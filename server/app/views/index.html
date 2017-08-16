@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <base href="/" />
+    <title>LC-Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
+    <script src="/lodash/index.js"></script>
+    <script
+        src="http://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="/angular/angular.js"></script>
+    <script src="/angular-animate/angular-animate.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="/main.js"></script>
+</head>
+<body>
+    <div class="app app-header-fixed" id ="app" ng-app="elite-lc-portal" ng-cloak>
+        <navbar></navbar>
+        <sidebar></sidebar>
+        <div id="content" class="app-content" role="main">
+            <div class="app-content-body ">
+                <div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+                    app.settings.asideFolded = false; 
+                    app.settings.asideDock = false;
+                ">
+                    <div ui-view></div>
+                </div>
+            </div>
+        </div>
+        <!-- <footer></footer> -->
+    </div>
+</body>
+</html>

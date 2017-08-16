@@ -1,0 +1,180 @@
+<header id="header" class="app-header navbar" role="menu">
+  <!-- navbar header -->
+  <div class="navbar-header bg-gray">
+    <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
+      <i class="glyphicon glyphicon-cog"></i>
+    </button>
+    <button class="pull-right visible-xs" ui-toggle-class="off-screen" target=".app-aside" ui-scroll="app">
+        <i class="glyphicon glyphicon-align-justify"></i>
+    </button>
+        <!-- brand -->
+    <a href="#/" class="navbar-brand text-lt"><img src="img/logo.png" alt="." ></a>
+        <!-- / brand -->
+  </div>
+  <!-- / navbar header -->
+  <!-- navbar collapse -->
+  <div class="collapse pos-rlt navbar-collapse box-shadow bg-maroon-only">
+    <!-- buttons -->
+    <div class="nav navbar-nav hidden-xs">
+        <a href="#" class="btn no-shadow navbar-btn top-btn" ui-toggle-class="app-aside-folded" target=".app"><img src="img/menu.png"></a>
+        <a href="#" class="btn no-shadow top-btn search-top"><img src="img/search.png"></a>
+        <a href="#" class="btn no-shadow top-btn" ui-toggle-class="show" target="#aside-user"><img src="img/feed.png"></a>
+    </div>
+    <!-- / buttons -->
+    <!-- nabar right -->
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+               <img src="img/user.png">
+              <span class="visible-xs-inline">Profile & Settings</span>
+              <span class="badge badge-sm up bg-danger pull-right-xs">2</span>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu w-xl">
+                <div class="panel bg-white" style="padding-bottom: 0">
+                    <div class="panel-heading drops">
+                        Profile & Settings
+                    </div>
+                    <div class="list-group">
+                        <a href class="list-group-item">
+                          Profile Settings 
+                        </a>
+                        <a href class="list-group-item">
+                          Account Settings
+                        </a>
+                        <a href class="list-group-item">
+                         Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- / dropdown -->
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+               <img src="img/notification.png">
+              <span class="visible-xs-inline">Notifications</span>
+              <span class="badge badge-sm up bg-danger pull-right-xs">1</span>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu w-xl">
+                <div class="panel bg-white" style="padding-bottom: 0">
+                    <div class="panel-heading drops">
+                        Notifications
+                    </div>
+                    <div class="list-group">
+                        <a href class="list-group-item">
+                          <span class="pull-left m-r msg-list" style="background: #7d93aa">S</span>
+                          <span class="clear block m-b-none">
+                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
+                          </span>
+                        </a>
+                        <a href class="list-group-item">
+                          <span class="pull-left m-r msg-list" style="background: #6cd2fa">S</span>
+                          <span class="clear block m-b-none">
+                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
+                          </span>
+                        </a>
+                        <a href class="list-group-item">
+                          <span class="pull-left m-r msg-list" style="background: #ffb22c">S</span>
+                          <span class="clear block m-b-none">
+                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
+                          </span>
+                        </a>
+                    </div>
+                    <div class="panel-footer text-sm">
+                        <a href="#notes" data-toggle="class:show animated fadeInRight">Check all messages</a>
+                    </div>
+                </div>
+            </div>
+            <!-- / dropdown -->
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+               <img src="img/message.png">
+              <span class="visible-xs-inline">Mails</span>
+              <span class="badge badge-sm up bg-danger pull-right-xs">3</span>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu w-xl">
+                <div class="panel bg-white" style="padding-bottom: 0">
+                    <div class="panel-heading drops">
+                        Mails
+                    </div>
+                    <div class="list-group">
+                        <a href class="list-group-item">
+                          <span class="pull-left m-r msg-list" style="background: #7d93aa">S</span>
+                          <span class="clear block m-b-none">
+                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
+                          </span>
+                        </a>
+                        <a href class="list-group-item">
+                          <span class="pull-left m-r msg-list" style="background: #6cd2fa">S</span>
+                          <span class="clear block m-b-none">
+                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
+                          </span>
+                        </a>
+                        <a href class="list-group-item">
+                          <span class="pull-left m-r msg-list" style="background: #ffb22c">S</span>
+                          <span class="clear block m-b-none">
+                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
+                          </span>
+                        </a>
+                    </div>
+                    <div class="panel-footer text-sm">
+                        <a href="#notes" data-toggle="class:show animated fadeInRight">Check all messages</a>
+                    </div>
+                </div>
+            </div>
+            <!-- / dropdown -->
+        </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+               <img src="img/chat.png">
+              <span class="visible-xs-inline">Messages</span>
+              <span class="badge badge-sm up bg-danger pull-right-xs">.</span>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu w-xl">
+                <div class="panel bg-white" style="padding-bottom: 0">
+                    <div class="panel-heading drops">
+                        Messages
+                    </div>
+                    <div class="list-group">
+                        <a href class="list-group-item">
+                          <span class="pull-left m-r msg-list" style="background: #7d93aa">S</span>
+                          <span class="clear block m-b-none">
+                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
+                          </span>
+                        </a>
+                        <a href class="list-group-item">
+                          <span class="pull-left m-r msg-list" style="background: #6cd2fa">S</span>
+                          <span class="clear block m-b-none">
+                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
+                          </span>
+                        </a>
+                        <a href class="list-group-item">
+                          <span class="pull-left m-r msg-list" style="background: #ffb22c">S</span>
+                          <span class="clear block m-b-none">
+                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
+                          </span>
+                        </a>
+                    </div>
+                    <div class="panel-footer text-sm">
+                        <a href="#notes" data-toggle="class:show animated fadeInRight">Check all messages</a>
+                    </div>
+                </div>
+            </div>
+            <!-- / dropdown -->
+        </li>
+    </ul>
+      <!-- /nabar right -->
+  </div>
+    <!-- / navbar collapse -->
+</header>
