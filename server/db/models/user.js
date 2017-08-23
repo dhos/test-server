@@ -14,6 +14,18 @@ module.exports = db.define('user', {
     },
     salt: {
         type: Sequelize.STRING
+    },
+    role: {
+        type: Sequelize.INTEGER
+            /*
+            1:cip,
+            2:csr,
+            3:client,
+            4:admin
+            */
+    },
+    assignedLetters: {
+        type: Sequelize.INTEGER
     }
 }, {
     instanceMethods: {
@@ -26,6 +38,7 @@ module.exports = db.define('user', {
     },
     hooks: {
         beforeCreate: function(user) {
+            console.log(user)
             var salt = bcrypt.genSaltSync(10);
             var hash = bcrypt.hashSync(user.password, salt);
             user.salt = salt;

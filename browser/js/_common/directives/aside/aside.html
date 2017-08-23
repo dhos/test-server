@@ -4,48 +4,54 @@
           <!-- nav -->
         <nav ui-nav class="navi clearfix">
           <ul class="nav">
-            <li class="active">
-                <a href="index.html">
+            <li class="">
+                <a ui-sref="dashboard" ui-sref-active="active">
                   <i class="fa fa-check-square"></i>
                   <span class="font-bold">Dashboard</span>
                 </a>
             </li>
             <li>
-              <a href="#" class="auto">      
+              <a class="auto">      
                 <span class="pull-right text-muted">
                 <i class="fa fa-fw fa-angle-right text"></i>
                 <i class="fa fa-fw fa-angle-down text-active"></i>
                 </span>
                 <i class="fa fa-check-square"></i>
-                 <span class="font-bold">List Manager</span>
+                 <span class="font-bold" >List Manager</span>
               </a>
               <ul class="nav nav-sub">
-                <li>
-                  <a href="new-lcs.html">
+              <li>
+                  <a ui-sref="listManager.all" ui-sref-active="active">
                     <b class="label bg-info pull-right">112</b>
-                    <span>New LCs</span>
+                    <span>All</span>
                   </a>
                 </li>
                 <li>
-                  <a href="reviewed.html">
+                  <a ui-sref="listManager.newLcs" ui-sref-active="active">
+                    <b class="label bg-info pull-right">112</b>
+                    <span>New Lcs</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="listManager.reviewed" ui-sref-active="active">
                     <b class="label bg-info pull-right">26</b>
                     <span>Reviewed</span>
                   </a>
                 </li>
                 <li>
-                  <a href="amended.html">
+                  <a ui-sref="listManager.amended" ui-sref-active="active">
                     <b class="label bg-info pull-right">25</b>
                     <span>Amended</span>
                   </a>
                 </li>
                 <li>
-                  <a href="dashboard.html">
+                  <a ui-sref="listManager.frozen" ui-sref-active="active">
                     <b class="label bg-info pull-right">58</b>
                     <span>Frozen</span>
                   </a>
                 </li>
                 <li>
-                  <a href="updated.html">
+                  <a ui-sref="listManager.updated" ui-sref-active="active">
                     <b class="label bg-info pull-right">30</b>
                     <span>Updated</span>
                   </a>
@@ -53,19 +59,20 @@
               </ul>
             </li>
             <li>
-              <a href="drafts.html">
-                <i class="fa fa-check-square"></i>
-                <span class="font-bold">Drafts</span>
-              </a>
-            </li>
+                <a ui-sref="archive" ui-sref-active="active">
+                  <i class="fa fa-check-square"></i>
+                  <span class="font-bold">Archive</span>
+                </a>
+              </li>
             <li>
-              <a href="archive.html">
-                <i class="fa fa-check-square"></i>
-                <span class="font-bold">Archive</span>
-              </a>
-            </li>
             <li>
-              <a href="clause-manager.html">
+                <a ui-sref="Drafts" ui-sref-active="active">
+                  <i class="fa fa-check-square"></i>
+                  <span class="font-bold">Drafts</span>
+                </a>
+              </li>
+            <li>
+              <a ui-sref="clauseManager" ui-sref-active="active">
                 <i class="fa fa-check-square"></i>
                 <span class="font-bold">Clause Manager</span>
               </a>

@@ -1,0 +1,219 @@
+<!-- main -->
+<div class="col-md-12">
+    <!-- main header -->
+    <div class="wrapper-md">
+        <!-- stats -->
+        <div class="row row-sm">
+            <div class="col-md-12">
+                <div class="panel wrapper">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h2 class="second-head">Letter of Credit Status</h2>
+                            <span class="font-thin m-t-none  text-muted">Overview of current Letters of Credit</span>
+                        </div>
+                        <div class="col-md-8 text-center">
+                            <div class="row lc-stats">
+                                <div class="col-md-2 pull-right">
+                                    30
+                                    <br> Updated
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    58
+                                    <br> Frozen
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    25
+                                    <br> Amended
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <span style="display: inline-block;">26
+                                    <br> Reviewed</span>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    112
+                                    <br> New LCs
+                                </div>
+                               <!--  <div class="col-md-2 text-right">
+                                    <a href="" class="lc-button"> <i class="fa fa-plus"></i> New LC</a>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row-sm">
+                    <div class="col-md-5">
+                        <div class="panel wrapper">
+                            <h2 class="second-head">Sabic International</h2>
+                            <span class="font-thin m-t-none m-b  text-muted">• Sales Contract <span class="redcolor">{{letter.contract}}</span>
+                            <br> • LC Number <span class="redcolor">{{letter.lc_number}}</span></span>
+                            <div class="row">
+                                <object data="uploads/SGHSBC7G18301634-T01.pdf" type="application/pdf" width="100%" height="500px">
+                                <p>Alternative text - include a link <a href="uploads/SGHSBC7G18301634-T01.pdf">to the PDF!</a></p>
+                                </object>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="panel wrapper no-pad">
+                            <div class="tab-container m-b-none">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href data-toggle="tab" data-target="#tab_1"><h2 class="second-head">Checklist & Action Center</h2></a></li>
+                                    <li><a href data-toggle="tab" data-target="#tab_2"><h2 class="second-head">Review Summary</h2></a></li>
+                                </ul>
+                                <div class="tab-content pad-25">
+                                    <div class="tab-pane active" id="tab_1">
+                                        <table class="table m-b-none table-expandable">
+                                            <thead>
+                                                <tr>
+                                                    <th>SWIFT</th>
+                                                    <th width="50%">References Text</th>
+                                                    <th>Status</th>
+                                                    <th>Last Change</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat-start="(key,value) in amendments">
+                                                    <td>{{key}}</td>
+                                                    <td>{{value.reference}}
+                                                        <br>
+                                                        <br>
+                                                        <div class="inline-block"><a href=""><img src="img/amend-message.png"></a></div>
+                                                        <div class="inline-block float-right">
+                                                            <div class="inline-block"><a href=""><img src="img/amend-tick.png"></a></div>
+                                                            <div class="inline-block"><a href=""><img src="img/amend-edit.png"></a></div>
+                                                            <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
+                                                        </div>
+                                                    </td>
+                                                    <td ng-if="value.status == '0'">
+                                                        <a ng-click="approveAmendment(key)"><img src="img/tick.png" alt="Status"></a>
+                                                        <a ng-click="value.expanded=true"><img src="img/edit.png" alt="Status"></a>
+                                                        <a ng-click="rejectAmendment(key)"><img src="img/add.png" alt="Status"></a>
+                                                    </td>
+                                                    <td ng-if="value.status !== '0'">
+                                                        <a ng-if="value.status=='1'"><img src="img/tick.png" alt="Status"></a>
+                                                        <a ng-if="value.status=='2'"><img src="img/edit.png" alt="Status"></a>
+                                                        <a ng-if="value.status=='3'"><img src="img/add.png" alt="Status"></a>
+                                                    </td>
+                                                    <td>{{value.lastModified | date:'longDate'}}</td>
+                                                    <td>
+                                                    <div ng-click="value.expanded = false" ng-if="value.expanded" class="table-expandable-arrow up"></div>
+                                                    <div ng-click="value.expanded = true" ng-if="!value.expanded" class="table-expandable-arrow"></div>
+                                                    </td>
+                                                </tr>
+                                                <tr ng-show="value.expanded" ng-repeat-end>
+                                                    <td></td>
+                                                    <td class="secondlevel">
+                                                        <div>
+                                                            <div class="btn-group dropdown">
+                                                                <button class="btn btn-dropdown" data-toggle="dropdown" aria-expanded="false">Choose Amendment <span class="caret"></span></button>
+                                                                <ul class="dropdown-menu">
+                                                                    <li><a href="">Action</a></li>
+                                                                    <li><a href="">Another action</a></li>
+                                                                    <li><a href="">Something else here</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="full-width">
+                                                            <textarea ng-model="reference[$index]" class="full-width" rows="5" placeholder="Enter LC Clause text"></textarea>
+                                                        </div>
+                                                        <div class="full-width">
+                                                            <button class="btn m-b-xs w-xs btn-success" ng-click="editAmendment($index)">Apply</button>
+                                                            <button ng-click="value.expanded = false" class="btn m-b-xs w-xs btn-dark">Cancel</button>
+                                                        </div>
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <hr>
+                                        <div class="text-right">
+                                            <button class="btn m-b-xs btn-default">Save Draft</button>
+                                            <button class="btn m-b-xs btn-danger">+ New Clause</button>
+                                            <button href data-toggle="tab" data-target="#tab_2" class="btn m-b-xs btn-success">Next </button>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="tab_2">
+                                        <div class="row summery">
+                                            <div class="col-md-4">
+                                                <table class="table m-b-none no-td-b">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td>
+                                                                <div class="text-center inline-block box-accepted">{{approved.length}}
+                                                                    <br> Accepted</div>
+
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-repeat="(key,value) in approved.content">
+                                                            <td>{{key}}</td>
+                                                            <td>{{value}}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <table class="table m-b-none no-td-b">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td>
+                                                                <div class="text-center inline-block box-amended">{{ammended.length}}
+                                                                    <br> Amended</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-repeat="(key,value) in amended.content">
+                                                            <td>{{key}}</td>
+                                                            <td>{{value}}</td>
+                                                        </tr>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <table class="table m-b-none no-td-b">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td>
+                                                                <div class="text-center inline-block box-added">2
+                                                                    <br> Added</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-repeat="amendment in rejected">
+                                                            <td>{{amendment.swift}}</td>
+                                                            <td>{{amendment.reference}}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="action-section m-t">
+                                          <button class="btn m-b-xs btn-danger">Preview Email</button>
+                                          <div class="pull-right">
+                                            <button class="btn m-b-xs btn-success" ng-click="updateLetter()">Confirm</button>
+                                          <button class="btn m-b-xs btn-default">Save Draft</button>
+                                          <button href data-toggle="tab" data-target="#tab_1" class="btn m-b-xs btn-dark">Cancel</button>
+                                          </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / stats -->
+    </div>
+</div>
+<!-- / main -->

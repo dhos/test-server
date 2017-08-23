@@ -1,0 +1,39 @@
+<table class="table table-expandable">
+    <thead>
+        <tr>
+            <th>LC Number</th>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Country</th>
+            <th>Status</th>
+            <th>Advising Bank</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat-start="letter in displayLetters">
+            <td>{{letter.lc_number}}</td>
+            <td>{{letter.createdAt}}</td>
+            <td>{{letter.client_name}}</td>
+            <td>{{letter.country}}</td>
+            <td>{{state[letter.state]}}</td>
+            <td>{{letter.bank}}</td>
+            <td>{{letter.psr}}</td>
+            <td>{{letter.crc}}</td>
+            <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
+              <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
+              </td>
+        </tr>
+        <tr ng-repeat-end ng-if="letter.expanded">
+            <td colspan="12" class="secondlevel" ng-click="transition(letter.lc_number)">
+                <ul class="statuses">
+                    <li ng-class="{active: letter.state===1}"><a ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">New<br>Stage 1 of 5</a></li>
+                    <li ng-class="{active: letter.state===2}"><a ng-disabled="letter.state!==2" ng-click="transition(letter.lc_number)">Review<br>Stage 2 of 5</a></li>
+                    <li ng-class="{active: letter.state===3}"><a ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">Amend<br>Stage 3 of 5</a></li>
+                    <li ng-class="{active: letter.state===4}"><a ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">Freeze<br>Stage 4 of 5</a></li>
+                    <li ng-class="{active: letter.state===5}"><a ng-disabled="letter.state!==5" ng-click="transition(letter.lc_number)">FD Update<br>Stage 5 of 5</a></li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>

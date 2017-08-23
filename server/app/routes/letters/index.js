@@ -3,6 +3,8 @@ var router = require('express').Router(); // eslint-disable-line new-cap
 module.exports = router;
 var db = require('../../../db');
 var Letter = db.model('letter')
+var multer = require('multer')
+var storage = multer.memoryStorage();
 var ensureAuthenticated = function(req, res, next) {
     var err;
     if (req.isAuthenticated()) {
@@ -17,18 +19,37 @@ var ensureAuthenticated = function(req, res, next) {
 //fetches
 
 router.get('/', ensureAuthenticated, (req, res, next) => {
-    res.json({})
+    Letter.findAll({
+        where: req.query
+    }).then(letters => {
+        res.json(letters)
+    }).catch(err => {
+        next(err)
+    })
 })
 
 router.get('/:id', ensureAuthenticated, (req, res, next) => {
-
+    Letter.findOne({
+        where: {
+            lc_number: req.params.id
+        }
+    }).then(letter => {
+        res.json(letter)
+    }).catch(err => {
+        next(err)
+    })
 })
 
 //end fetches
 
 //sets
 router.post('/', ensureAuthenticated, (req, res, next) => {
-
+    console.log(req.body.newLetter)
+    Letter.create(req.body.newLetter).then(letter => {
+        res.json(letter)
+    }).catch(err => {
+        return next(err)
+    })
 })
 
 //end sets
@@ -36,15 +57,33 @@ router.post('/', ensureAuthenticated, (req, res, next) => {
 //updates
 
 router.put('/', ensureAuthenticated, (req, res, next) => {
-
+    const updates = req.body.updates
+    Letter.findOne({
+        where: {
+            id: updates.id
+        }
+    }).then(letterToBeUpdated => {
+        return letterToBeUpdated.updateAttributes(updates).then(updatedLetter => res.json(updatedLetter))
+    }).catch((err) => {
+        return next(err)
+    })
 })
 
 //end updates
 
 //deletes
 
-router.delete('/', ensureAuthenticated, (req, res, next) => {
+router.put('/delete', ensureAuthenticated, (req, res, next) => {
+    Letter.findOne({
+        where: {
+            id: req.body.letter.id
+        }
+    }).then(letterToBeRemoved => {
+        letterToBeRemoved.status = 0
+        letterToBeRemoved.save().then(letter => {
 
+        })
+    })
 })
 
 //end deletes
