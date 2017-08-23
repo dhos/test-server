@@ -57,13 +57,17 @@ router.post('/', ensureAuthenticated, (req, res, next) => {
 //updates
 
 router.put('/', ensureAuthenticated, (req, res, next) => {
-    const updates = req.body.updates
+    const letter = req.body.updates
     Letter.findOne({
         where: {
-            id: updates.id
+            lc_number: letter.lc_number
         }
     }).then(letterToBeUpdated => {
-        return letterToBeUpdated.updateAttributes(updates).then(updatedLetter => res.json(updatedLetter))
+        if (letterToBeUpdated) {
+            return letterToBeUpdated.updateAttributes(letter)
+        }
+    }).then(updatedLetter => {
+        res.json(updatedLetter)
     }).catch((err) => {
         return next(err)
     })

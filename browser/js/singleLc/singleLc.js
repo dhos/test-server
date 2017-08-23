@@ -86,19 +86,35 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter) => {
             else $scope.amendments[key].status = $scope.letter.amendments[key].status[0] + '1'
         }
         for (let key of Object.keys($scope.amended.content)) {
-            if ($scope.client) $scope.amendments[key].status = '2' + $scope.letter.amendments[key].status[1]
-            else $scope.amendments[key].status = $scope.letter.amendments[key].status[0] + '2'
+            if ($scope.client) $scope.amendments[key].status = '10'
+            else $scope.amendments[key].status = '01'
         }
         for (let key of Object.keys($scope.rejected.content)) {
             if ($scope.client) $scope.amendments[key].status = '3' + $scope.letter.amendments[key].status[1]
             else $scope.amendments[key].status = $scope.letter.amendments[key].status[0] + '3'
         }
-        console.log($scope.amendments)
         $scope.letter.amendments = $scope.amendments
+        if ($scope.approved.length === total) {
+            if ($scope.client) {
+                if ($scope.letter.approved === '01') {
+                    $scope.letter.state++
+                        $scope.letter.approved = '00'
+                } else {
+                    $scope.letter.approved = '10'
+                }
+            } else {
+                if ($scope.letter.approved === '10') {
+                    $scope.letter.state++
+                        $scope.letter.approved === '00'
+                } else {
+                    $scope.letter.approved = '01'
+                }
+            }
+        }
 
-        // lcFactory.updateLetter().then(letter => {
-        //     $state.go($scope.states[letter.state])
-        // })
+        lcFactory.updateLetter($scope.letter).then(letter => {
+            $state.go($scope.states[letter.state])
+        })
     }
     $scope.submitDraft = () => {
         // $scope.client ? $scope.drafts

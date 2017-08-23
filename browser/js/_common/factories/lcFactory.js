@@ -54,7 +54,10 @@ app.factory('lcFactory', function($http, $q) {
 
     //Updates
     d.updateLetter = (letter) => {
-        return $http.put(`/api/lc/${letter.id}`)
+        var body = {
+            updates: letter
+        }
+        return $http.put(`/api/lc/`, body)
             .then(response => {
                 return response.data
             }).catch(err => {

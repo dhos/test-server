@@ -53,10 +53,6 @@ module.exports = db.define('letter', {
         type: Sequelize.STRING,
         defaultValue: '00'
     },
-    approved: {
-        type: Sequelize.STRING,
-        defaultValue: '00'
-    },
     draftText: {
         type: Sequelize.JSON
             /*{client:{},
