@@ -12,9 +12,10 @@ app.config(function($stateProvider) {
 });
 
 app.controller('newLcsCtrl', ($scope, lcFactory, letters, $state) => {
-    $scope.displayLetters = $scope.letters.filter(letter => {
+    $scope.letters = $scope.letters.filter(letter => {
         return letter.state === 1
     })
+    console.log($scope.letters)
     $scope.state = {
         1: 'New',
         2: 'Reviewed',
@@ -22,9 +23,9 @@ app.controller('newLcsCtrl', ($scope, lcFactory, letters, $state) => {
         4: 'Frozen',
         5: 'Pending Update'
     }
-    $state.transition = (lc_number) => {
+    $scope.transition = (lcNumber) => {
         $state.go('singleLc', {
-            lc_number: lc_number
+            lcNumber: lcNumber
         })
     }
 });

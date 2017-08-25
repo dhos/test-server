@@ -1,3 +1,74 @@
+.middle-box {
+    padding-top: 0;
+    color: #fff;
+    margin:0 auto;
+    position:relative;
+    left:-100px;
+}
+
+.middle-box .loginscreen {
+    background: #2965ba;
+    width: 100%;
+    padding: 25px;
+}
+
+.login-logo {
+    margin-top: 0
+}
+
+.login-logo img {
+    max-width: 150px;
+}
+
+h3.login-title {
+    font-size: 24px;
+    margin: 0 0 5px;
+}
+
+p.start-map {
+    font-size: 19px;
+    border-top: 1px solid #5786ca;
+    padding-top: 17px;
+    margin-top: 12px;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+input#submit.login-btn {
+    display: inline-block;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    padding: 7px 22px;
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 13px;
+}
+
+a.forgotpassword {
+    color: #fff;
+    display: block;
+    padding: 5px;
+    margin-top: 15px;
+    text-transform: uppercase;
+}
+
+input.login-input {
+    padding: 10px 14px;
+    height: inherit;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 0;
+    color: #333;
+}
+
+.middle-box.text-center.ng-scope {
+    max-width: 360px;
+}
+
+
 @import 'animate';
 @import 'app';
 @import 'font';

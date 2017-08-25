@@ -3,9 +3,9 @@ app.config(function($stateProvider) {
         templateUrl: 'js/dashboard/dashboard.html',
         controller: 'dashboardCtrl',
         url: '/dashboard',
-        // data: {
-        //     authenticate: true
-        // },
+        data: {
+            authenticate: true
+        },
         resolve: {
             // letters: (lcFactory) => {
             //     return lcFactory.getLetters({}).then(letters => {
@@ -43,9 +43,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory) {
 
     }
     $scope.test = () => {
-        $scope.createLc({
-            newLetter: $scope.letter
-        })
+
     }
 
     //functions to edit and ammend lcs

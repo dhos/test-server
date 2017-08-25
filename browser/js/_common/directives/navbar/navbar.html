@@ -1,4 +1,4 @@
-<header id="header" class="app-header navbar" role="menu">
+<header id="header" class="app-header navbar" role="menu" ng-if="user">
   <!-- navbar header -->
   <div class="navbar-header bg-gray">
     <button class="pull-right visible-xs dk" ui-toggle-class="show" target=".navbar-collapse">
@@ -42,7 +42,7 @@
                         <a href class="list-group-item">
                           Account Settings
                         </a>
-                        <a href class="list-group-item">
+                        <a ng-click="logout()" class="list-group-item">
                          Logout
                         </a>
                     </div>

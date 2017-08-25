@@ -3,9 +3,9 @@ app.config(function($stateProvider) {
         templateUrl: 'js/singleLc/singleLc.html',
         controller: 'singleLcCtrl',
         url: '/lc/:lcNumber',
-        // data: {
-        //     authenticate: true
-        // },
+        data: {
+            authenticate: true
+        },
         resolve: {
             letter: (lcFactory, $stateParams) => {
                 return lcFactory.getSingleLetter($stateParams.lcNumber).then(letter => {

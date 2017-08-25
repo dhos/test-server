@@ -3,9 +3,9 @@ app.config(function($stateProvider) {
         templateUrl: 'js/listManager/listManager.html',
         controller: 'listManagerCtrl',
         abstract: true,
-        // data: {
-        //     authenticate: true
-        // },
+        data: {
+            authenticate: true
+        },
         resolve: {
             letters: (lcFactory) => {
                 return lcFactory.getLetters({}).then(letters => {
