@@ -3,7 +3,7 @@
 
     // Hope you didn't forget Angular! Duh-doy.
     if (!window.angular) throw new Error('I can\'t find Angular!');
-
+    var app = angular.module('fsaPreBuilt', []);
     app.factory('Socket', function($rootScope) {
         if (!window.io) throw new Error('socket.io not found!');
         var socket = io.connect(window.location.origin);
@@ -29,8 +29,6 @@
             }
         };
     });
-    var app = angular.module('fsaPreBuilt', []);
-
     // AUTH_EVENTS is used throughout our app to
     // broadcast and listen from and to the $rootScope
     // for important events about authentication flow.
