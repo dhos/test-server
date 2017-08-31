@@ -1,0 +1,81 @@
+<div id="small-chat">
+    <span class="badge badge-warning pull-right">5</span>
+    <a class="open-small-chat" ng-click="open()">
+        <i class="fa fa-comments" ng-show="!chat"></i>
+        <i class="fa fa-remove" ng-show="chat"></i>
+    </a>
+</div>
+<div class="small-chat-box fadeInRight animated" ng-show="chat">
+    <div class="heading" draggable="true">
+        <small class="chat-date pull-right">
+            15 Aug 2017
+        </small> Small chat
+    </div>
+    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">
+        <div class="content" style="overflow-y: scroll;width: auto;height: 234px;overflow-x: hidden;">
+            <div class="left">
+                <div class="author-name">
+                    Monica Jackson <small class="chat-date">
+                10:02 am
+            </small>
+                </div>
+                <div class="chat-message active">
+                    Lorem Ipsum is simply dummy text input.
+                </div>
+            </div>
+            <div class="right">
+                <div class="author-name">
+                    Mick Smith
+                    <small class="chat-date">
+                    11:24 am
+                </small>
+                </div>
+                <div class="chat-message">
+                    Lorem Ipsum is simpl.
+                </div>
+            </div>
+            <div class="left">
+                <div class="author-name">
+                    Alice Novak
+                    <small class="chat-date">
+                    08:45 pm
+                </small>
+                </div>
+                <div class="chat-message active">
+                    Check this stock char.
+                </div>
+            </div>
+            <div class="right">
+                <div class="author-name">
+                    Anna Lamson
+                    <small class="chat-date">
+                    11:24 am
+                </small>
+                </div>
+                <div class="chat-message">
+                    The standard chunk of Lorem Ipsum
+                </div>
+            </div>
+            <div class="left">
+                <div class="author-name">
+                    Mick Lane
+                    <small class="chat-date">
+                    08:45 pm
+                </small>
+                </div>
+                <div class="chat-message active">
+                    I belive that. Lorem Ipsum is simply dummy text.
+                </div>
+            </div>
+        </div>
+        <div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 164.928px;">
+        </div>
+        <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.4; z-index: 90; right: 1px;"></div>
+    </div>
+    <div class="form-chat">
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control">
+            <span class="input-group-btn"> <button class="btn btn-primary" type="button">Send
+        </button> </span></div>
+    </div>
+</div>

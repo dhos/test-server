@@ -2,7 +2,14 @@ app.config(function($stateProvider) {
     $stateProvider.state('landing', {
         templateUrl: 'js/landing/landing.html',
         controller: 'landingCtrl',
-        url: '/'
+        url: '/',
+        resolve: {
+            user: (AuthService, $state) => {
+                AuthService.getLoggedInUser().then(user => {
+                    if (user) $state.go('dashboard')
+                })
+            }
+        }
     })
 });
 

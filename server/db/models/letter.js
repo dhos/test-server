@@ -25,7 +25,7 @@ module.exports = db.define('letter', {
         type: Sequelize.INTEGER
     },
     bank: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
     },
     pic: {
         type: Sequelize.STRING
@@ -43,10 +43,13 @@ module.exports = db.define('letter', {
 		2 = pending review
 		3 = amended
 		4 = frozen
-		5 = 
+		5 = uploaded
 		*/
     },
     archived: {
+        type: Sequelize.BOOLEAN
+    },
+    draft: {
         type: Sequelize.BOOLEAN
     },
     approved: {

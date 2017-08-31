@@ -1,20 +1,22 @@
-<div class="middle-box text-center">
-    <div class="loginscreen">
-        <div>
-            <h3 class="login-title">Welcome to Elite Shipping</h3>
-        </div>
-        <div>
-            <p ng-show="error">{{error}}</p>
-            <form class="m-t" role="form" ng-submit="sendLogin(loginInfo)">
-                <div class="form-group">
-                    <input type="text" class="form-control login-input" placeholder="Username" ng-model="loginInfo.username" required="">
+<div class="app app-header-fixed login-page">
+    <div class="container w-xxl w-auto-xs">
+        <a href class="block m-t text-center"><img src="img/login-logo.png"></a>
+        <div class="">
+            <div class="wrapper text-center">
+               Letter of credit manager portal 
+            </div>
+            <form name="form" class="form-validation" ng-submit="sendLogin(loginInfo)">
+                <div class="list-group-sm m-t">
+                    <div class="list-group-item">
+                        <input type="text" placeholder="Username" ng-model="loginInfo.username" class="form-control no-border">
+                    </div>
+                    <div class="list-group-item  m-t">
+                        <input type="password" placeholder="Password" ng-model="loginInfo.password" class="form-control no-border">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="password" class="form-control login-input" placeholder="Password" ng-model="loginInfo.password" required="">
-                </div>
-                <input type="submit" id="submit" value="Login" class="login-btn" />
-                <!-- <a href="#" class="forgotpassword"><small>Forgot password?</small></a> -->
-                <!-- <a class="btn btn-sm btn-white btn-block" ui-sref="signup">Create an account</a> -->
+                <button type="submit" class="btn btn-lg btn-blue btn-block m-t">Login</button>
+                <div class="m-t text-center"><a href="">Forgot password?</a></div>
+                <div class="line line-dashed"></div>
             </form>
         </div>
     </div>

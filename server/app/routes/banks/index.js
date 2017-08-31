@@ -2,7 +2,7 @@
 var router = require('express').Router(); // eslint-disable-line new-cap
 module.exports = router;
 var db = require('../../../db');
-var Country = db.model('country')
+var Bank = db.model('bank')
 var ensureAuthenticated = function(req, res, next) {
     var err;
     if (req.isAuthenticated()) {
@@ -17,7 +17,7 @@ var ensureAuthenticated = function(req, res, next) {
 //fetches
 
 router.get('/', ensureAuthenticated, (req, res, next) => {
-    Country.findAll({
+    Bank.findAll({
         where: req.query
     }).then(countries => {
         res.json(countries)

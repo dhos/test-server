@@ -1,8 +1,8 @@
-app.factory('countryFactory', function($http, $q) {
+app.factory('bankFactory', function($http, $q) {
     var d = {}
         //Fetches
-    d.getCountries = (query) => {
-        return $http.get('/api/countries/', {
+    d.getBanks = (query) => {
+        return $http.get('/api/banks/', {
             params: query
         }).then((response) => {
             return response.data
@@ -12,8 +12,8 @@ app.factory('countryFactory', function($http, $q) {
             })
         })
     }
-    d.getSingleCountry = (id) => {
-        return $http.get(`/api/lc/${id}`)
+    d.getSingleBank = (id) => {
+        return $http.get(`/api/banks/${id}`)
             .then(response => {
                 return response.data
             }).catch(err => {
@@ -26,8 +26,8 @@ app.factory('countryFactory', function($http, $q) {
     //End Fetches
 
     //Sets
-    d.createCountry = (Country) => {
-        return $http.post('/api/lc/')
+    d.createBank = (bank) => {
+        return $http.post('/api/banks/')
             .then(response => {
                 return response.data
             }).catch(err => {
@@ -40,8 +40,8 @@ app.factory('countryFactory', function($http, $q) {
     //End Sets
 
     //Updates
-    d.updateCountry = (Country) => {
-        return $http.put(`/api/lc/${Country.id}`)
+    d.updateBank = (bank) => {
+        return $http.put(`/api/banks/${bank.id}`)
             .then(response => {
                 return response.data
             }).catch(err => {
@@ -54,8 +54,8 @@ app.factory('countryFactory', function($http, $q) {
     //End Updates
 
     //Deletes
-    d.deleteCountry = (query) => {
-        return $http.delete(`/api/lc/`, {
+    d.deleteBank = (query) => {
+        return $http.delete(`/api/banks/`, {
             params: query
         }).then(response => {
             return response.data

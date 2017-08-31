@@ -1,0 +1,84 @@
+<div class="col">
+    <!-- main header -->
+    <div class="bg-light lter wrapper-md">
+        <div class="row title-space">
+            <div class="col-md-4">
+                <h1 class="m-n font-thin h3 text-black main-title">Amended LC</h1>
+                <small class="text-muted"><a href=""> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Amended LC</small>
+            </div>
+            <div class="col-md-8 text-center">
+                <div class="row lc-stats">
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">30</span>
+                        <br> Updated
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">58</span>
+                        <br> Frozen
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">25</span>
+                        <br> Amended
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span style="display: inline-block;"><span class="stats-numb">26</span>
+                        <br> Reviewed</span>
+                        <label class="switch">
+                            <input type="checkbox" checked="">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">112</span>
+                        <br> New LCs
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md">
+        <!-- stats -->
+        <div class="row row-sm">
+            <div class="col-md-12">
+                <div class="panel padder-v item">
+                    <div class="table-responsive">
+                        <table class="table table-striped m-b-none">
+                            <thead>
+                                <tr>
+                                  <th colspan="9">
+                                    <div class="form-group"><label class="sr-only">Search LC</label><div class="input-group"><input type="text" class="form-control" placeholder="Search LC number"><div class="input-group-btn"><button type="button" class="btn btn-primary">Search</button></div></div></div>
+                                  </th>
+                                </tr>
+                                <tr>
+                                    <th data-breakpoints="xs">LC Number</th>
+                                    <th>Sales Contract Number</th>
+                                    <th>Customer Name</th>
+                                    <th data-breakpoints="xs sm">LC Start Date</th>
+                                 <!--    <th data-breakpoints="xs sm">LC End Date</th> -->
+                                    <th data-breakpoints="xs sm">Country Name</th>
+                                    <th data-breakpoints="xs sm">Advising Bank</th>
+                                    <th data-breakpoints="xs">PIC</th>
+                                    <th data-breakpoints="xs">CSP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="letter in letters track by letter.lc_number">
+                                    <td><a ng-click="transition(letter.lc_number)"> {{letter.lc_number}}</a></td>
+                                    <td>{{letter.contract}}</td>
+                                    <td>{{letter.client}}</td>
+                                    <td>{{letter.date}}</td>
+                                    <td>{{countries[letter.country]}}</td>
+                                    <td>{{banks[letter.bank]}}</td>
+                                    <td>{{picUsers[letter.pic]}}</td>
+                                    <td>{{cspUsers[letter.csp]}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / stats -->
+    </div>
+</div>

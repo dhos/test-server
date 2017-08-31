@@ -4,6 +4,31 @@
     // Hope you didn't forget Angular! Duh-doy.
     if (!window.angular) throw new Error('I can\'t find Angular!');
 
+    app.factory('Socket', function($rootScope) {
+        if (!window.io) throw new Error('socket.io not found!');
+        var socket = io.connect(window.location.origin);
+
+        return {
+            on: function(eventName, callback) {
+                socket.on(eventName, function() {
+                    var args = arguments;
+                    $rootScope.$apply(function() {
+                        callback.apply(socket, args);
+                    });
+                });
+            },
+            emit: function(eventName, data, callback) {
+                socket.emit(eventName, data, function() {
+                    var args = arguments;
+                    $rootScope.$apply(function() {
+                        if (callback) {
+                            callback.apply(socket, args);
+                        }
+                    });
+                });
+            }
+        };
+    });
     var app = angular.module('fsaPreBuilt', []);
 
     // AUTH_EVENTS is used throughout our app to

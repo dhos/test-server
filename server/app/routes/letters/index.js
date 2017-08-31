@@ -1,10 +1,21 @@
 'use strict';
 var router = require('express').Router(); // eslint-disable-line new-cap
 module.exports = router;
+var path = require('path');
 var db = require('../../../db');
 var Letter = db.model('letter')
 var multer = require('multer')
-var storage = multer.memoryStorage();
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, path.join(__dirname, '../../../../browser/uploads'))
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+var upload = multer({
+    storage: storage
+})
 var ensureAuthenticated = function(req, res, next) {
     var err;
     if (req.isAuthenticated()) {
@@ -43,9 +54,10 @@ router.get('/:id', ensureAuthenticated, (req, res, next) => {
 //end fetches
 
 //sets
-router.post('/', ensureAuthenticated, (req, res, next) => {
-    console.log(req.body.newLetter)
-    Letter.create(req.body.newLetter).then(letter => {
+router.post('/', ensureAuthenticated, upload.single('file'), (req, res, next) => {
+    var newLetter = JSON.parse(req.body.newLetter)
+    newLetter.uploads = [req.file.originalname]
+    Letter.create(newLetter).then(letter => {
         res.json(letter)
     }).catch(err => {
         return next(err)
@@ -69,6 +81,27 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
     }).then(updatedLetter => {
         res.json(updatedLetter)
     }).catch((err) => {
+        return next(err)
+    })
+})
+
+router.put('/amend', upload.single('file'), ensureAuthenticated, (req, res, next) => {
+    var updates = JSON.parse(req.body.updates)
+    console.log(req.file)
+    updates.uploads.unshift(req.file.originalname)
+    console.log(updates.uploads)
+    Letter.findOne({
+        where: {
+            lc_number: updates.lc_number
+        }
+    }).then(letterToBeUpdated => {
+        if (letterToBeUpdated) {
+            return letterToBeUpdated.updateAttributes(updates)
+        }
+
+    }).then(updatedLetter => {
+        res.json(updatedLetter)
+    }).catch(err => {
         return next(err)
     })
 })

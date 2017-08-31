@@ -35,12 +35,18 @@ app.factory('lcFactory', function($http, $q) {
     }
 
     //Sets
-    d.createLetter = (letter) => {
-        // var file = letter;
-        // var fd = new FormData();
-        // fd.append('letter', file);
-        // fd.append('classroom', angular.toJson(letter))
-        return $http.post('/api/lc/', letter)
+    d.createLetter = (letter, file) => {
+        var file = file;
+        console.log(letter)
+        var fd = new FormData();
+        fd.append('file', file);
+        fd.append('newLetter', angular.toJson(letter))
+        return $http.post('/api/lc/', fd, {
+                transformRequest: angular.identity,
+                headers: {
+                    'Content-Type': undefined
+                }
+            })
             .then(response => {
                 return response.data
             }).catch(err => {
@@ -66,18 +72,25 @@ app.factory('lcFactory', function($http, $q) {
                 })
             })
     }
-    d.updateLetterFile = (letterAddition, letterToBeUpdatedId) => {
-            var file = letterAddition;
+    d.updateLetterFile = (letter, file) => {
+            var file = file;
+            console.log(letter)
             var fd = new FormData();
-            fd.append('letterAddition', file);
-            return $http.put('/api/lc/addition', fd, {
-                transformRequest: angular.identity,
-                headers: {
-                    'Content-Type': undefined
-                }
-            }).then(response => {
-                return response.data
-            })
+            fd.append('file', file);
+            fd.append('updates', angular.toJson(letter))
+            return $http.put('/api/lc/amend', fd, {
+                    transformRequest: angular.identity,
+                    headers: {
+                        'Content-Type': undefined
+                    }
+                })
+                .then(response => {
+                    return response.data
+                }).catch(err => {
+                    return $q.reject({
+                        message: err
+                    })
+                })
         }
         //End Updates
 

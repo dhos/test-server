@@ -178,3 +178,106 @@
   </div>
     <!-- / navbar collapse -->
 </header>
+<aside id="aside" class="app-aside hidden-xs bg-dark" ng-if="user">
+  <div class="aside-wrap">
+      <div class="navi-wrap">
+          <!-- nav -->
+        <nav ui-nav class="navi clearfix">
+          <ul class="nav">
+            <li class="">
+                <a ui-sref="dashboard" ui-sref-active="active">
+                  <i class="fa fa-check-square"></i>
+                  <span class="font-bold">Dashboard</span>
+                </a>
+            </li>
+            <li>
+              <a class="auto">      
+                <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+                </span>
+                <i class="fa fa-check-square"></i>
+                 <span class="font-bold" >List Manager</span>
+              </a>
+              <ul class="nav nav-sub">
+              <li>
+                  <a ui-sref="listManager.all" ui-sref-active="active">
+                    <b class="label bg-info pull-right">112</b>
+                    <span>All</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="listManager.newLcs" ui-sref-active="active">
+                    <b class="label bg-info pull-right">112</b>
+                    <span>New Lcs</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="listManager.reviewed" ui-sref-active="active">
+                    <b class="label bg-info pull-right">26</b>
+                    <span>Reviewed</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="listManager.amended" ui-sref-active="active">
+                    <b class="label bg-info pull-right">25</b>
+                    <span>Amended</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="listManager.frozen" ui-sref-active="active">
+                    <b class="label bg-info pull-right">58</b>
+                    <span>Frozen</span>
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="listManager.updated" ui-sref-active="active">
+                    <b class="label bg-info pull-right">30</b>
+                    <span>Updated</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+                <a ui-sref="archive" ui-sref-active="active">
+                  <i class="fa fa-check-square"></i>
+                  <span class="font-bold">Archive</span>
+                </a>
+              </li>
+            <li>
+            <li>
+                <a ui-sref="Drafts" ui-sref-active="active">
+                  <i class="fa fa-check-square"></i>
+                  <span class="font-bold">Drafts</span>
+                </a>
+              </li>
+            <li>
+              <a ui-sref="clauseManager" ui-sref-active="active">
+                <i class="fa fa-check-square"></i>
+                <span class="font-bold">Clause Manager</span>
+              </a>
+            </li>
+            <li>
+              <a href="analytics.html">
+                <i class="fa fa-check-square"></i>
+                <span class="font-bold">Analytics</span>
+              </a>
+            </li>
+            <li><a href="#" class="auto"><span class="pull-right text-muted"><i class="fa fa-fw fa-angle-right text"></i><i class="fa fa-fw fa-angle-down text-active"></i></span><i class="fa fa-cloud-upload"></i><span>Upload LCs</span></a>
+                  <ul class="nav nav-sub">
+                      <li><a ui-sref="createLc" ui-sref-active="active"><span>New LC</span></a></li>
+                      <li><a ui-sref="amendList" ui-sref-active="active"><span>Amended LC</span></a></li>
+                  </ul>
+              </li>
+              <li><a href="#" class="auto"><span class="pull-right text-muted"><i class="fa fa-fw fa-angle-right text"></i><i class="fa fa-fw fa-angle-down text-active"></i></span><i class="fa fa-cloud-upload"></i><span>User Master</span></a>
+                  <ul class="nav nav-sub">
+                      <li><a href="pic-csp-users.html"><span>PIC / CSP Users</span></a></li>
+                      <li><a href="banks.html"><span>Banks</span></a></li>
+                  </ul>
+              </li>
+          </ul>
+        </nav>
+          <!-- nav -->
+      </div>
+  </div>
+</aside>

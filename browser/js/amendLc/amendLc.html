@@ -3,8 +3,8 @@
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
             <div class="col-md-4">
-                <h1 class="m-n font-thin h3 text-black main-title">Upload New LC</h1>
-                <small class="text-muted"><a href=""> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Upload New LC</small>
+                <h1 class="m-n font-thin h3 text-black main-title">Amended LC</h1>
+                <small class="text-muted"><a href=""> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a href="amended-lc-upload.html"> Amended LC</a><i class="fa fa-angle-right br-gap"></i> 0LC008170004766</small> 
             </div>
             <div class="col-md-8 text-center">
                 <div class="row lc-stats">
@@ -46,43 +46,41 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">LC Number</label>
                             <div class="col-lg-6">
-                                <input type="text" ng-model="letter.lc_number" class="form-control">
+                                <input type="text" class="form-control" ng-model="letter.lc_number">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Sales Contract Number</label>
                             <div class="col-lg-6">
-                                <input type="text" ng-model="letter.contract" class="form-control">
+                                <input type="text" class="form-control" ng-model="letter.contract">
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- make into a dropdown -->
                             <label class="col-lg-2 control-label">Customer Name</label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" ng-model="letter.client">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">LC Start Date</label>
                             <div class="col-lg-6">
                                 <div class="input-group date">
-                                    <md-datepicker ng-model="letter.date" md-placeholder="Enter date"></md-datepicker>
-                                </div>
+                                <md-datepicker ng-model="letter.date" md-placeholder="Enter date"></md-datepicker></div>
                             </div>
                         </div>
                         <!-- <div class="form-group">
                             <label class="col-lg-2 control-label">LC End Date</label>
                             <div class="col-lg-6">
                                 <div class="input-group date">
-                                    <md-datepicker md-placeholder="Enter date"></md-datepicker>
-                                </div>
+<input type="text" class="form-control" value="Nov 30, 2017"><span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+</div>
                             </div>
                         </div> -->
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Country Name</label>
                             <div class="col-lg-6">
                                 <select class="form-control m-b" ng-model="letter.country">
-                                    <option ng-repeat="country in countries" value = "{{country.id}}">{{country.name}}</option>
+                                    <option ng-repeat="country in countries" ng-selected="letter.country==country.id" ng-value = "{{country.id}}">{{country.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -90,7 +88,7 @@
                             <label class="col-lg-2 control-label">Advising Bank</label>
                             <div class="col-lg-6">
                                 <select class="form-control m-b" ng-model="letter.bank">
-                                  <option ng-repeat="bank in banks" value = "{{bank.id}}">{{bank.name}}</option>
+                                  <option ng-repeat="bank in banks" ng-value = "{{bank.id}}" ng-selected="letter.bank == bank.id">{{bank.name}}</option>
                                 </select>
                             </div>
                         </div>
@@ -98,7 +96,7 @@
                             <label class="col-lg-2 control-label">PIC</label>
                             <div class="col-lg-6">
                                 <select class="form-control m-b" ng-model="letter.pic">
-                                  <option ng-repeat="pic in picUsers" value = "{{pic.id}}">{{pic.username}}</option>
+                                  <option ng-repeat="pic in picUsers" ng-value = "{{pic.id}}" ng-selected="letter.pic==pic.id">{{pic.username}}</option>
                                 </select>
                             </div>
                         </div>
@@ -106,19 +104,19 @@
                             <label class="col-lg-2 control-label">CSP</label>
                             <div class="col-lg-6">
                                 <select class="form-control m-b" ng-model="letter.csp">
-                                 <option ng-repeat="csp in cspUsers" value = "{{csp.id}}">{{csp.username}}</option>
+                                 <option ng-repeat="csp in cspUsers" ng-value = "{{csp.id}}" ng-selected="letter.csp=csp.id">{{csp.username}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">LC PDF or Text File Upload</label>
                             <div class="col-lg-6">
-                                <button type="file" ng-model="file" accept="image/*,application/pdf" ngf-select ng-f-max-height="1000" ngf-max-size="5mb" class="change-pro slim-btn outlined-btn gray-btn float-rt">Upload</button>
+                                <button type="file" ng-model="updatedFile" accept="image/*,application/pdf" ngf-select ng-f-max-height="1000" ngf-max-size="5mb" class="change-pro slim-btn outlined-btn gray-btn float-rt">Upload</button>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button ng-click="createLc()" class="btn m-b-xs btn-success">Upload LC</button>
+                                <button ng-click="updateLc()" class="btn m-b-xs btn-success">Upload LC</button>
                             </div>
                         </div>
                     </form>

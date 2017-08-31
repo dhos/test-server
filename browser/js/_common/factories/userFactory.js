@@ -22,11 +22,16 @@ app.factory('userFactory', function($http) {
             })
     }
 
-    userFactory.getUsers = function(user) {
-        return $http.get("/api/users/")
-            .then(function(response) {
-                return response.data
+    userFactory.getUsers = (query) => {
+        return $http.get('/api/users/', {
+            params: query
+        }).then((response) => {
+            return response.data
+        }).catch(err => {
+            return $q.reject({
+                message: err
             })
+        })
     }
     userFactory.getUserById = function(id) {
         return $http.get("/api/users/" + id)

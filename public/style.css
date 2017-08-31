@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
 .middle-box {
   padding-top: 0;
   color: #fff;
@@ -57,6 +58,9 @@ input.login-input {
 
 .middle-box.text-center.ng-scope {
   max-width: 360px; }
+
+.login-page {
+  margin-left: -100px; }
 
 /*!
 Animate.css - http://daneden.me/animate
@@ -2322,14 +2326,11 @@ Copyright (c) 2015 Daniel Eden
   -webkit-animation-name: slideOutUp;
   animation-name: slideOutUp; }
 
-/* 
-
-*/
 html {
   background-color: #f0f3f4; }
 
 body {
-  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   line-height: 1.42857143;
@@ -3007,6 +3008,7 @@ body {
   border: none; }
 
 .navbar-brand {
+  max-width: 200px;
   display: inline-block;
   float: none !important;
   height: auto;
@@ -3022,13 +3024,15 @@ body {
 .navbar-brand img {
   display: inline;
   margin-top: -4px;
-  vertical-align: middle; }
+  vertical-align: middle;
+  max-width: 100%;
+  max-height: 100%; }
 
 @media (min-width: 768px) {
   .app-aside, .navbar-header {
-    width: 200px; }
+    width: 230px; }
   .navbar-collapse, .app-content, .app-footer {
-    margin-left: 200px; }
+    margin-left: 230px; }
   .app-aside-right {
     position: absolute;
     top: 50px;
@@ -3056,7 +3060,7 @@ body {
     margin-left: 60px; }
   .app-aside-folded .app-header .navbar-brand {
     display: block;
-    padding: 0; }
+    padding: 6px 0 0; }
   .app-aside-fixed .app-aside:before {
     position: fixed; }
   .app-aside-fixed .app-header .navbar-header {
@@ -3252,7 +3256,7 @@ html.bg {
   display: block; }
 
 .navi ul.nav li li a {
-  padding-left: 55px; }
+  padding-left: 49px; }
 
 .navi ul.nav li li ul {
   display: none; }
@@ -3275,6 +3279,7 @@ html.bg {
   font-size: 11px; }
 
 .navi ul.nav li a > i {
+  font-size: 20px;
   position: relative;
   float: left;
   width: 40px;
@@ -3701,8 +3706,7 @@ html.bg {
   color: #58666e !important;
   background-color: #fcfdfd;
   background-color: #fff;
-  border-color: #dee5e7;
-  border-bottom-color: #d8e1e3;
+  border-color: #9aa2a7;
   -webkit-box-shadow: 0 1px 1px rgba(90, 90, 90, 0.1);
   box-shadow: 0 1px 1px rgba(90, 90, 90, 0.1); }
 
@@ -3710,7 +3714,7 @@ html.bg {
 .open .dropdown-toggle.btn-default {
   color: #58666e !important;
   background-color: #edf1f2;
-  border-color: #c7d3d6; }
+  border-color: #9aa2a7; }
 
 .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
   background-image: none; }
@@ -3755,14 +3759,15 @@ fieldset[disabled] .btn-primary:active, .btn-primary.disabled.active,
 
 .btn-success {
   color: #ffffff !important;
-  background-color: #27c24c;
-  border-color: #27c24c; }
+  background-color: #ae0035;
+  border-color: #ae0035;
+  text-transform: uppercase; }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active,
 .open .dropdown-toggle.btn-success {
   color: #ffffff !important;
-  background-color: #23ad44;
-  border-color: #20a03f; }
+  background-color: #670001;
+  border-color: #670001; }
 
 .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
   background-image: none; }
@@ -4636,14 +4641,10 @@ fieldset[disabled] .i-checks input + i:before {
 
 .bg-dark .nav > li:hover > a, .bg-dark .nav > li:focus > a,
 .bg-dark .nav > li.active > a {
-  color: #ffffff;
-  background-color: #2e3344; }
+  color: #ffffff; }
 
 .bg-dark .nav > li > a {
-  color: #b4b6bd; }
-
-.bg-dark .nav > li > a:hover, .bg-dark .nav > li > a:focus {
-  background-color: #32374a; }
+  color: #7590ab; }
 
 .bg-dark .nav .open > a {
   background-color: #2e3344; }
@@ -5288,7 +5289,7 @@ a.text-#000000:hover {
   color: #000; }
 
 .text-muted {
-  color: #98a6ad; }
+  color: #7590ab; }
 
 .bg {
   background-color: #f0f3f4; }
@@ -6105,6 +6106,7 @@ a {
   font-size: 12px; }
 
 header#header {
+  background: #efefef;
   -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.43);
   -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.43);
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.43); }
@@ -6150,7 +6152,7 @@ header#header {
   color: #222;
   font-size: 20px;
   margin-top: 0;
-  font-family: "open sans";
+  font-family: 'Poppins', sans-serif;
   margin-bottom: 3px; }
 
 .m-b {
@@ -6262,11 +6264,110 @@ hr {
 
 .stats-numb {
   font-size: 26px;
-  color: #670001; }
+  color: #ae0035; }
 
 .nav-tabs > li {
   width: 50%;
   text-align: center; }
+
+ul.nav ul.nav.nav-sub li a:hover, ul.nav ul.nav.nav-sub li.active a {
+  background: transparent;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  color: #ae0035; }
+
+.lc-stats a {
+  color: #7590ab; }
+
+.statuses li a div {
+  display: inline-block;
+  line-height: 13px;
+  vertical-align: middle; }
+
+.statuses > li > a > div.icon-stat {
+  background: #dbdbdb;
+  text-align: center;
+  margin-right: 10px;
+  color: #fff;
+  padding: 7px;
+  border-radius: 50px;
+  height: 30px;
+  width: 30px; }
+
+.statuses .main-stat {
+  color: #738ea1;
+  text-transform: uppercase; }
+
+.statuses .secnd-stat {
+  font-size: 10px;
+  color: #a6b3bc; }
+
+.statuses .normal-stat .stat-bg {
+  background: #dbdbdb; }
+
+.statuses .new-stat .stat-bg {
+  background: #99cc65; }
+
+.statuses .review-stat .stat-bg {
+  background: #ffb919; }
+
+.statuses .amend-stat .stat-bg {
+  background: #778ca1; }
+
+.statuses .freeze-stat .stat-bg {
+  background: #0b0b0d; }
+
+.statuses .fdupdate-stat .stat-bg {
+  background: #72cbf5; }
+
+.last-hide th:last-child {
+  display: none; }
+
+.td-stat {
+  padding: 2px 9px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 2px; }
+
+.btn {
+  text-transform: uppercase; }
+
+.btn-green {
+  background-color: #9dca61;
+  color: #fff;
+  border-color: #9dca61; }
+
+.btn-green:hover {
+  background-color: #76b03d;
+  color: #fff;
+  border-color: #76b03d; }
+
+.btn-panel {
+  padding: 20px;
+  border-top: 1px solid #eaeff0; }
+
+.app-aside-folded .navi .nav.nav-sub {
+  background: #fff; }
+
+.app-aside-folded .navi > ul > li > a {
+  padding: 6px;
+  height: auto;
+  margin: 11px auto !important;
+  width: 31px;
+  border-radius: 3px !important; }
+
+.app-aside-folded .navi > ul > li > a i {
+  line-height: normal; }
+
+.bg-dark ul.nav.nav-sub > li > a {
+  margin-left: 0; }
+
+.bg-dark ul.nav.nav-sub > li:hover > a, .bg-dark ul.nav.nav-sub > li:focus > a, .bg-dark ul.nav.nav-sub > li.active > a {
+  background: transparent;
+  box-shadow: none;
+  color: #ae0035;
+  margin-left: 0; }
 
 /*Custom CSS End Here*/
 /*switch button css start*/
@@ -6328,10 +6429,11 @@ input:checked + .slider:before {
   display: inline-block; }
 
 .statuses li a {
-  padding: 5px;
+  padding: 8px 12px;
   border: 1px solid #ccc;
   display: inline-block;
-  margin: 5px; }
+  margin: 5px;
+  border-radius: 4px; }
 
 .nav.nav-tabs li:first-child a {
   border-left: 0; }
@@ -6355,7 +6457,10 @@ input:checked + .slider:before {
 .full-width {
   width: 100%; }
 
-.secondleveltr td {
+.secondlevel td {
+  border-top: 0 !important; }
+
+.secondlevel {
   border-top: 0 !important; }
 
 .box-accepted {
@@ -6383,6 +6488,46 @@ input:checked + .slider:before {
   border: 0; }
 
 /*Listing page Css End*/
+/*Login page css start*/
+.login-page {
+  background: url(../img/login.jpg) center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+.login-page .list-group-item {
+  border: 1px solid #ced3d9;
+  border-radius: 0; }
+
+.login-page .container.w-xxl {
+  padding: 30px;
+  border-radius: 5px;
+  border: 1px solid #d7dbde;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.06);
+  background: #fff; }
+
+.login-page .navbar-brand {
+  margin: 0 auto; }
+
+.btn-blue {
+  background: #1d88e5;
+  color: #fff; }
+
+.login-page a {
+  color: #5c6469; }
+
+/*Login page css end*/
+/*LC Upload Start*/
+.file-upload {
+  padding: 5px; }
+
+.input-group-btn > .btn.btn-default.dropdown-toggle {
+  display: none; }
+
+/*LC Upload End*/
 /*Floating chat start*/
 .open-small-chat i {
   color: #fff; }
@@ -6413,7 +6558,6 @@ input:checked + .slider:before {
 .small-chat-box .heading {
   background: #670001;
   padding: 8px 15px;
-  font-weight: bold;
   color: #fff; }
 
 .small-chat-box .chat-date {
@@ -6445,16 +6589,16 @@ input:checked + .slider:before {
   float: left; }
 
 .small-chat-box .content .chat-message.active {
-  background: #7093b3;
+  background: #6488a9;
   color: #fff; }
 
 .small-chat-box .content .chat-message {
   padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 11px;
+  border-radius: 4px;
+  font-size: 12px;
   line-height: 14px;
-  max-width: 80%;
-  background: #f3f3f4;
+  background: #e6e6e8;
+  color: #333;
   margin-bottom: 10px; }
 
 .small-chat-box .content .right {
@@ -6510,7 +6654,7 @@ input:checked + .slider:before {
 .badge {
   background-color: #d1dade;
   color: #5e5e5e;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 11px;
   font-weight: 600;
   padding-bottom: 4px;

@@ -18,8 +18,8 @@ module.exports = db.define('user', {
     role: {
         type: Sequelize.INTEGER
             /*
-            1:cip,
-            2:csr,
+            1:pic,
+            2:csp,
             3:client,
             4:admin
             */

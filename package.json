@@ -11,7 +11,9 @@
   "dependencies": {
     "angular": "^1.6.2",
     "angular-animate": "^1.6.2",
+    "angular-aria": "^1.6.6",
     "angular-file-saver": "^1.1.3",
+    "angular-material": "^1.1.4",
     "angular-mocks": "^1.6.2",
     "angular-ui-bootstrap": "^2.5.0",
     "angular-ui-router": "^0.4.2",
@@ -54,6 +56,7 @@
     "karma-mocha-reporter": "^2.2.2",
     "lodash": "^3.9.3",
     "multer": "^1.3.0",
+    "ng-file-upload": "^12.2.13",
     "nodemon": "^1.11.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
@@ -62,6 +65,7 @@
     "sequelize": "^3.30.2",
     "serve-favicon": "^2.4.0",
     "sinon": "^1.17.7",
+    "socket.io": "^2.0.3",
     "streamifier": "^0.1.1",
     "supertest": "^3.0.0"
   }
