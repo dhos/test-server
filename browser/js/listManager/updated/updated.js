@@ -14,6 +14,7 @@ app.controller('updatedCtrl', ($scope, lcFactory, letters, $state) => {
     $scope.displayLetters = $scope.letters.filter(letter => {
         return letter.state === 5
     })
+    console.log($scope.displayLetters)
     $scope.transition = (lcNumber) => {
         $state.go('singleLc', {
             lcNumber: lcNumber

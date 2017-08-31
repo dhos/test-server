@@ -3,6 +3,7 @@
         <tr>
             <th>LC Number</th>
             <th>Date</th>
+            <th>Expire</th>
             <th>Customer</th>
             <th>Country</th>
             <th>Status</th>
@@ -13,7 +14,8 @@
     <tbody>
         <tr ng-repeat-start="letter in letters">
             <td>{{letter.lc_number}}</td>
-            <td>{{letter.createdAt}}</td>
+            <td>{{letter.date}}</td>
+            <td>{{letter.expire}}</td>
             <td>{{letter.client_name}}</td>
             <td>{{letter.country}}</td>
             <td>{{state[letter.state]}}</td>

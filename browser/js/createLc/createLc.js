@@ -43,9 +43,15 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
         })
         //get cspusers
     userFactory.getUsers({
-        role: 2
-    }).then(cspUsers => {
-        $scope.cspUsers = cspUsers
+            role: 2
+        }).then(cspUsers => {
+            $scope.cspUsers = cspUsers
+        })
+        //getclient
+    userFactory.getUsers({
+        role: 3
+    }).then(clients => {
+        $scope.clients = clients
     })
 
 });

@@ -15,7 +15,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('archiveCtrl', function($scope, archived) {
-    $scope.letters = archived
+app.controller('archiveCtrl', function($scope, archivedLetters) {
+    $scope.letters = archivedLetters
 
 });

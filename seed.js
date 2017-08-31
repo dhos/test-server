@@ -12,100 +12,100 @@ var sample = path.join(__dirname, '/sample.csv')
 
 var csvData = []
 
-// fs.createReadStream(sample)
-//     .pipe(parse({
-//         delimiter: ':'
-//     }))
-//     .on('data', csvrow => {
-//         csvData.push(csvrow)
-//     })
-//     .on('end', () => {
-//         organizeData(csvData)
-//         makeUsers()
-//         makeCountries()
-//         makeBanks()
-//     })
+fs.createReadStream(sample)
+    .pipe(parse({
+        delimiter: ':'
+    }))
+    .on('data', csvrow => {
+        csvData.push(csvrow)
+    })
+    .on('end', () => {
+        organizeData(csvData)
+            // makeUsers()
+            // makeCountries()
+            // makeBanks()
+    })
 
 var temp = [{
-    id: 1,
-    name: 'Bangladesh',
-    clauses: [{
-        swift: '27',
-        fieldDescription: 'Sequence of Total',
-        lineDescription: '1/1 (Number)(Total)'
+        id: 1,
+        name: 'Bangladesh',
+        clauses: [{
+            swift: '27',
+            fieldDescription: 'Sequence of Total',
+            lineDescription: '1/1 (Number)(Total)'
+        }, {
+            swift: '40 A',
+            fieldDescription: 'Form of Documentary Credit',
+            lineDescription: 'Irrevocable'
+        }, {
+            swift: '31C',
+            fieldDescription: 'Date of Issue',
+            lineDescription: 'dd/mm/yyyy'
+        }]
     }, {
-        swift: '40 A',
-        fieldDescription: 'Form of Documentary Credit',
-        lineDescription: 'Irrevocable'
+        id: 2,
+        name: 'Nepal',
+        clauses: [{
+            swift: '40E',
+            fieldDescription: 'Applicable Rules',
+            lineDescription: 'UCP LATEST VERSION'
+        }, {
+            swift: '32B',
+            fieldDescription: `Currency`,
+            lineDescription: `/Amount □ USD        □  JPY       □ EUR`
+        }, {
+            swift: '51A',
+            fieldDescription: 'Applicant',
+            lineDescription: 'Bank'
+        }]
     }, {
-        swift: '31C',
-        fieldDescription: 'Date of Issue',
-        lineDescription: 'dd/mm/yyyy'
-    }]
-}, {
-    id: 2,
-    name: 'Nepal',
-    clauses: [{
-        swift: '40E',
-        fieldDescription: 'Applicable Rules',
-        lineDescription: 'UCP LATEST VERSION'
-    }, {
-        swift: '32B',
-        fieldDescription: `Currency`,
-        lineDescription: `/Amount □ USD        □  JPY       □ EUR`
-    }, {
-        swift: '51A',
-        fieldDescription: 'Applicant',
-        lineDescription: 'Bank'
-    }]
-}, {
-    id: 3,
-    name: 'Sri Lanka',
-    clauses: [{
-        swift: '59',
-        fieldDescription: `Beneficiary
+        id: 3,
+        name: 'Sri Lanka',
+        clauses: [{
+            swift: '59',
+            fieldDescription: `Beneficiary
 (Follow this address in L/C
 application to avoid amendment, 
 as this is our official address
 information in our letterhead)"`,
-        lineDescription: `SABIC ASIA PACIFIC PTE LTD
+            lineDescription: `SABIC ASIA PACIFIC PTE LTD
 ONE TEMASEK AVENUE 
 NO. 06-01 MILLENIA TOWER
 SINGAPORE 039192"`
-    }, {
-        swift: '39A',
-        fieldDescription: `Percentage Credit
+        }, {
+            swift: '39A',
+            fieldDescription: `Percentage Credit
 Amount Tolerance`,
-        lineDescription: `10/10`
-    }]
-}, {
-    id: 4,
-    name: 'India',
-    clauses: [{
-        swift: '39B',
-        fieldDescription: 'Maximum Credit Amount',
-        lineDescription: 'Not Exceeding'
+            lineDescription: `10/10`
+        }]
     }, {
-        swift: '41D',
-        fieldDescription: 'Available With/by',
-        lineDescription: 'ANY BANK IN SINGAPORE BY NEGOTIATION'
-    }]
-}, {
-    id: 5,
-    name: 'Bhutan',
-    clauses: [{
-        swift: '42C',
-        fieldDescription: `  Drafts At`,
-        lineDescription: `□ XX Days from B/L date                  □ Sight`
+        id: 4,
+        name: 'India',
+        clauses: [{
+            swift: '39B',
+            fieldDescription: 'Maximum Credit Amount',
+            lineDescription: 'Not Exceeding'
+        }, {
+            swift: '41D',
+            fieldDescription: 'Available With/by',
+            lineDescription: 'ANY BANK IN SINGAPORE BY NEGOTIATION'
+        }]
     }, {
-        swift: '42A',
-        fieldDescription: 'Drawee',
-        lineDescription: 'ISSUING BANK / CONFIRMING BANK'
+        id: 5,
+        name: 'Bhutan',
+        clauses: [{
+            swift: '42C',
+            fieldDescription: `  Drafts At`,
+            lineDescription: `□ XX Days from B/L date                  □ Sight`
+        }, {
+            swift: '42A',
+            fieldDescription: 'Drawee',
+            lineDescription: 'ISSUING BANK / CONFIRMING BANK'
+        }]
     }]
-}]
-temp.forEach(country => {
-    Country.create(country)
-})
+    // temp.forEach(country => {
+    //     Country.create(country)
+    // })
 var makeCountries = () => {
     var countries = {
         'Bangladesh': 1,

@@ -12,7 +12,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('newLcsCtrl', ($scope, lcFactory, letters, $state) => {
-    $scope.letters = $scope.letters.filter(letter => {
+    $scope.displayLetters = $scope.letters.filter(letter => {
         return letter.state === 1
     })
     console.log($scope.letters)
