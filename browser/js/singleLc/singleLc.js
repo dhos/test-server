@@ -31,18 +31,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter) => {
         length: 0
     }
     $scope.reference = {}
-    $scope.letter.amendments = {
-        20: {
-            reference: 'Bridge sentient city boy meta-camera footage DIY papier-mache sign concrete human shoes courier. Dead digital 3D-printed range-rover computer sensory sentient franchise bridge network market rebar tank-traps free-market human. BASE jump stimulate artisanal narrative corrupted assault range-rover film nano-paranoid shrine semiotics convenience store. Sprawl concrete corrupted modem spook human disposable towards narrative industrial grade girl realism weathered Tokyo savant.',
-            status: '00',
-            lastModified: Date.now()
-        },
-        22: {
-            reference: 'Grenade lights computer saturation point cyber-long-chain hydrocarbons film tattoo skyscraper Tokyo digital into fluidity free-market towards pistol. Katana assault assassin footage cyber-kanji network industrial grade. Corrupted neural realism courier-ware sensory bicycle girl decay face forwards. Concrete towards cardboard DIY modem network monofilament tank-traps ablative urban spook disposable knife bicycle shanty town woman. ',
-            status: '00',
-            lastModified: Date.now()
-        }
-    }
+
     $scope.amendments = jQuery.extend(true, {}, $scope.letter.amendments)
     $scope.client = $scope.user === 3
     for (let key of Object.keys($scope.amendments)) {

@@ -7,7 +7,7 @@ module.exports = db.define('country', {
     name: {
         type: Sequelize.STRING
     },
-    ammendments: {
+    clauses: {
         type: Sequelize.JSON
     }
 });

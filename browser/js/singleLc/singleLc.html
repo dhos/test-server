@@ -51,9 +51,7 @@
                             <span class="font-thin m-t-none m-b  text-muted">• Sales Contract <span class="redcolor">{{letter.contract}}</span>
                             <span class="m-l"> • LC Number</span><span class="redcolor">{{letter.lc_number}}</span></span>
                             <div class="row">
-                                <object data="uploads/{{letter.uploads[0]}}" type="application/pdf" width="100%" height="517px">
-                                <p>Alternative text - include a link <a href="uploads/SGHSBC7G18301634-T01.pdf">to the PDF!</a></p>
-                                </object>
+                                <pdf source="{{letter.uploads[0]}}"></pdf>
                             </div>
                         </div>
                     </div>

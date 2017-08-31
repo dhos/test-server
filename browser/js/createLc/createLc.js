@@ -6,10 +6,19 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory) {
+app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state) {
     //find the users that are clients,
     //find the users that are csp/pic
     $scope.createLc = () => {
+        $scope.letter.amendments = {}
+        $scope.letter.country.clauses.forEach(clause => {
+            $scope.letter.amendments[clause.swift] = {
+                reference: clause.fieldDescription,
+                status: '00',
+                lastModified: Date.now()
+            }
+        })
+        $scope.letter.country = $scope.letter.country.id
         lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
             $state.go('singleLc', {
                 lc_number: letter.lc_number

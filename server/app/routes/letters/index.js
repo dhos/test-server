@@ -55,6 +55,7 @@ router.get('/:id', ensureAuthenticated, (req, res, next) => {
 
 //sets
 router.post('/', ensureAuthenticated, upload.single('file'), (req, res, next) => {
+    console.log(req.body)
     var newLetter = JSON.parse(req.body.newLetter)
     newLetter.uploads = [req.file.originalname]
     Letter.create(newLetter).then(letter => {

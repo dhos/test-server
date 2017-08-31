@@ -1,0 +1,83 @@
+Swift Code,Field Description,Line Description
+27,Sequence of Total,1/1 (Number)(Total)
+40A,Form of Documentary Credit,Irrevocable
+31C,Date of Issue,dd/mm/yyyy
+40E,Applicable Rules,UCP LATEST VERSION
+32B,Currency/Amount,□ USD        □  JPY       □ EUR
+51A,Applicant Bank,
+50,Applicant,
+59,Beneficiary
+(Follow this address in L/C
+application to avoid amendment, 
+as this is our official address
+information in our letterhead),SABIC ASIA PACIFIC PTE LTD
+ONE TEMASEK AVENUE 
+NO. 06-01 MILLENIA TOWER
+SINGAPORE 039192
+39A,Precentage Credit
+Amount Tolerance,10/10
+39B,Maximum Credit Amount,Not Exceeding
+41D,Available With/by,ANY BANK IN SINGAPORE BY NEGOTIATION
+42C ,Drafts At,□ XX Days from B/L date                  □ Sight
+42A,Drawee,ISSUING BANK / CONFIRMING BANK
+44C,Latest Shipment Date (dd/mm/yyyy),
+31D,Expiry Date/Place (dd/mm/yyyy),
+43P,Partial Shipments,Allowed
+43T,Transhipment,Allowed
+44E,Loading Port/ Dispatch at/ From,Any Port in Saudi Arabia / S. Korea / Europe
+44F,Port of Discharge / Airport of Destination,Any Port in Maldives
+49,Confirming Instruction,Confirm / May Add
+Any bank in Singapore is allowed to add confirmation to the L/C
+45A,Description of Goods
+(Do not mention specification, only Quantity,
+Product name or Grade),QUANTITY: --------------------------------------
+--------------------------------------------------------
+--------------------------------------------------------
+□ CIF    □ CFR    □ FOB    □ (other incoterms)
+
+46A,Documents Required,Signed Commercial Invoice in One Original and Three Copies.
+Invoice must show CIF breakdown (FOB value, Insurance and Freight charges separately)
+
+2) Full Set of Original Clean 'Shipped on Board' Marine Bills of Lading Made out or Endorsed To Order of Issuing Bank Marked Freight Prepaid and marked 
+notify applicant and issuing bank. Bill of Lading must show Name, address, telephone and fax number of local shipping agent in Maldives
+3) Certifciate of Origin issued by Beneficiary
+4) Insurance Certificate blank endorsed for full invoice value plus 10 pct, showing claims payable at destination and irrespective of 
+any deductions. Covering Institutute cargo class A, from warehouse to Warehouse in Maldives. (IF CIF Terms)
+5) Packing list in One Original and Two Copies
+47A,Additional Conditions,All Documents are to be made out in English and must indicate the credit number and be dated not earlier than the issuance date of this credit.
+2) For discrepancy arising  on account of  non- adherence to L/C terms the discrepancy charges are on Beneficiary’s  account
+3) All required documents to be courier in one lot to XXXX bank, trade finance center, XXXX, Building X, No. XX, XXXXXXX, Tel. XXXXXXXX, Fax. XXXXXXX
+4) Allow more of less 10% tolerance in Amount and Quantity
+
+5) Alteration or correction on Bill of Lading by Third Party Ship's Agent Acceptable but must be accompanied with their sign and stamp
+
+6) Third Party Documents Acceptable Except Commercial Invoice and Bill of Exchange
+
+7) Acceptance Commission if any, are for applicant's account
+
+8) Typographical or spelling error not consider discrepancy except Quantity, Amount, Product and Grade
+
+9) Payment falling due on Saturday or a weekday other than Monday which is not a banking day in Issuing Bank's Country, Singapore or New York Bank, payment
+should be effected with value immediately on the preceding banking day. 
+Payment falling due on Sunday or a Monday bank Holiday in Issuing Bank's country, Singapore or New York shall be effected on the following banking day.
+
+10) TT Reimbursement is allowed
+
+11) Discrepant documents to be negotiated only on prior approval basis
+71B,Charges,All bank charges in Singapore including Confirmation charges are for Beneficiary's account and all bank charges outside Singapore are for for Applicant's account including Reimbursing bank charges
+48,Period for Presentation,Within 21 days from the date of shipment but within the validity of the credit
+53A ,Reimbursing Bank,If Any
+57A,Advise Through Bank',The Bank Of Tokyo Mitsubishi UFJ, Ltd. - Singapore branch, 9 Raffles Place #01-01 Republic Plaza Singapore 048619,                                                                                                     Swift Code : BOTKSGSX
+
+Standard Chartered Bank, Bank Address: 6 Battery Road, Singapore 049909, Bank code: 7144, SWIFT Code: SCBLSGSG
+78,Instructions to the Paying/Accepting /
+Negotiating Bank,1) We authorize you to reimburse yourself by debiting our account held with you value 3 working days from due date.
+
+OR
+
+2) We authorize you to reimburse by sending swift claim to reimbursement bank mentioned in Field 53 value 3 working days from due date.
+
+OR
+
+3) We will honor your payment as per your instructions value 3 working days from claim date
+72,Sender to Receiver Information,Credit is subject to UCP or Documentary Credits ICC Publication No.600 (2007 Revision) or UCPURR Latest Version Please acknowledge receipt

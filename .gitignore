@@ -5,6 +5,7 @@ public
 .DS_Store
 coverage
 bower_components
+browser/uploads
 
 # Logs
 logs
