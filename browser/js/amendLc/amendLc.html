@@ -58,7 +58,9 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Customer Name</label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" ng-model="letter.client">
+                                <select class="form-control m-b" ng-model="letter.client">
+                                  <option ng-repeat="client in clients" value = "{{client.id}}">{{client.username}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">

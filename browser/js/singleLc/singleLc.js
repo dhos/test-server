@@ -2,13 +2,13 @@ app.config(function($stateProvider) {
     $stateProvider.state('singleLc', {
         templateUrl: 'js/singleLc/singleLc.html',
         controller: 'singleLcCtrl',
-        url: '/lc/:lcNumber',
+        url: '/lc/:lc_number',
         data: {
             authenticate: true
         },
         resolve: {
             letter: (lcFactory, $stateParams) => {
-                return lcFactory.getSingleLetter($stateParams.lcNumber).then(letter => {
+                return lcFactory.getSingleLetter($stateParams.lc_number).then(letter => {
                     return letter
                 })
             }
@@ -18,6 +18,7 @@ app.config(function($stateProvider) {
 
 app.controller('singleLcCtrl', ($scope, lcFactory, letter) => {
     $scope.letter = letter
+    console.log($scope.letter.uploads)
     $scope.approved = {
         content: {},
         length: 0

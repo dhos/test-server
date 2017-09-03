@@ -17,7 +17,7 @@ app.controller('updatedCtrl', ($scope, lcFactory, letters, $state) => {
     console.log($scope.displayLetters)
     $scope.transition = (lcNumber) => {
         $state.go('singleLc', {
-            lcNumber: lcNumber
+            lc_number: lc_number
         })
     }
 });

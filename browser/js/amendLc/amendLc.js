@@ -17,7 +17,6 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
     $scope.letter = letter
 
     $scope.updateLc = () => {
-        console.log($scope.updatedFile)
         lcFactory.updateLetterFile($scope.letter, $scope.updatedFile).then(letter => {
             $state.go('singleLc', {
                 lc_number: letter.lc_number
@@ -42,9 +41,15 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
         })
         //get cspusers
     userFactory.getUsers({
-        role: 2
-    }).then(cspUsers => {
-        $scope.cspUsers = cspUsers
+            role: 2
+        }).then(cspUsers => {
+            $scope.cspUsers = cspUsers
+        })
+        //get clients
+    userFactory.getUsers({
+        role: 3
+    }).then(clients => {
+        $scope.clients = clients
     })
 
 })

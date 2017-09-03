@@ -17,7 +17,7 @@ app.controller('reviewedCtrl', ($scope, lcFactory, letters, $state) => {
     })
     $scope.transition = (lcNumber) => {
         $state.go('singleLc', {
-            lcNumber: lcNumber
+            lc_number: lc_number
         })
     }
 });
