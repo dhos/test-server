@@ -16,7 +16,7 @@
     <tbody>
         <tr ng-repeat-start="letter in letters">
             <td>{{letter.lc_number}}</td>
-            <td>{{letter.date}}</td>
+            <td>{{letter.date | date:'longDate'}}</td>
             <td>{{letter.expire}}</td>
             <td>{{letter.client_name}}</td>
             <td>{{countries[letter.country]}}</td>

@@ -8,20 +8,22 @@
             <th>Country</th>
             <th>Status</th>
             <th>Advising Bank</th>
+            <th>PIC</th>
+            <th>CSP</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat-start="letter in displayLetters">
             <td>{{letter.lc_number}}</td>
-            <td>{{letter.date}}</td>
+            <td>{{letter.date | date:'longDate'}}</td>
             <td>{{letter.expire}}</td>
             <td>{{letter.client_name}}</td>
-            <td>{{letter.country}}</td>
+            <td>{{countries[letter.country]}}</td>
             <td>{{state[letter.state]}}</td>
-            <td>{{letter.bank}}</td>
-            <td>{{letter.psr}}</td>
-            <td>{{letter.crc}}</td>
+            <td>{{banks[letter.bank]}}</td>
+            <td>{{picUsers[letter.pic]}}</td>
+            <td>{{cspUsers[letter.csp]}}</td>
             <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
               <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
               </td>
