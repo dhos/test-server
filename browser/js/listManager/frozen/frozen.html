@@ -31,7 +31,15 @@
         <tr ng-repeat-end ng-if="letter.expanded">
             <td colspan="12" class="secondlevel" ng-click="transition(letter.lc_number)">
                 <ul class="statuses">
-                    <li ng-class="{active: letter.state===1}"><a class="new-stat" ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">New<br>Stage 1 of 5</a></li>
+                    <li ng-class="{active: letter.state===1}"><a href="detail-lc.html" class="new-stat">
+                        <div class="icon-stat stat-bg">
+                        <i class="fa fa-check"></i>
+                        </div>
+                        <div>
+                        <span class="main-stat"> New</span><br> <span class="secnd-stat">Completed</span>
+                        </div>
+                        </a>
+                    </li>
                     <li ng-class="{active: letter.state===2}"><a class="review-stat" ng-disabled="letter.state!==2" ng-click="transition(letter.lc_number)">Review<br>Stage 2 of 5</a></li>
                     <li ng-class="{active: letter.state===3}"><a class="amend-stat" ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">Amend<br>Stage 3 of 5</a></li>
                     <li ng-class="{active: letter.state===4}"><a class="freeze-stat" ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">Freeze<br>Stage 4 of 5</a></li>
