@@ -27,7 +27,7 @@ app.factory('bankFactory', function($http, $q) {
 
     //Sets
     d.createBank = (bank) => {
-        return $http.post('/api/banks/')
+        return $http.post('/api/banks/', bank)
             .then(response => {
                 return response.data
             }).catch(err => {
@@ -41,7 +41,7 @@ app.factory('bankFactory', function($http, $q) {
 
     //Updates
     d.updateBank = (bank) => {
-        return $http.put(`/api/banks/${bank.id}`)
+        return $http.put(`/api/banks/`, bank)
             .then(response => {
                 return response.data
             }).catch(err => {

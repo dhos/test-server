@@ -1,0 +1,76 @@
+<div class="col-md-12">
+    <!-- main header -->
+    <div class="bg-light lter wrapper-md">
+        <div class="row title-space">
+            <div class="col-md-4">
+                <h1 class="m-n font-thin h3 text-black main-title">Banks</h1>
+                <small class="text-muted"><a href=""> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Banks</small>
+            </div>
+            <div class="col-md-8 text-center">
+                <div class="row lc-stats">
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">30</span>
+                        <br> Updated
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">58</span>
+                        <br> Frozen
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">25</span>
+                        <br> Amended
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span style="display: inline-block;"><span class="stats-numb">26</span>
+                        <br> Reviewed</span>
+                        <label class="switch">
+                            <input type="checkbox" checked="">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">112</span>
+                        <br> New LCs
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md">
+        <!-- stats -->
+        <div class="row row-sm">
+            <div class="col-md-12">
+                <div class="panel padder-v item">
+                    <div class="table-responsive">
+                        <table class="table table-striped m-b-none">
+                            <thead>
+                                <tr>
+                                  <th colspan="9">
+                                    <div class="form-group inline-block"><div class="input-group"><input type="text" class="form-control m-r" placeholder="Enter bank name"><div class="input-group-btn"><button type="button" class="btn btn-primary">Search</button></div></div></div>
+                                    <div class="pull-right adduser"><a ui-sref="newBank" class="btn m-b-xs btn-success"><i class="fa fa-plus"></i> New Bank </a></div>
+                                  </th>
+                                </tr>
+                                <tr>
+                                    <th data-breakpoints="xs">Bank Name</th>
+                                    <th>Primary Email Address</th>
+                                    <th>Secondary Email Address</th>
+                                    <th data-breakpoints="xs sm">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="bank in banks">
+                                    <td>{{bank.name}}</td>
+                                    <td>{{bank.primary_email}}</td>
+                                    <td>{{bank.secondary_email}}</td>
+                                    <td><a ng-click="editBank(bank.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteBank(bank.id)"><i class="fa fa-trash"></i> Delete</a> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / stats -->
+    </div>
+</div>

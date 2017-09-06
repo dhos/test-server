@@ -11,6 +11,7 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
     //find the users that are csp/pic
     $scope.createLc = () => {
         $scope.letter.amendments = {}
+        $scope.letter.state = 1
         $scope.letter.country.clauses.forEach(clause => {
             $scope.letter.amendments[clause.swift] = {
                 reference: clause.fieldDescription,

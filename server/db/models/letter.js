@@ -14,6 +14,11 @@ module.exports = db.define('letter', {
     },
     amendments: {
         type: Sequelize.JSON
+            /*
+                {
+                ammendments:[]
+                }
+            */
     },
     date: {
         type: Sequelize.DATE
@@ -46,7 +51,6 @@ module.exports = db.define('letter', {
 		2 = pending review
 		3 = amended
 		4 = frozen
-		5 = uploaded
 		*/
     },
     archived: {
@@ -58,6 +62,8 @@ module.exports = db.define('letter', {
     approved: {
         type: Sequelize.STRING,
         defaultValue: '00'
+            //[0] = client
+            //[1] = elite
     },
     draftText: {
         type: Sequelize.JSON

@@ -9,6 +9,12 @@ module.exports = db.define('user', {
     username: {
         type: Sequelize.STRING
     },
+    firstName: {
+        type: Sequelize.STRING
+    },
+    lastName: {
+        type: Sequelize.STRING
+    },
     password: {
         type: Sequelize.STRING
     },
@@ -18,14 +24,31 @@ module.exports = db.define('user', {
     role: {
         type: Sequelize.INTEGER
             /*
+            0:customer
             1:pic,
             2:csp,
-            3:client,
+            3:super manager,
             4:admin
             */
     },
-    assignedLetters: {
-        type: Sequelize.INTEGER
+    countries: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER)
+    },
+    customers: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER)
+    },
+    //customer
+    email: {
+        type: Sequelize.STRING
+    },
+    address: {
+        type: Sequelize.STRING
+    },
+    number: {
+        type: Sequelize.STRING
+    },
+    website: {
+        type: Sequelize.STRING
     }
 }, {
     instanceMethods: {

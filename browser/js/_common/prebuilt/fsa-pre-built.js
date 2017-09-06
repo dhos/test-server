@@ -41,6 +41,9 @@
         notAuthorized: 'auth-not-authorized'
     });
 
+    app.constant('LETTER_EVENTS', {
+        refreshLetters: 'refresh-letters'
+    })
 
     app.factory('AuthInterceptor', function($rootScope, $q, AUTH_EVENTS) {
         var statusDict = {

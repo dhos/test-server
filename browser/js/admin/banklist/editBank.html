@@ -1,0 +1,76 @@
+<div class="col-md-12">
+    <!-- main header -->
+    <div class="bg-light lter wrapper-md">
+        <div class="row title-space">
+            <div class="col-md-4">
+                <h1 class="m-n font-thin h3 text-black main-title">Edit Bank</h1>
+                <small class="text-muted"><a href="index.html"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a href="banks.html"> Banks</a> <i class="fa fa-angle-right br-gap"></i> Edit Bank</small>
+            </div>
+            <div class="col-md-8 text-center">
+                <div class="row lc-stats">
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">30</span>
+                        <br> Updated
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">58</span>
+                        <br> Frozen
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">25</span>
+                        <br> Amended
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span style="display: inline-block;"><span class="stats-numb">26</span>
+                        <br> Reviewed</span>
+                        <label class="switch">
+                            <input type="checkbox" checked="">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">112</span>
+                        <br> New LCs
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md">
+        <!-- stats -->
+        <div class="row row-sm">
+            <div class="col-md-12">
+                <div class="panel padder-v item">
+                    <form class="bs-example form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Bank Name</label>
+                            <div class="col-lg-6">
+                                <input ng-model="bank.name" type="input" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Primary Email Address</label>
+                            <div class="col-lg-6">
+                                <input ng-model="bank.primary_email" type="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Secondary Email Address</label>
+                            <div class="col-lg-6">
+                                <input ng-model="bank.secondary_email" type="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button ng-click="updateBank(bank)" class="btn m-b-xs btn-success">Save</button>
+                                <a ui-sref="banklist" class="btn m-b-xs w-xs btn-dark">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- / stats -->
+    </div>
+</div>

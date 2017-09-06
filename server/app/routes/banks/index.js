@@ -27,14 +27,24 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
 })
 
 router.get('/:id', ensureAuthenticated, (req, res, next) => {
-
+    Bank.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(bank => {
+        res.json(bank)
+    })
 })
 
 //end fetches
 
 //sets
 router.post('/', ensureAuthenticated, (req, res, next) => {
-
+    Bank.create(req.body).then(bank => {
+        res.json(bank)
+    }).catch(err => {
+        return next(err)
+    })
 })
 
 //end sets
@@ -42,7 +52,20 @@ router.post('/', ensureAuthenticated, (req, res, next) => {
 //updates
 
 router.put('/', ensureAuthenticated, (req, res, next) => {
-
+    const bank = req.body
+    Bank.findOne({
+        where: {
+            id: bank.id
+        }
+    }).then(bankToBeUpdated => {
+        if (bankToBeUpdated) {
+            return bankToBeUpdated.updateAttributes(bank)
+        }
+    }).then(updatedBank => {
+        res.json(updatedBank)
+    }).catch((err) => {
+        return next(err)
+    })
 })
 
 //end updates
@@ -50,7 +73,11 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
 //deletes
 
 router.delete('/', ensureAuthenticated, (req, res, next) => {
-
+    Bank.destroy({
+        where: req.query
+    }).then(Bank.findAll({}).then(banks => {
+        res.json(banks)
+    }))
 })
 
 //end deletes

@@ -3,14 +3,20 @@ var Sequelize = require('sequelize');
 
 var db = require('../_db');
 
-module.exports = db.define('bank', {
+module.exports = db.define('customer', {
     name: {
         type: Sequelize.STRING,
     },
-    primary_email: {
+    email: {
         type: Sequelize.STRING
     },
-    secondary_email: {
+    address: {
+        type: Sequelize.STRING
+    },
+    number: {
+        type: Sequelize.STRING
+    },
+    website: {
         type: Sequelize.STRING
     }
 });

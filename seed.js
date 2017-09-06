@@ -21,9 +21,10 @@ fs.createReadStream(sample)
     })
     .on('end', () => {
         organizeData(csvData)
-            // makeUsers()
+        makeUsers()
             // makeCountries()
-            // makeBanks()
+        makeBanks()
+
     })
 
 var temp = [{
@@ -135,6 +136,14 @@ var makeBanks = () => {
         })
     }
 }
+
+var makeCustomers = () => {
+    Customer.create({
+        username: 'Sabic',
+        password: 'test',
+
+    })
+}
 var makeUsers = () => {
     var users = {
         JENY: 1,
@@ -154,6 +163,17 @@ var makeUsers = () => {
             role: Math.ceil(Math.random() * 2)
         })
     }
+    User.create({
+        username: 'test',
+        password: 'test',
+        role: 4
+    })
+    User.create({
+        username: 'Sabic',
+        password: 'test',
+        role: 0,
+
+    })
 }
 
 var organizeData = csvData => {
