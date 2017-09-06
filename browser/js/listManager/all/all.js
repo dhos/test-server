@@ -27,7 +27,7 @@ app.controller('allCtrl', ($scope, lcFactory, letters, $state) => {
     }
     $scope.transition = (lcNumber) => {
         $state.go('singleLc', {
-            lcNumber: lcNumber
+            lc_number: lcNumber
         })
     }
 });

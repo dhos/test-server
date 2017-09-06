@@ -70,12 +70,15 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.Reviewed = []
     $scope.Amended = []
     $scope.Frozen = []
-    $scope['Pending Update']
+    $scope.Update = []
     $scope.amendedCustomer = false
     $scope.reviewedCustomer = false
     $scope.letters = letters
         //set states
     $scope.letters.forEach(letter => {
         $scope[$scope.state[letter.state]].push(letter)
+    })
+    $scope.Frozen.forEach(frozen => {
+        if (frozen.finDoc === 0) $scope.Update.push(frozen)
     })
 })

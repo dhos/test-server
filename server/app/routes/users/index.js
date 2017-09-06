@@ -13,7 +13,7 @@ var ensureAuthenticated = function(req, res, next) {
 }
 router.get('/', (req, res, next) => {
     User.findAll({
-        where: req.body
+        where: req.query
     }).then(users => {
         res.json(users)
     }).catch(err => {

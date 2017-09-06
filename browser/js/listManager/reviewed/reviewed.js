@@ -14,21 +14,16 @@ app.config(function($stateProvider) {
 app.controller('reviewedCtrl', ($scope, lcFactory, letters, $state) => {
     $scope.$watch('reviewedCustomer', (nv, ov) => {
         if (nv === true) {
-            $scope.displayLetters = $scope.letters.filter(letter => {
-                return letter.state === 2
-            })
-            $scope.displayLetters = $scope.letters.filter(letter => {
+            $scope.displayLetters = $scope.Reviewed.filter(letter => {
                 return letter.approved[0] === '0'
             })
         } else {
-            $scope.displayLetters = $scope.letters.filter(letter => {
-                return letter.state === 2
-            })
-            $scope.displayLetters = $scope.letters.filter(letter => {
+            $scope.displayLetters = $scope.Reviewed.filter(letter => {
                 return letter.approved[1] === '0'
             })
         }
     })
+
     $scope.transition = (lc_number) => {
         $state.go('singleLc', {
             lc_number: lc_number

@@ -20,9 +20,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('frozenCtrl', ($scope, lcFactory, letters, $state) => {
-    $scope.displayLetters = $scope.letters.filter(letter => {
-        return letter.state === 4
-    })
+    $scope.displayLetters = $scope.Frozen
     $scope.transition = (lc_number) => {
         $state.go('singleLc', {
             lc_number: lc_number

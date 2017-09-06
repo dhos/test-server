@@ -15,7 +15,9 @@ app.factory('userFactory', function($http, $q) {
     }
 
     userFactory.getUsers = (query) => {
-        return $http.get('/api/users/', query).then((response) => {
+        return $http.get('/api/users/', {
+            params: query
+        }).then((response) => {
             return response.data
         }).catch(err => {
             return $q.reject({

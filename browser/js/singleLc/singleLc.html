@@ -37,9 +37,6 @@
                                     112
                                     <br> New LCs
                                 </div>
-                               <!--  <div class="col-md-2 text-right">
-                                    <a href="" class="lc-button"> <i class="fa fa-plus"></i> New LC</a>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -89,12 +86,10 @@
                                                     <td ng-if="value.status == '0'">
                                                         <a ng-click="approveAmendment(key)"><img src="img/tick.png" alt="Status"></a>
                                                         <a ng-click="value.expanded=true"><img src="img/edit.png" alt="Status"></a>
-                                                        <a ng-click="rejectAmendment(key)"><img src="img/add.png" alt="Status"></a>
                                                     </td>
                                                     <td ng-if="value.status !== '0'">
                                                         <a ng-if="value.status=='1'"><img src="img/tick.png" alt="Status"></a>
                                                         <a ng-if="value.status=='2'"><img src="img/edit.png" alt="Status"></a>
-                                                        <a ng-if="value.status=='3'"><img src="img/add.png" alt="Status"></a>
                                                     </td>
                                                     <td>{{value.lastModified | date:'longDate'}}</td>
                                                     <td>
@@ -117,10 +112,10 @@
                                                         </div>
                                                         <br>
                                                         <div class="full-width">
-                                                            <textarea ng-model="reference[$index]" class="full-width" rows="5" placeholder="Enter LC Clause text"></textarea>
+                                                            <textarea ng-model="reference[key]" class="full-width" rows="5" placeholder="Enter LC Clause text"></textarea>
                                                         </div>
                                                         <div class="full-width">
-                                                            <button class="btn m-b-xs w-xs btn-success" ng-click="editAmendment($index)">Apply</button>
+                                                            <button class="btn m-b-xs w-xs btn-success" ng-click="editAmendment(key)">Apply</button>
                                                             <button ng-click="value.expanded = false" class="btn m-b-xs w-xs btn-dark">Cancel</button>
                                                         </div>
                                                     </td>
@@ -133,7 +128,6 @@
                                         <hr>
                                         <div class="text-right">
                                             <button class="btn m-b-xs btn-default">Save Draft</button>
-                                            <button class="btn m-b-xs btn-danger">+ New Clause</button>
                                             <button href data-toggle="tab" data-target="#tab_2" class="btn m-b-xs btn-success">Next </button>
                                         </div>
                                     </div>

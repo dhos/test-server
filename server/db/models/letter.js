@@ -16,7 +16,12 @@ module.exports = db.define('letter', {
         type: Sequelize.JSON
             /*
                 {
-                ammendments:[]
+                ammendments:{
+                    swift: number,
+                    reference:text,
+                    previousReferences:[text],
+                    status:'00'
+                }
                 }
             */
     },

@@ -16,7 +16,8 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
             $scope.letter.amendments[clause.swift] = {
                 reference: clause.fieldDescription,
                 status: '00',
-                lastModified: Date.now()
+                lastModified: Date.now(),
+                previousReferences: []
             }
         })
         $scope.letter.country = $scope.letter.country.id
@@ -50,9 +51,10 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
         })
         //getclient
     userFactory.getUsers({
-        role: 3
+        role: 0
     }).then(clients => {
         $scope.clients = clients
+        console.log($scope.clients)
     })
 
 });
