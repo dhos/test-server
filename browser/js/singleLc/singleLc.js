@@ -54,9 +54,16 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
     $scope.client = $scope.user.role === 0
     for (let key of Object.keys($scope.amendments)) {
         if ($scope.client) {
+            if ($scope.amendments[key].status[0] === '1') {
+                $scope.approved.content[key] = $scope.amendments[key].reference
+                $scope.approved.length++
+            }
             $scope.amendments[key].status = $scope.amendments[key].status[0]
         } else {
-            console.log($scope.amendments[key])
+            if ($scope.amendments[key].status[1] === '1') {
+                $scope.approved.content[key] = $scope.amendments[key].reference
+                $scope.approved.length++
+            }
             $scope.amendments[key].status = $scope.amendments[key].status[1]
         }
     }
@@ -78,7 +85,6 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
     }
     $scope.updateLetter = () => {
         var total = $scope.approved.length + $scope.amended.length
-        if (total !== Object.keys($scope.amendments).length) return
 
         for (let key of Object.keys($scope.approved.content)) {
             if ($scope.client) $scope.amendments[key].status = '1' + $scope.letter.amendments[key].status[1]
@@ -112,7 +118,6 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
             }
         }
 
-        console.log($scope.letter)
         lcFactory.updateLetter($scope.letter).then(letter => {
             $state.go('listManager.' + $scope.states[letter.state])
         })
