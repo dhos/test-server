@@ -55,7 +55,10 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
     for (let key of Object.keys($scope.amendments)) {
         if ($scope.client) {
             $scope.amendments[key].status = $scope.amendments[key].status[0]
-        } else $scope.amendments[key].status = $scope.amendments[key].status[1]
+        } else {
+            console.log($scope.amendments[key])
+            $scope.amendments[key].status = $scope.amendments[key].status[1]
+        }
     }
     $scope.approveAmendment = (key) => {
         $scope.approved.content[key] = $scope.amendments[key].reference
@@ -64,19 +67,17 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
 
     }
     $scope.editAmendment = (key) => {
-        console.log(key)
         $scope.amendments[key].previousReferences.push($scope.amendments[key].reference)
         $scope.amendments[key].reference = $scope.reference[key]
         $scope.amendments[key].status = '2'
         $scope.amendments[key].expanded = false
-        $scope.amended[$scope.amendments[key]] = $scope.reference[key]
+        $scope.amended.content[key] = $scope.reference[key]
         $scope.reference[key] = ""
         $scope.amended.length++
 
     }
     $scope.updateLetter = () => {
         var total = $scope.approved.length + $scope.amended.length
-        console.log(Object.keys($scope.amendments).length, total)
         if (total !== Object.keys($scope.amendments).length) return
 
         for (let key of Object.keys($scope.approved.content)) {
@@ -91,14 +92,17 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
         $scope.letter.amendments = $scope.amendments
         if ($scope.approved.length === total) {
             if ($scope.letter.state === 1) {
-                $scope.letter.state++
+                $scope.letter.state = 2
             }
             if ($scope.client) {
                 $scope.letter.approved = "1" + $scope.letter.approved[1]
             } else {
                 $scope.letter.approved = $scope.letter.approved[0] + "1"
             }
-            if ($scope.letter.approved === "11") $scope.letter.state = 4
+            if ($scope.letter.approved === "11") {
+                $scope.letter.state = 4
+                $scope.letter.approved = "01"
+            }
         } else {
             $scope.letter.state = 3
             if ($scope.client) {

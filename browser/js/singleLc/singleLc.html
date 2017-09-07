@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="tab-pane" id="tab_2">
                                         <div class="row summery">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <table class="table m-b-none no-td-b">
                                                     <tbody>
                                                         <tr>
@@ -146,19 +146,18 @@
                                                         </tr>
                                                         <tr ng-repeat="(key,value) in approved.content">
                                                             <td>{{key}}</td>
-                                                            <td>{{value}}
-                                                            </td>
+                                                            <td>{{value}}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <table class="table m-b-none no-td-b">
                                                     <tbody>
                                                         <tr>
                                                             <td></td>
                                                             <td>
-                                                                <div class="text-center inline-block box-amended">{{ammended.length}}
+                                                                <div class="text-center inline-block box-amended">{{amended.length}}
                                                                     <br> Amended</div>
                                                             </td>
                                                         </tr>
@@ -166,24 +165,6 @@
                                                             <td>{{key}}</td>
                                                             <td>{{value}}</td>
                                                         </tr>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="col-md-4">
-                                              <table class="table m-b-none no-td-b">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td></td>
-                                                            <td>
-                                                                <div class="text-center inline-block box-added">2
-                                                                    <br> Added</div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr ng-repeat="amendment in rejected">
-                                                            <td>{{amendment.swift}}</td>
-                                                            <td>{{amendment.reference}}
-                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
