@@ -81,5 +81,9 @@ module.exports = db.define('letter', {
     },
     finDate: {
         type: Sequelize.DATE
+    },
+    expiring: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
     }
 });
