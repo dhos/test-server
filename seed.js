@@ -208,7 +208,7 @@ var organizeData = csvData => {
         var letterToBeCreated = {
             bank: banks[columns[0]],
             date: new Date(columns[1]),
-            expiry: new Date.now(),
+            expiry: new Date(1504813174792),
             contract: columns[2],
             lc_number: columns[3],
             country: countries[columns[4]],
