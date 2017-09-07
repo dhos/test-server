@@ -1145,8 +1145,8 @@ header#header {     background: #efefef;-webkit-box-shadow: 0px 0px 15px 0px rgb
 hr { margin-top: 0; }
 .redcolor { color: #ae0035; }
 .no-td-b td { border-top: 0 !important; }
-.search-wrapper { position: fixed; z-index: 99999; width: 100%; }
-.main-search { padding: 21px; border: 0; width: 100%; }
+.search-wrap {z-index: 99999; width: 50%;display:inline-block; }
+.main-search { padding: 21px; border: 0; width: 200%; }
 .close-search { position: absolute; top: 0; right: 0; padding: 18px; }
 .search-wrapper { display: none; }
 .col-hf-2 { width: 20%; }

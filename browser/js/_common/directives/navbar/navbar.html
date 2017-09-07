@@ -17,8 +17,10 @@
     <!-- buttons -->
     <div class="nav navbar-nav hidden-xs">
         <a href="#" class="btn no-shadow navbar-btn top-btn" ui-toggle-class="app-aside-folded" target=".app"><img src="img/menu.png"></a>
-        <a href="#" class="btn no-shadow top-btn search-top"><img src="img/search.png"></a>
-        <a href="#" class="btn no-shadow top-btn" ui-toggle-class="show" target="#aside-user"><img src="img/feed.png"></a>
+        <a ng-click="search(searchQuery)" class="btn no-shadow top-btn search-top"><img src="img/search.png"></a>
+        <div class="search-wrap">
+            <input type="text" id="search-text" style="padding:12px;border-radius:10px;" class="main-search" placeholder="Search by specific LC Number">
+        </div>
     </div>
     <!-- / buttons -->
     <!-- nabar right -->

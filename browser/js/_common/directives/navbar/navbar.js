@@ -6,7 +6,7 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state) {
         link: function(scope) {
 
             scope.user = null;
-
+            scope.query = ""
             scope.isLoggedIn = function() {
                 return AuthService.isAuthenticated();
             };
@@ -27,6 +27,16 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state) {
             var removeUser = function() {
                 scope.user = null;
             };
+
+            scope.search = () => {
+
+                if ($('#search-text')[0].value) {
+                    $state.go('singleLc', {
+                        lc_number: $('#search-text')[0].value
+                    })
+                    $('#search-text').val("")
+                }
+            }
 
             setUser();
 
