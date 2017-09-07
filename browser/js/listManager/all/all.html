@@ -31,11 +31,56 @@
         <tr ng-repeat-end ng-if="letter.expanded">
             <td colspan="12" class="secondlevel" ng-click="transition(letter.lc_number)">
                 <ul class="statuses">
-                    <li ng-class="[new-stat, {active: letter.state===1}]"><a ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">New<br>Stage 1 of 5</a></li>
-                    <li ng-class="[review-stat, {active: letter.state===2}]"><a ng-disabled="letter.state!==2" ng-click="transition(letter.lc_number)">Review<br>Stage 2 of 5</a></li>
-                    <li ng-class="[amend-stat, {active: letter.state===3}]"><a ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">Amend<br>Stage 3 of 5</a></li>
-                    <li ng-class="[freeze-stat, {active: letter.state===4}]"><a ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">Freeze<br>Stage 4 of 5</a></li>
-                    <li ng-class="[update-stat, {active: letter.state===5}]"><a ng-disabled="letter.state!==5" ng-click="transition(letter.lc_number)">FD Update<br>Stage 5 of 5</a></li>
+                    <li ng-class="[new-stat, {active: letter.state===1}]">
+                        <a ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">
+                            <div class="icon-stat stat-bg">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div>
+                                <span class="main-stat"> New</span><br> <span class="secnd-stat">Stage 1 of 5</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li ng-class="[review-stat, {active: letter.state===2}]">
+                        <a ng-disabled="letter.state!==2" ng-click="transition(letter.lc_number)">
+                            <div class="icon-stat stat-bg">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div>
+                                <span class="main-stat"> Review</span><br> <span class="secnd-stat">Stage 2 of 5</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li ng-class="[amend-stat, {active: letter.state===3}]">
+                        <a ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">
+                             <div class="icon-stat stat-bg">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div>
+                                <span class="main-stat"> Amend</span><br> <span class="secnd-stat">Stage 3 of 5</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li ng-class="[freeeze-stat, {active: letter.state===4}]">
+                        <a ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">                            
+                             <div class="icon-stat stat-bg">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div>
+                                <span class="main-stat"> Freeze</span><br> <span class="secnd-stat">Stage 4 of 5</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li ng-class="[fdupate-stat, {active: letter.state===5}]">
+                        <a ng-disabled="letter.state!==5" ng-click="transition(letter.lc_number)">
+                             <div class="icon-stat stat-bg">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div>
+                                <span class="main-stat"> FD Update</span><br> <span class="secnd-stat">Stage 5 of 5</span>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </td>
         </tr>
