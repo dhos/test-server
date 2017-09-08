@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('editCustomer', {
-        templateUrl: 'js/admin/customerlist/editCustomer.html',
+        templateUrl: 'js/admin/customerList/editCustomer.html',
         controller: 'editCustomerCtrl',
         url: '/editCustomer/:userId',
         resolve: {
