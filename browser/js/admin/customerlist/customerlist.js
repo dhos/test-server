@@ -60,6 +60,5 @@ app.controller('customerListCtrl', function($scope, customers, userFactory, $sta
         })
     }
     $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
-
     refreshLetters();
 });
