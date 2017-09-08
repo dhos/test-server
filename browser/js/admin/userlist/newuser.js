@@ -3,13 +3,37 @@ app.config(function($stateProvider) {
         templateUrl: 'js/admin/userlist/newUser.html',
         controller: 'newUserCtrl',
         url: '/newUser',
-        resolve: {}
+        resolve: {
+            countries: (countryFactory) => {
+                return countryFactory.getCountries({}).then(countries => {
+                    return countries
+                })
+            },
+            customers: (userFactory) => {
+                return userFactory.getUsers({
+                    role: 0
+                }).then(customers => {
+                    return customers
+                })
+            }
+        }
     })
 });
 
-app.controller('newUserCtrl', function($scope, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
+app.controller('newUserCtrl', function($scope, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, countries, customers) {
+    $scope.countries = countries
+    $scope.customers = customers
     $scope.createUser = (user) => {
+        user.countries = []
+        user.customers = []
+        for (let key of Object.keys($scope.selectedCountries)) {
+            if ($scope.selectedCountries[key]) user.countries.push(key)
+        }
+        for (let key of Object.keys($scope.selectedCustomers)) {
+            if ($scope.selectedCustomers[key]) user.customers.push(key)
+        }
         console.log(user)
+
         userFactory.createUser(user).then(user => {
             $state.go('userlist')
         })
@@ -21,6 +45,8 @@ app.controller('newUserCtrl', function($scope, userFactory, $state, $rootScope, 
         4: 'Frozen',
         5: 'Pending Update'
     }
+    $scope.selectedCountries = {}
+    $scope.selectedCustomers = {}
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
             $scope.letters = letters

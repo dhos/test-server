@@ -16,7 +16,6 @@ app.config(function($stateProvider) {
 
 app.controller('editCustomerCtrl', function($scope, userFactory, $state, user, $rootScope, LETTER_EVENTS, lcFactory) {
     $scope.user = user
-    $scope.letters = letters
     $scope.updateUser = (user) => {
         userFactory.updateUser(user).then(user => {
             $state.go('customerList')
