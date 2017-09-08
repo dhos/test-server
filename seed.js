@@ -20,14 +20,16 @@ fs.createReadStream(sample)
         csvData.push(csvrow)
     })
     .on('end', () => {
-        organizeData(csvData)
+        //organizeData(csvData)
         makeUsers()
         makeCountries()
         makeBanks()
 
     })
 
-var temp = [{
+
+var makeCountries = () => {
+    var temp = [{
         id: 1,
         name: 'Bangladesh',
         clauses: [{
@@ -104,23 +106,9 @@ Amount Tolerance`,
             lineDescription: 'ISSUING BANK / CONFIRMING BANK'
         }]
     }]
-    // temp.forEach(country => {
-    //     Country.create(country)
-    // })
-var makeCountries = () => {
-    var countries = {
-        'Bangladesh': 1,
-        'Nepal': 2,
-        'Sri Lanka': 3,
-        'India': 4,
-        'Bhutan': 5
-    }
-    for (var key of Object.keys(countries)) {
-        Country.create({
-            id: countries[key],
-            name: key
-        })
-    }
+    temp.forEach(country => {
+        Country.create(country)
+    })
 }
 var makeBanks = () => {
     var banks = {
