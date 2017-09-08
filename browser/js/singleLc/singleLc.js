@@ -152,23 +152,23 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
 
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
-            scope.letters = letters
-            scope.New = []
-            scope.Reviewed = []
-            scope.Amended = []
-            scope.Frozen = []
-            scope.Update = []
-            scope.letters = letters
+            $scope.letters = letters
+            $scope.New = []
+            $scope.Reviewed = []
+            $scope.Amended = []
+            $scope.Frozen = []
+            $scope.Update = []
+            $scope.letters = letters
                 //set states
-            scope.letters.forEach(letter => {
-                scope[state[letter.state]].push(letter)
+            $scope.letters.forEach(letter => {
+                $scope[state[letter.state]].push(letter)
             })
-            scope.Frozen.forEach(frozen => {
-                if (frozen.finDoc === 0) scope.Update.push(frozen)
+            $scope.Frozen.forEach(frozen => {
+                if (frozen.finDoc === 0) $scope.Update.push(frozen)
             })
         })
         lcFactory.getExpiringLetters({}).then(expiring => {
-            scope.Expiring = expiring[0]
+            $scope.Expiring = expiring[0]
         })
     }
     $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);

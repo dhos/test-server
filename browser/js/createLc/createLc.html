@@ -92,7 +92,8 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Country Name</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.country">
+                            <pre>{{letter.country}}</pre>
+                                <select class="form-control m-b" ng-model="selectedCountry">
                                     <option ng-repeat="country in countries" ng-value = "{{country}}">{{country.name}}</option>
                                 </select>
                             </div>

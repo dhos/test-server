@@ -9,10 +9,12 @@ app.config(function($stateProvider) {
 app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope) {
     //find the users that are clients,
     //find the users that are csp/pic
+    $scope.selectedCountry = {}
     $scope.createLc = () => {
+        console.log($scope.letter)
         $scope.letter.amendments = {}
         $scope.letter.state = 1
-        $scope.letter.country.clauses.forEach(clause => {
+        $scope.selectedCountry.clauses.forEach(clause => {
             $scope.letter.amendments[clause.swift] = {
                 reference: clause.fieldDescription,
                 status: '00',
@@ -20,7 +22,7 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
                 previousReferences: []
             }
         })
-        $scope.letter.country = $scope.letter.country.id
+        $scope.letter.country = $scope.selectedCountry.id
         lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
             $state.go('singleLc', {
                 lc_number: letter.lc_number
@@ -54,7 +56,6 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
         role: 0
     }).then(clients => {
         $scope.clients = clients
-        console.log($scope.clients)
     })
     $scope.state = {
         1: 'New',
