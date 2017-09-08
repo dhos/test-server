@@ -42,7 +42,7 @@ module.exports = db.define('user', {
         type: Sequelize.STRING
     },
     address: {
-        type: Sequelize.STRING
+        type: Sequelize.JSON
     },
     number: {
         type: Sequelize.STRING

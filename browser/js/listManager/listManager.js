@@ -16,7 +16,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory) => {
+app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope) => {
     //inits
     $scope.banks = {}
         //get banks
@@ -81,4 +81,26 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.Frozen.forEach(frozen => {
         if (frozen.finDoc === 0) $scope.Update.push(frozen)
     })
+    var refreshLetters = () => {
+        console.log('hello')
+        lcFactory.getLetters({}).then(letters => {
+            $scope.letters = letters
+            $scope.New = []
+            $scope.Reviewed = []
+            $scope.Amended = []
+            $scope.Frozen = []
+            $scope.Update = []
+            $scope.amendedCustomer = false
+            $scope.reviewedCustomer = false
+            $scope.letters = letters
+                //set states
+            $scope.letters.forEach(letter => {
+                $scope[$scope.state[letter.state]].push(letter)
+            })
+            $scope.Frozen.forEach(frozen => {
+                if (frozen.finDoc === 0) $scope.Update.push(frozen)
+            })
+        })
+    }
+    $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
 })

@@ -1159,8 +1159,8 @@ hr { margin-top: 0; }
 .nav-tabs > li { width: 50%; text-align: center; }
 ul.nav ul.nav.nav-sub li a:hover, ul.nav ul.nav.nav-sub li.active a { background: transparent; -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; color: #ae0035; }
 .lc-stats a { color: #7590ab; }
-.statuses li a div { display: inline-block; line-height: 13px; vertical-align: middle; }
-.statuses > li > a > div.icon-stat { background: #dbdbdb; text-align: center; margin-right: 10px; color: #fff; padding: 7px; border-radius: 50px; height: 30px; width: 30px; }
+.statuses li button div { display: inline-block; line-height: 13px; vertical-align: middle; }
+.statuses > li > button > div.icon-stat { background: #dbdbdb; text-align: center; margin-right: 10px; color: #fff; padding: 7px; border-radius: 50px; height: 30px; width: 30px; }
 .statuses .main-stat { color: #738ea1; text-transform: uppercase; }
 .statuses .secnd-stat { font-size: 10px; color: #a6b3bc; }
 
@@ -1221,7 +1221,7 @@ input:checked + .slider:before { -webkit-transform: translateX(15px); -ms-transf
 /*switch button css end*/
 /*Listing page Css Start*/
 .statuses li { list-style: none; display: inline-block; }
-.statuses li a { padding: 8px 12px; border: 1px solid #ccc; display: inline-block; margin: 5px; border-radius: 4px; }
+.statuses li button { background-color:white;padding: 8px 12px; border: 1px solid #ccc; display: inline-block; margin: 5px; border-radius: 4px; }
 .nav.nav-tabs li:first-child a { border-left: 0; }
 .nav.nav-tabs li a { border-top: 0 !important; border-bottom: 0 !important; padding: 25px; }
 .inline-block { display: inline-block; }

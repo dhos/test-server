@@ -163,38 +163,38 @@
               <ul class="nav nav-sub">
               <li>
                   <a ui-sref="listManager.all" ui-sref-active="active">
-                    <b class="label bg-info pull-right">112</b>
+                    <b class="label bg-info pull-right">{{letters.length}}</b>
                     <span>All</span>
                   </a>
                 </li>
                 <li>
                   <a ui-sref="listManager.newLcs" ui-sref-active="active">
-                    <b class="label bg-info pull-right">112</b>
+                    <b class="label bg-info pull-right">{{New.length}}</b>
                     <span>New Lcs</span>
                   </a>
                 </li>
                 <li>
                   <a ui-sref="listManager.reviewed" ui-sref-active="active">
-                    <b class="label bg-info pull-right">26</b>
+                    <b class="label bg-info pull-right">{{Reviewed.length}}</b>
                     <span>Reviewed</span>
                   </a>
                 </li>
                 <li>
                   <a ui-sref="listManager.amended" ui-sref-active="active">
-                    <b class="label bg-info pull-right">25</b>
+                    <b class="label bg-info pull-right">{{Amended.length}}</b>
                     <span>Amended</span>
                   </a>
                 </li>
                 <li>
                   <a ui-sref="listManager.frozen" ui-sref-active="active">
-                    <b class="label bg-info pull-right">58</b>
+                    <b class="label bg-info pull-right">{{Frozen.length}}</b>
                     <span>Frozen</span>
                   </a>
                 </li>
                 <li>
                   <a ui-sref="listManager.updated" ui-sref-active="active">
-                    <b class="label bg-info pull-right">30</b>
-                    <span>Updated</span>
+                    <b class="label bg-info pull-right">{{Update.length}}</b>
+                    <span>FD Update</span>
                   </a>
                 </li>
               </ul>
@@ -234,6 +234,7 @@
                   <ul class="nav nav-sub">
                       <li><a ui-sref="userlist"><span>PIC / CSP Users</span></a></li>
                       <li><a ui-sref="banklist"><span>Banks</span></a></li>
+                      <li><a ui-sref="customerList"><span>Customers</span></a></li>
                   </ul>
               </li>
           </ul>

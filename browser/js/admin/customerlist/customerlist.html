@@ -1,0 +1,49 @@
+<div class="col-md-12">
+    <!-- main header -->
+    <div class="bg-light lter wrapper-md">
+        <div class="row title-space">
+            <div class="col-md-4">
+                <h1 class="m-n font-thin h3 text-black main-title">Customers</h1>
+                <small class="text-muted"><a href=""> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Customers</small>
+            </div>
+        </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md">
+        <!-- stats -->
+        <div class="row row-sm">
+            <div class="col-md-12">
+                <div class="panel padder-v item">
+                    <div class="table-responsive table-responsive">
+                        <table class="table table-striped m-b-none">
+                            <thead>
+                                <tr>
+                                  <th colspan="9">
+                                    <div class="pull-right adduser"><a ui-sref="newCustomer" class="btn m-b-xs btn-success"><i class="fa fa-plus"></i> New Customer </a></div>
+                                  </th>
+                                </tr>
+                                <tr>
+                                    <th>Username</th>
+                                    <th>Contact Number</th>
+                                    <th>Email Address</th>
+                                    <th>Website</th>
+                                    <th data-breakpoints="xs sm">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="user in customers track by $index">
+                                    <td>{{user.username}}</td>
+                                    <td>{{user.number}}</td>
+                                    <td>{{user.email}}</td>
+                                    <td>{{user.website}}</td>
+                                    <td><a ng-click="editCustomer(user.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteUser(user.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / stats -->
+    </div>
+</div>

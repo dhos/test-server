@@ -1,5 +1,5 @@
 app.config(function($stateProvider) {
-    $stateProvider.state('drafts', {
+    $stateProvider.state('listManager.drafts', {
         templateUrl: 'js/drafts/drafts.html',
         controller: 'draftsCtrl',
         url: '/drafts',
@@ -16,6 +16,6 @@ app.config(function($stateProvider) {
 });
 
 app.controller('draftsCtrl', function($scope, drafts) {
-    $scope.letters = drafts
+    $scope.displayLetters = drafts
 
 });

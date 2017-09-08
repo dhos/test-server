@@ -20,7 +20,7 @@
             <td>{{letter.expire | date:'longDate'}}</td>
             <td>{{customers[letter.client]}}</td>
             <td>{{countries[letter.country]}}</td>
-            <td>{{state[letter.state]}}</td>
+            <td ng-class="{'new-stat': (letter.state==1),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
             <td>{{banks[letter.bank]}}</td>
             <td>{{picUsers[letter.pic]}}</td>
             <td>{{cspUsers[letter.csp]}}</td>
@@ -32,54 +32,54 @@
             <td colspan="12" class="secondlevel" ng-click="transition(letter.lc_number)">
                 <ul class="statuses">
                     <li ng-class="{active: letter.state===1}">
-                        <a class="new-stat" ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">
+                        <button class="new-stat" ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">
                             <div class="icon-stat stat-bg">
                                 <i class="fa fa-check"></i>
                             </div>
                             <div>
                                 <span class="main-stat"> New</span><br> <span class="secnd-stat">Stage 1 of 5</span>
                             </div>
-                        </a>
+                        </button>
                     </li>
                     <li ng-class="{active: letter.state===2}">
-                        <a class="normal-stat" ng-disabled="letter.state!==2" ng-click="transition(letter.lc_number)">
+                        <button class="normal-stat" ng-disabled="letter.state!==2" ng-click="transition(letter.lc_number)">
                             <div class="icon-stat stat-bg">
                                 <i class="fa fa-check"></i>
                             </div>
                             <div>
                                 <span class="main-stat"> Review</span><br> <span class="secnd-stat">Stage 2 of 5</span>
                             </div>
-                        </a>
+                        </button>
                     </li>
                     <li ng-class="{active: letter.state===3}">
-                        <a class="normal-stat" ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">
+                        <button class="normal-stat" ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">
                              <div class="icon-stat stat-bg">
                                 <i class="fa fa-check"></i>
                             </div>
                             <div>
                                 <span class="main-stat"> Amend</span><br> <span class="secnd-stat">Stage 3 of 5</span>
                             </div>
-                        </a>
+                        </button>
                     </li>
                     <li ng-class="{active: letter.state===4}">
-                        <a class="normal-stat" ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">                            
+                        <button class="normal-stat" ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">                            
                              <div class="icon-stat stat-bg">
                                 <i class="fa fa-check"></i>
                             </div>
                             <div>
                                 <span class="main-stat"> Freeze</span><br> <span class="secnd-stat">Stage 4 of 5</span>
                             </div>
-                        </a>
+                        </button>
                     </li>
                     <li ng-class="{active: letter.state===5}">
-                        <a class="normal-stat" ng-disabled="letter.state!==5" ng-click="transition(letter.lc_number)">
+                        <button class="normal-stat" ng-disabled="letter.state!==5" ng-click="transition(letter.lc_number)">
                              <div class="icon-stat stat-bg">
                                 <i class="fa fa-check"></i>
                             </div>
                             <div>
                                 <span class="main-stat"> FD Update</span><br> <span class="secnd-stat">Stage 5 of 5</span>
                             </div>
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </td>
