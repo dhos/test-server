@@ -12,6 +12,17 @@ app.factory('lcFactory', function($http, $q, LETTER_EVENTS, $rootScope) {
             })
         })
     }
+
+    d.getExpiringLetters = () => {
+        return $http.get('/api/lc/expiring').then(response => {
+            return response.data
+        }).catch(err => {
+            return $q.reject({
+                message: err
+            })
+        })
+    }
+
     d.getSingleLetter = (id) => {
         return $http.get(`/api/lc/${id}`)
             .then(response => {

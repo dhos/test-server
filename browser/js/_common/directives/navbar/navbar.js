@@ -60,6 +60,9 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                         if (frozen.finDoc === 0) scope.Update.push(frozen)
                     })
                 })
+                lcFactory.getExpiringLetters({}).then(expiring => {
+                    scope.Expiring = expiring[0]
+                })
             }
             $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
 

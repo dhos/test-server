@@ -21,7 +21,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
+app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS) => {
     $scope.user = user
     $scope.letter = letter
 
@@ -56,7 +56,6 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
         $scope.amendments = jQuery.extend(true, {}, $scope.letter.amendments)
     }
     $scope.client = $scope.user.role === 0
-    console.log($scope.letter)
     for (let key of Object.keys($scope.amendments)) {
         if ($scope.client) {
             if ($scope.amendments[key].status[0] === '1') {
@@ -143,4 +142,36 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
             $state.go("listManager.drafts")
         })
     }
+    $scope.state = {
+        1: 'New',
+        2: 'Reviewed',
+        3: 'Amended',
+        4: 'Frozen',
+        5: 'Pending Update'
+    }
+
+    var refreshLetters = () => {
+        lcFactory.getLetters({}).then(letters => {
+            scope.letters = letters
+            scope.New = []
+            scope.Reviewed = []
+            scope.Amended = []
+            scope.Frozen = []
+            scope.Update = []
+            scope.letters = letters
+                //set states
+            scope.letters.forEach(letter => {
+                scope[state[letter.state]].push(letter)
+            })
+            scope.Frozen.forEach(frozen => {
+                if (frozen.finDoc === 0) scope.Update.push(frozen)
+            })
+        })
+        lcFactory.getExpiringLetters({}).then(expiring => {
+            scope.Expiring = expiring[0]
+        })
+    }
+    $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
+
+    refreshLetters();
 });

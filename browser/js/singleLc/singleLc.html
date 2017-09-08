@@ -5,42 +5,49 @@
         <!-- stats -->
         <div class="row row-sm">
             <div class="col-md-12">
-                <!-- <div class="panel wrapper">
+                <div class="panel wrapper">
                     <div class="row">
                         <div class="col-md-4">
-                            <h2 class="second-head">Letter of Credit Status</h2>
-                            <span class="font-thin m-t-none  text-muted">Overview of current Letters of Credit</span>
+                            <h2 class="second-head">New Bank</h2>
                         </div>
                         <div class="col-md-8 text-center">
                             <div class="row lc-stats">
                                 <div class="col-md-2 pull-right">
-                                    30
-                                    <br> Updated
+                                    <span class="stats-numb">{{Expiring.length}}</span>
+                                    <br> Expiring
                                 </div>
                                 <div class="col-md-2 pull-right">
-                                    58
+                                    <span class="stats-numb">{{Update.length}}</span>
+                                    <br> FD Update
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <span class="stats-numb">{{Frozen.length}}</span>
                                     <br> Frozen
                                 </div>
                                 <div class="col-md-2 pull-right">
-                                    25
-                                    <br> Amended
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <span style="display: inline-block;">26
-                                    <br> Reviewed</span>
+                                    <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
+                                    <br> Amended</span>
                                     <label class="switch">
-                                        <input type="checkbox" checked>
+                                        <input ng-model="amendedCustomer" type="checkbox">
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
                                 <div class="col-md-2 pull-right">
-                                    112
+                                    <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
+                                    <br> Reviewed</span>
+                                    <label class="switch">
+                                        <input type="checkbox" ng-model="reviewedCustomer">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <span class="stats-numb">{{New.length}}</span>
                                     <br> New LCs
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="row row-sm">
                     <div class="col-md-5">
                         <div class="panel wrapper">

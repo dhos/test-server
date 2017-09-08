@@ -1,0 +1,92 @@
+<table class="table table-expandable">
+    <thead>
+        <tr>
+            <th>LC Number</th>
+            <th>Date</th>
+            <th>Expire</th>
+            <th>Customer</th>
+            <th>Country</th>
+            <th>Status</th>
+            <th>Advising Bank</th>
+            <th>PIC</th>
+            <th>CSP</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat-start="letter in letters track by $index">
+            <td>{{letter.lc_number}}</td>
+            <td>{{letter.date | date:'longDate'}}</td>
+            <td>{{letter.expire | date:'longDate'}}</td>
+            <td>{{customers[letter.client_name]}}</td>
+            <td>{{countries[letter.country]}}</td>
+            <td ng-class="{'new-stat': (letter.state==1),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
+            <td>{{banks[letter.bank]}}</td>
+            <td>{{picUsers[letter.pic]}}</td>
+            <td>{{cspUsers[letter.csp]}}</td>
+            <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
+              <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
+              </td>
+        </tr>
+        <tr ng-repeat-end ng-if="letter.expanded">
+            <td colspan="12" class="secondlevel">
+                <ul class="statuses">
+                    <li ng-class="{'new-stat': (letter.state>=1)}">
+                        <button ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">
+                            <div class="icon-stat stat-bg">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div>
+                                <span class="main-stat"> New</span><br> <span class="secnd-stat">Stage 1 of 5</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li ng-class="{'review-stat': (letter.state>=2)}">
+                        <button ng-disabled="letter.state!==2" ng-click="transition(letter.lc_number)">
+                            <div class="icon-stat stat-bg">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div>
+                                <span class="main-stat"> Review</span><br> <span class="secnd-stat">Stage 2 of 5</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li ng-class="{'amend-stat': (letter.state>=3)}">
+                        <button ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">
+                             <div class="icon-stat stat-bg">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div>
+                                <span class="main-stat"> Amend</span><br> <span class="secnd-stat">Stage 3 of 5</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li ng-class="{'freeze-stat': (letter.state>=4)}">
+                        <button ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">                            
+                             <div class="icon-stat stat-bg">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div>
+                                <span class="main-stat"> Freeze</span><br> <span class="secnd-stat">Stage 4 of 5</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="normal-stat" ng-class="{'fdupdate-stat':(letter.finDoc!=0)}" ng-disabled="letter.state!==4" ng-click="letter.toggled = !letter.toggled">
+                             <div class="icon-stat stat-bg">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div>
+                                <span class="main-stat"> FD Update</span><br> <span class="secnd-stat">Stage 5 of 5</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li ng-show="letter.toggled">
+                        <input ng-model="letter.finDoc" placeholder="Input Financial Document Number"/>
+                        <button ng-click="updateFinDoc($index)">Update</button>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>

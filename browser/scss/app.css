@@ -272,7 +272,7 @@ html.bg { background: url('../img/bg.jpg'); background-attachment: fixed; backgr
 .app-aside-folded li:focus > .nav-sub, .app-aside-folded li:active > .nav-sub { height: auto !important; margin-left: 0; overflow: auto; opacity: 1; }
 .nav-sub-header { display: none !important; }
 .nav-sub-header a { padding: 15px 20px; }
-.navi ul.nav li { position: relative; display: block; font-size: ; }
+.navi ul.nav li { position: relative; display: block; }
 .navi ul.nav li li a { padding-left: 49px; }
 .navi ul.nav li li ul { display: none; }
 .navi ul.nav li li.active > ul { display: block; }
@@ -1146,7 +1146,7 @@ hr { margin-top: 0; }
 .redcolor { color: #ae0035; }
 .no-td-b td { border-top: 0 !important; }
 .search-wrapper { position: fixed; z-index: 99999; width: 100%; }
-.main-search { padding: 21px; border: 0; width: 100%; }
+.main-search { padding: 21px; border: 0; width: 200%; }
 .close-search { position: absolute; top: 0; right: 0; padding: 18px; }
 .search-wrapper { display: none; }
 .col-hf-2 {     width: 16.662%; }

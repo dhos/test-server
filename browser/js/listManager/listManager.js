@@ -11,12 +11,17 @@ app.config(function($stateProvider) {
                 return lcFactory.getLetters({}).then(letters => {
                     return letters
                 })
+            },
+            expiring: (lcFactory) => {
+                return lcFactory.getExpiringLetters({}).then(letters => {
+                    return letters
+                })
             }
         }
     })
 });
 
-app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope) => {
+app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, expiring) => {
     //inits
     $scope.banks = {}
         //get banks
@@ -71,6 +76,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.Amended = []
     $scope.Frozen = []
     $scope.Update = []
+    $scope.Expiring = expiring[0]
     $scope.amendedCustomer = false
     $scope.reviewedCustomer = false
     $scope.letters = letters

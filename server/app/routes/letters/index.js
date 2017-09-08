@@ -39,6 +39,14 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
     })
 })
 
+router.get('/expiring', ensureAuthenticated, (req, res, next) => {
+    db.query(`select * from letters where letters.expire < NOW() + interval '30 days';`).then(expiringLetters => {
+        res.json(expiringLetters)
+    }).catch(err => {
+        next(err)
+    })
+})
+
 router.get('/:id', ensureAuthenticated, (req, res, next) => {
     Letter.findOne({
         where: {

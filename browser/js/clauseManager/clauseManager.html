@@ -1,47 +1,47 @@
 <div class="col">
     <!-- main header -->
-    <!-- main header -->
-    <div class="wrapper-md">
+    <div class="bg-light lter wrapper-md">
+        <div class="row title-space">
+            <div class="col-md-4">
+                <h1 class="m-n font-thin h3 text-black main-title">Clause Manager</h1>
+                <small class="text-muted"><a href=""> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Clause Manager</small>
+            </div>
+            <div class="col-md-8 text-center">
+                <div class="row lc-stats">
+                    <div class="col-md-2 pull-right">
+                        <a href="updated-lcs.html"> <span class="stats-numb">30</span>
+                        <br> Updated</a>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <a href="frozen-lcs.html"> <span class="stats-numb">58</span>
+                        <br> Frozen</a>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <a href="amended-lcs.html"> <span class="stats-numb">25</span>
+                        <br> Amended</a>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <a href="reviewed-lcs.html"><span style="display: inline-block;"><span class="stats-numb">26</span>
+                        <br> Reviewed</span></a>
+                        <label class="switch">
+                            <input type="checkbox" checked="">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <a href="new-lcs.html"><span class="stats-numb">112</span>
+                        <br> New LCs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md" ng-controller="FlotChartDemoCtrl">
         <!-- stats -->
         <div class="row row-sm">
             <div class="col-md-12">
-                <div class="panel wrapper">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h2 class="second-head">Clause Status</h2>
-                            <span class="font-thin m-t-none m-b text-muted">Overview of current Clauses in the system</span>
-                        </div>
-                        <div class="col-md-8 text-center">
-                            <div class="row lc-stats">
-                                <div class="col-md-2 pull-right">
-                                    <span class="stats-numb">30</span>
-                                    <br> Updated
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <span class="stats-numb">58</span>
-                                    <br> Frozen
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <span class="stats-numb">25</span>
-                                    <br> Amended
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <span style="display: inline-block;"><span class="stats-numb">26</span>
-                                    <br> Reviewed</span>
-                                    <label class="switch">
-                                        <input type="checkbox" checked="">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <span class="stats-numb">112</span>
-                                    <br> New LCs
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel wrapper">
+                <div class="panel wrapper table-responsive">
                     <table class="table m-b-none table-expandable">
                         <thead>
                             <tr>
@@ -83,14 +83,14 @@
                                 <td>
                                     <a href=""><img src="img/tick.png" alt="Status"></a>
                                     <a href=""><img src="img/edit.png" alt="Status"></a>
-                                    <a href=""><img src="img/add.png" alt="Status"></a></td>
+                                    </td>
                                 <td>India</td>
                                 <td>20 Mar 2017</td>
                             </tr>
-                            <tr class="secondleveltr">
+                            <tr class="secondlevel">
                                 <td></td>
                                 <td></td>
-                                <td class="secondlevel">
+                                <td>
                                     <div>
                                         <div class="btn-group dropdown">
                                             <button class="btn btn-dropdown" data-toggle="dropdown" aria-expanded="false">Choose Amendment <span class="caret"></span></button>
@@ -106,7 +106,7 @@
                                         <textarea class="full-width" rows="5" placeholder="Enter LC Clause text"></textarea>
                                     </div>
                                     <div class="full-width">
-                                        <button class="btn m-b-xs w-xs btn-success">Apply</button>
+                                        <button class="btn m-b-xs w-xs btn-green">Apply</button>
                                         <button class="btn m-b-xs w-xs btn-dark">Cancel</button>
                                     </div>
                                 </td>
@@ -131,14 +131,14 @@
                                 <td>
                                     <a href=""><img src="img/tick.png" alt="Status"></a>
                                     <a href=""><img src="img/edit.png" alt="Status"></a>
-                                    <a href=""><img src="img/add.png" alt="Status"></a></td>
+                                    </td>
                                 <td>India</td>
                                 <td>20 Mar 2017</td>
                             </tr>
-                            <tr class="secondleveltr">
+                            <tr class="secondlevel">
                                 <td></td>
                                 <td></td>
-                                <td class="secondlevel">
+                                <td>
                                     <div>
                                         <div class="btn-group dropdown">
                                             <button class="btn btn-dropdown" data-toggle="dropdown" aria-expanded="false">Choose Amendment <span class="caret"></span></button>
@@ -154,7 +154,7 @@
                                         <textarea class="full-width" rows="5" placeholder="Enter LC Clause text"></textarea>
                                     </div>
                                     <div class="full-width">
-                                        <button class="btn m-b-xs w-xs btn-success">Apply</button>
+                                        <button class="btn m-b-xs w-xs btn-green">Apply</button>
                                         <button class="btn m-b-xs w-xs btn-dark">Cancel</button>
                                     </div>
                                 </td>
@@ -179,14 +179,14 @@
                                 <td>
                                     <a href=""><img src="img/tick.png" alt="Status"></a>
                                     <a href=""><img src="img/edit.png" alt="Status"></a>
-                                    <a href=""><img src="img/add.png" alt="Status"></a></td>
+                                    </td>
                                 <td>India</td>
                                 <td>20 Mar 2017</td>
                             </tr>
-                            <tr class="secondleveltr">
+                            <tr class="secondlevel">
                                 <td></td>
                                 <td></td>
-                                <td class="secondlevel">
+                                <td>
                                     <div>
                                         <div class="btn-group dropdown">
                                             <button class="btn btn-dropdown" data-toggle="dropdown" aria-expanded="false">Choose Amendment <span class="caret"></span></button>
@@ -202,7 +202,7 @@
                                         <textarea class="full-width" rows="5" placeholder="Enter LC Clause text"></textarea>
                                     </div>
                                     <div class="full-width">
-                                        <button class="btn m-b-xs w-xs btn-success">Apply</button>
+                                        <button class="btn m-b-xs w-xs btn-green">Apply</button>
                                         <button class="btn m-b-xs w-xs btn-dark">Cancel</button>
                                     </div>
                                 </td>
@@ -214,7 +214,7 @@
                         </tbody>
                     </table>
                     <hr>
-                    <a href="#" class="btn m-b-xs btn-danger pull-right">+ New Clause</a>
+                    <a href="#" class="btn m-b-xs  btn-success pull-right">+ New Clause</a>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -222,4 +222,3 @@
         <!-- / stats -->
     </div>
 </div>
-<!-- / main -->

@@ -1,40 +1,49 @@
 <div class="col-md-12">
     <!-- main header -->
     <div class="bg-light lter wrapper-md">
-        <div class="row title-space">
+      <div class="panel wrapper">
+        <div class="row">
             <div class="col-md-4">
-                <h1 class="m-n font-thin h3 text-black main-title">PIC / CSP Users</h1>
-                <small class="text-muted"><a href=""> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> PIC / CSP Users</small>
+                <h2 class="second-head">All User</h2>
             </div>
             <div class="col-md-8 text-center">
                 <div class="row lc-stats">
                     <div class="col-md-2 pull-right">
-                        <span class="stats-numb">30</span>
-                        <br> Updated
+                        <span class="stats-numb">{{Expiring.length}}</span>
+                        <br> Expiring
                     </div>
                     <div class="col-md-2 pull-right">
-                        <span class="stats-numb">58</span>
+                        <span class="stats-numb">{{Update.length}}</span>
+                        <br> FD Update
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">{{Frozen.length}}</span>
                         <br> Frozen
                     </div>
                     <div class="col-md-2 pull-right">
-                        <span class="stats-numb">25</span>
-                        <br> Amended
-                    </div>
-                    <div class="col-md-2 pull-right">
-                        <span style="display: inline-block;"><span class="stats-numb">26</span>
-                        <br> Reviewed</span>
+                        <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
+                        <br> Amended</span>
                         <label class="switch">
-                            <input type="checkbox" checked="">
+                            <input ng-model="amendedCustomer" type="checkbox">
                             <span class="slider round"></span>
                         </label>
                     </div>
                     <div class="col-md-2 pull-right">
-                        <span class="stats-numb">112</span>
+                        <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
+                        <br> Reviewed</span>
+                        <label class="switch">
+                            <input type="checkbox" ng-model="reviewedCustomer">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-2 pull-right">
+                        <span class="stats-numb">{{New.length}}</span>
                         <br> New LCs
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- / main header -->
     <div class="wrapper-md">

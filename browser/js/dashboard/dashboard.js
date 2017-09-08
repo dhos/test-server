@@ -7,95 +7,174 @@ app.config(function($stateProvider) {
             authenticate: true
         },
         resolve: {
-            // letters: (lcFactory) => {
-            //     return lcFactory.getLetters({}).then(letters => {
-            //         return letters
-            //     })
-            // }
+            letters: (lcFactory) => {
+                return lcFactory.getLetters({}).then(letters => {
+                    return letters
+                })
+            },
+            expiring: (lcFactory) => {
+                return lcFactory.getExpiringLetters().then(expiring => {
+                    return expiring
+                })
+            }
         }
     })
 });
 
-app.controller('dashboardCtrl', function($scope, $state, lcFactory) {
+app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring) {
+    $scope.letters = letters
+    $scope.countries = {}
+    countryFactory.getCountries({}).then(countries => {
+        countries.forEach(country => {
+            $scope.countries[country.id] = country.name
+        })
+    })
+    $scope.customers = {}
+    userFactory.getUsers({
+        role: 0
+    }).then(customers => {
+        customers.forEach(customer => {
+            $scope.customers[customer.id] = customer.username
+        })
+    })
+    $scope.state = {
+        1: 'New',
+        2: 'Reviewed',
+        3: 'Amended',
+        4: 'Frozen',
+        5: 'Pending Update'
+    }
+    $scope.countryFilter = {
+        name: "All"
+    }
+    $scope.customerFilter = {
+        name: "All"
+    }
+
+    $scope.allCountries = () => {
+        $scope.countryFilter = {
+            name: "All"
+        }
+        $scope.filter()
+    }
+    $scope.allCustomers = () => {
+        $scope.customerFilter = {
+            name: "All"
+        }
+        $scope.filter()
+    }
+    $scope.expiringLetters = expiring[0]
+
+    $scope.reset = (letters) => {
+        $scope.New = []
+        $scope.Reviewed = []
+        $scope.Amended = []
+        $scope.Frozen = []
+        $scope.Update = []
+        $scope.amendedCustomer = 0
+        $scope.amendedElite = 0
+        $scope.reviewedCustomer = 0
+        $scope.reviewedElite = 0
+        $scope.Expiring = $scope.expiringLetters
+            //set states
+        letters.forEach(letter => {
+                $scope[$scope.state[letter.state]].push(letter)
+            })
+            // $scope.Amended.forEach
+        $scope.Frozen.forEach(frozen => {
+            if (frozen.finDoc === 0) $scope.Update.push(frozen)
+        })
+        $scope.Amended.forEach(amended => {
+            if (amended.approved[0] == "0") $scope.amendedCustomer++
+                if (amended.approved[1] == "0") $scope.amendedElite++
+        })
+        $scope.Reviewed.forEach(reviewed => {
+            if (reviewed.approved[0] == "0") $scope.reviewedCustomer++
+                if (reviewed.approved[1] == "0") $scope.reviewedElite++
+        })
+    }
+    $scope.filter = () => {
+        $scope.New = []
+        $scope.Reviewed = []
+        $scope.Amended = []
+        $scope.Frozen = []
+        $scope.Update = []
+        $scope.amendedCustomer = 0
+        $scope.amendedElite = 0
+        $scope.reviewedCustomer = 0
+        $scope.reviewedElite = 0
+        if ($scope.customerFilter.name !== "All") {
+            if ($scope.countryFilter.name !== "All") {
+                var letters = $scope.letters.filter(letter => {
+                    return letter.client == $scope.customerFilter.filter && letter.country == $scope.countryFilter.filter
+                })
+                $scope.Expiring = $scope.expiringLetters.filter(letter => {
+                    return letter.client == $scope.customerFilter.filter && letter.country == $scope.countryFilter.filter
+                })
+            } else {
+                var letters = $scope.letters.filter(letter => {
+                    return letter.client == $scope.customerFilter.filter
+                })
+                $scope.Expiring = $scope.expiringLetters.filter(letter => {
+                    return letter.client == $scope.customerFilter.filter
+                })
+            }
+        } else {
+            if ($scope.countryFilter.name !== "All") {
+                var letters = $scope.letters.filter(letter => {
+                    return letter.country == $scope.countryFilter.filter
+                })
+                $scope.Expiring = $scope.expiringLetters.filter(letter => {
+                    return letter.country == $scope.countryFilter.filter
+                })
+            } else {
+                var letters = $scope.letters
+                $scope.Expiring = $scope.expiringLetters
+            }
+        }
+        console.log(letters)
+        letters.forEach(letter => {
+                $scope[$scope.state[letter.state]].push(letter)
+            })
+            // $scope.Amended.forEach
+        $scope.Frozen.forEach(frozen => {
+            if (frozen.finDoc === 0) $scope.Update.push(frozen)
+        })
+        $scope.Amended.forEach(amended => {
+            if (amended.approved[0] == "0") $scope.amendedCustomer++
+                if (amended.approved[1] == "0") $scope.amendedElite++
+        })
+        $scope.Reviewed.forEach(reviewed => {
+            console.log(reviewed)
+            if (reviewed.approved[0] == "0") $scope.reviewedCustomer++
+                if (reviewed.approved[1] == "0") $scope.reviewedElite++
+        })
+
+    }
+
+    $scope.filterByCustomer = (customerId, name) => {
+        $scope.customerFilter = {
+            name: name,
+            filter: customerId
+        }
+        $scope.filter()
+    }
+    $scope.filterByCountry = (countryId, name) => {
+        $scope.countryFilter = {
+            name: name,
+            filter: countryId
+        }
+        $scope.filter()
+    }
+    $scope.reset($scope.letters)
 
     //inits
     // $scope.letters = letters
     //$scope.analytics = analytics
 
     //end inits
-    $scope.letter = {
-        lc_number: 34534535,
-        uploads: ['SGHSBC7G18301634-T01.pdf'],
-        ammendments: {
-            20: 'Bridge sentient city boy meta-camera footage DIY papier-mache sign concrete human shoes courier. Dead digital 3D-printed range-rover computer sensory sentient franchise bridge network market rebar tank-traps free-market human. BASE jump stimulate artisanal narrative corrupted assault range-rover film nano-paranoid shrine semiotics convenience store. Sprawl concrete corrupted modem spook human disposable towards narrative industrial grade girl realism weathered Tokyo savant.',
-            22: 'Grenade lights computer saturation point cyber-long-chain hydrocarbons film tattoo skyscraper Tokyo digital into fluidity free-market towards pistol. Katana assault assassin footage cyber-kanji network industrial grade. Corrupted neural realism courier-ware sensory bicycle girl decay face forwards. Concrete towards cardboard DIY modem network monofilament tank-traps ablative urban spook disposable knife bicycle shanty town woman. '
-        },
-        date: Date.now(),
-        country: 1,
-        client: 1,
-        bank: 'Bank of China',
-        psr: 'Sharon',
-        crc: 'Bob',
-        state: 5,
-        draft: false,
-        finDoc: 0,
-        finDate: null
-
-    }
-    $scope.test = () => {
-
-    }
 
     //functions to edit and ammend lcs
-    $scope.createLc = (letterToBeCreated) => {
-        lcFactory.createLetter(letterToBeCreated).then(createdLetter => {
-            $state.go('listManager')
-        })
-    }
 
-    $scope.addLcAttachment = (fileToBeAdded, lcId) => {
-        lcFactory.updateLetterFile(fileToBeAdded, lcId).then(letter => {
-            $state.go()
-        })
-    }
-
-    $scope.setLcToAmmended = (letterToBeUpdated) => {
-        letterToBeUpdated.status = 3
-        lcFactory.updateLetter(letterToBeUpdated).then(response => {
-            $state.go('amended')
-        })
-    }
-
-    $scope.setLcToReviewed = (letterToBeUpdated) => {
-        letterToBeUpdated.status = 2
-        lcFactory.updateLetter(letterToBeUpdated).then(response => {
-            $state.go('review')
-        })
-    }
-
-    $scope.setLcToFrozen = (letterToBeUpdated) => {
-        letterToBeUpdated.status = 4
-        lcFactory.updateLetter(letterToBeUpdated).then(response => {
-            $state.go('frozen')
-        })
-
-    }
-
-    $scope.setLcToArchived = (letterToBeUpdated) => {
-        letterToBeUpdated.finDoc = $scope.finDoc
-        letterToBeUpdated.status = 5
-        lcFactory.updateLetter(letterToBeUpdated).then(response => {
-            $state.go('archived')
-        })
-
-    }
-
-    /*ammendments = [{
-        swiftCode:int,
-        reference: text,
-        status: 0,1,2,
-        dateModified:date  
-    }]
-    */
 
 });

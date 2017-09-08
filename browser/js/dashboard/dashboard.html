@@ -1,4 +1,4 @@
-<div class="col">
+<div class="col-md-12">
     <!-- main header -->
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
@@ -12,15 +12,11 @@
                     <span class="dropdown">
 <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
 <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-<span translate="header.navbar.new.NEW" class="stats-drop">All</span> <span class="caret"></span>
+<span translate="header.navbar.new.NEW" class="stats-drop">{{customerFilter.name}}</span> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">All</a></li>
-                        <li><a href="#">Customer Name 1</a></li>
-                        <li><a href="#">Customer Name 2</a></li>
-                        <li><a href="#">Customer Name 3</a></li>
-                        <li><a href="#">Customer Name 4</a></li>
-                        <li><a href="#">Customer Name 5</a></li>
+                        <li><a ng-click="allCustomers(letters)">All</a></li>
+                        <li ng-repeat="(key,value) in customers"><a ng-click="filterByCustomer(key,value)">{{value}}</a></li>
                     </ul>
                     </span>
                 </div>
@@ -29,15 +25,11 @@
                     <span class="dropdown">
 <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
 <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-<span translate="header.navbar.new.NEW" class="stats-drop">India</span> <span class="caret"></span>
+<span translate="header.navbar.new.NEW" class="stats-drop">{{countryFilter.name}}</span> <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">All</a></li>
-                        <li><a href="#">Bangladesh</a></li>
-                        <li><a href="#">Bhutan</a></li>
-                        <li><a href="#">India</a></li>
-                        <li><a href="#">Maldives</a></li>
-                        <li><a href="#">Sri Lanka</a></li>
+                        <li><a ng-click="allCountries()">All</a></li>
+                        <li ng-repeat="(key,value) in countries"><a ng-click="filterByCountry(key,value)">{{value}}</a></li>
                     </ul>
                     </span>
                 </div>
@@ -63,7 +55,7 @@
             <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
                 <a href="new-lcs.html">
                     <div class="panel padder-v item">
-                        <div class="h1 text-info h1">112</div>
+                        <div class="h1 text-info h1">{{New.length}}</div>
                         <span class="text-muted text-base">New LCs</span>
                         <div class="top text-right w-full">
                             <i class="fa fa-file-text-o stats-replace"></i>
@@ -76,13 +68,13 @@
                     <div class="panel padder-v item">
                         <div class="row">
                             <div class="col-xs-7">
-                                <div class="h1 text-info h1">26</div>
+                                <div class="h1 text-info h1">{{Reviewed.length}}</div>
                                 <span class="text-muted text-base">Reviewed</span>
                             </div>
                             <div class="col-xs-5 total-stats">
                                 <div class="row">
-                                    <div class="col-xs-12 divided-stats">6</div>
-                                    <div class="col-xs-12 divided-stats n-b">20</div>
+                                    <div class="col-xs-12 divided-stats">{{reviewedCustomer}}</div>
+                                    <div class="col-xs-12 divided-stats n-b">{{reviewedElite}}</div>
                                 </div>
                             </div>
                         </div>
@@ -95,13 +87,13 @@
                     <div class="panel padder-v item">
                         <div class="row">
                             <div class="col-xs-7">
-                                <div class="h1 text-info h1">58</div>
+                                <div class="h1 text-info h1">{{Amended.length}}</div>
                                 <span class="text-muted text-base">Amended</span>
                             </div>
                             <div class="col-xs-5 total-stats">
                                 <div class="row">
-                                    <div class="col-xs-12 divided-stats">28</div>
-                                    <div class="col-xs-12 divided-stats n-b">20</div>
+                                    <div class="col-xs-12 divided-stats">{{amendedCustomer}}</div>
+                                    <div class="col-xs-12 divided-stats n-b">{{amendedElite}}</div>
                                 </div>
                             </div>
                         </div>
@@ -112,7 +104,7 @@
             <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
                 <a href="updated-lcs.html">
                     <div class="panel padder-v item">
-                        <div class="h1 text-info h1">30</div>
+                        <div class="h1 text-info h1">{{Frozen.length}}</div>
                         <span class="text-muted text-base">Frozen</span>
                         <div class="top text-right w-full">
                             <i class="fa fa-file-text-o stats-replace"></i>
@@ -123,7 +115,7 @@
             <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
                 <a href="updated-lcs.html">
                     <div class="panel padder-v item">
-                        <div class="h1 text-info h1">30</div>
+                        <div class="h1 text-info h1">{{Update.length}}</div>
                         <span class="text-muted text-base">Updated</span>
                         <div class="top text-right w-full">
                             <i class="fa fa-file-text-o stats-replace"></i>
@@ -134,8 +126,8 @@
             <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
                 <a href="updated-lcs.html">
                     <div class="panel padder-v item">
-                        <div class="h1 text-info h1">24</div>
-                        <span class="text-muted text-base">Expired LC</span>
+                        <div class="h1 text-info h1">{{Expiring.length}}</div>
+                        <span class="text-muted text-base">Expiring LC</span>
                         <div class="top text-right w-full">
                             <i class="fa fa-file-text-o stats-replace"></i>
                         </div>
