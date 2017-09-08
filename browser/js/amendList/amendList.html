@@ -67,8 +67,8 @@
                                     <td><a ng-click="transition(letter.lc_number)"> {{letter.lc_number}}</a></td>
                                     <td>{{letter.contract}}</td>
                                     <td>{{letter.client}}</td>
-                                    <td>{{letter.date}}</td>
-                                    <td>{{letter.expire}}</td>
+                                    <td>{{letter.date | date:"longDate"}}</td>
+                                    <td>{{letter.expire | date:"longDate"}}</td>
                                     <td>{{countries[letter.country]}}</td>
                                     <td>{{banks[letter.bank]}}</td>
                                     <td>{{picUsers[letter.pic]}}</td>

@@ -85,5 +85,9 @@ module.exports = db.define('letter', {
     expiring: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
+    },
+    amendedCount: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
     }
 });

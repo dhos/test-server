@@ -26,4 +26,12 @@ app.controller('frozenCtrl', ($scope, lcFactory, letters, $state) => {
             lc_number: lc_number
         })
     }
+    console.log($scope.displayLetters)
+    $scope.updateFinDoc = (index) => {
+        if ($scope.displayLetters[index].finDoc !== 0) {
+            lcFactory.updateLetter($scope.displayLetters[index]).then(letter => {
+                $scope.displayLetters[index].toggled = false
+            })
+        }
+    }
 });

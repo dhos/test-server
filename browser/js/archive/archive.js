@@ -1,5 +1,5 @@
 app.config(function($stateProvider) {
-    $stateProvider.state('archive', {
+    $stateProvider.state('listManager.archive', {
         templateUrl: 'js/archive/archive.html',
         controller: 'archiveCtrl',
         url: '/archive',

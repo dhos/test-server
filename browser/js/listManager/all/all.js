@@ -30,4 +30,11 @@ app.controller('allCtrl', ($scope, lcFactory, letters, $state) => {
             lc_number: lcNumber
         })
     }
+    $scope.updateFinDoc = (index) => {
+        if ($scope.letters[index].finDoc !== 0) {
+            lcFactory.updateLetter($scope.letters[index]).then(letter => {
+                $scope.letters[index].toggled = false
+            })
+        }
+    }
 });

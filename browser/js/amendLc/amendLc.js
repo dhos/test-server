@@ -15,8 +15,11 @@ app.config(function($stateProvider) {
 
 app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, bankFactory, letter, $state) => {
     $scope.letter = letter
-
+    console.log($scope.letter)
     $scope.updateLc = () => {
+        $scope.letter.amendedCount++
+            $scope.letter.state = 3
+        $scope.approved = "00"
         lcFactory.updateLetterFile($scope.letter, $scope.updatedFile).then(letter => {
             $state.go('singleLc', {
                 lc_number: letter.lc_number
@@ -47,9 +50,10 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
         })
         //get clients
     userFactory.getUsers({
-        role: 3
+        role: 0
     }).then(clients => {
         $scope.clients = clients
+        console.log($scope.clients)
     })
 
 })

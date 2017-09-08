@@ -1,4 +1,4 @@
-app.factory('lcFactory', function($http, $q) {
+app.factory('lcFactory', function($http, $q, LETTER_EVENTS, $rootScope) {
     var d = {}
         //Fetches
     d.getLetters = (query) => {
@@ -37,7 +37,6 @@ app.factory('lcFactory', function($http, $q) {
     //Sets
     d.createLetter = (letter, file) => {
         var file = file;
-        console.log(letter)
         var fd = new FormData();
         fd.append('file', file);
         fd.append('newLetter', angular.toJson(letter))
@@ -65,6 +64,7 @@ app.factory('lcFactory', function($http, $q) {
         }
         return $http.put(`/api/lc/`, body)
             .then(response => {
+                $rootScope.$broadcast(LETTER_EVENTS.refreshLetters);
                 return response.data
             }).catch(err => {
                 return $q.reject({
@@ -74,7 +74,6 @@ app.factory('lcFactory', function($http, $q) {
     }
     d.updateLetterFile = (letter, file) => {
             var file = file;
-            console.log(letter)
             var fd = new FormData();
             fd.append('file', file);
             fd.append('updates', angular.toJson(letter))

@@ -1,214 +1,171 @@
 <div class="col">
-<!-- main header -->
-<!-- <button ng-click="test(letter)">test</button> -->
-<div class="bg-light lter wrapper-md">
-    <div class="row title-space">
-        <div class="col-sm-6 col-xs-12">
-            <h1 class="m-n font-thin h3 text-black main-title">Dashboard</h1>
-            <small class="text-muted"><a href=""> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Dashboard</small>
-        </div>
-        <div class="col-sm-6 text-right hidden-xs">
-            <div class="inline m-r text-left v-middle">
-                <h1 class="m-n font-thin h3 text-black">Total LCs</h1>
-                <span class="dropdown">
-                  <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
-                  <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-                  <span translate="header.navbar.new.NEW" class="stats-drop">India</span> <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#" translate="header.navbar.new.PROJECT">Projects</a></li>
-                    <li>
-                      <a href="">
-                        <span class="badge bg-info pull-right">5</span>
-                        <span translate="header.navbar.new.TASK">Task</span>
-                      </a>
-                    </li>
-                    <li><a href="" translate="header.navbar.new.USER">User</a></li>
-                    <li class="divider"></li>
-                    <li>
-                      <a href="">
-                      <span class="badge bg-danger pull-right">4</span>
-                      <span translate="header.navbar.new.EMAIL">Email</span>
-                      </a>
-                    </li>
-                  </ul>
-                </span>
+    <!-- main header -->
+    <div class="bg-light lter wrapper-md">
+        <div class="row title-space">
+            <div class="col-md-3 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black main-title">Dashboard</h1>
+                <small class="text-muted"><a href=""> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Dashboard</small>
             </div>
-            <div class="inline m-r text-left">
-                <div ng-init="d3_1=[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ]" ui-jq="sparkline" ui-options="[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ], {type:'bar', height:35, barWidth:5, barSpacing:1, barColor:'#dce5ec'}" class="sparkline inline v-middle">loading...
+            <div class="col-md-9 text-right stats-column">
+                <div class="inline m-r text-left v-middle stats-drop">
+                    <h1 class="m-n font-thin h3 text-black">Customer </h1>
+                    <span class="dropdown">
+<a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
+<i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+<span translate="header.navbar.new.NEW" class="stats-drop">All</span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">All</a></li>
+                        <li><a href="#">Customer Name 1</a></li>
+                        <li><a href="#">Customer Name 2</a></li>
+                        <li><a href="#">Customer Name 3</a></li>
+                        <li><a href="#">Customer Name 4</a></li>
+                        <li><a href="#">Customer Name 5</a></li>
+                    </ul>
+                    </span>
                 </div>
-                <div class="m-b-xs top-chart-stats"><span class="text-muted">THIS MONTH</span> <br>1290 </div>
-            </div>
-            <div class="inline m-r text-left">
-                <div ng-init="d3_1=[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ]" ui-jq="sparkline" ui-options="[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ], {type:'bar', height:35, barWidth:5, barSpacing:1, barColor:'#dce5ec'}" class="sparkline inline v-middle">loading...
+                <div class="inline m-r text-left v-middle stats-drop">
+                    <h1 class="m-n font-thin h3 text-black">Total LCs</h1>
+                    <span class="dropdown">
+<a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="false">
+<i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+<span translate="header.navbar.new.NEW" class="stats-drop">India</span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">All</a></li>
+                        <li><a href="#">Bangladesh</a></li>
+                        <li><a href="#">Bhutan</a></li>
+                        <li><a href="#">India</a></li>
+                        <li><a href="#">Maldives</a></li>
+                        <li><a href="#">Sri Lanka</a></li>
+                    </ul>
+                    </span>
                 </div>
-                <div class="m-b-xs top-chart-stats"><span class="text-muted">THIS MONTH</span> <br>1290 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- / main header -->
-<div class="wrapper-md">
-    <!-- stats -->
-    <div class="row row-sm">
-        <div class="col-md-12">
-            <div class="row row-sm">
-                <div class="col-md-2">
-                    <div class="panel padder-v item">
-                        <div class="h1 text-info h1">521</div>
-                        <span class="text-muted text-xs">New items</span>
-                        <div class="top text-right w-full">
-                          <div class="quick-stats pull-right" ui-jq="easyPieChart" ui-options="{
-                              percent: 25,
-                              lineWidth: 5,
-                              trackColor: '#e8eff0',
-                              barColor: '#27c24c',
-                              scaleColor: false,
-                              size: 70,
-                              lineCap: 'butt',
-                              animate: 1000
-                            }">
-                            <div>
-                                25%
-                            </div>
-                          </div>
-                        </div>
+                <div class="inline m-r text-left stats-col">
+                    <div ng-init="d3_1=[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ]" ui-jq="sparkline" ui-options="[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ], {type:'bar', height:35, barWidth:5, barSpacing:1, barColor:'#610000'}" class="sparkline inline v-middle">loading...
                     </div>
+                    <div class="m-b-xs top-chart-stats"><span class="text-muted">THIS MONTH</span>
+                        <br>356 </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="panel padder-v item">
-                        <div class="h1 text-info h1">521</div>
-                        <span class="text-muted text-xs">New items</span>
-                        <div class="top text-right w-full">
-                            <div class="quick-stats pull-right" ui-jq="easyPieChart" ui-options="{
-                                  percent: 25,
-                                  lineWidth: 5,
-                                  trackColor: '#e8eff0',
-                                  barColor: '#27c24c',
-                                  scaleColor: false,
-                                  size: 70,
-                                  lineCap: 'butt',
-                                  animate: 1000
-                                }">
-                                <div>
-                                    25%
-                                </div>
-                            </div>
-                        </div>
+                <div class="inline m-r text-left stats-col">
+                    <div ng-init="d3_1=[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ]" ui-jq="sparkline" ui-options="[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ], {type:'bar', height:35, barWidth:5, barSpacing:1, barColor:'#6ccee7'}" class="sparkline inline v-middle">loading...
                     </div>
+                    <div class="m-b-xs top-chart-stats"><span class="text-muted">LAST MONTH</span>
+                        <br>412 </div>
                 </div>
-                <div class="col-md-2">
-                    <div class="panel padder-v item">
-                        <div class="h1 text-info h1">521</div>
-                        <span class="text-muted text-xs">New items</span>
-                        <div class="top text-right w-full">
-                            <div class="quick-stats pull-right" ui-jq="easyPieChart" ui-options="{
-                                  percent: 25,
-                                  lineWidth: 5,
-                                  trackColor: '#e8eff0',
-                                  barColor: '#27c24c',
-                                  scaleColor: false,
-                                  size: 70,
-                                  lineCap: 'butt',
-                                  animate: 1000
-                                }">
-                                <div>
-                                    25%
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="panel padder-v item">
-                        <div class="h1 text-info h1">521</div>
-                        <span class="text-muted text-xs">New items</span>
-                        <div class="top text-right w-full">
-                            <div class="quick-stats pull-right" ui-jq="easyPieChart" ui-options="{
-                                  percent: 25,
-                                  lineWidth: 5,
-                                  trackColor: '#e8eff0',
-                                  barColor: '#27c24c',
-                                  scaleColor: false,
-                                  size: 70,
-                                  lineCap: 'butt',
-                                  animate: 1000
-                                }">
-                                <div>
-                                    25%
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="panel padder-v item">
-                        <div class="h1 text-info h1">521</div>
-                        <span class="text-muted text-xs">New items</span>
-                        <div class="top text-right w-full">
-                            <div class="quick-stats pull-right" ui-jq="easyPieChart" ui-options="{
-                                  percent: 25,
-                                  lineWidth: 5,
-                                  trackColor: '#e8eff0',
-                                  barColor: '#27c24c',
-                                  scaleColor: false,
-                                  size: 70,
-                                  lineCap: 'butt',
-                                  animate: 1000
-                                }">
-                                <div>
-                                    25%
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="panel padder-v item">
-                        <div class="h1 text-info h1">521</div>
-                        <span class="text-muted text-xs">New items</span>
-                        <div class="top text-right w-full">
-                            <div class="quick-stats pull-right" ui-jq="easyPieChart" ui-options="{
-                                  percent: 25,
-                                  lineWidth: 5,
-                                  trackColor: '#e8eff0',
-                                  barColor: '#27c24c',
-                                  scaleColor: false,
-                                  size: 70,
-                                  lineCap: 'butt',
-                                  animate: 1000
-                                }">
-                                <div>
-                                    25%
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel wrapper">
-                <h2 class="second-head">Sales Overview</h2>
-                <span class="font-thin m-t-none m-b text-muted">Actual Sales Vs Projected Sales for 2017</span>
-                <div class="img-responsive text-center"> <img src="img/place1.png"></div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel wrapper">
-                <h2 class="second-head">Newsletter Campaign </h2>
-                <span class="font-thin m-t-none m-b text-muted">Overview of Newsletter Campaign </span>
-                <div class="img-responsive text-center"> <img src="img/place2.png"></div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel wrapper">
-                <h2 class="second-head">Current Visitors</h2>
-                <span class="font-thin m-t-none m-b text-muted">Different Devices Used to Visit</span>
-                <div class="img-responsive text-center"> <img src="img/place3.png"></div>
             </div>
         </div>
     </div>
-    <!-- / stats -->
-</div>
+    <!-- / main header -->
+    <div class="wrapper-md">
+        <!-- stats -->
+        <div class="row row-sm">
+            <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
+                <a href="new-lcs.html">
+                    <div class="panel padder-v item">
+                        <div class="h1 text-info h1">112</div>
+                        <span class="text-muted text-base">New LCs</span>
+                        <div class="top text-right w-full">
+                            <i class="fa fa-file-text-o stats-replace"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
+                <a href="reviewed-lcs.html">
+                    <div class="panel padder-v item">
+                        <div class="row">
+                            <div class="col-xs-7">
+                                <div class="h1 text-info h1">26</div>
+                                <span class="text-muted text-base">Reviewed</span>
+                            </div>
+                            <div class="col-xs-5 total-stats">
+                                <div class="row">
+                                    <div class="col-xs-12 divided-stats">6</div>
+                                    <div class="col-xs-12 divided-stats n-b">20</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
+                <a href="reviewed-lcs.html">
+                    <div class="panel padder-v item">
+                        <div class="row">
+                            <div class="col-xs-7">
+                                <div class="h1 text-info h1">58</div>
+                                <span class="text-muted text-base">Amended</span>
+                            </div>
+                            <div class="col-xs-5 total-stats">
+                                <div class="row">
+                                    <div class="col-xs-12 divided-stats">28</div>
+                                    <div class="col-xs-12 divided-stats n-b">20</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
+                <a href="updated-lcs.html">
+                    <div class="panel padder-v item">
+                        <div class="h1 text-info h1">30</div>
+                        <span class="text-muted text-base">Frozen</span>
+                        <div class="top text-right w-full">
+                            <i class="fa fa-file-text-o stats-replace"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
+                <a href="updated-lcs.html">
+                    <div class="panel padder-v item">
+                        <div class="h1 text-info h1">30</div>
+                        <span class="text-muted text-base">Updated</span>
+                        <div class="top text-right w-full">
+                            <i class="fa fa-file-text-o stats-replace"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
+                <a href="updated-lcs.html">
+                    <div class="panel padder-v item">
+                        <div class="h1 text-info h1">24</div>
+                        <span class="text-muted text-base">Expired LC</span>
+                        <div class="top text-right w-full">
+                            <i class="fa fa-file-text-o stats-replace"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row row-sm">
+            <div class="col-md-4">
+                <div class="panel wrapper">
+                    <h2 class="second-head m-b">LCs By Month</h2>
+                    <!-- <span class="font-thin m-t-none m-b text-muted">Actual Sales Vs Projected Sales for 2017</span> -->
+                    <div class="img-responsive text-center"> <img src="img/place1.png"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel wrapper">
+                    <h2 class="second-head m-b">Daily LCs </h2>
+                    <!-- <span class="font-thin m-t-none m-b text-muted">Overview of Newsletter Campaign </span> -->
+                    <div class="img-responsive text-center"> <img src="img/place2.png"></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel wrapper">
+                    <h2 class="second-head m-b">Current Visitors</h2>
+                    <!-- <span class="font-thin m-t-none m-b text-muted">Different Devices Used to Visit</span> -->
+                    <div class="img-responsive text-center"> <img src="img/place3.png"></div>
+                </div>
+            </div>
+        </div>
+        <!-- / stats -->
+    </div>
 </div>

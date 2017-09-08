@@ -1,70 +1,33 @@
 <div id="small-chat" ng-if="user">
-    <span class="badge badge-warning pull-right">5</span>
+    <span ng-if="newMessage" class="badge badge-warning pull-right">!</span>
     <a class="open-small-chat" ng-click="open()">
         <i class="fa fa-comments" ng-show="!chat"></i>
         <i class="fa fa-remove" ng-show="chat"></i>
     </a>
 </div>
 <div class="small-chat-box fadeInRight animated" ng-show="chat">
-    <div class="heading" draggable="true">
+    <div class="heading">
         <small class="chat-date pull-right">
             15 Aug 2017
         </small> Small chat
     </div>
-    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">
+    <div ng-if="!selectedChat" class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">
         <div class="content" style="overflow-y: scroll;width: auto;height: 234px;overflow-x: hidden;">
-            <div class="left">
+            <ul>
+                <li ng-repeat="(key,value) in contactList"><a ng-click="startChat(key)">{{value.username}}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div ng-if="selectedChat" class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">
+        <div class="content" style="overflow-y: scroll;width: auto;height: 234px;overflow-x: hidden;">
+            <div ng-class="{'left':(chat.sender.id !=user.id),'right:(chat.sender.id==user.id'}" ng-repeat="chat in chats">
                 <div class="author-name">
-                    Monica Jackson <small class="chat-date">
-                10:02 am
+                    {{chat.sender.firstName}} {{chat.sender.lastName}} <small class="chat-date">
+                {{chat.date | date:"longDate"}}
             </small>
                 </div>
                 <div class="chat-message active">
-                    Lorem Ipsum is simply dummy text input.
-                </div>
-            </div>
-            <div class="right">
-                <div class="author-name">
-                    Mick Smith
-                    <small class="chat-date">
-                    11:24 am
-                </small>
-                </div>
-                <div class="chat-message">
-                    Lorem Ipsum is simpl.
-                </div>
-            </div>
-            <div class="left">
-                <div class="author-name">
-                    Alice Novak
-                    <small class="chat-date">
-                    08:45 pm
-                </small>
-                </div>
-                <div class="chat-message active">
-                    Check this stock char.
-                </div>
-            </div>
-            <div class="right">
-                <div class="author-name">
-                    Anna Lamson
-                    <small class="chat-date">
-                    11:24 am
-                </small>
-                </div>
-                <div class="chat-message">
-                    The standard chunk of Lorem Ipsum
-                </div>
-            </div>
-            <div class="left">
-                <div class="author-name">
-                    Mick Lane
-                    <small class="chat-date">
-                    08:45 pm
-                </small>
-                </div>
-                <div class="chat-message active">
-                    I belive that. Lorem Ipsum is simply dummy text.
+                    {{chat.text}}
                 </div>
             </div>
         </div>
@@ -72,10 +35,10 @@
         </div>
         <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.4; z-index: 90; right: 1px;"></div>
     </div>
-    <div class="form-chat">
+    <div class="form-chat" ng-if="selectedChat">
         <div class="input-group input-group-sm">
-            <input type="text" class="form-control">
-            <span class="input-group-btn"> <button class="btn btn-primary" type="button">Send
+            <input type="text" ng-model="message" class="form-control">
+            <span ng-click="sendChat(message)" class="input-group-btn"> <button class="btn btn-primary" type="button">Send
         </button> </span></div>
     </div>
 </div>

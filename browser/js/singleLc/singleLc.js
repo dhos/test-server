@@ -50,8 +50,13 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
             status:'00'
             }
         }*/
-    $scope.amendments = jQuery.extend(true, {}, $scope.letter.amendments)
+    if ($scope.letter.draft) {
+        $scope.amendments = jQuery.extend(true, {}, $scope.letter.draftText)
+    } else {
+        $scope.amendments = jQuery.extend(true, {}, $scope.letter.amendments)
+    }
     $scope.client = $scope.user.role === 0
+    console.log($scope.letter)
     for (let key of Object.keys($scope.amendments)) {
         if ($scope.client) {
             if ($scope.amendments[key].status[0] === '1') {
@@ -85,7 +90,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
     }
     $scope.updateLetter = () => {
         var total = $scope.approved.length + $scope.amended.length
-
+        $scope.letter.draft = false
         for (let key of Object.keys($scope.approved.content)) {
             if ($scope.client) $scope.amendments[key].status = '1' + $scope.letter.amendments[key].status[1]
             else $scope.amendments[key].status = $scope.letter.amendments[key].status[0] + '1'
@@ -111,11 +116,12 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
             }
         } else {
             $scope.letter.state = 3
-            if ($scope.client) {
-                $scope.letter.approved = "10"
-            } else {
-                $scope.letter.approved = "01"
-            }
+            $scope.letter.amendedCount++
+                if ($scope.client) {
+                    $scope.letter.approved = "10"
+                } else {
+                    $scope.letter.approved = "01"
+                }
         }
 
         lcFactory.updateLetter($scope.letter).then(letter => {
@@ -124,6 +130,17 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state) => {
     }
     $scope.submitDraft = () => {
         $scope.letter.draft = true
-
+        for (let key of Object.keys($scope.approved.content)) {
+            if ($scope.client) $scope.amendments[key].status = '0' + $scope.letter.amendments[key].status[1]
+            else $scope.amendments[key].status = $scope.letter.amendments[key].status[0] + '0'
+        }
+        for (let key of Object.keys($scope.amended.content)) {
+            if ($scope.client) $scope.amendments[key].status = '00'
+            else $scope.amendments[key].status = '00'
+        }
+        $scope.letter.draftText = $scope.amendments
+        lcFactory.updateLetter($scope.letter).then(letter => {
+            $state.go("listManager.drafts")
+        })
     }
 });
