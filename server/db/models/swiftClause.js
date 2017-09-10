@@ -16,6 +16,12 @@ module.exports = db.define('swift_clause', {
     commercial: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
+    },
+    country: {
+        type: Sequelize.INTEGER
+    },
+    customer: {
+        type: Sequelize.INTEGER
     }
 
 });
