@@ -8,6 +8,6 @@ module.exports = db.define('country', {
         type: Sequelize.STRING
     },
     clauses: {
-        type: Sequelize.JSON
+        type: Sequelize.ARRAY(Sequelize.INTEGER)
     }
 });

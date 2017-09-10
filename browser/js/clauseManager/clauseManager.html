@@ -1,4 +1,4 @@
-<div class="col">
+<div class="col-md-12">
     <!-- main header -->
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
@@ -37,184 +37,73 @@
         </div>
     </div>
     <!-- / main header -->
-    <div class="wrapper-md" ng-controller="FlotChartDemoCtrl">
+    <div class="wrapper-md">
         <!-- stats -->
         <div class="row row-sm">
             <div class="col-md-12">
                 <div class="panel wrapper table-responsive">
+                    <div class="col-md-6">
+                        <div class="col-md-4">
+                            <label>
+                                <input type="radio" ng-model="radio.value" value="country">
+                                Country
+                            </label>
+                            <label>
+                              <input type="radio" ng-model="radio.value" value="customer">
+                                Customer
+                            </label>
+                        </div>
+                        <div class="col-md-8" ng-show="radio.value=='country'">
+                            <select class="form-control m-b" ng-model="selectedCountry">
+                                <option ng-repeat="country in countries" ng-selected="selectedCountry.name===country.name" ng-value="{{country}}">{{country.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-8" ng-show="radio.value=='customer'">
+                            <select class="form-control m-b" ng-model="selectedCustomer">
+                                <option ng-repeat="customer in customers" ng-selected="selectedCustomer.username==customer.username" ng-value = "{{customer}}">{{customer.username}}</option>
+                            </select>
+                        </div>
+                    </div>
                     <table class="table m-b-none table-expandable">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>SWIFT</th>
-                                <th width="50%">References Text</th>
-                                <th>Status</th>
-                                <th><span class="dropdown">
-<a href="#" data-toggle="dropdown" style="color: #58666e" class="dropdown-toggle" aria-expanded="false">
-<span translate="header.navbar.new.NEW">Country</span> <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">All</a></li>
-                                        <li><a href="#">Bangladesh</a></li>
-                                        <li><a href="#">Bhutan</a></li>
-                                        <li><a href="#">India</a></li>
-                                        <li><a href="#">Maldives</a></li>
-                                        <li><a href="#">Sri Lanka</a></li>
-                                    </ul>
-                                    </span>
-                                </th>
+                                <th>Field Description</th>
+                                <th>Line Description</th>
                                 <th>Last Change</th>
+                                <th ng-if="radio.value=='customer'">Commercial</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>001</td>
-                                <td>20</td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    <br>
-                                    <br>
-                                    <div class="inline-block"><a href=""><img src="img/amend-message.png"></a></div>
-                                    <div class="inline-block float-right">
-                                        <div class="inline-block"><a href=""><img src="img/amend-tick.png"></a></div>
-                                        <div class="inline-block"><a href=""><img src="img/amend-edit.png"></a></div>
-                                        <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href=""><img src="img/tick.png" alt="Status"></a>
-                                    <a href=""><img src="img/edit.png" alt="Status"></a>
-                                    </td>
-                                <td>India</td>
-                                <td>20 Mar 2017</td>
+                            <pre>{{selectedCountry}}</pre>
+                            <tr ng-if="radio.value=='country'" ng-repeat="clause in selectedCountry.clauses">
+                                <td>{{clauses[clause].swift_code}}</td>
+                                <td>{{clauses[clause].field_description}}</td>
+                                <td>{{clauses[clause].line_description}}</td>
+                                <td>{{clauses[clause].updatedAt | date:'longDate'}}</td>
+                                <td ng-if="radio.value=='customer'">{{clauses[clause].commercial}}</td>
                             </tr>
-                            <tr class="secondlevel">
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <div>
-                                        <div class="btn-group dropdown">
-                                            <button class="btn btn-dropdown" data-toggle="dropdown" aria-expanded="false">Choose Amendment <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="">Action</a></li>
-                                                <li><a href="">Another action</a></li>
-                                                <li><a href="">Something else here</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="full-width">
-                                        <textarea class="full-width" rows="5" placeholder="Enter LC Clause text"></textarea>
-                                    </div>
-                                    <div class="full-width">
-                                        <button class="btn m-b-xs w-xs btn-green">Apply</button>
-                                        <button class="btn m-b-xs w-xs btn-dark">Cancel</button>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                            <tr ng-if="radio.value=='customer'" ng-repeat="clause in selectedCustomer.clauses">
+                                <td>{{clauses[clause].swift_code}}</td>
+                                <td>{{clauses[clause].field_description}}</td>
+                                <td>{{clauses[clause].line_description}}</td>
+                                <td>{{clauses[clause].updatedAt | date:'longDate'}}</td>
+                                <td ng-if="radio.value=='customer'">{{clauses[clause].commercial}}</td>
                             </tr>
-                            <tr>
-                                <td>002</td>
-                                <td>20</td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    <br>
-                                    <br>
-                                    <div class="inline-block"><a href=""><img src="img/amend-message.png"></a></div>
-                                    <div class="inline-block float-right">
-                                        <div class="inline-block"><a href=""><img src="img/amend-tick.png"></a></div>
-                                        <div class="inline-block"><a href=""><img src="img/amend-edit.png"></a></div>
-                                        <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href=""><img src="img/tick.png" alt="Status"></a>
-                                    <a href=""><img src="img/edit.png" alt="Status"></a>
-                                    </td>
-                                <td>India</td>
-                                <td>20 Mar 2017</td>
-                            </tr>
-                            <tr class="secondlevel">
+                            <tr ng-if="newClause">
+                                <td><input class="form-control" ng-model="clauseToBeCreated.swift_code" type="text"/></td>
+                                <td ><input class="form-control" ng-model="clauseToBeCreated.field_description" type="text"/></td>
+                                <td><input class="form-control" ng-model="clauseToBeCreated.line_description" type="text"/></td>
                                 <td></td>
-                                <td></td>
-                                <td>
-                                    <div>
-                                        <div class="btn-group dropdown">
-                                            <button class="btn btn-dropdown" data-toggle="dropdown" aria-expanded="false">Choose Amendment <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="">Action</a></li>
-                                                <li><a href="">Another action</a></li>
-                                                <li><a href="">Something else here</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="full-width">
-                                        <textarea class="full-width" rows="5" placeholder="Enter LC Clause text"></textarea>
-                                    </div>
-                                    <div class="full-width">
-                                        <button class="btn m-b-xs w-xs btn-green">Apply</button>
-                                        <button class="btn m-b-xs w-xs btn-dark">Cancel</button>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>003</td>
-                                <td>20</td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    <br>
-                                    <br>
-                                    <div class="inline-block"><a href=""><img src="img/amend-message.png"></a></div>
-                                    <div class="inline-block float-right">
-                                        <div class="inline-block"><a href=""><img src="img/amend-tick.png"></a></div>
-                                        <div class="inline-block"><a href=""><img src="img/amend-edit.png"></a></div>
-                                        <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <a href=""><img src="img/tick.png" alt="Status"></a>
-                                    <a href=""><img src="img/edit.png" alt="Status"></a>
-                                    </td>
-                                <td>India</td>
-                                <td>20 Mar 2017</td>
-                            </tr>
-                            <tr class="secondlevel">
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <div>
-                                        <div class="btn-group dropdown">
-                                            <button class="btn btn-dropdown" data-toggle="dropdown" aria-expanded="false">Choose Amendment <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="">Action</a></li>
-                                                <li><a href="">Another action</a></li>
-                                                <li><a href="">Something else here</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="full-width">
-                                        <textarea class="full-width" rows="5" placeholder="Enter LC Clause text"></textarea>
-                                    </div>
-                                    <div class="full-width">
-                                        <button class="btn m-b-xs w-xs btn-green">Apply</button>
-                                        <button class="btn m-b-xs w-xs btn-dark">Cancel</button>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><label><input ng-model="clauseToBeCreated.commercial" type="checkbox"/>Commercial Clause</label><br/></td>
+                                </div>
                             </tr>
                         </tbody>
                     </table>
                     <hr>
-                    <a href="#" class="btn m-b-xs  btn-success pull-right">+ New Clause</a>
+                    <a ng-if="!newClause" ng-click="toggleNew()" class="btn m-b-xs  btn-success pull-right">+ New Clause</a>
+                    <a ng-if="newClause" ng-click="toggleNew()" class="btn m-b-xs btn-sucess pull-right">Cancel</a>
+                    <a ng-if="newClause" ng-click="createClause(clauseToBeCreated)" class="btn m-b-xs btn-primary pull-right">Save</a>
                     <div class="clearfix"></div>
                 </div>
             </div>

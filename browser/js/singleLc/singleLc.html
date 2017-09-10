@@ -52,8 +52,8 @@
                     <div class="col-md-5">
                         <div class="panel wrapper">
                             <h2 class="second-head">Sabic International</h2>
-                            <span class="font-thin m-t-none m-b  text-muted">• Sales Contract <span class="redcolor">{{letter.contract}}</span>
-                            <span class="m-l"> • LC Number</span><span class="redcolor">{{letter.lc_number}}</span></span>
+                            <span class="font-thin m-t-none m-b  text-muted"><span class="m-l"> • LC Number</span><span class="redcolor">{{letter.lc_number}}</span> • Sales Contract <span class="redcolor">{{letter.contract}}</span>
+                            </span>
                             <div class="row">
                                 <pdf source="{{letter.uploads[0]}}"></pdf>
                             </div>
@@ -72,14 +72,15 @@
                                             <thead>
                                                 <tr>
                                                     <th>SWIFT</th>
-                                                    <th width="50%">References Text</th>
+                                                    <th width="50%">Field Description</th>
+                                                    <th width="50%">Line Description
                                                     <th>Status</th>
                                                     <th>Last Change</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat-start="(key,value) in amendments">
-                                                    <td>{{key}}</td>
+                                                <tr ng-repeat-start="clause in letter.clauses">
+                                                    <td>{{clauses[clause].swift_code}}</td>
                                                     <td>{{value.reference}}
                                                         <br>
                                                         <br>

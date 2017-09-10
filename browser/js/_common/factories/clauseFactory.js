@@ -1,8 +1,8 @@
-app.factory('countryFactory', function($http, $q) {
+app.factory('clauseFactory', function($http, $q) {
     var d = {}
         //Fetches
-    d.getCountries = (query) => {
-        return $http.get('/api/countries/', {
+    d.getClauses = (query) => {
+        return $http.get('/api/clauses/', {
             params: query
         }).then((response) => {
             return response.data
@@ -12,8 +12,8 @@ app.factory('countryFactory', function($http, $q) {
             })
         })
     }
-    d.getSingleCountry = (id) => {
-        return $http.get(`/api/countries/${id}`)
+    d.getSingleClause = (id) => {
+        return $http.get(`/api/clauses/${id}`)
             .then(response => {
                 return response.data
             }).catch(err => {
@@ -26,8 +26,8 @@ app.factory('countryFactory', function($http, $q) {
     //End Fetches
 
     //Sets
-    d.createCountry = (Country) => {
-        return $http.post('/api/countries/')
+    d.createClause = (clause) => {
+        return $http.post('/api/clauses/', clause)
             .then(response => {
                 return response.data
             }).catch(err => {
@@ -40,8 +40,8 @@ app.factory('countryFactory', function($http, $q) {
     //End Sets
 
     //Updates
-    d.updateCountry = (country) => {
-        return $http.put(`/api/countries/`, country)
+    d.updateClause = (clause) => {
+        return $http.put(`/api/clauses/`, clause)
             .then(response => {
                 return response.data
             }).catch(err => {
@@ -54,8 +54,8 @@ app.factory('countryFactory', function($http, $q) {
     //End Updates
 
     //Deletes
-    d.deleteCountry = (query) => {
-        return $http.delete(`/api/countries/`, {
+    d.deleteClause = (query) => {
+        return $http.delete(`/api/clauses/`, {
             params: query
         }).then(response => {
             return response.data

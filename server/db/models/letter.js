@@ -12,18 +12,11 @@ module.exports = db.define('letter', {
         type: Sequelize.ARRAY(Sequelize.STRING),
         defaultValue: []
     },
-    amendments: {
+    commercial_notes: {
         type: Sequelize.JSON
-            /*
-                {
-                ammendments:{
-                    swift: number,
-                    reference:text,
-                    previousReferences:[text],
-                    status:'00'
-                }
-                }
-            */
+    },
+    business_notes: {
+        type: Sequelize.JSON
     },
     date: {
         type: Sequelize.DATE
@@ -61,19 +54,23 @@ module.exports = db.define('letter', {
     archived: {
         type: Sequelize.BOOLEAN
     },
-    draft: {
+    client_draft: {
         type: Sequelize.BOOLEAN
     },
-    approved: {
-        type: Sequelize.STRING,
-        defaultValue: '00'
-            //[0] = client
-            //[1] = elite
+    business_draft: {
+        type: Sequelize.BOOLEAN
     },
-    draftText: {
+    client_approved: {
+        type: Sequelize.BOOLEAN
+    },
+    business_approved: {
+        type: Sequelize.BOOLEAN
+    },
+    client_draftText: {
         type: Sequelize.JSON
-            /*{client:{},
-                elite:{}}*/
+    },
+    business_draftText: {
+        type: Sequelize.JSON
     },
     finDoc: {
         type: Sequelize.INTEGER,
@@ -81,10 +78,6 @@ module.exports = db.define('letter', {
     },
     finDate: {
         type: Sequelize.DATE
-    },
-    expiring: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
     },
     amendedCount: {
         type: Sequelize.INTEGER,

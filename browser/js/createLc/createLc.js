@@ -10,18 +10,11 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
     //find the users that are clients,
     //find the users that are csp/pic
     $scope.selectedCountry = {}
+    $scope.selectedClient = {}
     $scope.createLc = () => {
-        console.log($scope.letter)
-        $scope.letter.amendments = {}
         $scope.letter.state = 1
-        $scope.selectedCountry.clauses.forEach(clause => {
-            $scope.letter.amendments[clause.swift] = {
-                reference: clause.fieldDescription,
-                status: '00',
-                lastModified: Date.now(),
-                previousReferences: []
-            }
-        })
+        $scope.letter.clauses = $scope.selectedCountry.clauses.concat($scope.selectedClient.clauses)
+        $scope.letter.client = $scope.selectedClient.id
         $scope.letter.country = $scope.selectedCountry.id
         lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
             $state.go('singleLc', {

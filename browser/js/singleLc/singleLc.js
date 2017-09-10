@@ -21,10 +21,10 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS) => {
+app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauses) => {
     $scope.user = user
     $scope.letter = letter
-
+    $scope.clauses = clauses
     $scope.states = {
         1: 'newLcs',
         2: 'reviewed',
@@ -41,36 +41,8 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         length: 0
     }
     $scope.reference = {}
-        /*                
-            {
-            ammendments:{
-            swift: number,
-            reference:text,
-            previousReferences:[text],
-            status:'00'
-            }
-        }*/
-    if ($scope.letter.draft) {
-        $scope.amendments = jQuery.extend(true, {}, $scope.letter.draftText)
-    } else {
-        $scope.amendments = jQuery.extend(true, {}, $scope.letter.amendments)
-    }
-    $scope.client = $scope.user.role === 0
-    for (let key of Object.keys($scope.amendments)) {
-        if ($scope.client) {
-            if ($scope.amendments[key].status[0] === '1') {
-                $scope.approved.content[key] = $scope.amendments[key].reference
-                $scope.approved.length++
-            }
-            $scope.amendments[key].status = $scope.amendments[key].status[0]
-        } else {
-            if ($scope.amendments[key].status[1] === '1') {
-                $scope.approved.content[key] = $scope.amendments[key].reference
-                $scope.approved.length++
-            }
-            $scope.amendments[key].status = $scope.amendments[key].status[1]
-        }
-    }
+
+
     $scope.approveAmendment = (key) => {
         $scope.approved.content[key] = $scope.amendments[key].reference
         $scope.amendments[key].status = '1'
@@ -161,7 +133,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             $scope.letters = letters
                 //set states
             $scope.letters.forEach(letter => {
-                $scope[state[letter.state]].push(letter)
+                $scope[$scope.state[letter.state]].push(letter)
             })
             $scope.Frozen.forEach(frozen => {
                 if (frozen.finDoc === 0) $scope.Update.push(frozen)

@@ -51,6 +51,10 @@ module.exports = db.define('user', {
     },
     website: {
         type: Sequelize.STRING
+    },
+    clauses: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
+        defaultValue: []
     }
 }, {
     instanceMethods: {

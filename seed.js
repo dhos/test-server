@@ -4,6 +4,7 @@ var Letter = db.model('letter')
 var User = db.model('user');
 var Country = db.model('country')
 var Bank = db.model('bank')
+var Clause = db.model('swift_clause')
 var fs = require('fs')
 var path = require('path')
 var Promise = require('sequelize').Promise;
@@ -23,7 +24,8 @@ fs.createReadStream(sample)
         //organizeData(csvData)
         makeUsers()
         makeCountries()
-        makeBanks()
+            // makeBanks()
+        makeClauses()
 
     })
 
@@ -32,82 +34,91 @@ var makeCountries = () => {
     var temp = [{
         id: 1,
         name: 'Bangladesh',
-        clauses: [{
-            swift: '27',
-            fieldDescription: 'Sequence of Total',
-            lineDescription: '1/1 (Number)(Total)'
-        }, {
-            swift: '40 A',
-            fieldDescription: 'Form of Documentary Credit',
-            lineDescription: 'Irrevocable'
-        }, {
-            swift: '31C',
-            fieldDescription: 'Date of Issue',
-            lineDescription: 'dd/mm/yyyy'
-        }]
+        clauses: [1, 2, 3]
     }, {
         id: 2,
         name: 'Nepal',
-        clauses: [{
-            swift: '40E',
-            fieldDescription: 'Applicable Rules',
-            lineDescription: 'UCP LATEST VERSION'
-        }, {
-            swift: '32B',
-            fieldDescription: `Currency`,
-            lineDescription: `/Amount □ USD        □  JPY       □ EUR`
-        }, {
-            swift: '51A',
-            fieldDescription: 'Applicant',
-            lineDescription: 'Bank'
-        }]
+        clauses: [4, 5, 6]
     }, {
         id: 3,
         name: 'Sri Lanka',
-        clauses: [{
-            swift: '59',
-            fieldDescription: `Beneficiary
+        clauses: [7, 8]
+    }, {
+        id: 4,
+        name: 'India',
+        clauses: [9, 10]
+    }, {
+        id: 5,
+        name: 'Bhutan',
+        clauses: [11, 12]
+    }]
+    temp.forEach(country => {
+        Country.create(country)
+    })
+}
+
+var makeClauses = () => {
+
+
+    var clauses = [{
+        swift_code: '27',
+        field_description: 'Sequence of Total',
+        line_description: '1/1 (Number)(Total)'
+    }, {
+        swift_code: '40 A',
+        field_description: 'Form of Documentary Credit',
+        line_description: 'Irrevocable'
+    }, {
+        swift_code: '31C',
+        field_description: 'Date of Issue',
+        line_description: 'dd/mm/yyyy'
+    }, {
+        swift_code: '40E',
+        field_description: 'Applicable Rules',
+        line_description: 'UCP LATEST VERSION'
+    }, {
+        swift_code: '32B',
+        field_description: `Currency`,
+        line_description: `/Amount □ USD        □  JPY       □ EUR`
+    }, {
+        swift_code: '51A',
+        field_description: 'Applicant',
+        line_description: 'Bank'
+    }, {
+        swift_code: '59',
+        field_description: `Beneficiary
 (Follow this address in L/C
 application to avoid amendment, 
 as this is our official address
 information in our letterhead)"`,
-            lineDescription: `SABIC ASIA PACIFIC PTE LTD
+        line_description: `SABIC ASIA PACIFIC PTE LTD
 ONE TEMASEK AVENUE 
 NO. 06-01 MILLENIA TOWER
 SINGAPORE 039192"`
-        }, {
-            swift: '39A',
-            fieldDescription: `Percentage Credit
+    }, {
+        swift_code: '39A',
+        field_description: `Percentage Credit
 Amount Tolerance`,
-            lineDescription: `10/10`
-        }]
+        line_description: `10/10`
     }, {
-        id: 4,
-        name: 'India',
-        clauses: [{
-            swift: '39B',
-            fieldDescription: 'Maximum Credit Amount',
-            lineDescription: 'Not Exceeding'
-        }, {
-            swift: '41D',
-            fieldDescription: 'Available With/by',
-            lineDescription: 'ANY BANK IN SINGAPORE BY NEGOTIATION'
-        }]
+        swift_code: '39B',
+        field_description: 'Maximum Credit Amount',
+        line_description: 'Not Exceeding'
     }, {
-        id: 5,
-        name: 'Bhutan',
-        clauses: [{
-            swift: '42C',
-            fieldDescription: `  Drafts At`,
-            lineDescription: `□ XX Days from B/L date                  □ Sight`
-        }, {
-            swift: '42A',
-            fieldDescription: 'Drawee',
-            lineDescription: 'ISSUING BANK / CONFIRMING BANK'
-        }]
+        swift_code: '41D',
+        field_description: 'Available With/by',
+        line_description: 'ANY BANK IN SINGAPORE BY NEGOTIATION'
+    }, {
+        swift_code: '42C',
+        field_description: `  Drafts At`,
+        line_description: `□ XX Days from B/L date                  □ Sight`
+    }, {
+        swift_code: '42A',
+        field_description: 'Drawee',
+        line_description: 'ISSUING BANK / CONFIRMING BANK'
     }]
-    temp.forEach(country => {
-        Country.create(country)
+    clauses.forEach(clause => {
+        Clause.create(clause)
     })
 }
 var makeBanks = () => {

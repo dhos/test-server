@@ -6,7 +6,7 @@ router.use('/users', require('./users'));
 router.use('/lc', require('./letters'))
 router.use('/countries', require('./countries'))
 router.use('/banks', require('./banks'))
-    // router.user('/message', require('./message'))
+router.use('/clauses', require('./clauses'))
     // Make sure this is after all of
     // the registered routes!
 router.use(function(req, res) {

@@ -68,8 +68,8 @@
                             <!-- make into a dropdown -->
                             <label class="col-lg-2 control-label">Customer Name</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.client">
-                                  <option ng-repeat="client in clients" value = "{{client.id}}">{{client.username}}</option>
+                                <select class="form-control m-b" ng-model="selectedClient">
+                                  <option ng-repeat="client in clients" ng-value = "{{client}}">{{client.username}}</option>
                                 </select>
                             </div>
                         </div>

@@ -2,7 +2,7 @@
 var router = require('express').Router(); // eslint-disable-line new-cap
 module.exports = router;
 var db = require('../../../db');
-var Country = db.model('country')
+var Clause = db.model('swift_clause')
 var ensureAuthenticated = function(req, res, next) {
     var err;
     if (req.isAuthenticated()) {
@@ -17,8 +17,11 @@ var ensureAuthenticated = function(req, res, next) {
 //fetches
 
 router.get('/', ensureAuthenticated, (req, res, next) => {
-    Country.findAll({
-        where: req.query
+    Clause.findAll({
+        where: req.query,
+        order: [
+            ['id', 'ASC']
+        ]
     }).then(countries => {
         res.json(countries)
     }).catch(err => {
@@ -34,7 +37,11 @@ router.get('/:id', ensureAuthenticated, (req, res, next) => {
 
 //sets
 router.post('/', ensureAuthenticated, (req, res, next) => {
-
+    Clause.create(req.body).then(createdClause => {
+        res.json(createdClause)
+    }).catch(err => {
+        next(err)
+    })
 })
 
 //end sets
@@ -42,14 +49,7 @@ router.post('/', ensureAuthenticated, (req, res, next) => {
 //updates
 
 router.put('/', ensureAuthenticated, (req, res, next) => {
-    const updates = req.body
-    Country.update(updates, {
-        where: {
-            id: req.body.id
-        }
-    }).then(result => {
-        console.log(result)
-    })
+
 })
 
 //end updates

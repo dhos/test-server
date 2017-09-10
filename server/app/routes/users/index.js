@@ -2,6 +2,7 @@
 var router = require('express').Router();
 var db = require('../../../db')
 var User = db.model('user');
+var _ = require('lodash')
 
 
 var ensureAuthenticated = function(req, res, next) {
@@ -15,6 +16,9 @@ router.get('/', (req, res, next) => {
     User.findAll({
         where: req.query
     }).then(users => {
+        users.forEach(e => {
+            return _.omit(e.toJSON(), ['password', 'salt'])
+        })
         res.json(users)
     }).catch(err => {
         next(err)
@@ -33,17 +37,13 @@ router.get('/:id', (req, res, next) => {
 
 //UPDATES FOR THINGS
 router.put('/update', function(req, res, next) {
-    const user = req.body
-    User.findOne({
+    const updates = req.body
+    User.update(updates, {
         where: {
-            id: user.id
+            id: req.body.id
         }
-    }).then(userToBeUpdated => {
-        if (userToBeUpdated) {
-            return userToBeUpdated.updateAttributes(user)
-        }
-    }).then(updatedUser => {
-        res.json(updatedUser)
+    }).then(result => {
+        console.log(result)
     }).catch((err) => {
         return next(err)
     })
