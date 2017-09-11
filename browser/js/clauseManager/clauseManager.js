@@ -11,6 +11,7 @@ app.config(function($stateProvider) {
             },
             clauses: (clauseFactory) => {
                 return clauseFactory.getClauses({}).then(clauses => {
+                    console.log(clauses)
                     return clauses
                 })
             },
@@ -25,7 +26,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('clauseManagerCtrl', function($scope, countries, countryFactory, clauses, clauseFactory, customers, userFactory) {
+app.controller('clauseManagerCtrl', function($scope, countries, countryFactory, clauseFactory, customers, userFactory) {
     $scope.clauses = clauses
     $scope.countries = countries
     $scope.customers = customers

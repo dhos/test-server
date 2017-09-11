@@ -21,10 +21,20 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauses) => {
+app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauseFactory) => {
     $scope.user = user
     $scope.letter = letter
-    $scope.clauses = clauses
+    clauseFactory.getClauses({
+        country: $scope.letter.country,
+        customer: $scope.letter.client
+
+    }).then(clauses => {
+        $scope.clauses = clauses
+    })
+    $scope.client = $scope.user.role === 0
+    if ($scope.client) $scope.notes = jQuery.extend(true, {}, $scope.letter.commercial_notes)
+    else $scope.notes = $scope.amendments = jQuery.extend(true, {}, $scope.letter.business_notes)
+    console.log($scope.notes)
     $scope.states = {
         1: 'newLcs',
         2: 'reviewed',
@@ -32,69 +42,48 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         4: 'frozen',
         5: 'archived'
     }
-    $scope.approved = {
-        content: {},
-        length: 0
-    }
-    $scope.amended = {
-        content: {},
-        length: 0
-    }
-    $scope.reference = {}
-
-
-    $scope.approveAmendment = (key) => {
-        $scope.approved.content[key] = $scope.amendments[key].reference
-        $scope.amendments[key].status = '1'
-        $scope.approved.length++
+    $scope.approved = 0
+    $scope.amended = 0
+    $scope.references = {}
+    $scope.approveAmendment = (clause) => {
+        clause.status = 1
+        $scope.notes[clause.swift_code] = clause
+        $scope.approved++
 
     }
-    $scope.editAmendment = (key) => {
-        $scope.amendments[key].previousReferences.push($scope.amendments[key].reference)
-        $scope.amendments[key].reference = $scope.reference[key]
-        $scope.amendments[key].status = '2'
-        $scope.amendments[key].expanded = false
-        $scope.amended.content[key] = $scope.reference[key]
-        $scope.reference[key] = ""
-        $scope.amended.length++
-
+    $scope.editAmendment = (clause) => {
+        console.log(clause)
+        clause.status = 2
+        $scope.notes[clause.swift_key] = clause
+        $scope.amended++
     }
     $scope.updateLetter = () => {
-        var total = $scope.approved.length + $scope.amended.length
+        var total = $scope.approved + $scope.amended
+        if ($scope.letter.clause.length !== total) return
         $scope.letter.draft = false
-        for (let key of Object.keys($scope.approved.content)) {
-            if ($scope.client) $scope.amendments[key].status = '1' + $scope.letter.amendments[key].status[1]
-            else $scope.amendments[key].status = $scope.letter.amendments[key].status[0] + '1'
-        }
-        for (let key of Object.keys($scope.amended.content)) {
-            if ($scope.client) $scope.amendments[key].status = '10'
-            else $scope.amendments[key].status = '01'
-        }
 
-        $scope.letter.amendments = $scope.amendments
+        for (let key of Object.keys($scope.notes)) {
+            if ($scope.client) $scope.commercial_notes = $scope.notes
+            else $scope.business_notes = $scope.notes
+        }
         if ($scope.approved.length === total) {
+            if ($scope.client) {
+                $scope.letter.client_approved = true
+            } else {
+                $scope.letter.business_approved = true
+            }
             if ($scope.letter.state === 1) {
                 $scope.letter.state = 2
             }
-            if ($scope.client) {
-                $scope.letter.approved = "1" + $scope.letter.approved[1]
-            } else {
-                $scope.letter.approved = $scope.letter.approved[0] + "1"
-            }
-            if ($scope.letter.approved === "11") {
+            if ($scope.letter.client_approved && $scope.letter.business_approved) {
                 $scope.letter.state = 4
-                $scope.letter.approved = "01"
             }
         } else {
             $scope.letter.state = 3
+            $scope.letter.business_approved = false
+            $scope.letter.client_approved = false
             $scope.letter.amendedCount++
-                if ($scope.client) {
-                    $scope.letter.approved = "10"
-                } else {
-                    $scope.letter.approved = "01"
-                }
         }
-
         lcFactory.updateLetter($scope.letter).then(letter => {
             $state.go('listManager.' + $scope.states[letter.state])
         })

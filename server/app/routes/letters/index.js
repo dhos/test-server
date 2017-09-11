@@ -49,10 +49,10 @@ router.get('/expiring', ensureAuthenticated, (req, res, next) => {
 
 router.get('/:id', ensureAuthenticated, (req, res, next) => {
     Letter.findOne({
-        where: {
-            lc_number: req.params.id
-        }
-    }).then(letter => {
+            where: {
+                lc_number: req.params.id
+            }
+        }).then(letter => {
         res.json(letter)
     }).catch(err => {
         next(err)

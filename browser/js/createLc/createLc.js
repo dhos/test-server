@@ -13,7 +13,6 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
     $scope.selectedClient = {}
     $scope.createLc = () => {
         $scope.letter.state = 1
-        $scope.letter.clauses = $scope.selectedCountry.clauses.concat($scope.selectedClient.clauses)
         $scope.letter.client = $scope.selectedClient.id
         $scope.letter.country = $scope.selectedCountry.id
         lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
