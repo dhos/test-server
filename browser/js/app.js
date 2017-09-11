@@ -47,7 +47,7 @@ app.run(function($rootScope, AuthService, $state) {
             if (user) {
                 $state.transitionTo(toState.name, toParams);
             } else {
-                $state.transitionTo('home');
+                $state.transitionTo('landing');
             }
         });
 

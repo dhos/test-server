@@ -2,39 +2,46 @@
     <!-- main header -->
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
-            <div class="col-md-4">
-                <h1 class="m-n font-thin h3 text-black main-title">Archive</h1>
-                <small class="text-muted"><a href="index.html"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Archive</small>
-            </div>
-            <div class="col-md-8 text-center">
-                <div class="row lc-stats">
-                    <div class="col-md-2 pull-right">
-                        <a href="updated-lcs.html"> <span class="stats-numb">30</span>
-                        <br> Updated</a>
-                    </div>
-                    <div class="col-md-2 pull-right">
-                        <a href="frozen-lcs.html"> <span class="stats-numb">58</span>
-                        <br> Frozen</a>
-                    </div>
-                    <div class="col-md-2 pull-right">
-                        <a href="amended-lcs.html"> <span class="stats-numb">25</span>
-                        <br> Amended</a>
-                    </div>
-                    <div class="col-md-2 pull-right">
-                        <a href="reviewed-lcs.html"><span style="display: inline-block;"><span class="stats-numb">26</span>
-                        <br> Reviewed</span></a>
-                        <label class="switch">
-                            <input type="checkbox" checked="">
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-                    <div class="col-md-2 pull-right">
-                        <a href="new-lcs.html"><span class="stats-numb">112</span>
-                        <br> New LCs</a>
+                <div class="col-md-4">
+                    <h2 class="second-head">Archive</h2>
+                </div>
+                <div class="col-md-8 text-center">
+                    <div class="row lc-stats">
+                        <div class="col-md-2 pull-right">
+                            <span class="stats-numb">{{Expiring.length}}</span>
+                            <br> Expiring
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <span class="stats-numb">{{Update.length}}</span>
+                            <br> FD Update
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <span class="stats-numb">{{Frozen.length}}</span>
+                            <br> Frozen
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
+                            <br> Amended</span>
+                            <label class="switch">
+                                <input ng-model="amendedCustomer" type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
+                            <br> Reviewed</span>
+                            <label class="switch">
+                                <input type="checkbox" ng-model="reviewedCustomer">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <span class="stats-numb">{{New.length}}</span>
+                            <br> New LCs
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     <!-- / main header -->
     <div class="wrapper-md">

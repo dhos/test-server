@@ -8,7 +8,10 @@
         <i class="glyphicon glyphicon-align-justify"></i>
     </button>
         <!-- brand -->
-    <a href="#/" class="navbar-brand text-lt"><img src="img/logo.png" alt="." ></a>
+    <a href="#" class="navbar-brand text-lt">
+          <img src="img/logo.png" alt="." class="hidden-folded">
+          <img src="img/logo-icon.png" alt="." class="visible-folded">
+        </a>
         <!-- / brand -->
   </div>
   <!-- / navbar header -->
@@ -19,7 +22,7 @@
         <a href="#" class="btn no-shadow navbar-btn top-btn" ui-toggle-class="app-aside-folded" target=".app"><img src="img/menu.png"></a>
         <a ng-click="search(searchQuery)" class="btn no-shadow top-btn search-top"><img src="img/search.png"></a>
         <div class="search-wrap" style="display:inline-block;">
-            <input type="text" id="search-text" style="padding:12px;border-radius:10px;" class="main-search" placeholder="Search by specific LC Number">
+            <input type="text" id="search-text" class="main-search" placeholder="Search by LC Number">
         </div>
     </div>
     <!-- / buttons -->
@@ -147,8 +150,8 @@
           <ul class="nav">
             <li class="">
                 <a ui-sref="dashboard" ui-sref-active="active">
-                  <i class="fa fa-check-square"></i>
-                  <span class="font-bold">Dashboard</span>
+                  <i class="fa  fa-dashboard"></i>
+                  <span>Dashboard</span>
                 </a>
             </li>
             <li>
@@ -157,8 +160,8 @@
                 <i class="fa fa-fw fa-angle-right text"></i>
                 <i class="fa fa-fw fa-angle-down text-active"></i>
                 </span>
-                <i class="fa fa-check-square"></i>
-                 <span class="font-bold" >List Manager</span>
+                <i class="fa fa-list-alt"></i>
+                 <span >List Manager</span>
               </a>
               <ul class="nav nav-sub">
               <li>
@@ -207,27 +210,27 @@
             </li>
             <li>
                 <a ui-sref="archive" ui-sref-active="active">
-                  <i class="fa fa-check-square"></i>
-                  <span class="font-bold">Archive</span>
+                  <i class="fa fa-archive"></i>
+                  <span>Archive</span>
                 </a>
               </li>
             <li>
             <li>
                 <a ui-sref="listManager.drafts" ui-sref-active="active">
-                  <i class="fa fa-check-square"></i>
-                  <span class="font-bold">Drafts</span>
+                  <i class="fa fa-file"></i>
+                  <span>Drafts</span>
                 </a>
               </li>
             <li>
               <a ui-sref="clauseManager" ui-sref-active="active">
-                <i class="fa fa-check-square"></i>
-                <span class="font-bold">Clause Manager</span>
+                <i class="fa fa-file-text"></i>
+                <span>Clause Manager</span>
               </a>
             </li>
             <li>
               <a href="analytics.html">
-                <i class="fa fa-check-square"></i>
-                <span class="font-bold">Analytics</span>
+                <i class="fa fa-bar-chart-o"></i>
+                <span>Analytics</span>
               </a>
             </li>
             <li><a href="#" class="auto"><span class="pull-right text-muted"><i class="fa fa-fw fa-angle-right text"></i><i class="fa fa-fw fa-angle-down text-active"></i></span><i class="fa fa-cloud-upload"></i><span>Upload LCs</span></a>
@@ -236,7 +239,7 @@
                       <li><a ui-sref="amendList" ui-sref-active="active"><span>Amended LC</span></a></li>
                   </ul>
               </li>
-              <li><a href="#" class="auto"><span class="pull-right text-muted"><i class="fa fa-fw fa-angle-right text"></i><i class="fa fa-fw fa-angle-down text-active"></i></span><i class="fa fa-cloud-upload"></i><span>User Master</span></a>
+              <li><a href="#" class="auto"><span class="pull-right text-muted"><i class="fa fa-fw fa-angle-right text"></i><i class="fa fa-fw fa-angle-down text-active"></i></span><i class="fa fa-users"></i><span>User Master</span></a>
                   <ul class="nav nav-sub">
                       <li><a ui-sref="userlist"><span>PIC / CSP Users</span></a></li>
                       <li><a ui-sref="banklist"><span>Banks</span></a></li>
