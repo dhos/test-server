@@ -55,10 +55,12 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         console.log(clause)
         clause.status = 2
         $scope.notes[clause.swift_key] = clause
+        clause.expanded = false
         $scope.amended++
     }
     $scope.updateLetter = () => {
         var total = $scope.approved + $scope.amended
+        console.log($scope.notes)
         if ($scope.letter.clause.length !== total) return
         $scope.letter.draft = false
 

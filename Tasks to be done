@@ -1,0 +1,16 @@
+Tasks to be done
+
+General:
+Animation integration from html spec to angular across the forms
+	- Admin create/edit (banks, customer, users)
+	- Single LC add notes
+	- Icons in the side bar
+
+Angular form validation
+	- Admin create/edit (banks,customer,users)
+	- Upload new LC
+	- Amend LC
+	- Clause manager forms need to be revised. (I will probably need to provide some clarification. There's no html template so we'll be winging the designs)
+
+Notification fetches and navbar display (I still need to finish writing the api for this. I'll let you know when it's finished)
+

@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('newBank', {
-        templateUrl: 'js/admin/banklist/newBank.html',
+        templateUrl: 'js/admin/banklist/newbank.html',
         controller: 'newBankCtrl',
         url: '/newBank',
         resolve: {}
