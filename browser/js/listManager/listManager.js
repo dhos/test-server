@@ -69,15 +69,16 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
         2: 'Reviewed',
         3: 'Amended',
         4: 'Frozen',
-        5: 'Pending Update'
+        5: 'Revised'
     }
     $scope.New = []
     $scope.Reviewed = []
     $scope.Amended = []
+    $scope.Revised = []
     $scope.Frozen = []
     $scope.Update = []
     $scope.Expiring = expiring[0]
-    $scope.amendedCustomer = false
+    $scope.revisedCustomer = false
     $scope.reviewedCustomer = false
     $scope.letters = letters
         //set states
@@ -85,15 +86,15 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
         $scope[$scope.state[letter.state]].push(letter)
     })
     $scope.Frozen.forEach(frozen => {
-        if (frozen.finDoc === 0) $scope.Update.push(frozen)
-    })
+            if (frozen.finDoc === 0) $scope.Update.push(frozen)
+        })
     var refreshLetters = () => {
-        console.log('hello')
         lcFactory.getLetters({}).then(letters => {
             $scope.letters = letters
             $scope.New = []
             $scope.Reviewed = []
             $scope.Amended = []
+            $scope.Revised = []
             $scope.Frozen = []
             $scope.Update = []
             $scope.amendedCustomer = false

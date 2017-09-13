@@ -86,14 +86,14 @@
                                 <td>{{clauses[clause].swift_code}}</td>
                                 <td>{{clauses[clause].field_description}}</td>
                                 <td>{{clauses[clause].line_description}}</td>
-                                <td>{{clauses[clause].updatedAt | date:'longDate'}}</td>
+                                <td>{{clauses[clause].updatedAt | date:'shortDate'}}</td>
                                 <td ng-if="radio.value=='customer'">{{clauses[clause].commercial}}</td>
                             </tr>
                             <tr ng-if="radio.value=='customer'" ng-repeat="clause in selectedCustomer.clauses">
                                 <td>{{clauses[clause].swift_code}}</td>
                                 <td>{{clauses[clause].field_description}}</td>
                                 <td>{{clauses[clause].line_description}}</td>
-                                <td>{{clauses[clause].updatedAt | date:'longDate'}}</td>
+                                <td>{{clauses[clause].updatedAt | date:'shortDate'}}</td>
                                 <td ng-if="radio.value=='customer'">{{clauses[clause].commercial}}</td>
                             </tr>
                             <tr ng-if="newClause">

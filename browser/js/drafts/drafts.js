@@ -4,7 +4,7 @@ app.config(function($stateProvider) {
         controller: 'draftsCtrl',
         url: '/drafts',
         resolve: {
-            draftsdLetters: (lcFactory) => {
+            drafts: (lcFactory) => {
                 return lcFactory.getLetters({
                     draft: true
                 }).then(drafts => {
@@ -17,5 +17,9 @@ app.config(function($stateProvider) {
 
 app.controller('draftsCtrl', function($scope, drafts) {
     $scope.displayLetters = drafts
-
+    $scope.transition = (lc_number) => {
+        $state.go('singleLc', {
+            lc_number: lc_number
+        })
+    }
 });

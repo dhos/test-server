@@ -5,13 +5,7 @@ app.config(function($stateProvider) {
         url: '/users',
         resolve: {
             users: userFactory => {
-                return userFactory.getUsers({
-                    // $or: [{
-                    //     role: 1
-                    // }, {
-                    //     role: 2
-                    // }]
-                }).then(users => {
+                return userFactory.getUsers({}).then(users => {
                     return users
                 })
             }
@@ -20,7 +14,9 @@ app.config(function($stateProvider) {
 });
 
 app.controller('userlistCtrl', function($scope, users, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
-    $scope.users = users
+    $scope.users = users.filter(user => {
+        return user.role !== 0
+    })
     $scope.roles = {
         1: 'CSP',
         2: 'PIC',
@@ -46,7 +42,7 @@ app.controller('userlistCtrl', function($scope, users, userFactory, $state, $roo
         2: 'Reviewed',
         3: 'Amended',
         4: 'Frozen',
-        5: 'Pending Update'
+        5: 'Revised'
     }
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
@@ -55,6 +51,7 @@ app.controller('userlistCtrl', function($scope, users, userFactory, $state, $roo
             $scope.Reviewed = []
             $scope.Amended = []
             $scope.Frozen = []
+            $scope.Revised = []
             $scope.Update = []
             $scope.letters = letters
                 //set states

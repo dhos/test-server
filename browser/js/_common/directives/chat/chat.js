@@ -6,8 +6,8 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
         link: function(scope) {
             scope.chat = false
             scope.selectedChat = false
+            scope.chats = {}
             scope.open = () => {
-                console.log(scope.chat)
                 scope.chat = !scope.chat
             }
             var setUser = function() {
@@ -34,10 +34,9 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
             Socket.on('Incoming', function(newChat) {
                 console.log(newChat)
                 if (scope.chats[newChat]) {
-                    scope.chats[newChat]
-                    scope.selectedChat = scope.chats[sid]
+                    scope.chats[newChat].push(newChat)
                 } else {
-                    scope.chats[sid] = []
+                    scope.chats[newChat] = []
                 }
             })
             scope.sendChat = (message) => {
@@ -49,6 +48,8 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
                 }
                 scope.message = null
                 Socket.emit('chat', chat)
+                scope.selectedChat.push(chat)
+                console.log(scope.selectedChat)
             }
             var removeUser = function() {
                 scope.user = null;

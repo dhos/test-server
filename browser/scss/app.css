@@ -99,8 +99,8 @@ a.list-group-item:hover, a.list-group-item:focus, a.list-group-item.hover { back
 .panel-default > .panel-heading, .panel-default > .panel-footer { border-color: #edf1f2; }
 .panel-group .panel-heading + .panel-collapse .panel-body { border-top: 1px solid #eaedef; }
 .table > tbody > tr > th, .table > tfoot > tr > th, .table > tbody > tr > td,
-.table > tfoot > tr > td { padding: 8px 15px; border-top: 1px solid #eaeff0; }
-.table > thead > tr > th { padding: 8px 15px; border-bottom: 1px solid #eaeff0; }
+.table > tfoot > tr > td { padding: 8px 10px; border-top: 1px solid #eaeff0; }
+.table > thead > tr > th { padding: 8px 10px; border-bottom: 1px solid #eaeff0; }
 .table-bordered { border-color: #eaeff0; }
 .table-bordered > tbody > tr > td { border-color: #eaeff0; }
 .table-bordered > thead > tr > th { border-color: #eaeff0; }
@@ -1140,6 +1140,7 @@ header#header { background: #efefef; -webkit-box-shadow: 0px 0px 15px 0px rgba(0
 .no-t-border.table > tbody > tr > td.detail { padding-left: 20px !important; }
 .no-pad { padding: 0; }
 .pad-25 { padding: 25px !important; }
+.pad-5 { padding:5px !important;}
 hr { margin-top: 0; }
 .redcolor { color: #ae0035; }
 .no-td-b td { border-top: 0 !important; }
@@ -1286,7 +1287,7 @@ table.table-expandable > tbody > tr div.table-expandable-arrow { background: tra
 table.table-expandable > tbody > tr div.table-expandable-arrow.up { background-position: 0px 0px; }
 table.table-sticky-header th { color: #FFF; background-color: #555; }
 /*expandable table css End*/
-.lc-stats div.pull-right:nth-child(5), .lc-stats div.pull-right:nth-child(4) { min-width: 140px; }
+.lc-stats div.pull-right:nth-child(5), .lc-stats div.pull-right:nth-child(6) { min-width: 140px; }
 @media screen and (max-width: 1500px) {
  .lc-stats > div.pull-right{width: 110px;}
 }
