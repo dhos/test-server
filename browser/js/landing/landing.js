@@ -14,7 +14,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('landingCtrl', function($scope, AuthService, userFactory, $state) {
-
+    jQuery('body').addClass('loginpage')
     $scope.login = {};
     $scope.error = null;
     $scope.createUser = () => {
@@ -26,6 +26,7 @@ app.controller('landingCtrl', function($scope, AuthService, userFactory, $state)
         userFactory.createUser({
             user: login
         }).then(user => {
+            jQuery('body').removeClass('loginpage')
             AuthService.login(login)
         })
     }

@@ -34,7 +34,7 @@
                     <li ng-class="{'new-stat': (letter.state>=1)}">
                         <button ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">
                             <div class="icon-stat stat-bg">
-                                <i class="fa fa-check"></i>
+                                <img src="img/new.png" alt="new">
                             </div>
                             <div>
                                 <span class="main-stat"> New</span><br> <span class="secnd-stat">Stage 1 of 5</span>
@@ -44,7 +44,7 @@
                     <li ng-class="{'review-stat': (letter.state>=2)}">
                         <button ng-disabled="letter.state!==2 || letter.state !== 4" ng-click="transition(letter.lc_number)">
                             <div class="icon-stat stat-bg">
-                                <i class="fa fa-check"></i>
+                                <img src="img/review.png" alt="review">
                             </div>
                             <div>
                                 <span class="main-stat"> Review/Revise/Revised</span><br> <span class="secnd-stat">Stage 2 of 5</span>
@@ -54,7 +54,7 @@
                     <li ng-class="{'amend-stat': (letter.state>=3)}">
                         <button ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">
                              <div class="icon-stat stat-bg">
-                                <i class="fa fa-check"></i>
+                                <img src="img/amend.png" alt="amend">
                             </div>
                             <div>
                                 <span class="main-stat"> Amend</span><br> <span class="secnd-stat">Stage 3 of 5</span>
@@ -64,7 +64,7 @@
                     <li ng-class="{'freeze-stat': (letter.state>=4)}">
                         <button ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">                            
                              <div class="icon-stat stat-bg">
-                                <i class="fa fa-check"></i>
+                                <img src="img/freeze.png" alt="freeze">
                             </div>
                             <div>
                                 <span class="main-stat"> Freeze</span><br> <span class="secnd-stat">Stage 4 of 5</span>
@@ -74,7 +74,7 @@
                     <li>
                         <button class="normal-stat" ng-class="{'fdupdate-stat':(letter.finDoc!=0)}" ng-disabled="letter.state!==4" ng-click="letter.toggled = !letter.toggled">
                              <div class="icon-stat stat-bg">
-                                <i class="fa fa-check"></i>
+                                <img src="img/update.png" alt="update">
                             </div>
                             <div>
                                 <span class="main-stat"> FD Update</span><br> <span class="secnd-stat">Stage 5 of 5</span>
