@@ -15,7 +15,8 @@ app.config(function($stateProvider) {
 
 app.controller('banklistCtrl', function($scope, banks, bankFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
     $scope.banks = banks
-    $scope.deleteBank = (bankId) => {
+    $scope.deleteBank = (bankIdn, index) => {
+        $scope.banks.splice(index, 1)
         bankFactory.deleteBank({
             id: bankId
         }).then(banks => {
