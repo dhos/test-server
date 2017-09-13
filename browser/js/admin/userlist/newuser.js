@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('newUser', {
-        templateUrl: 'js/admin/userlist/newUser.html',
+        templateUrl: 'js/admin/userlist/newuser.html',
         controller: 'newUserCtrl',
         url: '/newUser',
         resolve: {

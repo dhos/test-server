@@ -70,11 +70,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="bank in banks">
+                                <tr ng-repeat="bank in banks track by $index">
                                     <td>{{bank.name}}</td>
                                     <td>{{bank.primary_email}}</td>
                                     <td>{{bank.secondary_email}}</td>
-                                    <td><a ng-click="editBank(bank.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteBank(bank.id)"><i class="fa fa-trash"></i> Delete</a> </td>
+                                    <td><a ng-click="editBank(bank.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteBank(bank.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
                                 </tr>
                             </tbody>
                         </table>
