@@ -16,7 +16,6 @@ module.exports = function(server) {
                     sid: Socket.id,
                     user: user
                 }
-              }
             }
             io.to(Socket.id).emit('identity', Socket.id)
             Socket.emit('ChatList', onlineUsers)
