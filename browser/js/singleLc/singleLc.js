@@ -91,7 +91,10 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         var complete = true
         if (!$scope.client) {
             $scope.business_clauses.forEach(clause => {
-                if (!clause.status) complete = false
+                if (!clause.status) {
+                    console.log(clause)
+                    complete = false
+                }
                 if (clause.status == 2) approved = false
                 $scope.letter.business_notes[clause.swift_code] = clause
             })
@@ -104,6 +107,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         }
         $scope.letter.draft = false
         $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
+        console.log(complete, approved)
         if (!complete) return
         if (approved) {
             if ($scope.letter.state === 1) {
