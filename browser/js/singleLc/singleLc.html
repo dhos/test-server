@@ -1,55 +1,55 @@
 <!-- main -->
 <div class="col-md-12">
     <!-- main header -->
+    <!-- <div class="bg-light lter wrapper-md">
+        <div class="row title-space">
+                <div class="col-md-4">
+                    <h2 class="second-head">New Bank</h2>
+                </div>
+                <div class="col-md-8 text-center">
+                    <div class="row lc-stats">
+                        <div class="col-md-2 pull-right">
+                            <span class="stats-numb ng-binding">3</span>
+                            <br> Expiring
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <span class="stats-numb ng-binding">0</span>
+                            <br> FD Update
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <span class="stats-numb ng-binding">0</span>
+                            <br> Frozen
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <span style="display: inline-block;"><span class="stats-numb ng-binding">1</span>
+                            <br> Amended</span>
+                            <label class="switch">
+                                <input ng-model="amendedCustomer" type="checkbox" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <span style="display: inline-block;"><span class="stats-numb ng-binding">0</span>
+                            <br> Reviewed</span>
+                            <label class="switch">
+                                <input type="checkbox" ng-model="reviewedCustomer" class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-2 pull-right">
+                            <span class="stats-numb ng-binding">4</span>
+                            <br> New LCs
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div> -->
     <div class="wrapper-md">
         <!-- stats -->
         <div class="row row-sm">
             <div class="col-md-12">
-                <div class="panel wrapper">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h2 class="second-head">New Bank</h2>
-                        </div>
-                        <div class="col-md-8 text-center">
-                            <div class="row lc-stats">
-                                <div class="col-md-2 pull-right">
-                                    <span class="stats-numb">{{Expiring.length}}</span>
-                                    <br> Expiring
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <span class="stats-numb">{{Update.length}}</span>
-                                    <br> FD Update
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <span class="stats-numb">{{Frozen.length}}</span>
-                                    <br> Frozen
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
-                                    <br> Amended</span>
-                                    <label class="switch">
-                                        <input ng-model="amendedCustomer" type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
-                                    <br> Reviewed</span>
-                                    <label class="switch">
-                                        <input type="checkbox" ng-model="reviewedCustomer">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                <div class="col-md-2 pull-right">
-                                    <span class="stats-numb">{{New.length}}</span>
-                                    <br> New LCs
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row row-sm">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="panel wrapper">
                             <h2 class="second-head">Sabic International</h2>
                             <span class="font-thin m-t-none m-b  text-muted"><span class="m-l"> • LC Number</span><span class="redcolor">{{letter.lc_number}}</span> • Sales Contract <span class="redcolor">{{letter.contract}}</span>
@@ -59,14 +59,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="panel wrapper no-pad">
-                            <div class="tab-container m-b-none">
+                            <div class="tab-container relative m-b-none">
+                            <div class="text-right action-panle">
+                                            <button class="btn m-b-xs btn-danger pull-left">Preview Email</button>
+                                            <button class="btn m-b-xs btn-default" ng-click="submitDraft()">Save Draft</button>
+                                            <button href data-toggle="tab" data-target="#tab_2" class="btn m-b-xs btn-success">Next </button>
+                                            <button class="btn m-b-xs btn-success" ng-click="updateLetter()">Confirm</button>
+                                            <button href data-toggle="tab" data-target="#tab_1" class="btn m-b-xs btn-dark">Cancel</button>
+                                        </div>
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href data-toggle="tab" data-target="#tab_1"><h2 class="second-head">Checklist & Action Center</h2></a></li>
                                     <li><a href data-toggle="tab" data-target="#tab_2"><h2 class="second-head">Review Summary</h2></a></li>
                                 </ul>
-                                <div class="tab-content pad-25" style="overflow-y: scroll; height: 557px; overflow-x: hidden;">
+                                <div class="tab-content pad-25" style="overflow-y: scroll; height: 534px; overflow-x: hidden; margin-bottom: 43px !important;">
                                     <div class="tab-pane active" id="tab_1">
                                         <table class="table m-b-none table-expandable">
                                             <thead>
@@ -84,8 +91,7 @@
                                                     <td>{{clause.swift_code}}</td>
                                                     <td>{{clause.field_description}}
                                                         <br>
-                                                        <br>
-                                                        <div class="inline-block float-right">
+                                                        <div class="inline-block m-t-s">
                                                             <div class="inline-block"><a href=""><img src="img/amend-tick.png"></a></div>
                                                             <div class="inline-block"><a href=""><img src="img/amend-edit.png"></a></div>
                                                             <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
@@ -93,7 +99,8 @@
                                                     </td>
                                                     <td>{{clause.line_description}}</td>
                                                     <td ng-if="!notes[clause.swift_code]">
-                                                        <a ng-click="approveAmendment(clause)"><img src="img/tick.png" alt="Status"></a>
+                                                        <a ng-click="approveAmendment(clause)"><img src="img/tick-inactive.png" alt="Status"></a>
+                                                        <a href=""><img src="img/tick-active.png" alt="Status"></a>
                                                         <a ng-click="clause.expanded=!clause.expanded"><img src="img/edit.png" alt="Status"></a>
                                                     </td>
                                                     <td ng-if="notes[clause.swift_code]">
@@ -106,28 +113,24 @@
                                                     <div ng-click="clause.expanded = true" ng-if="!clause.expanded" class="table-expandable-arrow"></div>
                                                     </td>
                                                 </tr>
-                                                <tr ng-show="clause.expanded" ng-repeat-end>
+                                                <tr ng-show="clause.expanded" ng-repeat-end class="secondlevel">
                                                     <td></td>
-                                                    <td class="secondlevel">
+                                                    <td colspan="2">
                                                         <div class="full-width">
                                                             <textarea ng-model="references[clause.swift_code]" class="full-width" rows="5" placeholder="Add Note"></textarea>
                                                         </div>
-                                                        <div class="full-width">
+                                                        <div class="full-width m-t">
                                                             <button class="btn m-b-xs w-xs btn-success" ng-click="editAmendment(clause)">Add Note</button>
                                                             <button ng-click="clause.expanded = false" class="btn m-b-xs w-xs btn-dark">Cancel</button>
                                                         </div>
                                                     </td>
                                                     <td></td>
                                                     <td></td>
-                                                    <td></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                         <hr>
-                                        <div class="text-right">
-                                            <button class="btn m-b-xs btn-default" ng-click="submitDraft()">Save Draft</button>
-                                            <button href data-toggle="tab" data-target="#tab_2" class="btn m-b-xs btn-success">Next </button>
-                                        </div>
+                                        
                                     </div>
                                     <div class="tab-pane" id="tab_2">
                                         <div class="row summery">
@@ -167,14 +170,6 @@
                                                     </tbody>
                                                 </table>
                                             </div>
-                                        </div>
-                                        <div class="action-section m-t">
-                                          <button class="btn m-b-xs btn-danger">Preview Email</button>
-                                          <div class="pull-right">
-                                            <button class="btn m-b-xs btn-success" ng-click="updateLetter()">Confirm</button>
-                                          <button class="btn m-b-xs btn-default">Save Draft</button>
-                                          <button href data-toggle="tab" data-target="#tab_1" class="btn m-b-xs btn-dark">Cancel</button>
-                                          </div>
                                         </div>
                                     </div>
                                 </div>
