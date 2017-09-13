@@ -36,7 +36,7 @@ app.controller('customerListCtrl', function($scope, customers, userFactory, $sta
         2: 'Reviewed',
         3: 'Amended',
         4: 'Frozen',
-        5: 'Pending Update'
+        5: 'Revised'
     }
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
@@ -45,6 +45,7 @@ app.controller('customerListCtrl', function($scope, customers, userFactory, $sta
             $scope.Reviewed = []
             $scope.Amended = []
             $scope.Frozen = []
+            $scope.Revised = []
             $scope.Update = []
             $scope.letters = letters
                 //set states

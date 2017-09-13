@@ -42,7 +42,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         2: 'Reviewed',
         3: 'Amended',
         4: 'Frozen',
-        5: 'Pending Update'
+        5: 'Revised'
     }
     $scope.countryFilter = {
         name: "All"
@@ -71,6 +71,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.Amended = []
         $scope.Frozen = []
         $scope.Update = []
+        $scope.Revised = []
         $scope.amendedCustomer = 0
         $scope.amendedElite = 0
         $scope.reviewedCustomer = 0
@@ -84,13 +85,14 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.Frozen.forEach(frozen => {
             if (frozen.finDoc === 0) $scope.Update.push(frozen)
         })
+        $scope.Amended = $scope.Amended.concat($scope.Revised)
         $scope.Amended.forEach(amended => {
-            if (amended.approved[0] == "0") $scope.amendedCustomer++
-                if (amended.approved[1] == "0") $scope.amendedElite++
+            if (!amended.clientApproved) $scope.amendedCustomer += 1
+            if (!amended.business_approved) $scope.amendedElite += 1
         })
         $scope.Reviewed.forEach(reviewed => {
-            if (reviewed.approved[0] == "0") $scope.reviewedCustomer++
-                if (reviewed.approved[1] == "0") $scope.reviewedElite++
+            if (!reviewed.clientApproved) $scope.reviewedCustomer += 1
+            if (!reviewed.business_approved) $scope.reviewedElite += 1
         })
     }
     $scope.filter = () => {
@@ -99,6 +101,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.Amended = []
         $scope.Frozen = []
         $scope.Update = []
+        $scope.Revised = []
         $scope.amendedCustomer = 0
         $scope.amendedElite = 0
         $scope.reviewedCustomer = 0
@@ -140,14 +143,15 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.Frozen.forEach(frozen => {
             if (frozen.finDoc === 0) $scope.Update.push(frozen)
         })
+        $scope.Amended = $scope.Amended.concat($scope.Revised)
         $scope.Amended.forEach(amended => {
-            if (amended.approved[0] == "0") $scope.amendedCustomer++
-                if (amended.approved[1] == "0") $scope.amendedElite++
+            if (!amended.clientApproved) $scope.amendedCustomer += 1
+            if (!amended.business_approved) $scope.amendedElite += 1
         })
         $scope.Reviewed.forEach(reviewed => {
             console.log(reviewed)
-            if (reviewed.approved[0] == "0") $scope.reviewedCustomer++
-                if (reviewed.approved[1] == "0") $scope.reviewedElite++
+            if (!reviewed.clientApproved) $scope.reviewedCustomer += 1
+            if (!reviewed.business_approved) $scope.reviewedElite += 1
         })
 
     }

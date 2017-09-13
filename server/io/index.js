@@ -11,7 +11,10 @@ module.exports = function(server) {
     io.on('connection', function(Socket) {
         //whiteboard events
         Socket.on('logon', user => {
-            onlineUsers[Socket.id] = user
+            onlineUsers[user.id] = {
+                sid: Socket.id,
+                user: user
+            }
             io.to(Socket.id).emit('identity', Socket.id)
             Socket.emit('ChatList', onlineUsers)
                 // chat

@@ -1276,7 +1276,7 @@ table.table-expandable > tbody > tr div.table-expandable-arrow { background: tra
 table.table-expandable > tbody > tr div.table-expandable-arrow.up { background-position: 0px 0px; }
 table.table-sticky-header th { color: #FFF; background-color: #555; }
 /*expandable table css End*/
-.lc-stats div.pull-right:nth-child(5), .lc-stats div.pull-right:nth-child(4) { min-width: 140px; }
+.lc-stats div.pull-right:nth-child(5), .lc-stats div.pull-right:nth-child(6) { min-width: 140px; }
 @media screen and (max-width: 1500px) {
  .lc-stats > div.pull-right{width: 110px;}
 }

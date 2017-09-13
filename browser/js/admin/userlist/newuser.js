@@ -38,15 +38,15 @@ app.controller('newUserCtrl', function($scope, userFactory, $state, $rootScope, 
             $state.go('userlist')
         })
     }
+    $scope.selectedCountries = {}
+    $scope.selectedCustomers = {}
     $scope.state = {
         1: 'New',
         2: 'Reviewed',
         3: 'Amended',
         4: 'Frozen',
-        5: 'Pending Update'
+        5: 'Revised'
     }
-    $scope.selectedCountries = {}
-    $scope.selectedCustomers = {}
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
             $scope.letters = letters
@@ -54,6 +54,7 @@ app.controller('newUserCtrl', function($scope, userFactory, $state, $rootScope, 
             $scope.Reviewed = []
             $scope.Amended = []
             $scope.Frozen = []
+            $scope.Revised = []
             $scope.Update = []
             $scope.letters = letters
                 //set states

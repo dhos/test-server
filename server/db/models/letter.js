@@ -13,10 +13,12 @@ module.exports = db.define('letter', {
         defaultValue: []
     },
     commercial_notes: {
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        defaultValue: {}
     },
     business_notes: {
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        defaultValue: {}
     },
     date: {
         type: Sequelize.DATE
@@ -54,10 +56,7 @@ module.exports = db.define('letter', {
     archived: {
         type: Sequelize.BOOLEAN
     },
-    client_draft: {
-        type: Sequelize.BOOLEAN
-    },
-    business_draft: {
+    draft: {
         type: Sequelize.BOOLEAN
     },
     client_approved: {
