@@ -8,6 +8,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('newBankCtrl', function($scope, bankFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
+
     $scope.createBank = (bank) => {
         bankFactory.createBank(bank).then(bank => {
             $state.go('banklist')
