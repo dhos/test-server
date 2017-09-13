@@ -99,8 +99,8 @@ a.list-group-item:hover, a.list-group-item:focus, a.list-group-item.hover { back
 .panel-default > .panel-heading, .panel-default > .panel-footer { border-color: #edf1f2; }
 .panel-group .panel-heading + .panel-collapse .panel-body { border-top: 1px solid #eaedef; }
 .table > tbody > tr > th, .table > tfoot > tr > th, .table > tbody > tr > td,
-.table > tfoot > tr > td { padding: 8px 15px; border-top: 1px solid #eaeff0; }
-.table > thead > tr > th { padding: 8px 15px; border-bottom: 1px solid #eaeff0; }
+.table > tfoot > tr > td { padding: 8px 10px; border-top: 1px solid #eaeff0; }
+.table > thead > tr > th { padding: 8px 10px; border-bottom: 1px solid #eaeff0; }
 .table-bordered { border-color: #eaeff0; }
 .table-bordered > tbody > tr > td { border-color: #eaeff0; }
 .table-bordered > thead > tr > th { border-color: #eaeff0; }

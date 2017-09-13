@@ -78,9 +78,8 @@
                                                     <th>SWIFT</th>
                                                     <th width="25%">Field Description</th>
                                                     <th width="50%">Line Description
-                                                    <th>Commercial</th>
+                                                    <th>Type</th>
                                                     <th>Status</th>
-                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -96,7 +95,7 @@
                                                         </div>
                                                     </td>
                                                     <td>{{clause.line_description}}</td>
-                                                    <td>{{clause.commercial}}</td>
+                                                    <td>{{(clause.commercial)?'Com':'Non-Com'}}</td>
                                                     <td ng-if="clause.status ==null">
                                                         <a ng-click="approve(clause)"><img src="img/tick.png" alt="Status"></a>
                                                         <a ng-click="clause.expanded=!clause.expanded"><img src="img/edit.png" alt="Status"></a>
@@ -106,10 +105,10 @@
                                                         <a ng-if="clause.status == 2" ng-click="unammend(clause)"><img src="img/edit.png" alt="Status"></a>
                                                     </td>
                                                     
-                                                    <td>
+<!--                                                     <td>
                                                     <div ng-click="clause.expanded = false" ng-if="clause.expanded" class="table-expandable-arrow up"></div>
                                                     <div ng-click="clause.expanded = true" ng-if="!clause.expanded" class="table-expandable-arrow"></div>
-                                                    </td>
+                                                    </td> -->
                                                 </tr>
                                                 <tr ng-show="clause.expanded" ng-repeat-end>
                                                     <td></td>
