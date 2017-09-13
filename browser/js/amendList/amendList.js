@@ -49,18 +49,27 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
             $scope.cspUsers[user.id] = user.username
         })
     })
+    $scope.clients = {}
+    userFactory.getUsers({
+        role: 0
+    }).then(clients => {
+        clients.forEach(client => {
+            $scope.clients[client.id] = client.username
+        })
+    })
     $scope.letters = amended
     $scope.transition = (lc_number) => {
         $state.go('amendLc', {
             lc_number: lc_number
         })
     }
+
     $scope.state = {
         1: 'New',
         2: 'Reviewed',
         3: 'Amended',
         4: 'Frozen',
-        5: 'Pending Update'
+        5: 'Revised'
     }
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
@@ -68,6 +77,7 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
             $scope.New = []
             $scope.Reviewed = []
             $scope.Amended = []
+            $scope.Revised = []
             $scope.Frozen = []
             $scope.Update = []
             $scope.letters = letters

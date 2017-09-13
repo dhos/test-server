@@ -15,11 +15,12 @@ app.config(function($stateProvider) {
 
 app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, bankFactory, letter, $state, LETTER_EVENTS, $rootScope) => {
     $scope.letter = letter
-    console.log($scope.letter)
     $scope.updateLc = () => {
-        $scope.letter.amendedCount++
-            $scope.letter.state = 3
-        $scope.approved = "00"
+        $scope.letter.state = 5
+        $scope.business_approved = false
+        $scope.client_approved = false
+        $scope.commercial_notes = {}
+        $scope.business_notes = {}
         lcFactory.updateLetterFile($scope.letter, $scope.updatedFile).then(letter => {
             $state.go('singleLc', {
                 lc_number: letter.lc_number

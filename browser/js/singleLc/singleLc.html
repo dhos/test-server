@@ -10,29 +10,33 @@
                         <div class="col-md-4">
                             <h2 class="second-head">New Bank</h2>
                         </div>
-                        <div class="col-md-8 text-center">
-                            <div class="row lc-stats">
-                                <div class="col-md-2 pull-right">
+                       <div class="text-center">
+                            <div class="lc-stats row">
+                                <div class="col-md-1 pull-right">
                                     <span class="stats-numb">{{Expiring.length}}</span>
                                     <br> Expiring
                                 </div>
-                                <div class="col-md-2 pull-right">
+                                <div class="col-md-1 pull-right">
                                     <span class="stats-numb">{{Update.length}}</span>
                                     <br> FD Update
                                 </div>
-                                <div class="col-md-2 pull-right">
+                                <div class="col-md-1 pull-right">
                                     <span class="stats-numb">{{Frozen.length}}</span>
                                     <br> Frozen
                                 </div>
-                                <div class="col-md-2 pull-right">
+                                <div class="col-md-1 pull-right">
                                     <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
                                     <br> Amended</span>
+                                </div>
+                                <div class="col-md-1 pull-right">
+                                    <span style="display: inline-block;"><span class="stats-numb">{{Revised.length}}</span>
+                                    <br> Revised</span>
                                     <label class="switch">
-                                        <input ng-model="amendedCustomer" type="checkbox">
+                                        <input type="checkbox" ng-model="revisedCustomer">
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <div class="col-md-2 pull-right">
+                                <div class="col-md-1 pull-right">
                                     <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
                                     <br> Reviewed</span>
                                     <label class="switch">
@@ -40,7 +44,7 @@
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
-                                <div class="col-md-2 pull-right">
+                                <div class="col-md-1 pull-right">
                                     <span class="stats-numb">{{New.length}}</span>
                                     <br> New LCs
                                 </div>
@@ -49,7 +53,7 @@
                     </div>
                 </div>
                 <div class="row row-sm">
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="panel wrapper">
                             <h2 class="second-head">Sabic International</h2>
                             <span class="font-thin m-t-none m-b  text-muted"><span class="m-l"> • LC Number</span><span class="redcolor">{{letter.lc_number}}</span> • Sales Contract <span class="redcolor">{{letter.contract}}</span>
@@ -59,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="panel wrapper no-pad">
                             <div class="tab-container m-b-none">
                                 <ul class="nav nav-tabs">
@@ -74,8 +78,8 @@
                                                     <th>SWIFT</th>
                                                     <th width="25%">Field Description</th>
                                                     <th width="50%">Line Description
+                                                    <th>Commercial</th>
                                                     <th>Status</th>
-                                                    <th>Last Change</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -92,15 +96,16 @@
                                                         </div>
                                                     </td>
                                                     <td>{{clause.line_description}}</td>
-                                                    <td ng-if="!notes[clause.swift_code]">
-                                                        <a ng-click="approveAmendment(clause)"><img src="img/tick.png" alt="Status"></a>
+                                                    <td>{{clause.commercial}}</td>
+                                                    <td ng-if="clause.status ==null">
+                                                        <a ng-click="approve(clause)"><img src="img/tick.png" alt="Status"></a>
                                                         <a ng-click="clause.expanded=!clause.expanded"><img src="img/edit.png" alt="Status"></a>
                                                     </td>
-                                                    <td ng-if="notes[clause.swift_code]">
-                                                        <a ng-if="notes[clause.swift_code].status == 1"><img src="img/tick.png" alt="Status"></a>
-                                                        <a ng-click="clause.expanded=!clause." ng-if="notes[clause.swift_code].status == 2"><img src="img/edit.png" alt="Status"></a>
+                                                    <td ng-if="clause.status">
+                                                        <a ng-if="clause.status ==1" ng-click="unapprove(clause)"><img src="img/tick.png" alt="Status"></a>
+                                                        <a ng-if="clause.status == 2" ng-click="unammend(clause)"><img src="img/edit.png" alt="Status"></a>
                                                     </td>
-                                                    <td>{{clause.updatedAt | date:'longDate'}}</td>
+                                                    
                                                     <td>
                                                     <div ng-click="clause.expanded = false" ng-if="clause.expanded" class="table-expandable-arrow up"></div>
                                                     <div ng-click="clause.expanded = true" ng-if="!clause.expanded" class="table-expandable-arrow"></div>
@@ -110,10 +115,10 @@
                                                     <td></td>
                                                     <td class="secondlevel">
                                                         <div class="full-width">
-                                                            <textarea ng-model="references[clause.swift_code]" class="full-width" rows="5" placeholder="Add Note"></textarea>
+                                                            <textarea ng-model="clause.note" class="full-width" rows="5" placeholder="Add Note"></textarea>
                                                         </div>
                                                         <div class="full-width">
-                                                            <button class="btn m-b-xs w-xs btn-success" ng-click="editAmendment(clause)">Add Note</button>
+                                                            <button class="btn m-b-xs w-xs btn-success" ng-click="ammend(clause)">Add Note</button>
                                                             <button ng-click="clause.expanded = false" class="btn m-b-xs w-xs btn-dark">Cancel</button>
                                                         </div>
                                                     </td>

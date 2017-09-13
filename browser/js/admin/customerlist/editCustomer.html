@@ -5,29 +5,33 @@
                 <div class="col-md-4">
                     <h2 class="second-head">Edit Customer</h2>
                 </div>
-                <div class="col-md-8 text-center">
-                    <div class="row lc-stats">
-                        <div class="col-md-2 pull-right">
+                <div class="text-center">
+                    <div class="lc-stats row">
+                        <div class="col-md-1 pull-right">
                             <span class="stats-numb">{{Expiring.length}}</span>
                             <br> Expiring
                         </div>
-                        <div class="col-md-2 pull-right">
+                        <div class="col-md-1 pull-right">
                             <span class="stats-numb">{{Update.length}}</span>
                             <br> FD Update
                         </div>
-                        <div class="col-md-2 pull-right">
+                        <div class="col-md-1 pull-right">
                             <span class="stats-numb">{{Frozen.length}}</span>
                             <br> Frozen
                         </div>
-                        <div class="col-md-2 pull-right">
+                        <div class="col-md-1 pull-right">
                             <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
                             <br> Amended</span>
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <span style="display: inline-block;"><span class="stats-numb">{{Revised.length}}</span>
+                            <br> Revised</span>
                             <label class="switch">
-                                <input ng-model="amendedCustomer" type="checkbox">
+                                <input type="checkbox" ng-model="revisedCustomer">
                                 <span class="slider round"></span>
                             </label>
                         </div>
-                        <div class="col-md-2 pull-right">
+                        <div class="col-md-1 pull-right">
                             <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
                             <br> Reviewed</span>
                             <label class="switch">
@@ -35,7 +39,7 @@
                                 <span class="slider round"></span>
                             </label>
                         </div>
-                        <div class="col-md-2 pull-right">
+                        <div class="col-md-1 pull-right">
                             <span class="stats-numb">{{New.length}}</span>
                             <br> New LCs
                         </div>

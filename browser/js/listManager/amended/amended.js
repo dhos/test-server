@@ -11,18 +11,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('amendedCtrl', ($scope, lcFactory, letters, $state) => {
-    console.log($scope.Amended)
-    $scope.$watch('amendedCustomer', (nv, ov) => {
-        if (nv === true) {
-            $scope.displayLetters = $scope.Amended.filter(letter => {
-                return letter.approved[0] === '0'
-            })
-        } else {
-            $scope.displayLetters = $scope.Amended.filter(letter => {
-                return letter.approved[1] === '0'
-            })
-        }
-    })
+    $scope.displayLetters = $scope.Amended
     $scope.transition = (lc_number) => {
         $state.go('singleLc', {
             lc_number: lc_number

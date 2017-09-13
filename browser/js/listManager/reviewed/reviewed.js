@@ -15,11 +15,11 @@ app.controller('reviewedCtrl', ($scope, lcFactory, letters, $state) => {
     $scope.$watch('reviewedCustomer', (nv, ov) => {
         if (nv === true) {
             $scope.displayLetters = $scope.Reviewed.filter(letter => {
-                return letter.approved[0] === '0'
+                return letter.client_approved
             })
         } else {
             $scope.displayLetters = $scope.Reviewed.filter(letter => {
-                return letter.approved[1] === '0'
+                return letter.business_approved
             })
         }
     })

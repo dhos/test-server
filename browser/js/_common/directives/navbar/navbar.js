@@ -41,13 +41,14 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                 2: 'Reviewed',
                 3: 'Amended',
                 4: 'Frozen',
-                5: 'Pending Update'
+                5: 'Revised'
             }
             var refreshLetters = () => {
                 lcFactory.getLetters({}).then(letters => {
                     scope.letters = letters
                     scope.New = []
                     scope.Reviewed = []
+                    scope.Revised = []
                     scope.Amended = []
                     scope.Frozen = []
                     scope.Update = []

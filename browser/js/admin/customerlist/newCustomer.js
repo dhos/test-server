@@ -15,13 +15,12 @@ app.controller('newCustomerCtrl', function($scope, userFactory, $state, $rootSco
         })
     }
     $scope.state = {
-            1: 'New',
-            2: 'Reviewed',
-            3: 'Amended',
-            4: 'Frozen',
-            5: 'Pending Update'
-        }
-        //why does caps matter
+        1: 'New',
+        2: 'Reviewed',
+        3: 'Amended',
+        4: 'Frozen',
+        5: 'Revised'
+    }
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
             $scope.letters = letters
@@ -29,6 +28,7 @@ app.controller('newCustomerCtrl', function($scope, userFactory, $state, $rootSco
             $scope.Reviewed = []
             $scope.Amended = []
             $scope.Frozen = []
+            $scope.Revised = []
             $scope.Update = []
             $scope.letters = letters
                 //set states

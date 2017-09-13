@@ -23,9 +23,9 @@ fs.createReadStream(sample)
     .on('end', () => {
         //organizeData(csvData)
         makeUsers()
-        makeCountries()
+            // makeCountries()
             // makeBanks()
-        makeClauses()
+            // makeClauses()
 
     })
 
@@ -144,34 +144,28 @@ var makeCustomers = () => {
     })
 }
 var makeUsers = () => {
-    var users = {
-        JENY: 1,
-        THINHA: 2,
-        ANURAG: 3,
-        SURYA: 4,
-        SANJEEV: 5,
-        NAVDEEP: 6,
-        GAURAV: 7,
-        VIPIN: 8,
-        SHEETAL: 9
-    }
-    for (var key of Object.keys(users)) {
-        User.create({
-            username: key,
-            password: "test",
-            role: Math.ceil(Math.random() * 2)
-        })
-    }
+    // var users = {
+    //     JENY: 1,
+    //     THINHA: 2,
+    //     ANURAG: 3,
+    //     SURYA: 4,
+    //     SANJEEV: 5,
+    //     NAVDEEP: 6,
+    //     GAURAV: 7,
+    //     VIPIN: 8,
+    //     SHEETAL: 9
+    // }
+    // for (var key of Object.keys(users)) {
+    //     User.create({
+    //         username: key,
+    //         password: "test",
+    //         role: Math.ceil(Math.random() * 2)
+    //     })
+    // }
     User.create({
-        username: 'test',
-        password: 'test',
+        username: 'admin',
+        password: 'admin',
         role: 4
-    })
-    User.create({
-        username: 'Sabic',
-        password: 'test',
-        role: 0,
-
     })
 }
 
