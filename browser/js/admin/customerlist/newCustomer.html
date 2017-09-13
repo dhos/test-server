@@ -53,29 +53,61 @@
         <div class="row row-sm">
             <div class="col-md-12">
                 <div class="panel padder-v item">
-                    <form class="bs-example form-horizontal">
+                    <form name="cus_form" class="bs-example form-horizontal" novalidate>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Username</label>
                             <div class="col-lg-6">
-                                <input ng-model="user.username" type="input" class="form-control" >
+                                <input name="cus_username" ng-model="user.username" type="input" class="form-control" required>
+                                <span ng-show="cus_form.cus_username.$error.required && cus_form.cus_username.$dirty">
+                                  Name is required.
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Password</label>
                             <div class="col-lg-6">
-                                <input ng-model="user.password" type="password" class="form-control" >
+                                <input name="cus_password" ng-model="user.password" type="password" class="form-control"
+                                 ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/">
+                                <span ng-show="cus_form.cus_password.$error.required && cus_form.cus_password.$dirty">
+                                  Password is required.
+                                </span>
+                                <span ng-show="!cus_form.cus_password.$error.required &&
+                                  (cus_form.cus_password.$error.minlength || cus_form.cus_password.$error.maxlength) && cus_form.cus_password.$dirty">
+                                  Passwords must be between 8 and 20 characters.</span>
+                                <span ng-show="!cus_form.cus_password.$error.required &&
+                                  !cus_form.cus_password.$error.minlength && !cus_form.cus_password.$error.maxlength &&
+                                  cus_form.cus_password.$error.pattern && cus_form.cus_password.$dirty">
+                                  Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Contact Number</label>
                             <div class="col-lg-6">
-                                <input type="input" ng-model="user.number" class="form-control" value="Phone Number">
+                                <input type="number"
+                                  ng-minlength="10"
+                                  ng-maxlength="10"
+                                  name="cus_num" ng-model="user.number"
+                                  class="form-control phone-number" value="Phone Number" required>
+                                <span ng-show="cus_form.cus_num.$error.number">
+                                  Please enter a valid phone number.
+                                </span>
+                                <span ng-show="((cus_form.cus_num.$error.minlength ||
+                                   cus_form.cus_num.$error.maxlength) &&
+                                   cus_form.cus_num.$dirty) ">
+                                   phone number should be 10 digits
+                              </span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Email Address</label>
                             <div class="col-lg-6">
-                                <input ng-model="user.email" type="email" class="form-control">
+                                <input name="email" ng-model="user.email" type="email" class="form-control" required>
+                                <span ng-show="cus_form.email.$error.required && cus_form.email.$dirty">
+                                  Email is required.
+                                </span>
+                                <span ng-show="!cus_form.email.$error.required && cus_form.email.$dirty && cus_form.email.$error.email">
+                                  Invalid email
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -119,7 +151,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button ng-click="createUser(user)" class="btn m-b-xs btn-success">Save</button>
+                                <button ng-click="makeUser(user)" ng-disabled="!cus_form.$valid" class="btn m-b-xs btn-success">Save</button>
                                 <a ui-sref="customerList" class="btn m-b-xs w-xs btn-dark">Cancel</a>
                             </div>
                         </div>

@@ -8,7 +8,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('newCustomerCtrl', function($scope, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
-    $scope.createUser = (user) => {
+    $scope.makeUser = (user) => {
         user.role = 0
         userFactory.createUser(user).then(user => {
             $state.go('customerList')
