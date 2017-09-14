@@ -29,6 +29,8 @@ app.controller('landingCtrl', function($scope, AuthService, userFactory, $state)
             AuthService.login(login)
         })
     }
+
+    console.log(jQuery('body'))
     $scope.sendLogin = function(loginInfo) {
 
         $scope.error = null;
