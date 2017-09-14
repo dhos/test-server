@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('editBank', {
-        templateUrl: 'js/admin/banklist/editBank.html',
+        templateUrl: 'js/admin/banklist/newbank.html',
         controller: 'editBankCtrl',
         url: '/editBank/:bankId',
         resolve: {
@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('editBankCtrl', function($scope, bankFactory, $state, bank, $rootScope, lcFactory) {
+app.controller('editBankCtrl', function($scope, bankFactory, $state, bank, $rootScope, LETTER_EVENTS,lcFactory) {
     $scope.bank = bank
     $scope.updateBank = (bank) => {
         bankFactory.updateBank(bank).then(bank => {

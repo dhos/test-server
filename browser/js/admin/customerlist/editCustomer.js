@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('editCustomer', {
-        templateUrl: 'js/admin/customerList/editCustomer.html',
+        templateUrl: 'js/admin/customerList/newCustomer.html',
         controller: 'editCustomerCtrl',
         url: '/editCustomer/:userId',
         resolve: {
@@ -16,7 +16,7 @@ app.config(function($stateProvider) {
 
 app.controller('editCustomerCtrl', function($scope, userFactory, $state, user, $rootScope, LETTER_EVENTS, lcFactory) {
     $scope.user = user
-    $scope.updateUser = (user) => {
+    $scope.makeUser = (user) => {
         userFactory.updateUser(user).then(user => {
             $state.go('customerList')
         })

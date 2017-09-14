@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('editUser', {
-        templateUrl: 'js/admin/userlist/editUser.html',
+        templateUrl: 'js/admin/userlist/newuser.html',
         controller: 'editUserCtrl',
         url: '/editUser/:userId',
         resolve: {
@@ -37,7 +37,7 @@ app.controller('editUserCtrl', function($scope, userFactory, $state, user, $root
     $scope.user.customers.forEach(customer => {
         $scope.selectedCustomers[customer] = true
     })
-    $scope.updateUser = (user) => {
+    $scope.makeUser = (user) => {
         user.countries = []
         user.customers = []
         for (let key of Object.keys($scope.selectedCountries)) {
