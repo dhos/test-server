@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat-start="letter in letters track by $index">
+        <tr ng-repeat-start="letter in letters track by $index" ng-click="letter.expanded=!letter.expanded">
             <td>{{letter.lc_number}}</td>
             <td>{{letter.date | date:'shortDate'}}</td>
             <td>{{letter.expire | date:'shortDate'}}</td>
