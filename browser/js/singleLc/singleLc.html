@@ -85,7 +85,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat-start="clause in clauses">
+                                                <tr ng-repeat-start="clause in clauses track by $index">
                                                     <td>{{clause.swift_code}}</td>
                                                     <td>{{clause.field_description}}
                                                         <!-- <br>
@@ -96,7 +96,9 @@
                                                             <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
                                                         </div> -->
                                                     </td>
-                                                    <td>{{clause.line_description}}</td>
+                                                    <td>{{clause.line_description}}
+                                                    </td>
+                                                    
                                                     <td>{{(clause.commercial)?'Com':'Non-Com'}}</td>
                                                     <td ng-if="clause.status ==null">
                                                         <a ng-click="approve(clause)"><img src="img/tick-inactive.png" alt="Status"></a>

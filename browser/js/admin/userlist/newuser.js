@@ -23,7 +23,7 @@ app.config(function($stateProvider) {
 app.controller('newUserCtrl', function($scope, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, countries, customers) {
     $scope.countries = countries
     $scope.customers = customers
-    $scope.createUser = (user) => {
+    $scope.makeUser = (user) => {
         user.countries = []
         user.customers = []
         for (let key of Object.keys($scope.selectedCountries)) {

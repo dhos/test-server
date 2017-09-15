@@ -3,8 +3,8 @@
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
                 <div class="col-md-3">
-                    <h2 class="second-head">New Customer</h2>
-                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="customerList"> Customers</a> <i class="fa fa-angle-right br-gap"></i> New Customer</small>
+                    <h2 class="second-head">Customer</h2>
+                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="customerList"> Customers</a> <i class="fa fa-angle-right br-gap"></i> Customer</small>
                 </div>
                 <div class="col-md-9 text-center">
                     <div class="lc-stats row">
@@ -54,9 +54,9 @@
         <div class="row row-sm">
             <div class="col-md-12">
                 <div class="panel padder-v item">
-                    <form class="bs-example form-horizontal">
+                    <form name="cus_form" class="bs-example form-horizontal" novalidate>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label">Username</label>
+                            <label class="col-lg-2 control-label">Name</label>
                             <div class="col-lg-6">
                                 <input name="cus_username" ng-model="user.name" type="input" class="form-control" required>
                                 <span ng-show="cus_form.cus_username.$error.required && cus_form.cus_username.$dirty">
@@ -85,7 +85,13 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Email Address</label>
                             <div class="col-lg-6">
-                                <input ng-model="user.email" type="email" class="form-control">
+                                <input name="email" ng-model="user.email" type="email" class="form-control" required>
+                                <span ng-show="cus_form.email.$error.required && cus_form.email.$dirty">
+                                  Email is required.
+                                </span>
+                                <span ng-show="!cus_form.email.$error.required && cus_form.email.$dirty && cus_form.email.$error.email">
+                                  Invalid email
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -129,7 +135,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button ng-click="createUser(user)" class="btn m-b-xs btn-success">Save</button>
+                                <button ng-click="makeUser(user)" ng-disabled="!cus_form.$valid" class="btn m-b-xs btn-success">Save</button>
                                 <a ui-sref="customerList" class="btn m-b-xs w-xs btn-dark">Cancel</a>
                             </div>
                         </div>

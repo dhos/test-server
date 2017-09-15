@@ -31,24 +31,23 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     $scope.client = $scope.user.role === 2
     $scope.manager = $scope.user.manager
 
-    if ($scope.client) $scope.notes = jQuery.extend(true, {}, $scope.letter.commercial_notes)
-    else $scope.notes = $scope.amendments = jQuery.extend(true, {}, $scope.letter.business_notes)
     clauseFactory.getClauses({
         country: $scope.letter.country,
         customer: $scope.letter.client
     }).then(clauses => {
-        $scope.clauses = clauses
+        $scope.clauses = clauses.map(clause => {
+            if (clause.commercial) {
+                if ($scope.letter.commercial_notes[clause.swift_code]) clause = $scope.letter.commercial_notes[clause.swift_code]
+            } else {
+                if ($scope.letter.business_notes[clause.swift_code]) clause = $scope.letter.business_notes[clause.swift_code]
+            }
+            return clause
+        })
         $scope.business_clauses = $scope.clauses.filter(clause => {
             return clause.commercial == false
         })
         $scope.commercial_clauses = $scope.clauses.filter(clause => {
             return clause.commercial == true
-        })
-        $scope.clauses.forEach(clause => {
-            if ($scope.notes[clause.swift_code]) {
-                clause.status = $scope.notes[clause.swift_code].status
-                clause.note = $scope.notes[clause.swift_code].note
-            }
         })
     })
 

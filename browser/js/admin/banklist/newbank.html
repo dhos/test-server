@@ -3,8 +3,8 @@
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
                 <div class="col-md-3">
-                    <h2 class="second-head">New Banks</h2>
-                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="banklist"> Banks</a> <i class="fa fa-angle-right br-gap"></i> New Bank</small>
+                    <h2 class="second-head">Banks</h2>
+                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="banklist"> Banks</a> <i class="fa fa-angle-right br-gap"></i> Bank</small>
                 </div>
                 <div class="col-md-9 text-center">
                     <div class="lc-stats row">
@@ -54,28 +54,40 @@
         <div class="row row-sm">
             <div class="col-md-12">
                 <div class="panel padder-v item">
-                    <form class="bs-example form-horizontal">
+                    <form name="bank_form" class="bs-example form-horizontal" novalidate>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Bank Name</label>
                             <div class="col-lg-6">
-                                <input ng-model="bank.name" type="input" class="form-control">
+                                <input name="bank_name" id="bank_name" ng-model="bank.name" type="input" class="form-control" required>
+                                  <span ng-show="bank_form.bank_name.$error.required && bank_form.bank_name.$dirty">
+                                    Name is required.
+                                  </span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Primary Email Address</label>
                             <div class="col-lg-6">
-                                <input ng-model="bank.primary_email" type="email" class="form-control">
+                                <input name="prim_email" ng-model="bank.primary_email" type="email" class="form-control" required>
+                                <span ng-show="bank_form.prim_email.$error.required && bank_form.prim_email.$dirty">
+                                  Primary email is required.
+                                </span>
+                                <span ng-show="!bank_form.prim_email.$error.required && bank_form.prim_email.$dirty && bank_form.prim_email.$error.email">
+                                  Invalid email
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Secondary Email Address</label>
                             <div class="col-lg-6">
-                                <input ng-model="bank.secondary_email" type="email" class="form-control">
+                                <input name="sec_email" ng-model="bank.secondary_email" type="email" class="form-control">
+                                <span ng-show="!bank_form.sec_email.$error.required && bank_form.sec_email.$dirty && bank_form.sec_email.$error.email">
+                                  Invalid email
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button ng-click="createBank(bank)" class="btn m-b-xs btn-success">Save</button>
+                                <button type="submit" ng-disabled="!bank_form.$valid" ng-click="createBank(bank)" class="btn m-b-xs btn-success">Save</button>
                                 <a ui-sref="banklist" class="btn m-b-xs w-xs btn-dark">Cancel</a>
                             </div>
                         </div>
