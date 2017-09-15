@@ -1,58 +1,59 @@
 <!-- main -->
 <div class="col-md-12">
     <!-- main header -->
+    <div class="bg-light lter wrapper-md">
+        <div class="row title-space">
+                <div class="col-md-3">
+                    <h2 class="second-head">Letter of Credit</h2>
+                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="listManager.all"> List Manager</a> <i class="fa fa-angle-right br-gap"></i> Letter of Credit</small>
+                </div>
+                <div class="col-md-9 text-center">
+                    <div class="lc-stats row">
+                        <div class="col-md-1 pull-right">
+                            <span class="stats-numb">{{Expiring.length}}</span>
+                            <br> Expiring
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <span class="stats-numb">{{Update.length}}</span>
+                            <br> FD Update
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <span class="stats-numb">{{Frozen.length}}</span>
+                            <br> Frozen
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
+                            <br> Amended</span>
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <span style="display: inline-block;"><span class="stats-numb">{{Revised.length}}</span>
+                            <br> Revised</span>
+                            <label class="switch">
+                                <input type="checkbox" ng-model="revisedCustomer">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
+                            <br> Reviewed</span>
+                            <label class="switch">
+                                <input type="checkbox" ng-model="reviewedCustomer">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <span class="stats-numb">{{New.length}}</span>
+                            <br> New LCs
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!-- / main header -->
     <div class="wrapper-md">
         <!-- stats -->
         <div class="row row-sm">
             <div class="col-md-12">
-                <div class="panel wrapper">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h2 class="second-head">Letter of Credit</h2>
-                            <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="listManager.all"> List Manager</a> <i class="fa fa-angle-right br-gap"></i> Letter of Credit</small>
-                        </div>
-                       <div class="col-md-9 text-center">
-                            <div class="lc-stats row">
-                                <div class="col-md-1 pull-right">
-                                    <span class="stats-numb">{{Expiring.length}}</span>
-                                    <br> Expiring
-                                </div>
-                                <div class="col-md-1 pull-right">
-                                    <span class="stats-numb">{{Update.length}}</span>
-                                    <br> FD Update
-                                </div>
-                                <div class="col-md-1 pull-right">
-                                    <span class="stats-numb">{{Frozen.length}}</span>
-                                    <br> Frozen
-                                </div>
-                                <div class="col-md-1 pull-right">
-                                    <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
-                                    <br> Amended</span>
-                                </div>
-                                <div class="col-md-1 pull-right">
-                                    <span style="display: inline-block;"><span class="stats-numb">{{Revised.length}}</span>
-                                    <br> Revised</span>
-                                    <label class="switch">
-                                        <input type="checkbox" ng-model="revisedCustomer">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                <div class="col-md-1 pull-right">
-                                    <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
-                                    <br> Reviewed</span>
-                                    <label class="switch">
-                                        <input type="checkbox" ng-model="reviewedCustomer">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                                <div class="col-md-1 pull-right">
-                                    <span class="stats-numb">{{New.length}}</span>
-                                    <br> New LCs
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="row row-sm">
                     <div class="col-md-5">
                         <div class="panel wrapper">
@@ -71,14 +72,14 @@
                                     <li class="active"><a href data-toggle="tab" data-target="#tab_1"><h2 class="second-head">Checklist & Action Center</h2></a></li>
                                     <li><a href data-toggle="tab" data-target="#tab_2"><h2 class="second-head">Review Summary</h2></a></li>
                                 </ul>
-                                <div class="tab-content pad-5" style="overflow-y: scroll; height: 557px; overflow-x: hidden;">
+                                <div class="tab-content pad-5" style="overflow-y: scroll; height: 577px; overflow-x: hidden;">
                                     <div class="tab-pane active" id="tab_1">
                                         <table class="table m-b-none table-expandable">
                                             <thead>
                                                 <tr>
                                                     <th>SWIFT</th>
-                                                    <th width="25%">Field Description</th>
-                                                    <th width="50%">Line Description
+                                                    <th width="35%">Field Description</th>
+                                                    <th width="30%">Line Description
                                                     <th>Type</th>
                                                     <th>Status</th>
                                                 </tr>
@@ -87,24 +88,26 @@
                                                 <tr ng-repeat-start="clause in clauses track by $index">
                                                     <td>{{clause.swift_code}}</td>
                                                     <td>{{clause.field_description}}
+                                                        <!-- <br>
                                                         <br>
-                                                        <br>
-                                                        <div class="inline-block float-right">
+                                                        <div class="inline-block">
                                                             <div class="inline-block"><a href=""><img src="img/amend-tick.png"></a></div>
                                                             <div class="inline-block"><a href=""><img src="img/amend-edit.png"></a></div>
                                                             <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
-                                                        </div>
+                                                        </div> -->
                                                     </td>
                                                     <td>{{clause.line_description}}
                                                     </td>
                                                     
                                                     <td>{{(clause.commercial)?'Com':'Non-Com'}}</td>
                                                     <td ng-if="clause.status ==null">
-                                                        <a ng-click="approve(clause)"><img src="img/tick-active.png" alt="Status"></a>
+                                                        <a ng-click="approve(clause)"><img src="img/tick-inactive.png" alt="Status"></a>
+                                                        <a><img src="img/tick-active.png" alt="Status"></a>
                                                         <a ng-click="clause.expanded=!clause.expanded"><img src="img/edit.png" alt="Status"></a>
                                                     </td>
                                                     <td ng-if="clause.status">
-                                                        <a ng-if="clause.status ==1" ng-click="unapprove(clause)"><img src="img/tick-active.png" alt="Status"></a>
+                                                        <a ng-if="clause.status ==1" ng-click="unapprove(clause)"><img src="img/tick-inactive.png" alt="Status"></a>
+                                                        <a><img src="img/tick-active.png" alt="Status"></a>
                                                         <a ng-if="clause.status == 2" ng-click="unammend(clause)"><img src="img/edit.png" alt="Status"></a>
                                                     </td>
                                                     
@@ -113,20 +116,17 @@
                                                     <div ng-click="clause.expanded = true" ng-if="!clause.expanded" class="table-expandable-arrow"></div>
                                                     </td> -->
                                                 </tr>
-                                                <tr ng-show="clause.expanded" ng-repeat-end>
+                                                <tr  class="secondlevel" ng-show="clause.expanded" ng-repeat-end>
                                                     <td></td>
-                                                    <td class="secondlevel">
-                                                        <div class="full-width">
+                                                    <td colspan="4">
+                                                        <div class="full-width m-b">
                                                             <textarea ng-model="clause.note" class="full-width" rows="5" placeholder="Add Note"></textarea>
                                                         </div>
-                                                        <div class="full-width">
-                                                            <button class="btn m-b-xs w-xs btn-success" ng-click="ammend(clause)">Add Note</button>
+                                                        <div class="full-width m-b">
+                                                            <button class="btn m-b-xs btn-success" ng-click="ammend(clause)">Add Note</button>
                                                             <button ng-click="clause.expanded = false" class="btn m-b-xs w-xs btn-dark">Cancel</button>
                                                         </div>
                                                     </td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -14,7 +14,7 @@ app.factory('customerFactory', function($http, $q) {
             })
     }
 
-    d.getUsers = (query) => {
+    d.getCustomers = (query) => {
         return $http.get('/api/customers/', {
             params: query
         }).then((response) => {

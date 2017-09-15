@@ -40,7 +40,7 @@ router.put('/update', function(req, res, next) {
             id: req.body.id
         }
     }).then(result => {
-        console.log(result)
+        res.json(result)
     }).catch((err) => {
         return next(err)
     })
@@ -49,7 +49,7 @@ router.put('/update', function(req, res, next) {
 router.post('/create', function(req, res, next) {
     var customer = req.body
     Customer.create(customer).then(createdCustomer => {
-        res.json(createdUser)
+        res.json(createdCustomer)
     }).catch(err => {
         next(err)
     })

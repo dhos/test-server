@@ -4,10 +4,8 @@ app.config(function($stateProvider) {
         controller: 'customerListCtrl',
         url: '/customers',
         resolve: {
-            customers: userFactory => {
-                return userFactory.getUsers({
-                    role: 0
-                }).then(customers => {
+            customers: customerFactory => {
+                return customerFactory.getCustomers({}).then(customers => {
                     return customers
                 })
             }
@@ -17,6 +15,7 @@ app.config(function($stateProvider) {
 
 app.controller('customerListCtrl', function($scope, customers, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
     $scope.customers = customers
+    console.log($scope.customers)
     $scope.deleteUser = (UserId, index) => {
         $scope.customers.splice(index, 1)
         userFactory.deleteUser({

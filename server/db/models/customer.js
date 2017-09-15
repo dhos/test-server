@@ -5,7 +5,7 @@ var db = require('../_db');
 
 module.exports = db.define('customer', {
     name: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
     },
     email: {
         type: Sequelize.STRING
@@ -18,5 +18,9 @@ module.exports = db.define('customer', {
     },
     website: {
         type: Sequelize.STRING
+    },
+    clients: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
+        defaultValue: []
     }
 });

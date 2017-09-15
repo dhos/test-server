@@ -4,20 +4,22 @@ app.config(function($stateProvider) {
         controller: 'editCustomerCtrl',
         url: '/editCustomer/:userId',
         resolve: {
-            user: (userFactory, $stateParams) => {
-                return userFactory.getSingleUser($stateParams.userId).then(user => {
+            customer: (customerFactory, $stateParams) => {
+                return customerFactory.getSingleCustomer($stateParams.userId).then(customer => {
                     //remember to shortcircuit if it's not a customer
-                    return user
+                    return customer
                 })
             },
         }
     })
 });
 
-app.controller('editCustomerCtrl', function($scope, userFactory, $state, user, $rootScope, LETTER_EVENTS, lcFactory) {
-    $scope.user = user
+app.controller('editCustomerCtrl', function($scope, customerFactory, $state, customer, $rootScope, LETTER_EVENTS, lcFactory) {
+    $scope.user = customer
+    $scope.user.number = Number($scope.user.number)
+    console.log($scope.user)
     $scope.makeUser = (user) => {
-        userFactory.updateUser(user).then(user => {
+        customerFactory.updateCustomer(user).then(user => {
             $state.go('customerList')
         })
     }

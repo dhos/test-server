@@ -58,7 +58,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Name</label>
                             <div class="col-lg-6">
-                                <input name="cus_username" ng-model="user.username" type="input" class="form-control" required>
+                                <input name="cus_username" ng-model="user.name" type="input" class="form-control" required>
                                 <span ng-show="cus_form.cus_username.$error.required && cus_form.cus_username.$dirty">
                                   Name is required.
                                 </span>
@@ -78,7 +78,7 @@
                                 <span ng-show="((cus_form.cus_num.$error.minlength ||
                                    cus_form.cus_num.$error.maxlength) &&
                                    cus_form.cus_num.$dirty) ">
-                                   phone number should be 10 digits
+                                   Phone number should be 10 digits
                               </span>
                             </div>
                         </div>
