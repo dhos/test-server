@@ -51,12 +51,15 @@
     <!-- / main header -->
     <div class="wrapper-md">
         <!-- stats -->
-        <div class="row row-sm">
+        <div class="row row-sm dashboard-stats">
             <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
                 <a href="new-lcs.html">
                     <div class="panel padder-v item">
-                        <div class="h1 text-info h1">{{New.length}}</div>
-                        <span class="text-muted text-base">New LCs</span>
+                        <div class="mainstatscol">
+                            <div class="h1 text-info h1">{{New.length}}</div>
+                            <span class="text-muted text-base">New LCs</span>
+                        </div>
+                        
                         <div class="top text-right w-full">
                             <i class="fa fa-file-text-o stats-replace"></i>
                         </div>
@@ -104,8 +107,10 @@
             <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
                 <a href="updated-lcs.html">
                     <div class="panel padder-v item">
+                    <div class="mainstatscol">
                         <div class="h1 text-info h1">{{Frozen.length}}</div>
                         <span class="text-muted text-base">Frozen</span>
+                        </div>
                         <div class="top text-right w-full">
                             <i class="fa fa-file-text-o stats-replace"></i>
                         </div>
@@ -115,8 +120,10 @@
             <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
                 <a href="updated-lcs.html">
                     <div class="panel padder-v item">
+                    <div class="mainstatscol">
                         <div class="h1 text-info h1">{{Update.length}}</div>
                         <span class="text-muted text-base">Updated</span>
+                        </div>
                         <div class="top text-right w-full">
                             <i class="fa fa-file-text-o stats-replace"></i>
                         </div>
@@ -126,8 +133,36 @@
             <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
                 <a href="updated-lcs.html">
                     <div class="panel padder-v item">
+                    <div class="mainstatscol">
                         <div class="h1 text-info h1">{{Expiring.length}}</div>
-                        <span class="text-muted text-base">Expiring LC</span>
+                        <span class="text-muted text-base">Revised</span>
+                        </div>
+                        <div class="top text-right w-full">
+                            <i class="fa fa-file-text-o stats-replace"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
+                <a href="updated-lcs.html">
+                    <div class="panel padder-v item">
+                    <div class="mainstatscol">
+                        <div class="h1 text-info h1">{{Expiring.length}}</div>
+                        <span class="text-muted text-base">Archived</span>
+                        </div>
+                        <div class="top text-right w-full">
+                            <i class="fa fa-file-text-o stats-replace"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
+                <a href="updated-lcs.html">
+                    <div class="panel padder-v item">
+                    <div class="mainstatscol">
+                        <div class="h1 text-info h1">{{Expiring.length}}</div>
+                        <span class="text-muted text-base">Expiring</span>
+                        </div>
                         <div class="top text-right w-full">
                             <i class="fa fa-file-text-o stats-replace"></i>
                         </div>
