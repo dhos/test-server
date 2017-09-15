@@ -3,8 +3,8 @@
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
                 <div class="col-md-3">
-                    <h2 class="second-head">New Customer</h2>
-                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="customerList"> Customers</a> <i class="fa fa-angle-right br-gap"></i> New Customer</small>
+                    <h2 class="second-head">Customer</h2>
+                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="customerList"> Customers</a> <i class="fa fa-angle-right br-gap"></i> Customer</small>
                 </div>
                 <div class="col-md-9 text-center">
                     <div class="lc-stats row">
@@ -56,29 +56,12 @@
                 <div class="panel padder-v item">
                     <form name="cus_form" class="bs-example form-horizontal" novalidate>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label">Username</label>
+                            <label class="col-lg-2 control-label">Name</label>
                             <div class="col-lg-6">
                                 <input name="cus_username" ng-model="user.username" type="input" class="form-control" required>
                                 <span ng-show="cus_form.cus_username.$error.required && cus_form.cus_username.$dirty">
                                   Name is required.
                                 </span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">Password</label>
-                            <div class="col-lg-6">
-                                <input name="cus_password" ng-model="user.password" type="password" class="form-control"
-                                 ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/">
-                                <span ng-show="cus_form.cus_password.$error.required && cus_form.cus_password.$dirty">
-                                  Password is required.
-                                </span>
-                                <span ng-show="!cus_form.cus_password.$error.required &&
-                                  (cus_form.cus_password.$error.minlength || cus_form.cus_password.$error.maxlength) && cus_form.cus_password.$dirty">
-                                  Passwords must be between 8 and 20 characters.</span>
-                                <span ng-show="!cus_form.cus_password.$error.required &&
-                                  !cus_form.cus_password.$error.minlength && !cus_form.cus_password.$error.maxlength &&
-                                  cus_form.cus_password.$error.pattern && cus_form.cus_password.$dirty">
-                                  Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)</span>
                             </div>
                         </div>
                         <div class="form-group">
