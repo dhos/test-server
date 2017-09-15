@@ -28,7 +28,8 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     $scope.user = user
     $scope.letter = letter
     console.log($scope.letter, $scope.user)
-    $scope.client = $scope.user.role === 0
+    $scope.client = $scope.user.role === 2
+    $scope.manager = $scope.user.manager
 
     if ($scope.client) $scope.notes = jQuery.extend(true, {}, $scope.letter.commercial_notes)
     else $scope.notes = $scope.amendments = jQuery.extend(true, {}, $scope.letter.business_notes)
@@ -62,7 +63,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     $scope.approved = 0
     $scope.amended = 0
     let checkPermissions = (commercial) => {
-        return $scope.client ? !!commercial : !commercial
+        return $scope.client ? !!commercial : !commercial && !$scope.manager
     }
     $scope.approve = clause => {
         if (!checkPermissions(clause.commercial)) return
@@ -81,10 +82,13 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         $scope.amended += 1
     }
     $scope.unammend = clause => {
-        if (!checkPermissions(clause.commercial)) return
-        clause.status = null
-        clause.note = null
-        $scope.amended -= 1
+        if (clause.expanded == false) clause.expanded = true
+        else {
+            if (!checkPermissions(clause.commercial)) return
+            clause.status = null
+            clause.note = null
+            $scope.amended -= 1
+        }
     }
     $scope.updateLetter = () => {
         var approved = true

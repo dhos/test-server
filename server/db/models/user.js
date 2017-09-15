@@ -27,9 +27,11 @@ module.exports = db.define('user', {
             0:customer
             1:pic,
             2:csp,
-            3:super manager,
             4:admin
             */
+    },
+    manager: {
+        type: Sequelize.BOOLEAN
     },
     countries: {
         type: Sequelize.ARRAY(Sequelize.INTEGER),

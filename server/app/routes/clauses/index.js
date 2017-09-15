@@ -20,7 +20,8 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
     Clause.findAll({
         where: req.query,
         order: [
-            ['id', 'ASC']
+            ['commercial', 'ASC'],
+            ['swift_code', 'ASC']
         ]
     }).then(countries => {
         res.json(countries)

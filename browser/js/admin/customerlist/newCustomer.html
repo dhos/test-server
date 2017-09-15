@@ -58,19 +58,28 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Username</label>
                             <div class="col-lg-6">
-                                <input ng-model="user.username" type="input" class="form-control" >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">Password</label>
-                            <div class="col-lg-6">
-                                <input ng-model="user.password" type="password" class="form-control" >
+                                <input name="cus_username" ng-model="user.name" type="input" class="form-control" required>
+                                <span ng-show="cus_form.cus_username.$error.required && cus_form.cus_username.$dirty">
+                                  Name is required.
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Contact Number</label>
                             <div class="col-lg-6">
-                                <input type="input" ng-model="user.number" class="form-control" value="Phone Number">
+                                <input type="number"
+                                  ng-minlength="10"
+                                  ng-maxlength="10"
+                                  name="cus_num" ng-model="user.number"
+                                  class="form-control phone-number" value="Phone Number" required>
+                                <span ng-show="cus_form.cus_num.$error.number">
+                                  Please enter a valid phone number.
+                                </span>
+                                <span ng-show="((cus_form.cus_num.$error.minlength ||
+                                   cus_form.cus_num.$error.maxlength) &&
+                                   cus_form.cus_num.$dirty) ">
+                                   Phone number should be 10 digits
+                              </span>
                             </div>
                         </div>
                         <div class="form-group">

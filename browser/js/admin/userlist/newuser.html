@@ -82,7 +82,6 @@
                                 <select ng-model="user.role" class="form-control">
                                     <option ng-value="1">PIC</option>
                                     <option ng-value="2">CSP</option>
-                                    <option ng-value="3">MANAGER</option>
                                     <option ng-value="4">ADMIN</option>
                                 </select>
                             </div>
@@ -91,6 +90,14 @@
                             <label class="col-lg-2 control-label">Email Address</label>
                             <div class="col-lg-6">
                                 <input ng-model="user.email" class="form-control" type="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Manager</label>
+                            <div class="col-lg-6">
+                                <label>
+                                    <input ng-model="user.manager" type="checkbox"> Manager
+                                </label>
                             </div>
                         </div>
                         <div class="form-group">
