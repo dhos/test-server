@@ -57,6 +57,9 @@ module.exports = db.define('user', {
     clauses: {
         type: Sequelize.ARRAY(Sequelize.INTEGER),
         defaultValue: []
+    },
+    last_login: {
+        type: Sequelize.DATE
     }
 }, {
     instanceMethods: {

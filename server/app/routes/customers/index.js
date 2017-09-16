@@ -2,7 +2,6 @@
 var router = require('express').Router();
 var db = require('../../../db')
 var Customer = db.model('customer');
-var _ = require('lodash')
 
 
 var ensureAuthenticated = function(req, res, next) {
@@ -29,7 +28,7 @@ router.get('/:id', (req, res, next) => {
         }
     }).then(customer => {
         res.json(customer)
-    })
+    }).catch(err => next(err))
 })
 
 //UPDATES FOR THINGS

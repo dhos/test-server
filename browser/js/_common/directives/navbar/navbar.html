@@ -30,30 +30,11 @@
     <!-- nabar right -->
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+            <a ng-click="logout()">
                <img src="img/user.png">
               <span class="visible-xs-inline">Profile & Settings</span>
-              <span class="badge badge-sm up bg-danger pull-right-xs">2</span>
             </a>
             <!-- dropdown -->
-            <div class="dropdown-menu w-xl">
-                <div class="panel bg-white" style="padding-bottom: 0">
-                    <div class="panel-heading drops">
-                        Profile & Settings
-                    </div>
-                    <div class="list-group">
-                        <a href class="list-group-item">
-                          Profile Settings 
-                        </a>
-                        <a href class="list-group-item">
-                          Account Settings
-                        </a>
-                        <a ng-click="logout()" class="list-group-item">
-                         Logout
-                        </a>
-                    </div>
-                </div>
-            </div>
             <!-- / dropdown -->
         </li>
     </ul>
@@ -71,41 +52,26 @@
                         Notifications
                     </div>
                     <div class="list-group">
-                        <a href class="list-group-item">
+                        <a ng-click="transition(letter.lc_number)" class="list-group-item" ng-repeat="letter in updatedLetters">
                           <span class="pull-left m-r msg-list" style="background: #7d93aa">S</span>
                           <span class="clear block m-b-none">
-                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
+                            {{state[letter.state]}}<br><small class="text-muted">{{letter.lc_number}} <br>{{letter.updatedAt|date:"shortDate"}}</small>
                           </span>
                         </a>
-                        <a href class="list-group-item">
-                          <span class="pull-left m-r msg-list" style="background: #6cd2fa">S</span>
-                          <span class="clear block m-b-none">
-                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
-                          </span>
-                        </a>
-                        <a href class="list-group-item">
-                          <span class="pull-left m-r msg-list" style="background: #ffb22c">S</span>
-                          <span class="clear block m-b-none">
-                            James Anderson<br><small class="text-muted">Just a reminder that you have… <br>9:08 AM</small>
-                          </span>
-                        </a>
-                    </div>
-                    <div class="panel-footer text-sm">
-                        <a href="#notes" data-toggle="class:show animated fadeInRight">Check all messages</a>
                     </div>
                 </div>
             </div>
             <!-- / dropdown -->
         </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
+<!--     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                <img src="img/message.png">
               <span class="visible-xs-inline">Mails</span>
               <span class="badge badge-sm up bg-danger pull-right-xs">3</span>
             </a>
-            <!-- dropdown -->
+            dropdown
             <div class="dropdown-menu w-xl">
                 <div class="panel bg-white" style="padding-bottom: 0">
                     <div class="panel-heading drops">
@@ -136,9 +102,9 @@
                     </div>
                 </div>
             </div>
-            <!-- / dropdown -->
+            / dropdown
         </li>
-    </ul>
+    </ul> -->
       <!-- /nabar right -->
   </div>
     <!-- / navbar collapse -->

@@ -23,16 +23,16 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
             ['commercial', 'ASC'],
             ['swift_code', 'ASC']
         ]
-    }).then(countries => {
-        res.json(countries)
+    }).then(clauses => {
+        res.json(clauses)
     }).catch(err => {
         next(err)
     })
 })
 
-router.get('/:id', ensureAuthenticated, (req, res, next) => {
+// router.get('/:id', ensureAuthenticated, (req, res, next) => {
 
-})
+// })
 
 //end fetches
 
@@ -49,16 +49,22 @@ router.post('/', ensureAuthenticated, (req, res, next) => {
 
 //updates
 
-router.put('/', ensureAuthenticated, (req, res, next) => {
+// router.put('/', ensureAuthenticated, (req, res, next) => {
 
-})
+// })
 
 //end updates
 
 //deletes
 
 router.delete('/', ensureAuthenticated, (req, res, next) => {
-
+    Clause.destroy({
+        where: req.query
+    }).then(() => {
+        res.sendStatus(200)
+    }).catch(err => {
+        return next(err)
+    })
 })
 
 //end deletes

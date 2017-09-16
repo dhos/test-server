@@ -32,7 +32,7 @@ router.get('/:id', (req, res, next) => {
         }
     }).then(user => {
         res.json(user)
-    })
+    }).catch(err => next(err))
 })
 
 //UPDATES FOR THINGS
@@ -43,9 +43,9 @@ router.put('/update', function(req, res, next) {
             id: req.body.id
         }
     }).then(result => {
-        console.log(result)
+        res.json(result)
     }).catch((err) => {
-        return next(err)
+        next(err)
     })
 })
 

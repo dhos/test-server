@@ -16,13 +16,27 @@ app.config(function($stateProvider) {
                 return lcFactory.getExpiringLetters().then(expiring => {
                     return expiring
                 })
+            },
+            user: (AuthService) => {
+                return AuthService.getLoggedInUser().then(user => {
+                    return user
+                })
             }
         }
     })
 });
 
-app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring) {
+app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user) {
+    $scope.user = user
     $scope.letters = letters
+    if ($scope.user.role !== 4) {
+        $scope.letters = letters.filter(letter => {
+            let bool = true
+            if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+            if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+            return bool
+        })
+    }
     $scope.countries = {}
     countryFactory.getCountries({}).then(countries => {
         countries.forEach(country => {
@@ -135,7 +149,6 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
                 $scope.Expiring = $scope.expiringLetters
             }
         }
-        console.log(letters)
         letters.forEach(letter => {
                 $scope[$scope.state[letter.state]].push(letter)
             })

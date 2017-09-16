@@ -26,16 +26,16 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
     })
 })
 
-router.get('/:id', ensureAuthenticated, (req, res, next) => {
+// router.get('/:id', ensureAuthenticated, (req, res, next) => {
 
-})
+// })
 
-//end fetches
+// //end fetches
 
-//sets
-router.post('/', ensureAuthenticated, (req, res, next) => {
+// //sets
+// router.post('/', ensureAuthenticated, (req, res, next) => {
 
-})
+// })
 
 //end sets
 
@@ -49,15 +49,15 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
         }
     }).then(result => {
         console.log(result)
-    })
+    }).catch(err => next(err))
 })
 
 //end updates
 
 //deletes
 
-router.delete('/', ensureAuthenticated, (req, res, next) => {
+// router.delete('/', ensureAuthenticated, (req, res, next) => {
 
-})
+// })
 
 //end deletes

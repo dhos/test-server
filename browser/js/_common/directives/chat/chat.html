@@ -2,28 +2,29 @@
     <span ng-if="newMessage" class="badge badge-warning pull-right">!</span>
     <a class="open-small-chat" ng-click="open()">
         <i class="fa fa-comments" ng-show="!chat"></i>
-        <i class="fa fa-remove" ng-show="chat"></i>
+        <i class="fa fa-remove" ng-show="chat">X</i>
     </a>
 </div>
-<div class="small-chat-box fadeInRight animated" ng-show="chat">
+<div class="small-chat-box fadeInRight animated" ng-if="user" ng-show="chat">
     <div class="heading">
         <small class="chat-date pull-right">
             15 Aug 2017
-        </small> <span ng-if="selectedChat"> <a ng-click="selectedChat = false">Back</a></span> Small chat 
+        </small> <span ng-if="selectedChat"></span> Small chat 
     </div>
     <div ng-if="!selectedChat" class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">
         <div class="content" style="overflow-y: scroll;width: auto;height: 234px;overflow-x: hidden;">
             <ul>
-                <li ng-repeat="(key,value) in contactList"><a ng-click="startChat(key)">{{value.username}}</a></li>
+                <li ng-repeat="(key,value) in contactList"><a ng-click="startChat(key)">{{value.user.username}}</a></li>
             </ul>
         </div>
     </div>
     <div ng-if="selectedChat" class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">
-        <div class="content" style="overflow-y: scroll;width: auto;height: 234px;overflow-x: hidden;">
+        <a ng-click="back()">Back</a>
+        <div class="content" style="overflow-y: scroll;width: auto;height: 234px;overflow-x: hidden;" scroll-glue>
             <div ng-repeat="chat in selectedChat">
-                <div ng-class="{'left':(chat.sender.id !=user.id),'right':(chat.sender.id==user.id)}" ng-repeat="chat in chats">
+                <div ng-class="{'left':(chat.sender.id !=user.id),'right':(chat.sender.id==user.id)}">
                 <div class="author-name">
-                    {{chat.sender.firstName}} {{chat.sender.lastName}} <small class="chat-date">
+                    {{chat.sender.firstName}} <small class="chat-date">
                     {{chat.date | date:"shortDate"}}
                     </small>
                     </div>
@@ -39,7 +40,7 @@
     </div>
     <div class="form-chat" ng-if="selectedChat">
         <div class="input-group input-group-sm">
-            <input type="text" ng-model="message" class="form-control">
+            <input id="chatBox" type="text" name="" placeholder="Type message here..." class="form-control" ng-model="message" chat-enter="sendChat(message)">
             <span ng-click="sendChat(message)" class="input-group-btn"> <button class="btn btn-primary" type="button">Send
         </button> </span></div>
     </div>

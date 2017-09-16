@@ -6,7 +6,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope) {
+app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope, customerFactory) {
     //find the users that are clients,
     //find the users that are csp/pic
     $scope.selectedCountry = {}
@@ -44,9 +44,7 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
             $scope.cspUsers = cspUsers
         })
         //getclient
-    userFactory.getUsers({
-        role: 0
-    }).then(clients => {
+    customerFactory.getCustomers({}).then(clients => {
         $scope.clients = clients
     })
     $scope.state = {
