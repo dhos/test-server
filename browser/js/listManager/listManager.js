@@ -29,11 +29,14 @@ app.config(function($stateProvider) {
 app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user) => {
     //inits
     $scope.user = user
+    $scope.csp = $scope.user.role === 2
     if ($scope.user.role !== 4) {
         $scope.letters = letters.filter(letter => {
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
             if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+            if (scope.csp) bool = letter.csp == $scope.user.id
+            else bool = letter.pic == scope.user.id
             return bool
         })
     } else {
@@ -108,7 +111,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.Frozen.forEach(frozen => {
         if (frozen.finDoc === 0) $scope.Update.push(frozen)
     })
-    $scope.csp = $scope.user.role === 2
+
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
             $scope.letters = letters
