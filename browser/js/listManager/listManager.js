@@ -29,12 +29,16 @@ app.config(function($stateProvider) {
 app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user) => {
     //inits
     $scope.user = user
-    $scope.letters = letters.filter(letter => {
-        let bool = true
-        if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
-        if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
-        return bool
-    })
+    if ($scope.user.role !== 4) {
+        $scope.letters = letters.filter(letter => {
+            let bool = true
+            if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+            if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+            return bool
+        })
+    } else {
+        $scope.letters = letters
+    }
     console.log($scope.user, $scope.letters)
     $scope.banks = {}
         //get banks
@@ -115,7 +119,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.Update = []
             $scope.amendedCustomer = false
             $scope.reviewedCustomer = false
-            if (scope.user.role !== 4) {
+            if (scope.user.role == 4) {
                 $scope.letters = letters.filter(letter => {
                     let bool = true
                     if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
