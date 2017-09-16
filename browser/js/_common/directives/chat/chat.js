@@ -16,27 +16,29 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
 
                 });
             };
-            scope.startChat = (sid) => {
-                if (scope.chats[sid]) {
-                    scope.selectedChat = scope.chats[sid]
+            scope.date = new Date();
+            scope.startChat = (userId) => {
+                if (scope.chats[userId]) {
+                    scope.selectedChat = scope.chats[userId]
                 } else {
-                    scope.chats[sid] = []
+                    scope.chats[userId] = []
                 }
-                scope.chatTarget = sid
+                scope.chatTarget = userId
+            }
+            scope.back = () => {
+                scope.selectedChat = false
             }
             Socket.on('identity', function(identity) {
                 scope.self = identity
             })
             Socket.on('ChatList', function(onlineUsers) {
                 scope.contactList = onlineUsers
-                console.log(onlineUsers)
             })
             Socket.on('Incoming', function(newChat) {
-                console.log(newChat)
-                if (scope.chats[newChat]) {
-                    scope.chats[newChat].push(newChat)
+                if (scope.chats[newChat.sender.id]) {
+                    scope.chats[newChat.sender.id].push(newChat)
                 } else {
-                    scope.chats[newChat] = []
+                    scope.chats[newChat.sender.id] = []
                 }
             })
             scope.sendChat = (message) => {
@@ -46,10 +48,10 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
                     sender: scope.user,
                     target: scope.chatTarget
                 }
-                scope.message = null
-                Socket.emit('chat', chat)
+                $('#chatBox').val('')
+                console.log(scope.message)
                 scope.selectedChat.push(chat)
-                console.log(scope.selectedChat)
+                Socket.emit('chat', chat)
             }
             var removeUser = function() {
                 scope.user = null;

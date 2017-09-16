@@ -16,8 +16,8 @@
     <tbody>
         <tr ng-repeat-start="letter in displayLetters">
             <td>{{letter.lc_number}}</td>
-            <td>{{letter.date | date:'shortDate'}}</td>
-            <td>{{letter.expire | date:'shortDate'}}</td>
+            <td>{{letter.date | date:'mediumDate'}}</td>
+            <td>{{letter.expire | date:'mediumDate'}}</td>
             <td>{{customers[letter.client]}}</td>
             <td>{{countries[letter.country]}}</td>
             <td ng-class="{'new-stat': (letter.state==1),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>

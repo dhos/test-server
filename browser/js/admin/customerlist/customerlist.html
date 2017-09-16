@@ -6,46 +6,6 @@
                     <h2 class="second-head">All Customers</h2>
                     <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Customers</a></small>
                 </div>
-                <div class="col-md-9 text-center">
-                    <div class="lc-stats row">
-                        <div class="col-md-1 pull-right">
-                            <span class="stats-numb">{{Expiring.length}}</span>
-                            <br> Expiring
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span class="stats-numb">{{Update.length}}</span>
-                            <br> FD Update
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span class="stats-numb">{{Frozen.length}}</span>
-                            <br> Frozen
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
-                            <br> Amended</span>
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Revised.length}}</span>
-                            <br> Revised</span>
-                            <label class="switch">
-                                <input type="checkbox" ng-model="revisedCustomer">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
-                            <br> Reviewed</span>
-                            <label class="switch">
-                                <input type="checkbox" ng-model="reviewedCustomer">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span class="stats-numb">{{New.length}}</span>
-                            <br> New LCs
-                        </div>
-                    </div>
-                </div>
             </div>
     </div>
     <!-- / main header -->
@@ -63,7 +23,7 @@
                                   </th>
                                 </tr>
                                 <tr>
-                                    <th>Username</th>
+                                    <th>Name</th>
                                     <th>Contact Number</th>
                                     <th>Email Address</th>
                                     <th>Website</th>
@@ -71,12 +31,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="user in customers track by $index">
-                                    <td>{{user.username}}</td>
-                                    <td>{{user.number}}</td>
-                                    <td>{{user.email}}</td>
-                                    <td>{{user.website}}</td>
-                                    <td><a ng-click="editCustomer(user.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteUser(user.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
+                                <tr ng-repeat="customer in customers track by $index">
+                                    <td>{{customer.name}}</td>
+                                    <td>{{customer.number}}</td>
+                                    <td>{{customer.email}}</td>
+                                    <td>{{customer.website}}</td>
+                                    <td><a ng-click="editCustomer(customer.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deletecustomer(customer.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
                                 </tr>
                             </tbody>
                         </table>

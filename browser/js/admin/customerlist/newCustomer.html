@@ -3,48 +3,8 @@
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
                 <div class="col-md-3">
-                    <h2 class="second-head">New Customer</h2>
-                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="customerList"> Customers</a> <i class="fa fa-angle-right br-gap"></i> New Customer</small>
-                </div>
-                <div class="col-md-9 text-center">
-                    <div class="lc-stats row">
-                        <div class="col-md-1 pull-right">
-                            <span class="stats-numb">{{Expiring.length}}</span>
-                            <br> Expiring
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span class="stats-numb">{{Update.length}}</span>
-                            <br> FD Update
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span class="stats-numb">{{Frozen.length}}</span>
-                            <br> Frozen
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
-                            <br> Amended</span>
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Revised.length}}</span>
-                            <br> Revised</span>
-                            <label class="switch">
-                                <input type="checkbox" ng-model="revisedCustomer">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
-                            <br> Reviewed</span>
-                            <label class="switch">
-                                <input type="checkbox" ng-model="reviewedCustomer">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-1 pull-right">
-                            <span class="stats-numb">{{New.length}}</span>
-                            <br> New LCs
-                        </div>
-                    </div>
+                    <h2 class="second-head">Customer</h2>
+                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="customerList"> Customers</a> <i class="fa fa-angle-right br-gap"></i> Customer</small>
                 </div>
             </div>
     </div>
@@ -54,29 +14,44 @@
         <div class="row row-sm">
             <div class="col-md-12">
                 <div class="panel padder-v item">
-                    <form class="bs-example form-horizontal">
+                    <form name="cus_form" class="bs-example form-horizontal" novalidate>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label">Username</label>
+                            <label class="col-lg-2 control-label">Name</label>
                             <div class="col-lg-6">
-                                <input ng-model="user.username" type="input" class="form-control" >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label">Password</label>
-                            <div class="col-lg-6">
-                                <input ng-model="user.password" type="password" class="form-control" >
+                                <input name="cus_username" ng-model="user.name" type="input" class="form-control" required>
+                                <span ng-show="cus_form.cus_username.$error.required && cus_form.cus_username.$dirty">
+                                  Name is required.
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Contact Number</label>
                             <div class="col-lg-6">
-                                <input type="input" ng-model="user.number" class="form-control" value="Phone Number">
+                                <input type="number"
+                                  ng-minlength="6"
+                                  ng-maxlength="12"
+                                  name="cus_num" ng-model="user.number"
+                                  class="form-control phone-number" value="Phone Number" required>
+                                <span ng-show="cus_form.cus_num.$error.number">
+                                  Please enter a valid phone number.
+                                </span>
+                                <span ng-show="((cus_form.cus_num.$error.minlength ||
+                                   cus_form.cus_num.$error.maxlength) &&
+                                   cus_form.cus_num.$dirty) ">
+                                   Phone number should be 10 digits
+                              </span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Email Address</label>
                             <div class="col-lg-6">
-                                <input ng-model="user.email" type="email" class="form-control">
+                                <input name="email" ng-model="user.email" type="email" class="form-control" required>
+                                <span ng-show="cus_form.email.$error.required && cus_form.email.$dirty">
+                                  Email is required.
+                                </span>
+                                <span ng-show="!cus_form.email.$error.required && cus_form.email.$dirty && cus_form.email.$error.email">
+                                  Invalid email
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -120,7 +95,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button ng-click="createUser(user)" class="btn m-b-xs btn-success">Save</button>
+                                <button ng-click="makeUser(user)" ng-disabled="!cus_form.$valid" class="btn m-b-xs btn-success">Save</button>
                                 <a ui-sref="customerList" class="btn m-b-xs w-xs btn-dark">Cancel</a>
                             </div>
                         </div>

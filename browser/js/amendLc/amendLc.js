@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, bankFactory, letter, $state, LETTER_EVENTS, $rootScope) => {
+app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, bankFactory, letter, $state, LETTER_EVENTS, $rootScope, customerFactory) => {
     $scope.letter = letter
     $scope.updateLc = () => {
         $scope.letter.state = 5
@@ -50,9 +50,7 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
             $scope.cspUsers = cspUsers
         })
         //get clients
-    userFactory.getUsers({
-        role: 0
-    }).then(clients => {
+    customerFactory.getCustomers({}).then(clients => {
         $scope.clients = clients
         console.log($scope.clients)
     })

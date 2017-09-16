@@ -30,10 +30,12 @@ app.controller('landingCtrl', function($scope, AuthService, userFactory, $state)
             AuthService.login(login)
         })
     }
-    $scope.sendLogin = function(loginInfo) {
 
+    console.log(jQuery('body'))
+    $scope.sendLogin = function(loginInfo) {
         $scope.error = null;
         AuthService.login(loginInfo).then(function() {
+            jQuery('body').removeClass('loginpage')
             $state.transitionTo('dashboard');
         })
     };

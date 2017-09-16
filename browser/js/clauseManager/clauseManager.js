@@ -9,16 +9,8 @@ app.config(function($stateProvider) {
                     return countries
                 })
             },
-            clauses: (clauseFactory) => {
-                return clauseFactory.getClauses({}).then(clauses => {
-                    console.log(clauses)
-                    return clauses
-                })
-            },
-            customers: (userFactory) => {
-                return userFactory.getUsers({
-                    role: 0
-                }).then(customers => {
+            customers: (customerFactory) => {
+                return customerFactory.getCustomers({}).then(customers => {
                     return customers
                 })
             }
@@ -26,58 +18,37 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('clauseManagerCtrl', function($scope, countries, countryFactory, clauseFactory, customers, userFactory, clauses) {
-    $scope.clauses = clauses
+app.controller('clauseManagerCtrl', function($scope, countries, countryFactory, clauseFactory, customers, userFactory) {
     $scope.countries = countries
     $scope.customers = customers
     $scope.clauseToBeCreated = {}
-    $scope.radio = {
-        value: 'country'
-    };
-    $scope.specialValue = {
-        "id": "12345",
-        "value": "green"
-    };
-    console.log($scope.country)
     $scope.selectedCountry = $scope.countries[0]
     $scope.selectedCustomer = $scope.customers[0]
-    $scope.updateCountries = (country) => {
-        countryFactory.updateCountry(country).then(() => {
-            countryFactory.getCountries({}).then(countries => {
-                $scope.countries = countries
-            })
+    $scope.search = () => {
+        clauseFactory.getClauses({
+            country: $scope.selectedCountry.id,
+            customer: $scope.selectedCustomer.id
+        }).then(clauses => {
+            $scope.clauses = clauses
         })
     }
     $scope.createClause = (clause) => {
-        console.log($scope.selectedCustomer)
+        clause.customer = $scope.selectedCustomer.id
+        clause.country = $scope.selectedCountry.id
         clauseFactory.createClause(clause).then(createdClause => {
-            clauseFactory.getClauses({}).then(clauses => {
-                $scope.clauses = clauses
-            })
-            if ($scope.radio.value == "country") {
-                $scope.selectedCountry.clauses.push(createdClause.id - 1)
-                countryFactory.updateCountry($scope.selectedCountry).then(country => {
-                    countryFactory.getCountries({}).then(countries => {
-                        $scope.countries = countries
-                        $scope.clauseToBeCreated = {}
-                    })
-                })
-            } else {
-
-                $scope.selectedCustomer.clauses.push(createdClause.id - 1)
-                userFactory.updateUser($scope.selectedCustomer).then(user => {
-                    userFactory.getUsers({
-                        role: 0
-                    }).then(customers => {
-                        $scope.customers = customser
-                        $scope.clauseToBeCreated = {}
-
-                    })
-                })
-            }
+            $scope.clauses.push(createdClause)
+        })
+    }
+    $scope.deleteClause = (clauseId, index) => {
+        $scope.clauses.splice(index, 1)
+        clauseFactory.deleteClause({
+            id: clauseId
+        }).then(clauses => {
+            $scope.clauses = clauses
         })
     }
     $scope.toggleNew = () => {
+        if (!$scope.selectedCountry || !$scope.selectedCustomer) return
         $scope.newClause = !$scope.newClause
     }
 });

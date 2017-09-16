@@ -18,36 +18,34 @@ app.config(function($stateProvider) {
                 })
             }
         }
-        // onEnter: (letter, user) => {
-        //     if ($scope.user.id !== $scope.letter.client) $state.go('dashboard')
-        // }
     })
 });
 
 app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauseFactory) => {
     $scope.user = user
+    console.log($scope.user)
     $scope.letter = letter
-    console.log($scope.letter, $scope.user)
-    $scope.client = $scope.user.role === 0
+    $scope.client = $scope.user.role === 2
+    $scope.owner = $scope.client ? ($scope.letter.csp == $scope.user.id) : ($scope.letter.pic == $scope.user.id)
+    $scope.manager = $scope.user.manager
 
-    if ($scope.client) $scope.notes = jQuery.extend(true, {}, $scope.letter.commercial_notes)
-    else $scope.notes = $scope.amendments = jQuery.extend(true, {}, $scope.letter.business_notes)
     clauseFactory.getClauses({
         country: $scope.letter.country,
         customer: $scope.letter.client
     }).then(clauses => {
-        $scope.clauses = clauses
+        $scope.clauses = clauses.map(clause => {
+            if (clause.commercial) {
+                if ($scope.letter.commercial_notes[clause.swift_code]) clause = $scope.letter.commercial_notes[clause.swift_code]
+            } else {
+                if ($scope.letter.business_notes[clause.swift_code]) clause = $scope.letter.business_notes[clause.swift_code]
+            }
+            return clause
+        })
         $scope.business_clauses = $scope.clauses.filter(clause => {
             return clause.commercial == false
         })
         $scope.commercial_clauses = $scope.clauses.filter(clause => {
             return clause.commercial == true
-        })
-        $scope.clauses.forEach(clause => {
-            if ($scope.notes[clause.swift_code]) {
-                clause.status = $scope.notes[clause.swift_code].status
-                clause.note = $scope.notes[clause.swift_code].note
-            }
         })
     })
 
@@ -62,10 +60,11 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     $scope.approved = 0
     $scope.amended = 0
     let checkPermissions = (commercial) => {
-        return $scope.client ? !!commercial : !commercial
+        return ($scope.client ? !!commercial : !commercial) && (!$scope.manager) && ($scope.owner)
     }
     $scope.approve = clause => {
         if (!checkPermissions(clause.commercial)) return
+        clause.expanded = false
         clause.status = 1
         $scope.approved += 1
     }
@@ -81,17 +80,30 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         $scope.amended += 1
     }
     $scope.unammend = clause => {
-        if (!checkPermissions(clause.commercial)) return
-        clause.status = null
-        clause.note = null
-        $scope.amended -= 1
+        if (clause.expanded == false) clause.expanded = true
+        else {
+            if (!checkPermissions(clause.commercial)) return
+            clause.status = null
+            clause.note = null
+            $scope.amended -= 1
+        }
+    }
+    $scope.freeze = () => {
+        if ($scope.letter.state === 4) $scope.letter.state = 1
+        else $scope.letter.state = 4
+        lcFactory.updateLetter($scope.letter).then(letter => {
+            $state.go("listManager.all")
+        })
     }
     $scope.updateLetter = () => {
         var approved = true
         var complete = true
         if (!$scope.client) {
             $scope.business_clauses.forEach(clause => {
-                if (!clause.status) complete = false
+                if (!clause.status) {
+                    console.log(clause)
+                    complete = false
+                }
                 if (clause.status == 2) approved = false
                 $scope.letter.business_notes[clause.swift_code] = clause
             })
@@ -104,6 +116,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         }
         $scope.letter.draft = false
         $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
+        console.log(complete, approved)
         if (!complete) return
         if (approved) {
             if ($scope.letter.state === 1) {

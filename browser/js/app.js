@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('elite-lc-portal', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'ngFileUpload', 'ngAnimate']);
+window.app = angular.module('elite-lc-portal', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'ngFileUpload', 'ngAnimate', 'luegg.directives']);
 
 app.config(function($urlRouterProvider, $locationProvider, $compileProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)

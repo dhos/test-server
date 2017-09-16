@@ -36,10 +36,10 @@ module.exports = db.define('letter', {
         type: Sequelize.INTEGER
     },
     pic: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
     },
     csp: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
     },
     contract: {
         type: Sequelize.STRING

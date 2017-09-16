@@ -3,6 +3,7 @@ var db = require('./server/db');
 var Letter = db.model('letter')
 var User = db.model('user');
 var Country = db.model('country')
+var Customer = db.model('customer')
 var Bank = db.model('bank')
 var Clause = db.model('swift_clause')
 var fs = require('fs')
@@ -22,10 +23,11 @@ fs.createReadStream(sample)
     })
     .on('end', () => {
         //organizeData(csvData)
-        makeUsers()
-            // makeCountries()
-            // makeBanks()
-            // makeClauses()
+        // makeUsers()
+        // makeCountries()
+        // makeBanks()
+        // makeClauses()
+        makeCustomers()
 
     })
 
@@ -138,8 +140,7 @@ var makeBanks = () => {
 
 var makeCustomers = () => {
     Customer.create({
-        username: 'Sabic',
-        password: 'test',
+        name: 'Sabic'
 
     })
 }

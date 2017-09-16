@@ -6,7 +6,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope) {
+app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope, customerFactory) {
     //find the users that are clients,
     //find the users that are csp/pic
     $scope.selectedCountry = {}
@@ -44,9 +44,7 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
             $scope.cspUsers = cspUsers
         })
         //getclient
-    userFactory.getUsers({
-        role: 0
-    }).then(clients => {
+    customerFactory.getCustomers({}).then(clients => {
         $scope.clients = clients
     })
     $scope.state = {
@@ -56,30 +54,30 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
         4: 'Frozen',
         5: 'Revised'
     }
-    var refreshLetters = () => {
-        lcFactory.getLetters({}).then(letters => {
-            $scope.letters = letters
-            $scope.New = []
-            $scope.Reviewed = []
-            $scope.Amended = []
-            $scope.Frozen = []
-            $scope.Revised = []
-            $scope.Update = []
-            $scope.letters = letters
-                //set states
-            $scope.letters.forEach(letter => {
-                $scope[$scope.state[letter.state]].push(letter)
-            })
-            $scope.Frozen.forEach(frozen => {
-                if (frozen.finDoc === 0) $scope.Update.push(frozen)
-            })
-        })
-        lcFactory.getExpiringLetters({}).then(expiring => {
-            $scope.Expiring = expiring[0]
-        })
-    }
-    $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
+    // var refreshLetters = () => {
+    //     lcFactory.getLetters({}).then(letters => {
+    //         $scope.letters = letters
+    //         $scope.New = []
+    //         $scope.Reviewed = []
+    //         $scope.Amended = []
+    //         $scope.Frozen = []
+    //         $scope.Revised = []
+    //         $scope.Update = []
+    //         $scope.letters = letters
+    //             //set states
+    //         $scope.letters.forEach(letter => {
+    //             $scope[$scope.state[letter.state]].push(letter)
+    //         })
+    //         $scope.Frozen.forEach(frozen => {
+    //             if (frozen.finDoc === 0) $scope.Update.push(frozen)
+    //         })
+    //     })
+    //     lcFactory.getExpiringLetters({}).then(expiring => {
+    //         $scope.Expiring = expiring[0]
+    //     })
+    // }
+    // $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
 
-    refreshLetters();
+    // refreshLetters();
 
 });

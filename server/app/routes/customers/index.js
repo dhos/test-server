@@ -1,8 +1,7 @@
 'use strict';
 var router = require('express').Router();
 var db = require('../../../db')
-var User = db.model('user');
-var _ = require('lodash')
+var Customer = db.model('customer');
 
 
 var ensureAuthenticated = function(req, res, next) {
@@ -13,46 +12,43 @@ var ensureAuthenticated = function(req, res, next) {
     }
 }
 router.get('/', (req, res, next) => {
-    User.findAll({
+    Customer.findAll({
         where: req.query
-    }).then(users => {
-        users.forEach(e => {
-            return _.omit(e.toJSON(), ['password', 'salt'])
-        })
-        res.json(users)
+    }).then(customers => {
+        res.json(customers)
     }).catch(err => {
         next(err)
     })
 })
 
 router.get('/:id', (req, res, next) => {
-    User.findOne({
+    Customer.findOne({
         where: {
             id: req.params.id
         }
-    }).then(user => {
-        res.json(user)
+    }).then(customer => {
+        res.json(customer)
     }).catch(err => next(err))
 })
 
 //UPDATES FOR THINGS
 router.put('/update', function(req, res, next) {
     const updates = req.body
-    User.update(updates, {
+    Customer.update(updates, {
         where: {
             id: req.body.id
         }
     }).then(result => {
         res.json(result)
     }).catch((err) => {
-        next(err)
+        return next(err)
     })
 })
 
-router.post('/signup', function(req, res, next) {
-    var user = req.body
-    User.create(user).then(createdUser => {
-        res.json(createdUser)
+router.post('/create', function(req, res, next) {
+    var customer = req.body
+    Customer.create(customer).then(createdCustomer => {
+        res.json(createdCustomer)
     }).catch(err => {
         next(err)
     })
@@ -60,7 +56,7 @@ router.post('/signup', function(req, res, next) {
 
 
 router.delete('/', ensureAuthenticated, (req, res, next) => {
-    User.destroy({
+    Customer.destroy({
         where: req.query
     }).then(() => {
         res.sendStatus(200)

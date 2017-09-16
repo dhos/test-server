@@ -7,15 +7,7 @@ app.config(function($stateProvider) {
         // data: {
         //     authenticate: true
         // },
-        resolve: {
-            letters: (lcFactory) => {
-                return lcFactory.getLetters({
-                    state: 4
-                }).then(letters => {
-                    return letters
-                })
-            }
-        }
+        resolve: {}
     })
 });
 

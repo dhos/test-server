@@ -2,46 +2,10 @@
     <!-- main header -->
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
-                <div class="col-md-3">
-                    <h2 class="second-head">Clause Manager</h2>
-                </div>
-                <div class="col-md-9 text-center">
-                    <div class="row lc-stats">
-                        <div class="col-md-2 pull-right">
-                            <span class="stats-numb">{{Expiring.length}}</span>
-                            <br> Expiring
-                        </div>
-                        <div class="col-md-2 pull-right">
-                            <span class="stats-numb">{{Update.length}}</span>
-                            <br> FD Update
-                        </div>
-                        <div class="col-md-2 pull-right">
-                            <span class="stats-numb">{{Frozen.length}}</span>
-                            <br> Frozen
-                        </div>
-                        <div class="col-md-2 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
-                            <br> Amended</span>
-                            <label class="switch">
-                                <input ng-model="amendedCustomer" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-2 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
-                            <br> Reviewed</span>
-                            <label class="switch">
-                                <input type="checkbox" ng-model="reviewedCustomer">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-2 pull-right">
-                            <span class="stats-numb">{{New.length}}</span>
-                            <br> New LCs
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-3">
+                <h2 class="second-head">Clause Manager</h2>
             </div>
+        </div>
     </div>
     <!-- / main header -->
     <div class="wrapper-md">
@@ -49,26 +13,19 @@
         <div class="row row-sm">
             <div class="col-md-12">
                 <div class="panel wrapper table-responsive">
-                    <div class="col-md-6">
-                        <div class="col-md-4">
-                            <label>
-                                <input type="radio" ng-model="radio.value" value="country">
-                                Country
-                            </label>
-                            <label>
-                              <input type="radio" ng-model="radio.value" value="customer">
-                                Customer
-                            </label>
-                        </div>
-                        <div class="col-md-8" ng-show="radio.value=='country'">
+                    <div class="col-md-8">
+                        <div class="col-md-5">
                             <select class="form-control m-b" ng-model="selectedCountry">
                                 <option ng-repeat="country in countries" ng-selected="selectedCountry.name===country.name" ng-value="{{country}}">{{country.name}}</option>
                             </select>
                         </div>
-                        <div class="col-md-8" ng-show="radio.value=='customer'">
+                        <div class="col-md-5">
                             <select class="form-control m-b" ng-model="selectedCustomer">
-                                <option ng-repeat="customer in customers" ng-selected="selectedCustomer.username==customer.username" ng-value = "{{customer}}">{{customer.username}}</option>
+                                <option ng-repeat="customer in customers" ng-selected="selectedCustomer.name==customer.name" ng-value = "{{customer}}">{{customer.name}}</option>
                             </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button ng-click="search()">Search</button>
                         </div>
                     </div>
                     <table class="table m-b-none table-expandable">
@@ -78,30 +35,31 @@
                                 <th>Field Description</th>
                                 <th>Line Description</th>
                                 <th>Last Change</th>
-                                <th ng-if="radio.value=='customer'">Commercial</th>
+                                <th>Commercial</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-if="radio.value=='country'" ng-repeat="clause in selectedCountry.clauses">
-                                <td>{{clauses[clause].swift_code}}</td>
-                                <td>{{clauses[clause].field_description}}</td>
-                                <td>{{clauses[clause].line_description}}</td>
-                                <td>{{clauses[clause].updatedAt | date:'shortDate'}}</td>
-                                <td ng-if="radio.value=='customer'">{{clauses[clause].commercial}}</td>
+                            <tr ng-repeat="clause in clauses">
+                                <td>{{clause.swift_code}}</td>
+                                <td>{{clause.field_description}}</td>
+                                <td>{{clause.line_description}}</td>
+                                <td>{{clause.updatedAt | date:'mediumDate'}}</td>
+                                <td>{{(clause.commercial)?'Com':'Non-Com'}}</td>
+                                <td><a ng-click="deleteClause(bank.id,$index)"><i class="fa fa-trash"></i>Delete</a></td>
                             </tr>
-                            <tr ng-if="radio.value=='customer'" ng-repeat="clause in selectedCustomer.clauses">
-                                <td>{{clauses[clause].swift_code}}</td>
-                                <td>{{clauses[clause].field_description}}</td>
-                                <td>{{clauses[clause].line_description}}</td>
-                                <td>{{clauses[clause].updatedAt | date:'shortDate'}}</td>
-                                <td ng-if="radio.value=='customer'">{{clauses[clause].commercial}}</td>
+                            <tr ng-if="newClause">
+                                <th>SWIFT</th>
+                                <th>Field Description</th>
+                                <th>Line Description</th>
+                                <th>Commercial</th>
                             </tr>
                             <tr ng-if="newClause">
                                 <td><input class="form-control" ng-model="clauseToBeCreated.swift_code" type="text"/></td>
                                 <td ><input class="form-control" ng-model="clauseToBeCreated.field_description" type="text"/></td>
                                 <td><input class="form-control" ng-model="clauseToBeCreated.line_description" type="text"/></td>
                                 <td></td>
-                                <td><label><input ng-model="clauseToBeCreated.commercial" type="checkbox"/>Commercial Clause</label><br/></td>
+                                <td><label><input ng-model="clauseToBeCreated.commercial" type="checkbox"/>Commercial</label><br/></td>
                                 </div>
                             </tr>
                         </tbody>
