@@ -8,7 +8,7 @@
 <div class="small-chat-box fadeInRight animated" ng-if="user" ng-show="chat">
     <div class="heading">
         <small class="chat-date pull-right">
-            15 Aug 2017
+            {{date:|date:'shortDate'}}
         </small> <span ng-if="selectedChat"></span> Small chat 
     </div>
     <div ng-if="!selectedChat" class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">

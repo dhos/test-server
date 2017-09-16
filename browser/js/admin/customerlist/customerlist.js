@@ -15,7 +15,6 @@ app.config(function($stateProvider) {
 
 app.controller('customerListCtrl', function($scope, customers, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
     $scope.customers = customers
-    console.log($scope.customers)
     $scope.deleteUser = (UserId, index) => {
         $scope.customers.splice(index, 1)
         userFactory.deleteUser({

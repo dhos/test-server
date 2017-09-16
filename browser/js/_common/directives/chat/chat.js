@@ -16,6 +16,7 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
 
                 });
             };
+            scope.date = new Date();
             scope.startChat = (userId) => {
                 if (scope.chats[userId]) {
                     scope.selectedChat = scope.chats[userId]
