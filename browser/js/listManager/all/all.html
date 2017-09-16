@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat-start="letter in letters track by $index" ng-click="letter.expanded=!letter.expanded">
+        <tr ng-repeat-start="letter in letters track by $index" expandable>
             <td>{{letter.lc_number}}</td>
             <td>{{letter.date | date:'mediumDate'}}</td>
             <td>{{letter.expire | date:'mediumDate'}}</td>
@@ -24,11 +24,12 @@
             <td>{{banks[letter.bank]}}</td>
             <td>{{picUsers[letter.pic]}}</td>
             <td>{{cspUsers[letter.csp]}}</td>
-<!--             <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
+            <td>
+              <button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
               <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
               </td> -->
         </tr>
-        <tr ng-repeat-end ng-if="letter.expanded">
+        <tr ng-repeat-end ng-show="false">
             <td colspan="12" class="secondlevel">
                 <ul class="statuses">
                     <li ng-class="{'new-stat': (letter.state>=1)}">
@@ -62,7 +63,7 @@
                         </button>
                     </li>
                     <li ng-class="{'freeze-stat': (letter.state==4)}">
-                        <button ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">                            
+                        <button ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">
                              <div class="icon-stat stat-bg">
                                 <img src="img/freeze.png" alt="freeze">
                             </div>

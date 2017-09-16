@@ -7,7 +7,9 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('newBankCtrl', function($scope, bankFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
+app.controller('newBankCtrl', function($scope, bankFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, usSpinnerService) {
+
+
 
     $scope.createBank = (bank) => {
         bankFactory.createBank(bank).then(bank => {
