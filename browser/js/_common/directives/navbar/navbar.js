@@ -22,6 +22,7 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                     scope.user = user;
                     Socket.emit('logon', user)
                 });
+                refreshLetters();
             };
 
             var removeUser = function() {
@@ -36,7 +37,7 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                     $('#search-text').val("")
                 }
             }
-            var state = {
+            scope.state = {
                 1: 'New',
                 2: 'Reviewed',
                 3: 'Amended',
@@ -52,22 +53,37 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                     scope.Amended = []
                     scope.Frozen = []
                     scope.Update = []
-                    scope.letters = letters
-                        //set states
+                    scope.updatedLetters = []
+                    scope.csp = scope.user.role === 2
+                    if (scope.user.role !== 4) {
+                        scope.letters = letters.filter(letter => {
+                            let bool = true
+                            if (scope.user.countries.indexOf(letter.country) === -1) bool = false
+                            if (scope.user.customers.indexOf(letter.client) === -1) bool = false
+                            if (scope.csp) bool = letter.csp == $scope.user.id
+                            else bool = letter.pic == scope.user.id
+                            return bool
+                        })
+                    }
+                    //set states
                     scope.letters.forEach(letter => {
-                        scope[state[letter.state]].push(letter)
-                    })
-                    scope.Frozen.forEach(frozen => {
-                        if (frozen.finDoc === 0) scope.Update.push(frozen)
+                        scope[scope.state[letter.state]].push(letter)
+                        if (letter.state == 4 && letter.finDoc === 0) scope.Update.push(letter)
+                        if ((Date.now() - Date.parse(letter.updatedAt)) < (60 * 60 * 1000 * 24 * 7)) scope.updatedLetters.push(letter)
                     })
                 })
                 lcFactory.getExpiringLetters({}).then(expiring => {
-                    scope.Expiring = expiring[0]
+                    if (scope.user.role === 4) {
+                        scope.Expiring = expiring[0].filter(letter => {
+                            let bool = true
+                            if (scope.user.countries.indexOf(letter.country) === -1) bool = false
+                            if (scope.user.customers.indexOf(letter.client) === -1) bool = false
+                            return bool
+                        })
+                    }
                 })
             }
             $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
-
-            refreshLetters();
             setUser();
 
 

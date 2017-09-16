@@ -6,24 +6,21 @@ app.config(function($stateProvider) {
         // data: {
         //     authenticate: true
         // },
-        resolve: {
-            letters: (lcFactory) => {
-                return lcFactory.getLetters({}).then(letters => {
-                    return letters
-                })
-            }
-        }
+        resolve: {}
     })
 });
 
-app.controller('allCtrl', ($scope, lcFactory, letters, $state) => {
-    $scope.letters = letters
+app.controller('allCtrl', ($scope, lcFactory, $state) => {
+
     $scope.state = {
         1: 'New',
         2: 'Reviewed',
         3: 'Amended',
         4: 'Frozen',
         5: 'Revised'
+    }
+    $scope.checkReviewed = (letter) => {
+        return (letter.state !== 2 && letter.state !== 5)
     }
     $scope.transition = (lcNumber) => {
         $state.go('singleLc', {

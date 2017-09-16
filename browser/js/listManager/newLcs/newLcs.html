@@ -10,14 +10,14 @@
             <th>Advising Bank</th>
             <th>PIC</th>
             <th>CSP</th>
-            <th>Expand</th>
+            <!-- <th>Expand</th> -->
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat-start="letter in displayLetters">
+        <tr ng-repeat-start="letter in displayLetters" ng-click="letter.expanded=!letter.expanded">
             <td>{{letter.lc_number}}</td>
-            <td>{{letter.date | date:'shortDate'}}</td>
-            <td>{{letter.expire | date:'shortDate'}}</td>
+            <td>{{letter.date | date:'mediumDate'}}</td>
+            <td>{{letter.expire | date:'mediumDate'}}</td>
             <td>{{customers[letter.client]}}</td>
             <td>{{countries[letter.country]}}</td>
             <td ng-class="{'new-stat': (letter.state==1),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
@@ -42,7 +42,7 @@
                         </button>
                     </li>
                     <li ng-class="{active: letter.state===2}">
-                        <button class="normal-stat" ng-disabled="letter.state!==2 || letter.state !== 4" ng-click="transition(letter.lc_number)">
+                        <button ng-disabled="true" class="normal-stat" ng-disabled="letter.state!==2 || letter.state !== 4" ng-click="transition(letter.lc_number)">
                             <div class="icon-stat stat-bg">
                                 <img src="img/review.png" alt="review">
                             </div>
@@ -52,7 +52,7 @@
                         </button>
                     </li>
                     <li ng-class="{active: letter.state===3}">
-                        <button class="normal-stat" ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">
+                        <button ng-disabled="true" class="normal-stat" ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">
                              <div class="icon-stat stat-bg">
                                 <img src="img/amend.png" alt="amend">
                             </div>
@@ -62,7 +62,7 @@
                         </button>
                     </li>
                     <li ng-class="{active: letter.state===4}">
-                        <button class="normal-stat" ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">                            
+                        <button ng-disabled="true" class="normal-stat" ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">                            
                              <div class="icon-stat stat-bg">
                                 <img src="img/freeze.png" alt="freeze">
                             </div>
@@ -72,7 +72,7 @@
                         </button>
                     </li>
                     <li ng-class="{active: letter.state===5}">
-                        <button class="normal-stat" ng-disabled="letter.state!==5" ng-click="transition(letter.lc_number)">
+                        <button ng-disabled="true" class="normal-stat" ng-disabled="letter.state!==5" ng-click="transition(letter.lc_number)">
                              <div class="icon-stat stat-bg">
                                 <img src="img/update.png" alt="update">
                             </div>

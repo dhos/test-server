@@ -10,23 +10,23 @@
             <th>Advising Bank</th>
             <th>PIC</th>
             <th>CSP</th>
-            <th>Expand</th>
+            <!-- <th>Expand</th> -->
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat-start="letter in letters track by $index">
+        <tr ng-repeat-start="letter in letters track by $index" ng-click="letter.expanded=!letter.expanded">
             <td>{{letter.lc_number}}</td>
-            <td>{{letter.date | date:'shortDate'}}</td>
-            <td>{{letter.expire | date:'shortDate'}}</td>
+            <td>{{letter.date | date:'mediumDate'}}</td>
+            <td>{{letter.expire | date:'mediumDate'}}</td>
             <td>{{customers[letter.client_name]}}</td>
             <td>{{countries[letter.country]}}</td>
-            <td ng-class="{'new-stat': (letter.state==1),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
+            <td ng-class="{'new-stat': (letter.state==1 || letter.state == 5),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
             <td>{{banks[letter.bank]}}</td>
             <td>{{picUsers[letter.pic]}}</td>
             <td>{{cspUsers[letter.csp]}}</td>
-            <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
+<!--             <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
               <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
-              </td>
+              </td> -->
         </tr>
         <tr ng-repeat-end ng-if="letter.expanded">
             <td colspan="12" class="secondlevel">

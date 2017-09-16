@@ -18,13 +18,12 @@ module.exports = function(server) {
                 }
             }
             io.to(Socket.id).emit('identity', Socket.id)
-            Socket.emit('ChatList', onlineUsers)
+            io.emit('ChatList', onlineUsers)
                 // chat
 
         })
         Socket.on('chat', function(message) {
-            console.log(message)
-            io.to(message.target).emit('Incoming', message)
+            io.to(onlineUsers[message.target].sid).emit('Incoming', message)
         })
     });
 

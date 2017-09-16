@@ -40,7 +40,7 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
 })
 
 router.get('/expiring', ensureAuthenticated, (req, res, next) => {
-    db.query(`select * from letters where letters.expire < NOW() + interval '30 days';`).then(expiringLetters => {
+    db.query(`select * from letters where letters.expire < NOW() + interval '30 days' and letters.expire >= NOW();`).then(expiringLetters => {
         res.json(expiringLetters)
     }).catch(err => {
         next(err)
@@ -49,10 +49,10 @@ router.get('/expiring', ensureAuthenticated, (req, res, next) => {
 
 router.get('/:id', ensureAuthenticated, (req, res, next) => {
     Letter.findOne({
-            where: {
-                lc_number: req.params.id
-            }
-        }).then(letter => {
+        where: {
+            lc_number: req.params.id
+        }
+    }).then(letter => {
         res.json(letter)
     }).catch(err => {
         next(err)
@@ -129,7 +129,7 @@ router.put('/delete', ensureAuthenticated, (req, res, next) => {
         letterToBeRemoved.save().then(letter => {
 
         })
-    })
+    }).catch(err => next(err))
 })
 
 //end deletes

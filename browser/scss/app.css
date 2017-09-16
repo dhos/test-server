@@ -1151,7 +1151,7 @@ hr { margin-top: 0; }
 .search-wrap{position: relative;    margin-left: 12px;    min-width: 220px;}
 .search-top{position: absolute;    padding: 4px;
     right: 3px;}
-.col-hf-2 { width: 16.662%; }
+.col-hf-2 { width: 12.5%; }
 .panel-heading.drops { padding: 0; font-size: 19px; border-bottom: 1px solid #eee; margin: -10px -25px 0; padding: 0 25px 15px; }
 .list-group { border-radius: 2px; margin: 0 -25px; }
 .panel .list-group-item { border-color: #edf1f2; padding: 10px 25px; }
@@ -1189,10 +1189,15 @@ ul.nav ul.nav.nav-sub li a:hover, ul.nav ul.nav.nav-sub li.active a { background
 .bg-dark ul.nav.nav-sub > li > a { margin-left: 0; }
 .bg-dark ul.nav.nav-sub > li:hover > a, .bg-dark ul.nav.nav-sub > li:focus > a,
 .bg-dark ul.nav.nav-sub > li.active > a { background: transparent; box-shadow: none; color: #ae0035; margin-left: 0; }
+.mainstatscol{    padding-right: 34px;
+    text-align: left;}
+
 
 h3, .h3 { font-size: 22px; }
-.stats-replace { font-size: 45px; padding: 27px 21px; color: #e0e0e0; }
-.total-stats { border-left: 1px solid #e2e2e2; margin: -24px -25px -24px 11px; padding: 0px 16px; text-align: center; }
+.stats-replace { font-size: 36px; padding: 27px 15px; color: #e0e0e0; }
+.total-stats { border-left: 1px solid #e2e2e2; margin: -24px -25px -24px 1px; padding: 0px 10px; text-align: center; }
+.total-stats div.row{    margin-right: -12px;
+    margin-left: -11px;}
 .divided-stats { border-bottom: 1px solid #e2e2e2; font-size: 21px; padding: 9px 10px; }
 .n-b { border: 0; }
 .table-expandable .table-expandable-arrow { display: none !important; }
@@ -1217,6 +1222,7 @@ td > button.ng-scope{    background: #69ccf6;
     border-top: 1px solid #e4e4e4;}
     .relative {position: relative; border-radius: 5px; overflow:hidden; }
     .lc-stats .col-md-1.pull-right{width: 13.333333%;}
+    .dashboard-stats .panel.padder-v{padding: 20px 15px !important;}
 /*Custom CSS End Here*/
 /*switch button css start*/
 .switch { position: relative; display: inline-block; width: 33px; height: 18px; -ms-transform: rotate(-90deg); -webkit-transform: rotate(-90deg); transform: rotate(-90deg); vertical-align: top; margin-top: 19px; }
@@ -1318,6 +1324,13 @@ table.table-expandable > tbody > tr:nth-child(2).ng-hide {
 /*expandable table css End*/
 .lc-stats div.pull-right:nth-child(5), .lc-stats div.pull-right:nth-child(6) { min-width: 140px; }
 
+
+@media (max-width: 1575px) {
+	.col-hf-2 {
+    width: 25%;
+}
+}
+
 @media (max-width: 1340px) {
  .title-space .col-md-9.text-center { width: 100%;    border-top: 1px solid #eee;
     padding-top: 6px;
@@ -1327,7 +1340,9 @@ table.table-expandable > tbody > tr:nth-child(2).ng-hide {
    .lc-stats .col-md-1.pull-right{    width: 13.3%;}
 }
 
-
+@media (max-width: 975px) {
+	 .col-hf-2 { width: 50% !important; }
+}
 @media (max-width: 992px) {
  .stats-column { text-align: left; float: left; width: 100%; margin-top: 20px; }
  .stats-drop { width: 44%; margin-bottom: 15px; }
@@ -1342,12 +1357,12 @@ table.table-expandable > tbody > tr:nth-child(2).ng-hide {
  .lc-stats .pull-right { float: left !important; border: 1px solid #e7ebee !important; width: 50% !important; padding: 10px 12px; }
 }
 @media (max-width: 1285px) {
- .col-hf-2 { width: 33%; }
+ .col-hf-2 { width: 25%; }
 }
 @media (min-width: 768px) and (max-width: 991px) {
  .hidden-sm.show { display: inherit !important; }
  .no-m-sm { margin: 0 !important; }
- .col-hf-2 { width: 50%; }
+ .col-hf-2 { width: 25%; }
 }
 /*phone*/
 @media (max-width: 767px) {
@@ -1374,8 +1389,10 @@ table.table-expandable > tbody > tr:nth-child(2).ng-hide {
  .lc-stats { width: 100%; float: left; text-align: left; margin-top: 15px; margin-left: 0px; }
  .lc-stats .pull-right { float: left !important; border: 1px solid #e7ebee !important; width: 50% !important; padding: 10px 12px; }
 }
-@media (max-width: 460px) {
- .col-hf-2 { width: 100%; }
+
+
+@media (max-width: 380px) {
+ .col-hf-2 { width: 100% !important; }
 }
 .butterbar { position: relative; height: 3px; margin-bottom: -3px; }
 .butterbar .bar { position: absolute; width: 100%; height: 0; text-indent: -9999px; background-color: #23b7e5; }

@@ -9,10 +9,8 @@ app.config(function($stateProvider) {
                     return countries
                 })
             },
-            customers: (userFactory) => {
-                return userFactory.getUsers({
-                    role: 0
-                }).then(customers => {
+            customers: (customerFactory) => {
+                return customerFactory.getCustomers({}).then(customers => {
                     return customers
                 })
             }
@@ -40,37 +38,5 @@ app.controller('newUserCtrl', function($scope, userFactory, $state, $rootScope, 
     }
     $scope.selectedCountries = {}
     $scope.selectedCustomers = {}
-    $scope.state = {
-        1: 'New',
-        2: 'Reviewed',
-        3: 'Amended',
-        4: 'Frozen',
-        5: 'Revised'
-    }
-    var refreshLetters = () => {
-        lcFactory.getLetters({}).then(letters => {
-            $scope.letters = letters
-            $scope.New = []
-            $scope.Reviewed = []
-            $scope.Amended = []
-            $scope.Frozen = []
-            $scope.Revised = []
-            $scope.Update = []
-            $scope.letters = letters
-                //set states
-            $scope.letters.forEach(letter => {
-                $scope[$scope.state[letter.state]].push(letter)
-            })
-            $scope.Frozen.forEach(frozen => {
-                if (frozen.finDoc === 0) $scope.Update.push(frozen)
-            })
-        })
-        lcFactory.getExpiringLetters({}).then(expiring => {
-            $scope.Expiring = expiring[0]
-        })
-    }
-    $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
-
-    refreshLetters();
 
 });

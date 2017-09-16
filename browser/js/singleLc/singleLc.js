@@ -18,17 +18,16 @@ app.config(function($stateProvider) {
                 })
             }
         }
-        // onEnter: (letter, user) => {
-        //     if ($scope.user.id !== $scope.letter.client) $state.go('dashboard')
-        // }
     })
 });
 
 app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauseFactory) => {
     $scope.user = user
+    console.log($scope.user)
     $scope.letter = letter
-    console.log($scope.letter, $scope.user)
-    $scope.client = $scope.user.role === 0
+    $scope.client = $scope.user.role === 2
+    $scope.owner = $scope.client ? ($scope.letter.csp == $scope.user.id) : ($scope.letter.pic == $scope.user.id)
+    $scope.manager = $scope.user.manager
 
     clauseFactory.getClauses({
         country: $scope.letter.country,
@@ -61,10 +60,11 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     $scope.approved = 0
     $scope.amended = 0
     let checkPermissions = (commercial) => {
-        return $scope.client ? !!commercial : !commercial
+        return ($scope.client ? !!commercial : !commercial) && (!$scope.manager) && ($scope.owner)
     }
     $scope.approve = clause => {
         if (!checkPermissions(clause.commercial)) return
+        clause.expanded = false
         clause.status = 1
         $scope.approved += 1
     }
@@ -80,10 +80,20 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         $scope.amended += 1
     }
     $scope.unammend = clause => {
-        if (!checkPermissions(clause.commercial)) return
-        clause.status = null
-        clause.note = null
-        $scope.amended -= 1
+        if (clause.expanded == false) clause.expanded = true
+        else {
+            if (!checkPermissions(clause.commercial)) return
+            clause.status = null
+            clause.note = null
+            $scope.amended -= 1
+        }
+    }
+    $scope.freeze = () => {
+        if ($scope.letter.state === 4) $scope.letter.state = 1
+        else $scope.letter.state = 4
+        lcFactory.updateLetter($scope.letter).then(letter => {
+            $state.go("listManager.all")
+        })
     }
     $scope.updateLetter = () => {
         var approved = true

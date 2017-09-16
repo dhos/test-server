@@ -16,13 +16,31 @@ app.config(function($stateProvider) {
                 return lcFactory.getExpiringLetters().then(expiring => {
                     return expiring
                 })
+            },
+            user: (AuthService) => {
+                return AuthService.getLoggedInUser().then(user => {
+                    return user
+                })
             }
         }
     })
 });
 
-app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring) {
+app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory) {
+    $scope.user = user
     $scope.letters = letters
+    $scope.csp = $scope.user.role === 2
+    if ($scope.user.role !== 4) {
+        $scope.letters = letters.filter(letter => {
+            let bool = true
+            if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+            if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+            if ($scope.csp) bool = letter.csp == $scope.user.id
+            else bool = letter.pic == $scope.user.id
+            return bool
+        })
+    }
+    console.log($scope.user, $scope.letters)
     $scope.countries = {}
     countryFactory.getCountries({}).then(countries => {
         countries.forEach(country => {
@@ -30,11 +48,9 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         })
     })
     $scope.customers = {}
-    userFactory.getUsers({
-        role: 0
-    }).then(customers => {
+    customerFactory.getCustomers({}).then(customers => {
         customers.forEach(customer => {
-            $scope.customers[customer.id] = customer.username
+            $scope.customers[customer.id] = customer.name
         })
     })
     $scope.state = {
@@ -44,6 +60,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         4: 'Frozen',
         5: 'Revised'
     }
+    $scope.Archived = []
     $scope.countryFilter = {
         name: "All"
     }
@@ -135,7 +152,6 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
                 $scope.Expiring = $scope.expiringLetters
             }
         }
-        console.log(letters)
         letters.forEach(letter => {
                 $scope[$scope.state[letter.state]].push(letter)
             })

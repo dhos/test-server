@@ -16,13 +16,33 @@ app.config(function($stateProvider) {
                 return lcFactory.getExpiringLetters({}).then(letters => {
                     return letters
                 })
+            },
+            user: (AuthService) => {
+                return AuthService.getLoggedInUser().then(user => {
+                    return user
+                })
             }
         }
     })
 });
 
-app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, expiring) => {
+app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user) => {
     //inits
+    $scope.user = user
+    $scope.csp = $scope.user.role === 2
+    if ($scope.user.role !== 4) {
+        $scope.letters = letters.filter(letter => {
+            let bool = true
+            if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+            if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+            if ($scope.csp) bool = letter.csp == $scope.user.id
+            else bool = letter.pic == $scope.user.id
+            return bool
+        })
+    } else {
+        $scope.letters = letters
+    }
+    console.log($scope.user, $scope.letters)
     $scope.banks = {}
         //get banks
     bankFactory.getBanks({}).then(banks => {
@@ -57,11 +77,9 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
         })
         //get customers
     $scope.customers = {}
-    userFactory.getUsers({
-        role: 0
-    }).then(customers => {
+    customerFactory.getCustomers({}).then(customers => {
         customers.forEach(customer => {
-            $scope.customers[customer.id] = customer.username
+            $scope.customers[customer.id] = customer.name
         })
     })
     $scope.state = {
@@ -77,17 +95,23 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.Revised = []
     $scope.Frozen = []
     $scope.Update = []
-    $scope.Expiring = expiring[0]
+    $scope.Expiring = expiring[0].filter(letter => {
+        let bool = true
+        if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+        if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+        return bool
+    })
     $scope.revisedCustomer = false
     $scope.reviewedCustomer = false
-    $scope.letters = letters
-        //set states
+
+    //set states
     $scope.letters.forEach(letter => {
         $scope[$scope.state[letter.state]].push(letter)
     })
     $scope.Frozen.forEach(frozen => {
-            if (frozen.finDoc === 0) $scope.Update.push(frozen)
-        })
+        if (frozen.finDoc === 0) $scope.Update.push(frozen)
+    })
+
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
             $scope.letters = letters
@@ -99,13 +123,20 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.Update = []
             $scope.amendedCustomer = false
             $scope.reviewedCustomer = false
-            $scope.letters = letters
-                //set states
+            if (scope.user.role == 4) {
+                $scope.letters = letters.filter(letter => {
+                    let bool = true
+                    if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+                    if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+                    if (scope.csp) bool = letter.csp == $scope.user.id
+                    else bool = letter.pic == scope.user.id
+                    return bool
+                })
+            }
+            //set states
             $scope.letters.forEach(letter => {
                 $scope[$scope.state[letter.state]].push(letter)
-            })
-            $scope.Frozen.forEach(frozen => {
-                if (frozen.finDoc === 0) $scope.Update.push(frozen)
+                if (letter.state == 4 && letter.finDoc === 0) scope.Update.push(letter)
             })
         })
     }
