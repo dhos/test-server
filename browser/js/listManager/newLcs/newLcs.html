@@ -10,11 +10,11 @@
             <th>Advising Bank</th>
             <th>PIC</th>
             <th>CSP</th>
-            <th>Expand</th>
+            <!-- <th>Expand</th> -->
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat-start="letter in displayLetters">
+        <tr ng-repeat-start="letter in displayLetters" ng-click="letter.expanded=!letter.expanded">
             <td>{{letter.lc_number}}</td>
             <td>{{letter.date | date:'mediumDate'}}</td>
             <td>{{letter.expire | date:'mediumDate'}}</td>

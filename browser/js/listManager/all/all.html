@@ -10,7 +10,7 @@
             <th>Advising Bank</th>
             <th>PIC</th>
             <th>CSP</th>
-            <th>Expand</th>
+            <!-- <th>Expand</th> -->
         </tr>
     </thead>
     <tbody>
@@ -24,9 +24,9 @@
             <td>{{banks[letter.bank]}}</td>
             <td>{{picUsers[letter.pic]}}</td>
             <td>{{cspUsers[letter.csp]}}</td>
-            <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
+<!--             <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
               <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
-              </td>
+              </td> -->
         </tr>
         <tr ng-repeat-end ng-if="letter.expanded">
             <td colspan="12" class="secondlevel">

@@ -26,7 +26,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user) {
+app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory) {
     $scope.user = user
     $scope.letters = letters
     if ($scope.user.role !== 4) {
@@ -44,11 +44,9 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         })
     })
     $scope.customers = {}
-    userFactory.getUsers({
-        role: 0
-    }).then(customers => {
+    customerFactory.getCustomers({}).then(customers => {
         customers.forEach(customer => {
-            $scope.customers[customer.id] = customer.username
+            $scope.customers[customer.id] = customer.name
         })
     })
     $scope.state = {
@@ -58,6 +56,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         4: 'Frozen',
         5: 'Revised'
     }
+    $scope.Archived = []
     $scope.countryFilter = {
         name: "All"
     }

@@ -10,11 +10,11 @@
             <th>Advising Bank</th>
             <th>PIC</th>
             <th>CSP</th>
-            <th></th>
+            <!-- <th></th> -->
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat-start="letter in displayLetters">
+        <tr ng-repeat-start="letter in displayLetters" ng-click="letter.expanded=!letter.expanded">
             <td>{{letter.lc_number}}</td>
             <td>{{letter.date | date:'mediumDate'}}</td>
             <td>{{letter.expire | date:'mediumDate'}}</td>
@@ -24,9 +24,9 @@
             <td>{{banks[letter.bank]}}</td>
             <td>{{picUsers[letter.pic]}}</td>
             <td>{{cspUsers[letter.csp]}}</td>
-            <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
+<!--             <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
               <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
-              </td>
+              </td> -->
         </tr>
         <tr ng-repeat-end ng-if="letter.expanded">
             <td colspan="12" class="secondlevel" ng-click="transition(letter.lc_number)">
