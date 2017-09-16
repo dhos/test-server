@@ -22,6 +22,7 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                     scope.user = user;
                     Socket.emit('logon', user)
                 });
+                refreshLetters();
             };
 
             var removeUser = function() {
@@ -83,8 +84,6 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                 })
             }
             $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
-
-            refreshLetters();
             setUser();
 
 
