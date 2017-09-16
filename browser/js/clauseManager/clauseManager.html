@@ -44,7 +44,7 @@
                                 <td>{{clause.swift_code}}</td>
                                 <td>{{clause.field_description}}</td>
                                 <td>{{clause.line_description}}</td>
-                                <td>{{clause.updatedAt | date:'shortDate'}}</td>
+                                <td>{{clause.updatedAt | date:'mediumDate'}}</td>
                                 <td>{{(clause.commercial)?'Com':'Non-Com'}}</td>
                                 <td><a ng-click="deleteClause(bank.id,$index)"><i class="fa fa-trash"></i>Delete</a></td>
                             </tr>

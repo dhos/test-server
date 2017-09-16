@@ -8,7 +8,7 @@
 <div class="small-chat-box fadeInRight animated" ng-if="user" ng-show="chat">
     <div class="heading">
         <small class="chat-date pull-right">
-            {{date:|date:'shortDate'}}
+            {{date|date:'mediumDate'}}
         </small> <span ng-if="selectedChat"></span> Small chat 
     </div>
     <div ng-if="!selectedChat" class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">
@@ -25,7 +25,7 @@
                 <div ng-class="{'left':(chat.sender.id !=user.id),'right':(chat.sender.id==user.id)}">
                 <div class="author-name">
                     {{chat.sender.firstName}} <small class="chat-date">
-                    {{chat.date | date:"shortDate"}}
+                    {{chat.date | date:"mediumDate"}}
                     </small>
                     </div>
                     <div class="chat-message active">

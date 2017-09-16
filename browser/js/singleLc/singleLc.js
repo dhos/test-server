@@ -23,6 +23,7 @@ app.config(function($stateProvider) {
 
 app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauseFactory) => {
     $scope.user = user
+    console.log($scope.user)
     $scope.letter = letter
     $scope.client = $scope.user.role === 2
     $scope.owner = $scope.client ? ($scope.letter.csp == $scope.user.id) : ($scope.letter.pic == $scope.user.id)

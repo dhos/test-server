@@ -19,6 +19,9 @@ app.controller('allCtrl', ($scope, lcFactory, $state) => {
         4: 'Frozen',
         5: 'Revised'
     }
+    $scope.checkReviewed = (letter) => {
+        return (letter.state !== 2 && letter.state !== 5)
+    }
     $scope.transition = (lcNumber) => {
         $state.go('singleLc', {
             lc_number: lcNumber

@@ -9,10 +9,8 @@ app.config(function($stateProvider) {
                     return countries
                 })
             },
-            customers: (userFactory) => {
-                return userFactory.getUsers({
-                    role: 0
-                }).then(customers => {
+            customers: (customerFactory) => {
+                return customerFactory.getCustomers({}).then(customers => {
                     return customers
                 })
             }
