@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('customerList', {
-        templateUrl: 'js/admin/customerList/customerList.html',
+        templateUrl: 'js/admin/customerlist/customerlist.html',
         controller: 'customerListCtrl',
         url: '/customers',
         resolve: {
