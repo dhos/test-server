@@ -29,14 +29,18 @@ app.config(function($stateProvider) {
 app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory) {
     $scope.user = user
     $scope.letters = letters
+    $scope.csp = $scope.user.role === 2
     if ($scope.user.role !== 4) {
         $scope.letters = letters.filter(letter => {
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
             if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+            if ($scope.csp) bool = letter.csp == $scope.user.id
+            else bool = letter.pic == $scope.user.id
             return bool
         })
     }
+    console.log($scope.user, $scope.letters)
     $scope.countries = {}
     countryFactory.getCountries({}).then(countries => {
         countries.forEach(country => {
