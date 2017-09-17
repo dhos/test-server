@@ -80,14 +80,17 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                     })
                 })
                 lcFactory.getExpiringLetters({}).then(expiring => {
-                    if (scope.user.role === 4) {
+                    if (scope.user.role !== 4) {
                         scope.Expiring = expiring[0].filter(letter => {
                             let bool = true
                             if (scope.user.countries.indexOf(letter.country) === -1) bool = false
                             if (scope.user.customers.indexOf(letter.client) === -1) bool = false
                             return bool
                         })
+                    } else {
+                        scope.Expiring = expiring[0]
                     }
+                    console.log(scope.Expiring)
                 })
             }
             $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
