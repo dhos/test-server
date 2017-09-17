@@ -28,7 +28,6 @@ app.config(function($stateProvider) {
 
 app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory) {
     $scope.user = user
-    $scope.letters = letters
     $scope.csp = $scope.user.role === 2
     if ($scope.user.role !== 4) {
         $scope.letters = letters.filter(letter => {
@@ -39,8 +38,9 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
             else bool = letter.pic == $scope.user.id
             return bool
         })
+    } else {
+        $scope.letters = letters
     }
-    console.log($scope.user, $scope.letters)
     $scope.countries = {}
     countryFactory.getCountries({}).then(countries => {
         countries.forEach(country => {
@@ -93,7 +93,12 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.amendedElite = 0
         $scope.reviewedCustomer = 0
         $scope.reviewedElite = 0
-        $scope.Expiring = $scope.expiringLetters
+        $scope.Expiring = expiring[0].filter(letter => {
+                let bool = true
+                if ($scope.csp) bool = letter.csp == $scope.user.id
+                else bool = letter.pic == $scope.user.id
+                return bool
+            })
             //set states
         letters.forEach(letter => {
                 $scope[$scope.state[letter.state]].push(letter)

@@ -42,6 +42,7 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
                 }
             })
             scope.sendChat = (message) => {
+                if (!message) return
                 let chat = {
                     text: message,
                     date: Date.now(),

@@ -44,6 +44,11 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                 4: 'Frozen',
                 5: 'Revised'
             }
+            scope.roles = {
+                1: 'PIC',
+                2: 'CSP',
+                4: 'Admin'
+            }
             var refreshLetters = () => {
                 lcFactory.getLetters({}).then(letters => {
                     scope.letters = letters
@@ -60,10 +65,12 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                             let bool = true
                             if (scope.user.countries.indexOf(letter.country) === -1) bool = false
                             if (scope.user.customers.indexOf(letter.client) === -1) bool = false
-                            if (scope.csp) bool = letter.csp == $scope.user.id
+                            if (scope.csp) bool = letter.csp == scope.user.id
                             else bool = letter.pic == scope.user.id
                             return bool
                         })
+                    } else {
+                        scope.letters = letters
                     }
                     //set states
                     scope.letters.forEach(letter => {
