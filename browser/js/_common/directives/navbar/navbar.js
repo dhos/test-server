@@ -1,4 +1,4 @@
-app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, LETTER_EVENTS, lcFactory, Socket) {
+app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, LETTER_EVENTS, lcFactory, Socket, openModal) {
     return {
         restrict: 'E',
         scope: {},
@@ -12,9 +12,13 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
             };
 
             scope.logout = function() {
-                AuthService.logout().then(function() {
-                    $state.go('landing');
-                });
+                openModal('Logout', 'Are you sure you want to logout?', 'prompt', 'confirm').then(result => {
+                    if (result) {
+                        AuthService.logout().then(function() {
+                            $state.go('landing');
+                        });
+                    }
+                })
             };
 
             var setUser = function() {
@@ -77,6 +81,9 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                         scope[scope.state[letter.state]].push(letter)
                         if (letter.state == 4 && letter.finDoc === 0) scope.Update.push(letter)
                         if ((Date.now() - Date.parse(letter.updatedAt)) < (60 * 60 * 1000 * 24 * 7)) scope.updatedLetters.push(letter)
+                    })
+                    scope.updatedLetters.sort((a, b) => {
+                        return a.updatedAt - b.updatedAt
                     })
                 })
                 lcFactory.getExpiringLetters({}).then(expiring => {

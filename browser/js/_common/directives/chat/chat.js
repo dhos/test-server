@@ -42,6 +42,7 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
                 }
             })
             scope.sendChat = (message) => {
+                console.log(scope.message)
                 if (!message) return
                 let chat = {
                     text: message,
@@ -50,7 +51,7 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
                     target: scope.chatTarget
                 }
                 $('#chatBox').val('')
-                console.log(scope.message)
+                scope.message = null
                 scope.selectedChat.push(chat)
                 Socket.emit('chat', chat)
             }

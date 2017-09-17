@@ -13,19 +13,22 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, bankFactory, letter, $state, LETTER_EVENTS, $rootScope, customerFactory) => {
+app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, bankFactory, letter, $state, LETTER_EVENTS, $rootScope, customerFactory, openModal) => {
     $scope.letter = letter
     $scope.updateLc = () => {
-        $scope.letter.state = 5
-        $scope.business_approved = false
-        $scope.client_approved = false
-        $scope.commercial_notes = {}
-        $scope.business_notes = {}
-        lcFactory.updateLetterFile($scope.letter, $scope.updatedFile).then(letter => {
-            $state.go('singleLc', {
-                lc_number: letter.lc_number
-            })
-
+        openModal('Amend LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+                $scope.letter.state = 5
+                $scope.business_approved = false
+                $scope.client_approved = false
+                $scope.commercial_notes = {}
+                $scope.business_notes = {}
+                lcFactory.updateLetterFile($scope.letter, $scope.updatedFile).then(letter => {
+                    $state.go('singleLc', {
+                        lc_number: letter.lc_number
+                    })
+                })
+            }
         })
     }
 
@@ -52,38 +55,37 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
         //get clients
     customerFactory.getCustomers({}).then(clients => {
         $scope.clients = clients
-        console.log($scope.clients)
     })
     $scope.state = {
-        1: 'New',
-        2: 'Reviewed',
-        3: 'Amended',
-        4: 'Frozen',
-        5: 'Pending Update'
-    }
-    var refreshLetters = () => {
-        lcFactory.getLetters({}).then(letters => {
-            $scope.letters = letters
-            $scope.New = []
-            $scope.Reviewed = []
-            $scope.Amended = []
-            $scope.Frozen = []
-            $scope.Update = []
-            $scope.letters = letters
-                //set states
-            $scope.letters.forEach(letter => {
-                $scope[$scope.state[letter.state]].push(letter)
-            })
-            $scope.Frozen.forEach(frozen => {
-                if (frozen.finDoc === 0) $scope.Update.push(frozen)
-            })
-        })
-        lcFactory.getExpiringLetters({}).then(expiring => {
-            $scope.Expiring = expiring[0]
-        })
-    }
-    $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
+            1: 'New',
+            2: 'Reviewed',
+            3: 'Amended',
+            4: 'Frozen',
+            5: 'Pending Update'
+        }
+        // var refreshLetters = () => {
+        //     lcFactory.getLetters({}).then(letters => {
+        //         $scope.letters = letters
+        //         $scope.New = []
+        //         $scope.Reviewed = []
+        //         $scope.Amended = []
+        //         $scope.Frozen = []
+        //         $scope.Update = []
+        //         $scope.letters = letters
+        //             //set states
+        //         $scope.letters.forEach(letter => {
+        //             $scope[$scope.state[letter.state]].push(letter)
+        //         })
+        //         $scope.Frozen.forEach(frozen => {
+        //             if (frozen.finDoc === 0) $scope.Update.push(frozen)
+        //         })
+        //     })
+        //     lcFactory.getExpiringLetters({}).then(expiring => {
+        //         $scope.Expiring = expiring[0]
+        //     })
+        // }
+        // $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
 
-    refreshLetters();
+    // refreshLetters();
 
 })

@@ -7,13 +7,14 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('newBankCtrl', function($scope, bankFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, usSpinnerService) {
-
-
-
+app.controller('newBankCtrl', function($scope, bankFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, usSpinnerService, openModal) {
     $scope.createBank = (bank) => {
-        bankFactory.createBank(bank).then(bank => {
-            $state.go('banklist')
+        openModal('Create Bank', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+                bankFactory.createBank(bank).then(bank => {
+                    $state.go('banklist')
+                })
+            }
         })
     }
 });

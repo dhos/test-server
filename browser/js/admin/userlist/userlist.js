@@ -24,9 +24,13 @@ app.controller('userlistCtrl', function($scope, users, userFactory, $state, $roo
         4: 'Admin'
     }
     $scope.deleteUser = (UserId, index) => {
-        $scope.users.splice(index, 1)
-        userFactory.deleteUser({
-            id: UserId
+        openModal('Delete User', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+                $scope.users.splice(index, 1)
+                userFactory.deleteUser({
+                    id: UserId
+                })
+            }
         })
     }
     $scope.editUser = (UserId) => {

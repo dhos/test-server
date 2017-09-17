@@ -7,11 +7,16 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('newCustomerCtrl', function($scope, customerFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
+app.controller('newCustomerCtrl', function($scope, customerFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, openModal, usSpinnerService) {
+    $scope.submitting = false
     $scope.makeUser = (user) => {
-        user.role = 0
-        customerFactory.createCustomer(user).then(user => {
-            $state.go('customerList')
+        openModal('Create Customer', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if(result){
+                
+                customerFactory.createCustomer(user).then(user => {
+                    $state.go('customerList')
+                })
+            }
         })
     }
 

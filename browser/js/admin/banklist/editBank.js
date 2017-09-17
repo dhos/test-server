@@ -16,8 +16,13 @@ app.config(function($stateProvider) {
 app.controller('editBankCtrl', function($scope, bankFactory, $state, bank, $rootScope, LETTER_EVENTS, lcFactory) {
     $scope.bank = bank
     $scope.updateBank = (bank) => {
-        bankFactory.updateBank(bank).then(bank => {
-            $state.go('banklist')
+        openModal('Edit Bank', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if(result){
+                
+                bankFactory.updateBank(bank).then(bank => {
+                    $state.go('banklist')
+                })
+            }
         })
     }
 
