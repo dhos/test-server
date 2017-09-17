@@ -73,19 +73,20 @@
                         </button>
                     </li>
                     <li>
-                        <button class="normal-stat" ng-class="{'fdupdate-stat':(letter.finDoc!=0)}" ng-disabled="letter.state!==4" ng-click="letter.toggled = !letter.toggled">
-                             <div class="icon-stat stat-bg">
+                        <button class="normal-stat" ng-class="{'fdupdate-stat':(letter.finDoc!=0)}" ng-disabled="letter.state!==4" >
+                             <div class="icon-stat stat-bg" ng-click="letter.toggled = !letter.toggled">
                                 <img src="img/update.png" alt="update">
                             </div>
-                            <div>
+                            <div ng-click="letter.toggled = !letter.toggled">
                                 <span class="main-stat"> FD Update</span><br> <span class="secnd-stat">Stage 5 of 5</span>
+                            </div>
+                            <div ng-show="letter.toggled" class="fd-updatefield">
+                                <input ng-model="letter.finDoc" placeholder="Input financial document number"/>
+                                <a class="updatedoctnum" ng-click="updateFinDoc($index)">Update</a>
                             </div>
                         </button>
                     </li>
-                    <li ng-show="letter.toggled">
-                        <input ng-model="letter.finDoc" placeholder="Input Financial Document Number"/>
-                        <button ng-click="updateFinDoc($index)">Update</button>
-                    </li>
+                    
                 </ul>
             </td>
         </tr>

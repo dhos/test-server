@@ -1148,7 +1148,7 @@ hr { margin-top: 0; }
 .main-search { padding: 21px; border: 0; width: 100%; }
 .close-search { position: absolute; top: 0; right: 0; padding: 18px; }
 .search-wrapper { display: none; }
-.search-wrap{position: relative;    margin-left: 12px;    min-width: 220px;}
+.search-wrap{position: relative;    margin-left: 12px;    max-width: 200px;}
 .search-top{position: absolute;    padding: 4px;
     right: 3px;}
 .col-hf-2 { width: 12.5%; }
@@ -1223,6 +1223,17 @@ td > button.ng-scope{    background: #69ccf6;
     .relative {position: relative; border-radius: 5px; overflow:hidden; }
     .lc-stats .col-md-1.pull-right{width: 13.333333%;}
     .dashboard-stats .panel.padder-v{padding: 20px 15px !important;}
+    .fd-updatefield{    padding-left:15px;
+    border-left: 1px solid #ccc;
+    margin-left: 11px;}
+    .fd-updatefield input{    padding: 4px 7px;
+    border: 1px solid #ccc;}
+    .updatedoctnum{    text-transform: uppercase;
+    background: #ae0035;
+    color: #fff !important;
+    padding: 6px 10px;
+    font-size: 13px;
+    border-radius: 2px;}
 /*Custom CSS End Here*/
 /*switch button css start*/
 .switch { position: relative; display: inline-block; width: 33px; height: 18px; -ms-transform: rotate(-90deg); -webkit-transform: rotate(-90deg); transform: rotate(-90deg); vertical-align: top; margin-top: 19px; }
@@ -1293,7 +1304,7 @@ body.loginpage .app-content{    margin-left: 0;}
 .small-chat-box .chat-date { opacity: 0.6; font-size: 10px; font-weight: normal; }
 .small-chat-box .content .left .chat-message { float: left; }
 .small-chat-box .content .chat-message.active { background: #6488a9; color: #fff; }
-.small-chat-box .content .chat-message { padding: 5px 10px; border-radius: 4px; font-size: 12px; line-height: 14px; background: #e6e6e8; color: #333; margin-bottom: 10px; }
+.small-chat-box .content .chat-message {  max-width: 100%;   word-wrap: break-word; padding: 5px 10px; border-radius: 4px; font-size: 12px; line-height: 14px; background: #e6e6e8; color: #333; margin-bottom: 10px; }
 .small-chat-box .content .right { text-align: right; clear: both; }
 .small-chat-box .content > div { padding-bottom: 20px; }
 .small-chat-box .content .author-name { font-weight: bold; margin-bottom: 3px; font-size: 11px; }
@@ -1308,6 +1319,14 @@ body.loginpage .app-content{    margin-left: 0;}
 .label-warning, .badge-warning { background-color: #f8ac59; color: #FFFFFF; }
 .badge { background-color: #d1dade; color: #5e5e5e; font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; padding-bottom: 4px; padding-left: 6px; padding-right: 6px; text-shadow: none; }
 .open-small-chat { height: 38px; width: 38px; display: block; background: #ae0035; padding: 9px 8px; text-align: center; color: #fff; border-radius: 50%; }
+.backbtn{    color: #fff;
+    text-transform: uppercase;
+    border: 1px solid #fff;
+    padding: 2px 6px 1px;
+    margin: 0px -7px 0 0;
+    display: inline-block;
+    border-radius: 2px;
+    font-size: 11px;}
 /*Floating chat end*/
 /*expandable table css start*/
 table.table-expandable > tbody > tr:nth-child(odd) { cursor: pointer; }
@@ -1388,6 +1407,10 @@ table.table-expandable > tbody > tr:nth-child(2).ng-hide {
  .collapse.pos-rlt .navbar-nav .dropdown-toggle { color: #fff; }
  .lc-stats { width: 100%; float: left; text-align: left; margin-top: 15px; margin-left: 0px; }
  .lc-stats .pull-right { float: left !important; border: 1px solid #e7ebee !important; width: 50% !important; padding: 10px 12px; }
+ .search-wrap{width: 100%; max-width: 100%;     margin: 0;
+    padding: 17px;}
+ .search-top{    right: 22px;}
+ .navbar-header > button{    padding: 15px 20px;}
 }
 
 

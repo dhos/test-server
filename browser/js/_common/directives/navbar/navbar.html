@@ -18,8 +18,8 @@
   <!-- navbar collapse -->
   <div class="collapse pos-rlt navbar-collapse box-shadow bg-maroon-only">
     <!-- buttons -->
-    <div class="nav navbar-nav hidden-xs">
-        <a href="#" class="btn no-shadow navbar-btn top-btn" ui-toggle-class="app-aside-folded" target=".app"><img src="img/menu.png"></a>
+    <div class="nav navbar-nav">
+        <a href="#" class="btn no-shadow navbar-btn top-btn hidden-xs" ui-toggle-class="app-aside-folded" target=".app"><img src="img/menu.png"></a>
         
         <div class="search-wrap" style="display:inline-block;">
           <a ng-click="search(searchQuery)" class="btn no-shadow top-btn search-top"><img src="img/search.png"></a>
@@ -30,9 +30,10 @@
     <!-- nabar right -->
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-            <a ng-click="logout()">
-               <img src="img/user.png">
-              <span class="visible-xs-inline">Profile & Settings</span>
+
+        <a href="JavaScript:Void(0);" style="color: #fff; display: inline-block; padding-right: 0" class="dropdown-toggle"><img src="img/user.png" style="display: inline-block; margin-right: 5px;"> <span style="border-right: 1px solid #b14546; margin-top: 2px; display: inline-block; padding-right: 15px;">Hi, John</span></a>
+            <a ng-click="logout()" class="dropdown-toggle" style="display: inline-block; color: #fff; padding-left: 10px;">
+               Logout
             </a>
             <!-- dropdown -->
             <!-- / dropdown -->
