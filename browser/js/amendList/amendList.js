@@ -15,7 +15,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('amendListCtrl', function($scope, amended, $state, countryFactory, userFactory, bankFactory, lcFactory, LETTER_EVENTS, $rootScope) {
+app.controller('amendListCtrl', function($scope, amended, $state, countryFactory, userFactory, bankFactory, lcFactory, LETTER_EVENTS, $rootScope, customerFactory) {
     //get banks
     $scope.banks = {}
     bankFactory.getBanks({}).then(banks => {
@@ -50,9 +50,7 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
         })
     })
     $scope.clients = {}
-    userFactory.getUsers({
-        role: 0
-    }).then(clients => {
+    customerFactory.getCustomers({}).then(clients => {
         clients.forEach(client => {
             $scope.clients[client.id] = client.username
         })
