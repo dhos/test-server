@@ -104,7 +104,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.amendedElite = 0
         $scope.reviewedCustomer = 0
         $scope.reviewedElite = 0
-        if (scope.user.role !== 4) {
+        if ($scope.user.role !== 4) {
             $scope.Expiring = expiring[0].filter(letter => {
                 let bool = true
                 if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
