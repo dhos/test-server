@@ -164,9 +164,9 @@ var makeUsers = () => {
     //     })
     // }
     User.create({
-        username: 'admin',
+        username: 'humantics',
         password: 'admin',
-        role: 4
+        role: 5
     })
 }
 

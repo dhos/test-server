@@ -8,8 +8,9 @@ app.config(function($stateProvider) {
         },
         resolve: {
             letter: (lcFactory, $stateParams) => {
-                return lcFactory.getSingleLetter($stateParams.lc_number, $state).then(letter => {
-                    if (!letter) $state.go('listManager.all')
+                return lcFactory.getSingleLetter($stateParams.lc_number).then(letter => {
+                    console.log('hello', letter)
+                        // if (!letter) $state.go('listManager.all')
                     return letter
                 })
             },
@@ -18,9 +19,6 @@ app.config(function($stateProvider) {
                     return user
                 })
             }
-        },
-        onEnter: () => {
-
         }
     })
 });
@@ -170,4 +168,8 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             $state.go("listManager.drafts")
         })
     }
+
+    $scope.$on('$destroy', function() {
+
+    })
 });

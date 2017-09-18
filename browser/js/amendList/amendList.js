@@ -3,7 +3,13 @@ app.config(function($stateProvider) {
         templateUrl: 'js/amendList/amendList.html',
         controller: 'amendListCtrl',
         url: '/amendList',
-        resolve: {}
+        resolve: {
+            amended: lcFactory => {
+                return lcFactory.getLetters({}).then(letters => {
+                    return letters
+                })
+            }
+        }
     })
 });
 
@@ -45,7 +51,7 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
     $scope.clients = {}
     customerFactory.getCustomers({}).then(clients => {
         clients.forEach(client => {
-            $scope.clients[client.id] = client.username
+            $scope.clients[client.id] = client.name
         })
     })
     $scope.letters = amended
