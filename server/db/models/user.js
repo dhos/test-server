@@ -77,17 +77,20 @@ module.exports = db.define('user', {
             user.salt = salt;
             user.password = hash;
         },
-        beforeUpdate: function(instance, optons, next) {
-            var SALT_FACTOR = 5;
-            if (!instance.changed('password')) return next();
-            bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
-                if (err) return next(err);
+        beforeUpdate: function(user, optons, next) {
+            console.log('hello')
+            console.log('PWD CHANGED? ' + user.changed('password'));
 
-                var salt = bcrypt.genSaltSync(10);
-                var hash = bcrypt.hashSync(instance.password, salt);
-                instance.salt = salt;
-                instance.password = hash;
-            });
+            if (!user.changed('password')) {
+                console.log('inside')
+                return next();
+            }
+            var salt = bcrypt.genSaltSync(10);
+            var hash = bcrypt.hashSync(user.password, salt);
+
+            user.set('salt', salt);
+            user.set('password', hash);
+            next()
         }
     }
 });

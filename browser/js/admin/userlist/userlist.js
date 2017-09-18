@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('userlistCtrl', function($scope, users, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
+app.controller('userlistCtrl', function($scope, users, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, openModal) {
     $scope.users = users.filter(user => {
         return user.role !== 0
     })
