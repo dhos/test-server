@@ -130,12 +130,12 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.Update = []
             $scope.amendedCustomer = false
             $scope.reviewedCustomer = false
-            if (scope.user.role !== 4) {
+            if ($scope.user.role !== 4) {
                 $scope.letters = letters.filter(letter => {
                     let bool = true
                     if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
                     if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
-                    if (scope.csp) bool = letter.csp == $scope.user.id
+                    if ($scope.csp) bool = letter.csp == $scope.user.id
                     else bool = letter.pic == scope.user.id
                     return bool
                 })

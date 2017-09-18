@@ -78,11 +78,7 @@ module.exports = db.define('user', {
             user.password = hash;
         },
         beforeUpdate: function(user, optons, next) {
-            console.log('hello')
-            console.log('PWD CHANGED? ' + user.changed('password'));
-
             if (!user.changed('password')) {
-                console.log('inside')
                 return next();
             }
             var salt = bcrypt.genSaltSync(10);
