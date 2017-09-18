@@ -5,7 +5,9 @@ app.config(function($stateProvider) {
         url: '/amendList',
         resolve: {
             amended: lcFactory => {
-                return lcFactory.getLetters({}).then(letters => {
+                return lcFactory.getLetters({
+                    state: 3
+                }).then(letters => {
                     return letters
                 })
             }
