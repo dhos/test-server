@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('editCustomer', {
-        templateUrl: 'js/admin/customerList/newCustomer.html',
+        templateUrl: 'js/admin/customerlist/newCustomer.html',
         controller: 'editCustomerCtrl',
         url: '/editCustomer/:userId',
         resolve: {
@@ -14,13 +14,17 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('editCustomerCtrl', function($scope, customerFactory, $state, customer, $rootScope, LETTER_EVENTS, lcFactory) {
+app.controller('editCustomerCtrl', function($scope, customerFactory, $state, customer, $rootScope, LETTER_EVENTS, lcFactory, openModal) {
     $scope.user = customer
     $scope.user.number = Number($scope.user.number)
-    console.log($scope.user)
     $scope.makeUser = (user) => {
-        customerFactory.updateCustomer(user).then(user => {
-            $state.go('customerList')
+        openModal('Edit Customer', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+
+                customerFactory.updateCustomer(user).then(user => {
+                    $state.go('customerList')
+                })
+            }
         })
     }
 });

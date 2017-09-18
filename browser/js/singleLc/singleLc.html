@@ -7,7 +7,7 @@
                     <h2 class="second-head">Letter of Credit</h2>
                     <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="listManager.all"> List Manager</a> <i class="fa fa-angle-right br-gap"></i> Letter of Credit</small>
                 </div>
-                <div class="col-md-9 text-center">
+<!--                 <div class="col-md-9 text-center">
                     <div class="lc-stats row">
                         <div class="col-md-1 pull-right">
                             <span class="stats-numb">{{Expiring.length}}</span>
@@ -46,7 +46,7 @@
                             <br> New LCs
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
     </div>
     <!-- / main header -->
@@ -72,7 +72,7 @@
                                     <li class="active"><a href data-toggle="tab" data-target="#tab_1"><h2 class="second-head">Checklist & Action Center</h2></a></li>
                                     <li><a href data-toggle="tab" data-target="#tab_2"><h2 class="second-head">Review Summary</h2></a></li>
                                 </ul>
-                                <div class="tab-content pad-5" style="overflow-y: scroll; height: 577px; overflow-x: hidden;">
+                                <div class="tab-content pad-5" style="overflow-y: scroll; height: 70vh; overflow-x: hidden;">
                                     <div class="tab-pane active" id="tab_1">
                                         <table class="table m-b-none table-expandable">
                                             <thead>
@@ -106,7 +106,7 @@
                                                     </td>
                                                     <td ng-if="clause.status">
                                                         <a ng-if="clause.status ==1" ng-click="unapprove(clause)"><img src="img/tick-active.png" alt="Status"></a>
-                                                        <a ng-if="clause.status == 2" ng-click="unammend(clause)"><img src="img/edit.png" alt="Status"></a>
+                                                        <a ng-if="clause.status == 2" ng-click="unammend(clause)"><img src="img/add.png" alt="Status"></a>
                                                     </td>
                                                     
 <!--                                                     <td>
@@ -142,14 +142,18 @@
                                                         <tr>
                                                             <td></td>
                                                             <td>
-                                                                <div class="text-center inline-block box-accepted">{{approved}}
-                                                                    <br> Accepted</div>
+                                                                <div class="text-center inline-block box-accepted">{{approved.length}}/
+                                                                    {{(client?commercial_clauses.length:business_clauses.length)}}
+                                                                    <br/> Accepted</div>
+                                                                    
+                                                                
+                                                                
 
                                                             </td>
                                                         </tr>
-                                                        <tr ng-repeat="(key,value) in approved.content">
-                                                            <td>{{key}}</td>
-                                                            <td>{{value}}</td>
+                                                        <tr>
+                                                            <td>Approved Clauses</td>
+                                                            <td>{{approved.join(', ')}}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -160,13 +164,13 @@
                                                         <tr>
                                                             <td></td>
                                                             <td>
-                                                                <div class="text-center inline-block box-amended">{{amended}}
+                                                                <div class="text-center inline-block box-amended">{{amended.length}}/{{(client?commercial_clauses.length:business_clauses.length)}}
                                                                     <br> Amended</div>
                                                             </td>
                                                         </tr>
-                                                        <tr ng-repeat="(key,value) in amended.content">
-                                                            <td>{{key}}</td>
-                                                            <td>{{value}}</td>
+                                                        <tr>
+                                                            <td>Amended Clauses</td>
+                                                            <td>{{amended.join(', ')}}</td>
                                                         </tr>
                                                         </tr>
                                                     </tbody>

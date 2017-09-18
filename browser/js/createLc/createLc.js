@@ -6,20 +6,25 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope, customerFactory) {
+app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope, customerFactory, openModal, clientFactory) {
     //find the users that are clients,
     //find the users that are csp/pic
     $scope.selectedCountry = {}
+    $scope.selectedCustomer = {}
     $scope.selectedClient = {}
     $scope.createLc = () => {
-        $scope.letter.state = 1
-        $scope.letter.client = $scope.selectedClient.id
-        $scope.letter.country = $scope.selectedCountry.id
-        lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
-            $state.go('singleLc', {
-                lc_number: letter.lc_number
-            })
-
+        openModal('Create LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+                $scope.letter.state = 1
+                $scope.letter.client = $scope.selectedClient.id
+                $scope.letter.customer = $scope.selectedCustomer.id
+                $scope.letter.country = $scope.selectedCountry.id
+                lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
+                    $state.go('singleLc', {
+                        lc_number: letter.lc_number
+                    })
+                })
+            }
         })
     }
 
@@ -44,39 +49,43 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
             $scope.cspUsers = cspUsers
         })
         //getclient
-    customerFactory.getCustomers({}).then(clients => {
+    customerFactory.getCustomers({}).then(customers => {
+        $scope.customers = customers
+    })
+
+    clientFactory.getClients({}).then(clients => {
         $scope.clients = clients
     })
     $scope.state = {
-        1: 'New',
-        2: 'Reviewed',
-        3: 'Amended',
-        4: 'Frozen',
-        5: 'Revised'
-    }
-    // var refreshLetters = () => {
-    //     lcFactory.getLetters({}).then(letters => {
-    //         $scope.letters = letters
-    //         $scope.New = []
-    //         $scope.Reviewed = []
-    //         $scope.Amended = []
-    //         $scope.Frozen = []
-    //         $scope.Revised = []
-    //         $scope.Update = []
-    //         $scope.letters = letters
-    //             //set states
-    //         $scope.letters.forEach(letter => {
-    //             $scope[$scope.state[letter.state]].push(letter)
-    //         })
-    //         $scope.Frozen.forEach(frozen => {
-    //             if (frozen.finDoc === 0) $scope.Update.push(frozen)
-    //         })
-    //     })
-    //     lcFactory.getExpiringLetters({}).then(expiring => {
-    //         $scope.Expiring = expiring[0]
-    //     })
-    // }
-    // $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
+            1: 'New',
+            2: 'Reviewed',
+            3: 'Amended',
+            4: 'Frozen',
+            5: 'Revised'
+        }
+        // var refreshLetters = () => {
+        //     lcFactory.getLetters({}).then(letters => {
+        //         $scope.letters = letters
+        //         $scope.New = []
+        //         $scope.Reviewed = []
+        //         $scope.Amended = []
+        //         $scope.Frozen = []
+        //         $scope.Revised = []
+        //         $scope.Update = []
+        //         $scope.letters = letters
+        //             //set states
+        //         $scope.letters.forEach(letter => {
+        //             $scope[$scope.state[letter.state]].push(letter)
+        //         })
+        //         $scope.Frozen.forEach(frozen => {
+        //             if (frozen.finDoc === 0) $scope.Update.push(frozen)
+        //         })
+        //     })
+        //     lcFactory.getExpiringLetters({}).then(expiring => {
+        //         $scope.Expiring = expiring[0]
+        //     })
+        // }
+        // $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
 
     // refreshLetters();
 

@@ -3,8 +3,8 @@
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
                 <div class="col-md-3">
-                    <h2 class="second-head">All Banks</h2>
-                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a> Banks</a></small>
+                    <h2 class="second-head">All Clients</h2>
+                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Clients</a></small>
                 </div>
             </div>
     </div>
@@ -14,27 +14,23 @@
         <div class="row row-sm">
             <div class="col-md-12">
                 <div class="panel padder-v item">
-                    <div class="table-responsive">
+                    <div class="table-responsive table-responsive">
                         <table class="table table-striped m-b-none">
                             <thead>
                                 <tr>
                                   <th colspan="9">
-                                    <div class="pull-right adduser"><a ui-sref="newBank" class="btn m-b-xs btn-success"><i class="fa fa-plus"></i> New Bank </a></div>
+                                    <div class="pull-right adduser"><a ui-sref="newCustomer" class="btn m-b-xs btn-success"><i class="fa fa-plus"></i> New Client </a></div>
                                   </th>
                                 </tr>
                                 <tr>
-                                    <th data-breakpoints="xs">Bank Name</th>
-                                    <th>Primary Email Address</th>
-                                    <th>Secondary Email Address</th>
+                                    <th>Name</th>
                                     <th data-breakpoints="xs sm">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="bank in banks track by $index">
-                                    <td>{{bank.name}}</td>
-                                    <td>{{bank.primary_email}}</td>
-                                    <td>{{bank.secondary_email}}</td>
-                                    <td><a ng-click="editBank(bank.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteBank(bank.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
+                                <tr ng-repeat="client in clients track by $index">
+                                    <td>{{client.name}}</td>
+                                    <td><a ng-click="editclient(client.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteclient(client.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
                                 </tr>
                             </tbody>
                         </table>

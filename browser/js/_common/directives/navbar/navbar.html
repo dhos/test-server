@@ -23,7 +23,7 @@
         
         <div class="search-wrap" style="display:inline-block;">
           <a ng-click="search(searchQuery)" class="btn no-shadow top-btn search-top"><img src="img/search.png"></a>
-            <input type="text" id="search-text" class="main-search" placeholder="Search by LC Number">
+            <input type="text" id="search-text" chat-enter="search(searchQuery)" class="main-search" placeholder="Search by LC Number">
         </div>
     </div>
     <!-- / buttons -->
@@ -31,7 +31,7 @@
     <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
 
-        <a href="JavaScript:Void(0);" style="color: #fff; display: inline-block; padding-right: 0" class="dropdown-toggle"><img src="img/user.png" style="display: inline-block; margin-right: 5px;"> <span style="border-right: 1px solid #b14546; margin-top: 2px; display: inline-block; padding-right: 15px;">Hi, John</span></a>
+        <a href="JavaScript:Void(0);" style="color: #fff; display: inline-block; padding-right: 0" class="dropdown-toggle"><img src="img/user.png" style="display: inline-block; margin-right: 5px;"> <span style="border-right: 1px solid #b14546; margin-top: 2px; display: inline-block; padding-right: 15px;">Hi, {{user.firstName}} ({{roles[user.role]}})</span></a>
             <a ng-click="logout()" class="dropdown-toggle" style="display: inline-block; color: #fff; padding-left: 10px;">
                Logout
             </a>
@@ -183,7 +183,7 @@
               </ul>
             </li>
             <li>
-                <a ui-sref="archive" ui-sref-active="active">
+                <a ui-sref="listManager.archive" ui-sref-active="active">
                   <i class="fa fa-archive"></i>
                   <span>Archive</span>
                 </a>
@@ -195,7 +195,7 @@
                   <span>Drafts</span>
                 </a>
               </li>
-            <li ng-if="user.role===4">
+            <li ng-if="user.role>=4">
               <a ui-sref="clauseManager" ui-sref-active="active">
                 <i class="fa fa-file-text"></i>
                 <span>Clause Manager</span>
@@ -207,17 +207,18 @@
                 <span>Analytics</span>
               </a>
             </li> -->
-            <li ng-if="user.role===4"><a href="#" class="auto"><span class="pull-right text-muted"><i class="fa fa-fw fa-angle-right text"></i><i class="fa fa-fw fa-angle-down text-active"></i></span><i class="fa fa-cloud-upload"></i><span>Upload LCs</span></a>
+            <li ng-if="user.role>=4"><a href="#" class="auto"><span class="pull-right text-muted"><i class="fa fa-fw fa-angle-right text"></i><i class="fa fa-fw fa-angle-down text-active"></i></span><i class="fa fa-cloud-upload"></i><span>Upload LCs</span></a>
                   <ul class="nav nav-sub">
                       <li><a ui-sref="createLc" ui-sref-active="active"><span>New LC</span></a></li>
-                      <li><a ui-sref="amendList" ui-sref-active="active"><span>Amended LC</span></a></li>
+                      <li><a ui-sref="amendList" ui-sref-active="active"><span>Amend an LC</span></a></li>
                   </ul>
               </li>
-              <li ng-if="user.role===4"><a href="#" class="auto"><span class="pull-right text-muted"><i class="fa fa-fw fa-angle-right text"></i><i class="fa fa-fw fa-angle-down text-active"></i></span><i class="fa fa-users"></i><span>User Master</span></a>
+              <li ng-if="user.role>=4"><a href="#" class="auto"><span class="pull-right text-muted"><i class="fa fa-fw fa-angle-right text"></i><i class="fa fa-fw fa-angle-down text-active"></i></span><i class="fa fa-users"></i><span>User Master</span></a>
                   <ul class="nav nav-sub">
                       <li><a ui-sref="userlist"><span>PIC / CSP Users</span></a></li>
                       <li><a ui-sref="banklist"><span>Banks</span></a></li>
                       <li><a ui-sref="customerList"><span>Customers</span></a></li>
+                      <li><a ui-sref="clientlist"><span>Clients</span></a></li>
                   </ul>
               </li>
           </ul>

@@ -9,6 +9,8 @@ app.config(function($stateProvider) {
         resolve: {
             letter: (lcFactory, $stateParams) => {
                 return lcFactory.getSingleLetter($stateParams.lc_number).then(letter => {
+                    console.log('hello', letter)
+                        // if (!letter) $state.go('listManager.all')
                     return letter
                 })
             },
@@ -21,13 +23,14 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauseFactory) => {
+app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauseFactory, openModal) => {
     $scope.user = user
-    console.log($scope.user)
     $scope.letter = letter
     $scope.client = $scope.user.role === 2
     $scope.owner = $scope.client ? ($scope.letter.csp == $scope.user.id) : ($scope.letter.pic == $scope.user.id)
     $scope.manager = $scope.user.manager
+    $scope.approved = []
+    $scope.amended = []
 
     clauseFactory.getClauses({
         country: $scope.letter.country,
@@ -36,9 +39,11 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         $scope.clauses = clauses.map(clause => {
             if (clause.commercial) {
                 if ($scope.letter.commercial_notes[clause.swift_code]) clause = $scope.letter.commercial_notes[clause.swift_code]
+
             } else {
                 if ($scope.letter.business_notes[clause.swift_code]) clause = $scope.letter.business_notes[clause.swift_code]
             }
+
             return clause
         })
         $scope.business_clauses = $scope.clauses.filter(clause => {
@@ -47,6 +52,17 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         $scope.commercial_clauses = $scope.clauses.filter(clause => {
             return clause.commercial == true
         })
+        if (!$scope.client) {
+            $scope.business_clauses.forEach(clause => {
+                if (clause.status == 1) $scope.approved.push(clause.swift_code)
+                else if (clause.status == 2) $scope.amended.push(clause.swift_code)
+            })
+        } else {
+            $scope.commercial_clauses.forEach(clause => {
+                if (clause.status == 1) $scope.approved.push(clause.swift_code)
+                else if (clause.status == 2) $scope.amended.push(clause.swift_code)
+            })
+        }
     })
 
 
@@ -57,8 +73,6 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         4: 'frozen',
         5: 'revised'
     }
-    $scope.approved = 0
-    $scope.amended = 0
     let checkPermissions = (commercial) => {
         return ($scope.client ? !!commercial : !commercial) && (!$scope.manager) && ($scope.owner)
     }
@@ -66,18 +80,18 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         if (!checkPermissions(clause.commercial)) return
         clause.expanded = false
         clause.status = 1
-        $scope.approved += 1
+        $scope.approved.push(clause.swift_code)
     }
     $scope.unapprove = clause => {
         if (!checkPermissions(clause.commercial)) return
         clause.status = null
-        $scope.approved -= 1
+        $scope.approved.splice($scope.approved.indexOf(clause.swift_code), 1)
     }
     $scope.ammend = clause => {
         if (!checkPermissions(clause.commercial)) return
         clause.status = 2
         clause.expanded = false
-        $scope.amended += 1
+        $scope.amended.push(clause.swift_code)
     }
     $scope.unammend = clause => {
         if (clause.expanded == false) clause.expanded = true
@@ -85,12 +99,17 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             if (!checkPermissions(clause.commercial)) return
             clause.status = null
             clause.note = null
-            $scope.amended -= 1
+            $scope.amended.splice($scope.approved.indexOf(clause.swift_code), 1)
         }
     }
     $scope.freeze = () => {
-        if ($scope.letter.state === 4) $scope.letter.state = 1
-        else $scope.letter.state = 4
+        if ($scope.letter.state === 4) {
+            $scope.letter.state = 5
+            $scope.letter.business_notes = {}
+            $scope.letter.commercial_notes = {}
+            $scope.letter.client_approved = false
+            $scope.letter.business_approved = false
+        } else $scope.letter.state = 4
         lcFactory.updateLetter($scope.letter).then(letter => {
             $state.go("listManager.all")
         })
@@ -116,8 +135,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         }
         $scope.letter.draft = false
         $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
-        console.log(complete, approved)
-        if (!complete) return
+        if (!complete) return openModal('Incomplete', 'There are clauses awaiting approval', '', 'warning')
         if (approved) {
             if ($scope.letter.state === 1) {
                 $scope.letter.state = 2
@@ -150,37 +168,8 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             $state.go("listManager.drafts")
         })
     }
-    $scope.state = {
-        1: 'New',
-        2: 'Reviewed',
-        3: 'Amended',
-        4: 'Frozen',
-        5: 'Revised'
-    }
 
-    var refreshLetters = () => {
-        lcFactory.getLetters({}).then(letters => {
-            $scope.letters = letters
-            $scope.New = []
-            $scope.Reviewed = []
-            $scope.Revised = []
-            $scope.Amended = []
-            $scope.Frozen = []
-            $scope.Update = []
-            $scope.letters = letters
-                //set states
-            $scope.letters.forEach(letter => {
-                $scope[$scope.state[letter.state]].push(letter)
-            })
-            $scope.Frozen.forEach(frozen => {
-                if (frozen.finDoc === 0) $scope.Update.push(frozen)
-            })
-        })
-        lcFactory.getExpiringLetters({}).then(expiring => {
-            $scope.Expiring = expiring[0]
-        })
-    }
-    $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
+    $scope.$on('$destroy', function() {
 
-    refreshLetters();
+    })
 });

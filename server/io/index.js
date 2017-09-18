@@ -25,6 +25,12 @@ module.exports = function(server) {
         Socket.on('chat', function(message) {
             io.to(onlineUsers[message.target].sid).emit('Incoming', message)
         })
+
+        Socket.on('disconnect', () => {
+            for (let key of Object.keys(onlineUsers)) {
+                if (Socket.id === onlineUsers[key].sid) delete onlineUsers[key]
+            }
+        })
     });
 
     return io;

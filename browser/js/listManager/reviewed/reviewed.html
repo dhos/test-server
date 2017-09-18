@@ -2,8 +2,8 @@
     <thead>
         <tr>
             <th>LC Number</th>
-            <th>Date</th>
-            <th>Expire</th>
+            <th>Start Date</th>
+            <th>Expiry Date</th>
             <th>Customer</th>
             <th>Country</th>
             <th>Status</th>
@@ -18,7 +18,7 @@
             <td>{{letter.lc_number}}</td>
             <td>{{letter.date | date:'mediumDate'}}</td>
             <td>{{letter.expire | date:'mediumDate'}}</td>
-            <td>{{customers[letter.client]}}</td>
+            <td>{{customers[letter.customer]}}</td>
             <td>{{countries[letter.country]}}</td>
             <td ng-class="{'new-stat': (letter.state==1),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
             <td>{{banks[letter.bank]}}</td>
@@ -42,7 +42,7 @@
                         </button>
                     </li>
                     <li ng-class="{active: letter.state===2}">
-                        <button ng-disabled="true" class="review-stat" ng-disabled="letter.state!==2 || letter.state !== 4" ng-click="transition(letter.lc_number)">
+                        <button ng-disabled="true" class="review-stat" ng-disabled="letter.state!==2 || letter.state !== 5" ng-click="transition(letter.lc_number)">
                             <div class="icon-stat stat-bg">
                                 <img src="img/review.png" alt="review">
                             </div>

@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="/angular-material/angular-material.css">
     <script src="/lodash/index.js"></script>
     <script
-        src="http://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+      crossorigin="anonymous"></script>
     <script src="/angular/angular.js"></script>
     <script src="/angular-animate/angular-animate.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
@@ -25,6 +25,8 @@
     <script src="/ng-file-upload/dist/ng-file-upload.js"></script>
     <script src="/angular-aria/angular-aria.js"></script>
     <script src="/angular-material/angular-material.js"></script>
+    <script type="text/javascript" src="http://fgnass.github.io/spin.js/spin.min.js"></script>
+    <script src="/angular-spinner/dist/angular-spinner.min.js"></script>
     <script src="/socket.io-client/dist/socket.io.js"></script>
     <script src="/main.js"></script>
 </head>
@@ -35,15 +37,17 @@
         <div id="content" class="app-content" role="main">
             <div class="app-content-body ">
                 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
-                    app.settings.asideFolded = false; 
+                    app.settings.asideFolded = false;
                     app.settings.asideDock = false;
                 ">
                     <div ui-view></div>
                 </div>
             </div>
+            <chat></chat>
         </div>
-        <chat></chat>
+        <span  us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span> 
         <!-- <footer></footer> -->
+        <foot></foot>
     </div>
 </body>
 </html>

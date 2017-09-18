@@ -34,7 +34,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
         $scope.letters = letters.filter(letter => {
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
-            if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+            if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
             if ($scope.csp) bool = letter.csp == $scope.user.id
             else bool = letter.pic == $scope.user.id
             return bool
@@ -95,12 +95,19 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.Revised = []
     $scope.Frozen = []
     $scope.Update = []
-    $scope.Expiring = expiring[0].filter(letter => {
-        let bool = true
-        if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
-        if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
-        return bool
-    })
+    if ($scope.user.role !== 4) {
+        $scope.Expiring = expiring[0].filter(letter => {
+            let bool = true
+            if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+            if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
+            if ($scope.csp) bool = letter.csp == $scope.user.id
+            else bool = letter.pic == $scope.user.id
+            return bool
+        })
+    } else {
+        $scope.Expiring = expiring[0]
+    }
+    console.log($scope.Expiring)
     $scope.revisedCustomer = false
     $scope.reviewedCustomer = false
 
@@ -123,12 +130,12 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.Update = []
             $scope.amendedCustomer = false
             $scope.reviewedCustomer = false
-            if (scope.user.role == 4) {
+            if ($scope.user.role !== 4) {
                 $scope.letters = letters.filter(letter => {
                     let bool = true
                     if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
-                    if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
-                    if (scope.csp) bool = letter.csp == $scope.user.id
+                    if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
+                    if ($scope.csp) bool = letter.csp == $scope.user.id
                     else bool = letter.pic == scope.user.id
                     return bool
                 })

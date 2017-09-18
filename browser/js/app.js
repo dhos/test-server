@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('elite-lc-portal', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'ngFileUpload', 'ngAnimate', 'luegg.directives']);
+window.app = angular.module('elite-lc-portal', ['fsaPreBuilt', 'ui.router', 'ui.bootstrap', 'ngMaterial', 'ngFileUpload', 'ngAnimate', 'angularSpinner', 'luegg.directives']);
 
 app.config(function($urlRouterProvider, $locationProvider, $compileProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
@@ -14,13 +14,11 @@ app.config(function($urlRouterProvider, $locationProvider, $compileProvider) {
 });
 
 // This app.run is for controlling access to specific states.
-app.run(function($rootScope, AuthService, $state) {
-
+app.run(function($rootScope, AuthService, $state, SpinnerService) {
     // The given state requires an authenticated user.
     var destinationStateRequiresAuth = function(state) {
         return state.data && state.data.authenticate;
     };
-
     // $stateChangeStart is an event fired
     // whenever the process of changing a state begins.
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {

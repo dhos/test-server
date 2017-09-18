@@ -25,7 +25,7 @@
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <button ng-click="search()">Search</button>
+                            <button class="btn m-b-xd btn-success" ng-click="search()">Search</button>
                         </div>
                     </div>
                     <table class="table m-b-none table-expandable">
@@ -46,7 +46,7 @@
                                 <td>{{clause.line_description}}</td>
                                 <td>{{clause.updatedAt | date:'mediumDate'}}</td>
                                 <td>{{(clause.commercial)?'Com':'Non-Com'}}</td>
-                                <td><a ng-click="deleteClause(bank.id,$index)"><i class="fa fa-trash"></i>Delete</a></td>
+                                <td><a ng-click="deleteClause(clause.id,$index)"><i class="fa fa-trash"></i>Delete</a></td>
                             </tr>
                             <tr ng-if="newClause">
                                 <th>SWIFT</th>
@@ -65,7 +65,7 @@
                         </tbody>
                     </table>
                     <hr>
-                    <a ng-if="!newClause" ng-click="toggleNew()" class="btn m-b-xs  btn-success pull-right">+ New Clause</a>
+                    <a ng-if="!newClause" ng-show="queried" ng-click="toggleNew()" class="btn m-b-xs  btn-success pull-right">+ New Clause</a>
                     <a ng-if="newClause" ng-click="toggleNew()" class="btn m-b-xs btn-sucess pull-right">Cancel</a>
                     <a ng-if="newClause" ng-click="createClause(clauseToBeCreated)" class="btn m-b-xs btn-primary pull-right">Save</a>
                     <div class="clearfix"></div>

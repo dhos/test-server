@@ -16,9 +16,14 @@ app.config(function($stateProvider) {
 app.controller('customerListCtrl', function($scope, customers, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
     $scope.customers = customers
     $scope.deleteUser = (UserId, index) => {
-        $scope.customers.splice(index, 1)
-        userFactory.deleteUser({
-            id: UserId
+        openModal('Delete Customer', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+
+                $scope.customers.splice(index, 1)
+                customerFactory.deleteUser({
+                    id: UserId
+                })
+            }
         })
     }
     $scope.editCustomer = (UserId) => {

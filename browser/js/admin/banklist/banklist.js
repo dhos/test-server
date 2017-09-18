@@ -16,11 +16,13 @@ app.config(function($stateProvider) {
 app.controller('banklistCtrl', function($scope, banks, bankFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
     $scope.banks = banks
     $scope.deleteBank = (bankId, index) => {
-        $scope.banks.splice(index, 1)
-        bankFactory.deleteBank({
-            id: bankId
-        }).then(banks => {
-            $scope.banks = banks
+        openModal('Delete Bank', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            $scope.banks.splice(index, 1)
+            bankFactory.deleteBank({
+                id: bankId
+            }).then(banks => {
+                $scope.banks = banks
+            })
         })
     }
     $scope.editBank = (bankId) => {

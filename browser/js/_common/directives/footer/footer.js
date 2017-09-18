@@ -1,4 +1,4 @@
-app.directive('footer', function($state) {
+app.directive('foot', function($state) {
     return {
         restrict: 'E',
         scope: {},

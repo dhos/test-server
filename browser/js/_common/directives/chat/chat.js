@@ -18,6 +18,7 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
             };
             scope.date = new Date();
             scope.startChat = (userId) => {
+                scope.newMessage = false
                 if (scope.chats[userId]) {
                     scope.selectedChat = scope.chats[userId]
                 } else {
@@ -35,6 +36,7 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
                 scope.contactList = onlineUsers
             })
             Socket.on('Incoming', function(newChat) {
+                scope.newMessage = true
                 if (scope.chats[newChat.sender.id]) {
                     scope.chats[newChat.sender.id].push(newChat)
                 } else {
@@ -42,6 +44,8 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
                 }
             })
             scope.sendChat = (message) => {
+                console.log(scope.message)
+                if (!message) return
                 let chat = {
                     text: message,
                     date: Date.now(),
@@ -49,7 +53,7 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
                     target: scope.chatTarget
                 }
                 $('#chatBox').val('')
-                console.log(scope.message)
+                scope.message = null
                 scope.selectedChat.push(chat)
                 Socket.emit('chat', chat)
             }

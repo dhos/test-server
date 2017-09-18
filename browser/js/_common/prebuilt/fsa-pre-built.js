@@ -158,49 +158,73 @@
         };
 
     });
+    app.service('SpinnerService', function($rootScope, usSpinnerService, $http) {
+        var whenToSpin = function() {
+            var request_count = 0;
+
+            for (var i = 0; i < $http.pendingRequests.length; ++i) {
+                if ($http.pendingRequests[i].method.toLowerCase() === 'post' ||
+                    $http.pendingRequests[i].method.toLowerCase() === 'put')
+                    request_count += 1;
+            }
+
+            return request_count > 0;
+        };
+
+        $rootScope.$watch(whenToSpin, function(hasPending) {
+            debugger
+            if (hasPending) {
+                usSpinnerService.spin('spinner-1');
+            } else {
+                usSpinnerService.stop('spinner-1');
+            }
+        });
+    });
+
 
 })();
 
 
-window.EventEmitter = function() {
-    this.subscribers = {};
-};
-(function(EE) {
+// window.EventEmitter = function() {
+//     this.subscribers = {};
+// };
+// (function(EE) {
 
-    // To be used like:
-    // instanceOfEE.on('touchdown', cheerFn);
-    EE.prototype.on = function(eventName, eventListener) {
+//     // To be used like:
+//     // instanceOfEE.on('touchdown', cheerFn);
+//     EE.prototype.on = function(eventName, eventListener) {
 
-        // If this instance's subscribers object does not yet
-        // have the key matching the given event name, create the
-        // key and assign the value of an empty array.
-        if (!this.subscribers[eventName]) {
-            this.subscribers[eventName] = [];
-        }
+//         // If this instance's subscribers object does not yet
+//         // have the key matching the given event name, create the
+//         // key and assign the value of an empty array.
+//         if (!this.subscribers[eventName]) {
+//             this.subscribers[eventName] = [];
+//         }
 
-        // Push the given listener function into the array
-        // located on the instance's subscribers object.
-        this.subscribers[eventName].push(eventListener);
+//         // Push the given listener function into the array
+//         // located on the instance's subscribers object.
+//         this.subscribers[eventName].push(eventListener);
 
-    };
+//     };
 
-    // To be used like:
-    // instanceOfEE.emit('codec', 'Hey Snake, Otacon is calling!');
-    EE.prototype.emit = function(eventName) {
+//     // To be used like:
+//     // instanceOfEE.emit('codec', 'Hey Snake, Otacon is calling!');
+//     EE.prototype.emit = function(eventName) {
 
-        // If there are no subscribers to this event name, why even?
-        if (!this.subscribers[eventName]) {
-            return;
-        }
+//         // If there are no subscribers to this event name, why even?
+//         if (!this.subscribers[eventName]) {
+//             return;
+//         }
 
-        // Grab the remaining arguments to our emit function.
-        var remainingArgs = [].slice.call(arguments, 1);
+//         // Grab the remaining arguments to our emit function.
+//         var remainingArgs = [].slice.call(arguments, 1);
 
-        // For each subscriber, call it with our arguments.
-        this.subscribers[eventName].forEach(function(listener) {
-            listener.apply(null, remainingArgs);
-        });
+//         // For each subscriber, call it with our arguments.
+//         this.subscribers[eventName].forEach(function(listener) {
+//             listener.apply(null, remainingArgs);
+//         });
 
-    };
+//     };
 
-})(window.EventEmitter);
+
+// })(window.EventEmitter);

@@ -2,13 +2,13 @@
     <span ng-if="newMessage" class="badge badge-warning pull-right">!</span>
     <a class="open-small-chat" ng-click="open()">
         <i class="fa fa-comments" ng-show="!chat"></i>
-        <i class="fa fa-remove" ng-show="chat">X</i>
+        <i class="fa fa-remove" ng-show="chat"></i>
     </a>
 </div>
-<div class="small-chat-box fadeInRight animated" ng-if="user" ng-show="chat">
+<div class="small-chat-box" ng-if="user" ng-show="chat">
     <div class="heading">
         <small class="chat-date pull-right">
-            <a ng-click="back()" class="backbtn"><i class="fa fa-angle-left"></i> Back</a>
+            <a ng-if="selectedChat" ng-click="back()" class="backbtn"><i class="fa fa-angle-left"></i> Back</a>
         </small> <span ng-if="selectedChat"></span> Admin 
     </div>
     <div ng-if="!selectedChat" class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">

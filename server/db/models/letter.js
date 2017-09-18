@@ -41,6 +41,9 @@ module.exports = db.define('letter', {
     csp: {
         type: Sequelize.INTEGER
     },
+    customer: {
+        type: Sequelize.INTEGER
+    },
     contract: {
         type: Sequelize.STRING
     },

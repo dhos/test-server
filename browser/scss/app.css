@@ -1334,6 +1334,12 @@ table.table-expandable.table-hover > tbody > tr:nth-child(even):hover td { backg
 table.table-expandable > tbody > tr div.table-expandable-arrow { background: transparent url(../img/arrows.png) no-repeat scroll 0px -16px; width: 16px; height: 16px; display: block; }
 table.table-expandable > tbody > tr div.table-expandable-arrow.up { background-position: 0px 0px; }
 table.table-sticky-header th { color: #FFF; background-color: #555; }
+table.table-expandable > tbody > tr:nth-child(2).ng-show {
+  transition:max-height 0.5s ease-in-out;
+}
+table.table-expandable > tbody > tr:nth-child(2).ng-hide {
+  transition:0px 0.5s ease-in-out;
+}
 /*expandable table css End*/
 .lc-stats div.pull-right:nth-child(5), .lc-stats div.pull-right:nth-child(6) { min-width: 140px; }
 
@@ -1348,7 +1354,7 @@ table.table-sticky-header th { color: #FFF; background-color: #555; }
  .title-space .col-md-9.text-center { width: 100%;    border-top: 1px solid #eee;
     padding-top: 6px;
     margin-top: 10px;    margin-left: 5px;
-    margin-right: 5px;} 
+    margin-right: 5px;}
     .lc-stats > div.pull-right{width: 16.66666667%;}
    .lc-stats .col-md-1.pull-right{    width: 13.3%;}
 }

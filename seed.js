@@ -23,11 +23,11 @@ fs.createReadStream(sample)
     })
     .on('end', () => {
         //organizeData(csvData)
-        // makeUsers()
-        // makeCountries()
-        // makeBanks()
-        // makeClauses()
-        makeCustomers()
+        makeUsers()
+            // makeCountries()
+            // makeBanks()
+            // makeClauses()
+            // makeCustomers()
 
     })
 
@@ -164,9 +164,9 @@ var makeUsers = () => {
     //     })
     // }
     User.create({
-        username: 'admin',
+        username: 'humantics',
         password: 'admin',
-        role: 4
+        role: 5
     })
 }
 
