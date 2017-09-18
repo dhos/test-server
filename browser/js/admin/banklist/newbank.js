@@ -7,7 +7,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('newBankCtrl', function($scope, bankFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, usSpinnerService, openModal) {
+app.controller('newBankCtrl', function($scope, bankFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, openModal) {
     $scope.createBank = (bank) => {
         openModal('Create Bank', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
