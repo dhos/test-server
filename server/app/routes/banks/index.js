@@ -43,7 +43,7 @@ router.post('/', ensureAuthenticated, (req, res, next) => {
     Bank.create(req.body).then(bank => {
         res.json(bank)
     }).catch(err => {
-        return next(err)
+        next(err)
     })
 })
 
@@ -64,7 +64,7 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
     }).then(updatedBank => {
         res.json(updatedBank)
     }).catch((err) => {
-        return next(err)
+        next(err)
     })
 })
 
