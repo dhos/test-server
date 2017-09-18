@@ -18,6 +18,7 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
             };
             scope.date = new Date();
             scope.startChat = (userId) => {
+                scope.newMessage = false
                 if (scope.chats[userId]) {
                     scope.selectedChat = scope.chats[userId]
                 } else {
@@ -35,6 +36,7 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
                 scope.contactList = onlineUsers
             })
             Socket.on('Incoming', function(newChat) {
+                scope.newMessage = true
                 if (scope.chats[newChat.sender.id]) {
                     scope.chats[newChat.sender.id].push(newChat)
                 } else {
