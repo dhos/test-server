@@ -33,7 +33,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.letters = letters.filter(letter => {
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
-            if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+            if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
             if ($scope.csp) bool = letter.csp == $scope.user.id
             else bool = letter.pic == $scope.user.id
             return bool
@@ -131,17 +131,17 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         if ($scope.customerFilter.name !== "All") {
             if ($scope.countryFilter.name !== "All") {
                 var letters = $scope.letters.filter(letter => {
-                    return letter.client == $scope.customerFilter.filter && letter.country == $scope.countryFilter.filter
+                    return letter.customer == $scope.customerFilter.filter && letter.country == $scope.countryFilter.filter
                 })
                 $scope.Expiring = $scope.expiringLetters.filter(letter => {
-                    return letter.client == $scope.customerFilter.filter && letter.country == $scope.countryFilter.filter
+                    return letter.customer == $scope.customerFilter.filter && letter.country == $scope.countryFilter.filter
                 })
             } else {
                 var letters = $scope.letters.filter(letter => {
-                    return letter.client == $scope.customerFilter.filter
+                    return letter.customer == $scope.customerFilter.filter
                 })
                 $scope.Expiring = $scope.expiringLetters.filter(letter => {
-                    return letter.client == $scope.customerFilter.filter
+                    return letter.customer == $scope.customerFilter.filter
                 })
             }
         } else {

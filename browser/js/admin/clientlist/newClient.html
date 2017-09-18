@@ -1,0 +1,39 @@
+<div class="col-md-12">
+    <!-- main header -->
+    <div class="bg-light lter wrapper-md">
+        <div class="row title-space">
+                <div class="col-md-3">
+                    <h2 class="second-head">Clients</h2>
+                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="clientlist"> Clients</a> <i class="fa fa-angle-right br-gap"></i> Client</small>
+                </div>
+            </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md">
+        <!-- stats -->
+        <div class="row row-sm">
+            <div class="col-md-12">
+                <div class="panel padder-v item">
+                    <form name="client_form" class="bs-example form-horizontal" novalidate>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Client Name</label>
+                            <div class="col-lg-6">
+                                <input name="client_name" id="client_name" ng-model="client.name" type="input" class="form-control" required>
+                                  <span ng-show="client_form.client_name.$error.required && client_form.client_name.$dirty">
+                                    Name is required.
+                                  </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" ng-disabled="!client_form.$valid" ng-click="createclient(client)" class="btn m-b-xs btn-success">Save</button>
+                                <a ui-sref="clientlist" class="btn m-b-xs w-xs btn-dark">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- / stats -->
+    </div>
+</div>

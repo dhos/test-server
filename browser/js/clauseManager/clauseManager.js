@@ -14,6 +14,9 @@ app.config(function($stateProvider) {
                     return customers
                 })
             }
+        },
+        data: {
+            authenticate: true
         }
     })
 });

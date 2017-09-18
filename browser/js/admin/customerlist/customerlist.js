@@ -17,10 +17,10 @@ app.controller('customerListCtrl', function($scope, customers, userFactory, $sta
     $scope.customers = customers
     $scope.deleteUser = (UserId, index) => {
         openModal('Delete Customer', 'Are you sure?', 'prompt', 'confirm').then(result => {
-            if(result){
-                
+            if (result) {
+
                 $scope.customers.splice(index, 1)
-                userFactory.deleteUser({
+                customerFactory.deleteUser({
                     id: UserId
                 })
             }

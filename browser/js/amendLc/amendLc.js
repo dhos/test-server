@@ -53,8 +53,8 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
             $scope.cspUsers = cspUsers
         })
         //get clients
-    customerFactory.getCustomers({}).then(clients => {
-        $scope.clients = clients
+    customerFactory.getCustomers({}).then(customers => {
+        $scope.customers = customers
     })
     $scope.state = {
             1: 'New',

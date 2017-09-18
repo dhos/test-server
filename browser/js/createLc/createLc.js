@@ -6,16 +6,18 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope, customerFactory, openModal) {
+app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope, customerFactory, openModal, clientFactory) {
     //find the users that are clients,
     //find the users that are csp/pic
     $scope.selectedCountry = {}
+    $scope.selectedCustomer = {}
     $scope.selectedClient = {}
     $scope.createLc = () => {
         openModal('Create LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 $scope.letter.state = 1
                 $scope.letter.client = $scope.selectedClient.id
+                $scope.letter.customer = $scope.selectedCustomer.id
                 $scope.letter.country = $scope.selectedCountry.id
                 lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
                     $state.go('singleLc', {
@@ -47,7 +49,11 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
             $scope.cspUsers = cspUsers
         })
         //getclient
-    customerFactory.getCustomers({}).then(clients => {
+    customerFactory.getCustomers({}).then(customers => {
+        $scope.customers = customers
+    })
+
+    clientFactory.getClients({}).then(clients => {
         $scope.clients = clients
     })
     $scope.state = {

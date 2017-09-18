@@ -83,12 +83,10 @@ module.exports = db.define('user', {
             bcrypt.genSalt(SALT_FACTOR, function(err, salt) {
                 if (err) return next(err);
 
-                bcrypt.hash(instance.get('password'), salt, null, function(err, hash) {
-                    if (err) return next(err);
-                    instance.set('password', hash);
-                    console.log(instance.get('password'))
-                    next()
-                });
+                var salt = bcrypt.genSaltSync(10);
+                var hash = bcrypt.hashSync(instance.password, salt);
+                instance.salt = salt;
+                instance.password = hash;
             });
         }
     }
