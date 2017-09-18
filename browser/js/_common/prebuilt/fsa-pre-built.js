@@ -203,4 +203,33 @@ window.EventEmitter = function() {
 
     };
 
+    app.service('SpinnerService', function($rootScope, usSpinnerService, $http, $timeout) {
+        $rootScope.$on('us-spinner:spin', function(event, key) {
+          $rootScope.spinneractive = true;
+        });
+
+        $rootScope.$on('us-spinner:stop', function(event, key) {
+          $rootScope.spinneractive = false;
+        });
+
+        var whenToSpin = function() {
+            var request_count = 0;
+
+            for(var i = 0; i < $http.pendingRequests.length; ++i) {
+              if($http.pendingRequests[i].method.toLowerCase() === 'post'
+              || $http.pendingRequests[i].method.toLowerCase() === 'put')
+                request_count+=1;
+            }
+
+            return request_count > 0;
+        };
+
+        $rootScope.$watch(whenToSpin, function(hasPending) {
+              if (hasPending) {
+                usSpinnerService.spin('spinner-1');
+              }
+              usSpinnerService.stop('spinner-1');
+        });
+    });
+
 })(window.EventEmitter);
