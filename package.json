@@ -68,6 +68,7 @@
     "sinon": "^1.17.7",
     "socket.io": "^2.0.3",
     "streamifier": "^0.1.1",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "angular-spinner": "1.0.1"
   }
 }
