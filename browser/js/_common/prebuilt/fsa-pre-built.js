@@ -203,7 +203,7 @@ window.EventEmitter = function() {
 
     };
 
-    app.service('SpinnerService', function($rootScope, usSpinnerService, $http, $timeout) {
+    app.service('SpinnerService', function($rootScope, usSpinnerService, $http) {
         var whenToSpin = function() {
             var request_count = 0;
 
