@@ -26,10 +26,10 @@ module.exports = function(server) {
             io.to(onlineUsers[message.target].sid).emit('Incoming', message)
         })
 
-        Socket.on('disconnect', ()=>{
-            // for(let key of Object.keys(onlineUsers)){
-
-            // }
+        Socket.on('disconnect', () => {
+            for (let key of Object.keys(onlineUsers)) {
+                if (Socket.id === onlineUsers[key].sid) delete oblineUsers[key]
+            }
         })
     });
 

@@ -44,7 +44,7 @@ app.controller('clauseManagerCtrl', function($scope, countries, countryFactory, 
         })
     }
     $scope.deleteClause = (clauseId, index) => {
-        openModal('Delete Bank', 'Are you sure?', 'prompt', 'confirm').then(result => {
+        openModal('Delete Clause', 'Are you sure?', 'prompt', 'confirm').then(result => {
             $scope.clauses.splice(index, 1)
 
             clauseFactory.deleteClause({
