@@ -58,6 +58,7 @@ router.post('/', ensureAuthenticated, (req, res, next) => {
 //deletes
 
 router.delete('/', ensureAuthenticated, (req, res, next) => {
+    if (!req.query) res.sendStatus(200)
     Clause.destroy({
         where: req.query
     }).then(() => {

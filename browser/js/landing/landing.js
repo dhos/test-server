@@ -15,28 +15,14 @@ app.config(function($stateProvider) {
 
 app.controller('landingCtrl', function($scope, AuthService, userFactory, $state) {
     jQuery('body').addClass('loginpage')
-    $scope.login = {};
-    $scope.error = null;
-    $scope.createUser = () => {
-        console.log('hello')
-        let login = {
-            username: 'test',
-            password: 'test'
-        }
-        userFactory.createUser({
-            user: login
-        }).then(user => {
-            jQuery('body').removeClass('loginpage')
-            AuthService.login(login)
-        })
-    }
-
-    console.log(jQuery('body'))
+    $scope.authError = null;
     $scope.sendLogin = function(loginInfo) {
         $scope.error = null;
         AuthService.login(loginInfo).then(function() {
             jQuery('body').removeClass('loginpage')
             $state.transitionTo('dashboard');
+        }).catch(err => {
+            $scope.authError = err.message.data;
         })
     };
 })

@@ -14,17 +14,22 @@ app.config(function($stateProvider) {
                     return customers
                 })
             }
+        },
+        data: {
+            authenticate: true
         }
     })
 });
 
-app.controller('clauseManagerCtrl', function($scope, countries, countryFactory, clauseFactory, customers, userFactory) {
+app.controller('clauseManagerCtrl', function($scope, countries, countryFactory, clauseFactory, customers, userFactory, openModal) {
     $scope.countries = countries
     $scope.customers = customers
     $scope.clauseToBeCreated = {}
+    $scope.queried = false
     $scope.selectedCountry = $scope.countries[0]
     $scope.selectedCustomer = $scope.customers[0]
     $scope.search = () => {
+        $scope.queried = true
         clauseFactory.getClauses({
             country: $scope.selectedCountry.id,
             customer: $scope.selectedCustomer.id
@@ -36,15 +41,20 @@ app.controller('clauseManagerCtrl', function($scope, countries, countryFactory, 
         clause.customer = $scope.selectedCustomer.id
         clause.country = $scope.selectedCountry.id
         clauseFactory.createClause(clause).then(createdClause => {
+            $scope.clauseToBeCreated = null
+            $scope.newClause = false
             $scope.clauses.push(createdClause)
         })
     }
     $scope.deleteClause = (clauseId, index) => {
-        $scope.clauses.splice(index, 1)
-        clauseFactory.deleteClause({
-            id: clauseId
-        }).then(clauses => {
-            $scope.clauses = clauses
+        openModal('Delete Clause', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            $scope.clauses.splice(index, 1)
+
+            clauseFactory.deleteClause({
+                id: clauseId
+            }).then(clauses => {
+
+            })
         })
     }
     $scope.toggleNew = () => {

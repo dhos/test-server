@@ -1,4 +1,4 @@
-app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, LETTER_EVENTS, lcFactory, Socket) {
+app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, LETTER_EVENTS, lcFactory, Socket, openModal) {
     return {
         restrict: 'E',
         scope: {},
@@ -12,9 +12,13 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
             };
 
             scope.logout = function() {
-                AuthService.logout().then(function() {
-                    $state.go('landing');
-                });
+                openModal('Logout', 'Are you sure you want to logout?', 'prompt', 'confirm').then(result => {
+                    if (result) {
+                        AuthService.logout().then(function() {
+                            $state.go('landing');
+                        });
+                    }
+                })
             };
 
             var setUser = function() {
@@ -64,7 +68,7 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                         scope.letters = letters.filter(letter => {
                             let bool = true
                             if (scope.user.countries.indexOf(letter.country) === -1) bool = false
-                            if (scope.user.customers.indexOf(letter.client) === -1) bool = false
+                            if (scope.user.customers.indexOf(letter.customer) === -1) bool = false
                             if (scope.csp) bool = letter.csp == scope.user.id
                             else bool = letter.pic == scope.user.id
                             return bool
@@ -78,15 +82,22 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                         if (letter.state == 4 && letter.finDoc === 0) scope.Update.push(letter)
                         if ((Date.now() - Date.parse(letter.updatedAt)) < (60 * 60 * 1000 * 24 * 7)) scope.updatedLetters.push(letter)
                     })
+                    scope.updatedLetters.sort((a, b) => {
+                        return a.updatedAt - b.updatedAt
+                    })
                 })
                 lcFactory.getExpiringLetters({}).then(expiring => {
-                    if (scope.user.role === 4) {
+                    if (scope.user.role !== 4) {
                         scope.Expiring = expiring[0].filter(letter => {
                             let bool = true
                             if (scope.user.countries.indexOf(letter.country) === -1) bool = false
-                            if (scope.user.customers.indexOf(letter.client) === -1) bool = false
+                            if (scope.user.customers.indexOf(letter.customer) === -1) bool = false
+                            if (scope.csp) bool = letter.csp == scope.user.id
+                            else bool = letter.pic == scope.user.id
                             return bool
                         })
+                    } else {
+                        scope.Expiring = expiring[0]
                     }
                 })
             }

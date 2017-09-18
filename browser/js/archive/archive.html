@@ -1,98 +1,94 @@
-<div class="col-md-12">
-    <!-- main header -->
-    <div class="bg-light lter wrapper-md">
-        <div class="row title-space">
-                <div class="col-md-3">
-                    <h2 class="second-head">Archive</h2>
-                </div>
-                <div class="col-md-9 text-center">
-                    <div class="row lc-stats">
-                        <div class="col-md-2 pull-right">
-                            <span class="stats-numb">{{Expiring.length}}</span>
-                            <br> Expiring
-                        </div>
-                        <div class="col-md-2 pull-right">
-                            <span class="stats-numb">{{Update.length}}</span>
-                            <br> FD Update
-                        </div>
-                        <div class="col-md-2 pull-right">
-                            <span class="stats-numb">{{Frozen.length}}</span>
-                            <br> Frozen
-                        </div>
-                        <div class="col-md-2 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
-                            <br> Amended</span>
-                            <label class="switch">
-                                <input ng-model="amendedCustomer" type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-2 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Reviewed.length}}</span>
-                            <br> Reviewed</span>
-                            <label class="switch">
-                                <input type="checkbox" ng-model="reviewedCustomer">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="col-md-2 pull-right">
-                            <span class="stats-numb">{{New.length}}</span>
-                            <br> New LCs
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>
-    <!-- / main header -->
-    <div class="wrapper-md">
-        <!-- stats -->
-        <div class="row row-sm">
-            <div class="col-md-12">
-                <div class="panel wrapper p-b-0">
-                    <div class="statuses">
-                        <table class="table table-expandable">
-                            <thead>
-                                <tr>
-                                    <th>LC Number</th>
-                                    <th>Date</th>
-                                    <th>Customer</th>
-                                    <th>Country</th>
-                                    <th>Status</th>
-                                    <th>Advising Bank</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat-start="letter in letters">
-                                    <td>{{letter.lc_number}}</td>
-                                    <td>{{letter.createdAt}}</td>
-                                    <td>{{letter.client_name}}</td>
-                                    <td>{{letter.country}}</td>
-                                    <td>{{state[letter.state]}}</td>
-                                    <td>{{letter.bank}}</td>
-                                    <td>{{letter.psr}}</td>
-                                    <td>{{letter.crc}}</td>
-                                    <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
-                                      <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
-                                      </td>
-                                </tr>
-                                <tr ng-repeat-end ng-if="letter.expanded">
-                                    <td colspan="12" class="secondlevel" ng-click="transition(letter.lc_number)">
-                                        <ul class="statuses">
-                                            <li ng-class="{active: letter.state===1}"><a ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">New<br>Stage 1 of 5</a></li>
-                                            <li ng-class="{active: letter.state===2}"><a ng-disabled="letter.state!==2" ng-click="transition(letter.lc_number)">Review<br>Stage 2 of 5</a></li>
-                                            <li ng-class="{active: letter.state===3}"><a ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">Amend<br>Stage 3 of 5</a></li>
-                                            <li ng-class="{active: letter.state===4}"><a ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">Freeze<br>Stage 4 of 5</a></li>
-                                            <li ng-class="{active: letter.state===5}"><a ng-disabled="letter.state!==5" ng-click="transition(letter.lc_number)">FD Update<br>Stage 5 of 5</a></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- / stats -->
-    </div>
-</div>
+<table class="table table-expandable">
+    <thead>
+        <tr>
+            <th>LC Number</th>
+            <th>Start Date</th>
+            <th>Expiry Date</th>
+            <th>Customer</th>
+            <th>Country</th>
+            <th>Status</th>
+            <th>Advising Bank</th>
+            <th>PIC</th>
+            <th>CSP</th>
+            <!-- <th>Expand</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat-start="letter in letters track by $index" expandable>
+            <td>{{letter.lc_number}}</td>
+            <td>{{letter.date | date:'mediumDate'}}</td>
+            <td>{{letter.expire | date:'mediumDate'}}</td>
+            <td>{{customers[letter.customer]}}</td>
+            <td>{{countries[letter.country]}}</td>
+            <td ng-class="{'new-stat': (letter.state==1 || letter.state == 5),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
+            <td>{{banks[letter.bank]}}</td>
+            <td>{{picUsers[letter.pic]}}</td>
+            <td>{{cspUsers[letter.csp]}}</td>
+            <td>
+              <button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
+              <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
+            </td>
+        </tr>
+        <tr ng-repeat-end ng-show="false">
+            <td colspan="12" class="secondlevel">
+                <ul class="statuses">
+                    <li ng-class="{'new-stat': (letter.state>=1)}">
+                        <button ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">
+                            <div class="icon-stat stat-bg">
+                                <img src="img/new.png" alt="new">
+                            </div>
+                            <div>
+                                <span class="main-stat"> New</span><br> <span class="secnd-stat">Stage 1 of 5</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li ng-class="{'review-stat': (letter.state>=2)}">
+                        <button ng-disabled="checkReviewed(letter)" ng-click="transition(letter.lc_number)">
+                            <div class="icon-stat stat-bg">
+                                <img src="img/review.png" alt="review">
+                            </div>
+                            <div>
+                                <span class="main-stat"> Review/Revise</span><br> <span class="secnd-stat">Stage 2 of 5</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li ng-class="{'amend-stat': (letter.state>=3)}">
+                        <button ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">
+                             <div class="icon-stat stat-bg">
+                                <img src="img/amend.png" alt="amend">
+                            </div>
+                            <div>
+                                <span class="main-stat"> Amended</span><br> <span class="secnd-stat">Stage 3 of 5</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li ng-class="{'freeze-stat': (letter.state==4)}">
+                        <button ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">
+                             <div class="icon-stat stat-bg">
+                                <img src="img/freeze.png" alt="freeze">
+                            </div>
+                            <div>
+                                <span class="main-stat"> Freeze</span><br> <span class="secnd-stat">Stage 4 of 5</span>
+                            </div>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="normal-stat" ng-class="{'fdupdate-stat':(letter.finDoc!=0)}" ng-disabled="letter.state!==4" >
+                             <div class="icon-stat stat-bg" ng-click="letter.toggled = !letter.toggled">
+                                <img src="img/update.png" alt="update">
+                            </div>
+                            <div ng-click="letter.toggled = !letter.toggled">
+                                <span class="main-stat"> FD Update</span><br> <span class="secnd-stat">Stage 5 of 5</span>
+                            </div>
+                            <div ng-show="letter.toggled" class="fd-updatefield">
+                                <input ng-model="letter.finDoc" placeholder="Input financial document number"/>
+                                <a class="updatedoctnum" ng-click="updateFinDoc($index)">Update</a>
+                            </div>
+                        </button>
+                    </li>
+                    
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>

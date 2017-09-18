@@ -3,20 +3,13 @@ app.config(function($stateProvider) {
         templateUrl: 'js/amendList/amendList.html',
         controller: 'amendListCtrl',
         url: '/amendList',
-        resolve: {
-            amended: (lcFactory) => {
-                return lcFactory.getLetters({
-                    state: 3
-                }).then(amended => {
-                    return amended
-                })
-            }
-        }
+        resolve: {}
     })
 });
 
-app.controller('amendListCtrl', function($scope, amended, $state, countryFactory, userFactory, bankFactory, lcFactory, LETTER_EVENTS, $rootScope) {
+app.controller('amendListCtrl', function($scope, amended, $state, countryFactory, userFactory, bankFactory, lcFactory, LETTER_EVENTS, $rootScope, customerFactory) {
     //get banks
+    $scope.letters = $scope.Amended
     $scope.banks = {}
     bankFactory.getBanks({}).then(banks => {
             banks.forEach(bank => {
@@ -50,9 +43,7 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
         })
     })
     $scope.clients = {}
-    userFactory.getUsers({
-        role: 0
-    }).then(clients => {
+    customerFactory.getCustomers({}).then(clients => {
         clients.forEach(client => {
             $scope.clients[client.id] = client.username
         })

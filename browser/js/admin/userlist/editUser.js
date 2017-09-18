@@ -14,10 +14,8 @@ app.config(function($stateProvider) {
                     return countries
                 })
             },
-            customers: (userFactory) => {
-                return userFactory.getUsers({
-                    role: 0
-                }).then(customers => {
+            customers: (customerFactory) => {
+                return customerFactory.getCustomers({}).then(customers => {
                     return customers
                 })
             }
@@ -25,10 +23,11 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('editUserCtrl', function($scope, userFactory, $state, user, $rootScope, LETTER_EVENTS, lcFactory, countries, customers) {
+app.controller('editUserCtrl', function($scope, userFactory, $state, user, $rootScope, LETTER_EVENTS, lcFactory, countries, customers, openModal) {
     $scope.user = user
     $scope.countries = countries
     $scope.customers = customers
+    console.log(customers)
     $scope.selectedCountries = {}
     $scope.selectedCustomers = {}
     $scope.user.countries.forEach(country => {
@@ -38,16 +37,20 @@ app.controller('editUserCtrl', function($scope, userFactory, $state, user, $root
         $scope.selectedCustomers[customer] = true
     })
     $scope.makeUser = (user) => {
-        user.countries = []
-        user.customers = []
-        for (let key of Object.keys($scope.selectedCountries)) {
-            if ($scope.selectedCountries[key]) user.countries.push(key)
-        }
-        for (let key of Object.keys($scope.selectedCustomers)) {
-            if ($scope.selectedCustomers[key]) user.customers.push(key)
-        }
-        userFactory.updateUser(user).then(user => {
-            $state.go('userlist')
+        openModal('Edit User', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+                user.countries = []
+                user.customers = []
+                for (let key of Object.keys($scope.selectedCountries)) {
+                    if ($scope.selectedCountries[key]) user.countries.push(key)
+                }
+                for (let key of Object.keys($scope.selectedCustomers)) {
+                    if ($scope.selectedCustomers[key]) user.customers.push(key)
+                }
+                userFactory.updateUser(user).then(user => {
+                    $state.go('userlist')
+                })
+            }
         })
     }
 

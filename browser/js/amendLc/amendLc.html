@@ -6,7 +6,7 @@
                     <h2 class="second-head">Amend LC</h2>
                     <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="userlist"> Amend LC</a></small>
                 </div>
-                <div class="col-md-9 text-center">
+               <!--  <div class="col-md-9 text-center">
                     <div class="row lc-stats">
                         <div class="col-md-2 pull-right">
                             <span class="stats-numb">{{Expiring.length}}</span>
@@ -40,7 +40,7 @@
                             <span class="stats-numb">{{New.length}}</span>
                             <br> New LCs
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
     </div>
@@ -66,8 +66,8 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Customer Name</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.client">
-                                  <option ng-repeat="client in clients" ng-selected="letter.client=client.id" ng-value = "{{client.id}}">{{client.name}}</option>
+                                <select class="form-control m-b" ng-model="letter.customer">
+                                  <option ng-repeat="customer in customers" ng-selected="letter.customer=customer.id" ng-value = "{{customer.id}}">{{customer.name}}</option>
                                 
                                 </select>
                             </div>

@@ -13,20 +13,24 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('userlistCtrl', function($scope, users, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
+app.controller('userlistCtrl', function($scope, users, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, openModal) {
     $scope.users = users.filter(user => {
         return user.role !== 0
     })
     $scope.roles = {
-        1: 'CSP',
-        2: 'PIC',
+        1: 'PIC',
+        2: 'CSP',
         3: 'MANAGER',
         4: 'Admin'
     }
     $scope.deleteUser = (UserId, index) => {
-        $scope.users.splice(index, 1)
-        userFactory.deleteUser({
-            id: UserId
+        openModal('Delete User', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+                $scope.users.splice(index, 1)
+                userFactory.deleteUser({
+                    id: UserId
+                })
+            }
         })
     }
     $scope.editUser = (UserId) => {

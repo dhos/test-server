@@ -2,8 +2,8 @@
     <thead>
         <tr>
             <th>LC Number</th>
-            <th>Date</th>
-            <th>Expire</th>
+            <th>Start Date</th>
+            <th>Expiry Date</th>
             <th>Customer</th>
             <th>Country</th>
             <th>Status</th>
@@ -18,15 +18,15 @@
             <td>{{letter.lc_number}}</td>
             <td>{{letter.date | date:'mediumDate'}}</td>
             <td>{{letter.expire | date:'mediumDate'}}</td>
-            <td>{{customers[letter.client]}}</td>
+            <td>{{customers[letter.customer]}}</td>
             <td>{{countries[letter.country]}}</td>
             <td ng-class="{'new-stat': (letter.state==1 || letter.state == 5),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
             <td>{{banks[letter.bank]}}</td>
             <td>{{picUsers[letter.pic]}}</td>
             <td>{{cspUsers[letter.csp]}}</td>
-            <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
+<!--             <td><button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
               <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
-              </td>
+              </td> -->
         </tr>
         <tr ng-repeat-end ng-if="letter.expanded">
             <td colspan="12" class="secondlevel">
@@ -83,7 +83,7 @@
                     </li>
                     <li ng-show="letter.toggled">
                         <input ng-model="letter.finDoc" placeholder="Input Financial Document Number"/>
-                        <button ng-click="updateFinDoc($index)">Update</button>
+                        <button ng-click="updateFinDoc($index)" ng-disabled="user.role !=1">Update</button>
                     </li>
                 </ul>
             </td>
