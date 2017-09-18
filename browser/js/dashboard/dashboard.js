@@ -80,7 +80,18 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         }
         $scope.filter()
     }
-    $scope.expiringLetters = expiring[0]
+    if (scope.user.role !== 4) {
+        $scope.Expiring = expiring[0].filter(letter => {
+            let bool = true
+            if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+            if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
+            if ($scope.csp) bool = letter.csp == $scope.user.id
+            else bool = letter.pic == $scope.user.id
+            return bool
+        })
+    } else {
+        $scope.Expiring = expiring[0]
+    }
 
     $scope.reset = (letters) => {
         $scope.New = []
@@ -93,13 +104,19 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.amendedElite = 0
         $scope.reviewedCustomer = 0
         $scope.reviewedElite = 0
-        $scope.Expiring = expiring[0].filter(letter => {
+        if (scope.user.role !== 4) {
+            $scope.Expiring = expiring[0].filter(letter => {
                 let bool = true
+                if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+                if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
                 if ($scope.csp) bool = letter.csp == $scope.user.id
                 else bool = letter.pic == $scope.user.id
                 return bool
             })
-            //set states
+        } else {
+            $scope.Expiring = expiring[0]
+        }
+        //set states
         letters.forEach(letter => {
                 $scope[$scope.state[letter.state]].push(letter)
             })
