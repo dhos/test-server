@@ -8,7 +8,8 @@ app.config(function($stateProvider) {
         },
         resolve: {
             letter: (lcFactory, $stateParams) => {
-                return lcFactory.getSingleLetter($stateParams.lc_number).then(letter => {
+                return lcFactory.getSingleLetter($stateParams.lc_number, $state).then(letter => {
+                    if (!letter) $state.go('listManager.all')
                     return letter
                 })
             },
@@ -17,6 +18,9 @@ app.config(function($stateProvider) {
                     return user
                 })
             }
+        },
+        onEnter: () => {
+
         }
     })
 });
@@ -101,8 +105,13 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         }
     }
     $scope.freeze = () => {
-        if ($scope.letter.state === 4) $scope.letter.state = 1
-        else $scope.letter.state = 4
+        if ($scope.letter.state === 4) {
+            $scope.letter.state = 5
+            $scope.letter.business_notes = {}
+            $scope.letter.commercial_notes = {}
+            $scope.letter.client_approved = false
+            $scope.letter.business_approved = false
+        } else $scope.letter.state = 4
         lcFactory.updateLetter($scope.letter).then(letter => {
             $state.go("listManager.all")
         })

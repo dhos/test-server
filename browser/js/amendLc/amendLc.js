@@ -18,7 +18,6 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
     $scope.updateLc = () => {
         openModal('Amend LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
-                debugger
                 $scope.letter.state = 5
                 $scope.letter.business_approved = false
                 $scope.letter.client_approved = false

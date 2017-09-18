@@ -82,7 +82,7 @@
                             </div>
                             <div ng-show="letter.toggled" class="fd-updatefield">
                                 <input ng-model="letter.finDoc" placeholder="Input financial document number"/>
-                                <a class="updatedoctnum" ng-click="updateFinDoc($index)">Update</a>
+                                <button class="updateFinDoc" ng-click="updateFinDoc($index)" ng-disabled="user.role ==1">Update</button>
                             </div>
                         </button>
                     </li>

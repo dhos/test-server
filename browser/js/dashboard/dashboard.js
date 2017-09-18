@@ -34,8 +34,10 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
             if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
-            if ($scope.csp) bool = letter.csp == $scope.user.id
-            else bool = letter.pic == $scope.user.id
+            if (!$scope.user.manager) {
+                if ($scope.csp) bool = letter.csp == $scope.user.id
+                else bool = letter.pic == $scope.user.id
+            }
             return bool
         })
     } else {
@@ -145,35 +147,37 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.amendedElite = 0
         $scope.reviewedCustomer = 0
         $scope.reviewedElite = 0
+        debugger
         if ($scope.customerFilter.name !== "All") {
             if ($scope.countryFilter.name !== "All") {
-                var letters = $scope.letters.filter(letter => {
+                let letters = $scope.letters.filter(letter => {
                     return letter.customer == $scope.customerFilter.filter && letter.country == $scope.countryFilter.filter
                 })
-                $scope.Expiring = $scope.expiringLetters.filter(letter => {
+                $scope.Expiring = $scope.Expiring.filter(letter => {
                     return letter.customer == $scope.customerFilter.filter && letter.country == $scope.countryFilter.filter
                 })
             } else {
-                var letters = $scope.letters.filter(letter => {
+                let letters = $scope.letters.filter(letter => {
                     return letter.customer == $scope.customerFilter.filter
                 })
-                $scope.Expiring = $scope.expiringLetters.filter(letter => {
+                $scope.Expiring = $scope.Expiring.filter(letter => {
                     return letter.customer == $scope.customerFilter.filter
                 })
             }
         } else {
             if ($scope.countryFilter.name !== "All") {
-                var letters = $scope.letters.filter(letter => {
+                let letters = $scope.letters.filter(letter => {
                     return letter.country == $scope.countryFilter.filter
                 })
-                $scope.Expiring = $scope.expiringLetters.filter(letter => {
+                $scope.Expiring = $scope.Expiring.filter(letter => {
                     return letter.country == $scope.countryFilter.filter
                 })
             } else {
-                var letters = $scope.letters
-                $scope.Expiring = $scope.expiringLetters
+                let letters = $scope.letters
+                $scope.Expiring = $scope.Expiring
             }
         }
+        console.log(letters)
         letters.forEach(letter => {
                 $scope[$scope.state[letter.state]].push(letter)
             })
@@ -187,7 +191,6 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
             if (!amended.business_approved) $scope.amendedElite += 1
         })
         $scope.Reviewed.forEach(reviewed => {
-            console.log(reviewed)
             if (!reviewed.clientApproved) $scope.reviewedCustomer += 1
             if (!reviewed.business_approved) $scope.reviewedElite += 1
         })
