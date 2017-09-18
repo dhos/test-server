@@ -18,8 +18,8 @@ app.controller('userlistCtrl', function($scope, users, userFactory, $state, $roo
         return user.role !== 0
     })
     $scope.roles = {
-        1: 'CSP',
-        2: 'PIC',
+        1: 'PIC',
+        2: 'CSP',
         3: 'MANAGER',
         4: 'Admin'
     }

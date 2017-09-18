@@ -14,10 +14,8 @@ app.config(function($stateProvider) {
                     return countries
                 })
             },
-            customers: (userFactory) => {
-                return userFactory.getUsers({
-                    role: 0
-                }).then(customers => {
+            customers: (customerFactory) => {
+                return customerFactory.getCustomers({}).then(customers => {
                     return customers
                 })
             }
@@ -29,6 +27,7 @@ app.controller('editUserCtrl', function($scope, userFactory, $state, user, $root
     $scope.user = user
     $scope.countries = countries
     $scope.customers = customers
+    console.log(customers)
     $scope.selectedCountries = {}
     $scope.selectedCustomers = {}
     $scope.user.countries.forEach(country => {

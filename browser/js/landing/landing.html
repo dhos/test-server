@@ -7,6 +7,7 @@
             </div>
             <form name="form" class="form-validation" ng-submit="sendLogin(loginInfo)">
                 <div class="list-group-sm m-t">
+                    <h4 class="erorr" ng-show="authError">{{authError}}</h4>
                     <div class="list-group-item">
                         <input type="text" placeholder="Username" ng-model="loginInfo.username" class="form-control no-border">
                     </div>

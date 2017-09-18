@@ -28,7 +28,7 @@ module.exports = function(server) {
 
         Socket.on('disconnect', () => {
             for (let key of Object.keys(onlineUsers)) {
-                if (Socket.id === onlineUsers[key].sid) delete oblineUsers[key]
+                if (Socket.id === onlineUsers[key].sid) delete onlineUsers[key]
             }
         })
     });

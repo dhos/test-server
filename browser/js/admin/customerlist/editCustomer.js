@@ -1,6 +1,6 @@
 app.config(function($stateProvider) {
     $stateProvider.state('editCustomer', {
-        templateUrl: 'js/admin/customerList/newCustomer.html',
+        templateUrl: 'js/admin/customerlist/newCustomer.html',
         controller: 'editCustomerCtrl',
         url: '/editCustomer/:userId',
         resolve: {
@@ -19,8 +19,8 @@ app.controller('editCustomerCtrl', function($scope, customerFactory, $state, cus
     $scope.user.number = Number($scope.user.number)
     $scope.makeUser = (user) => {
         openModal('Edit Customer', 'Are you sure?', 'prompt', 'confirm').then(result => {
-            if(result){
-                
+            if (result) {
+
                 customerFactory.updateCustomer(user).then(user => {
                     $state.go('customerList')
                 })

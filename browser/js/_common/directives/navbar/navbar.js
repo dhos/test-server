@@ -90,8 +90,10 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                     if (scope.user.role !== 4) {
                         scope.Expiring = expiring[0].filter(letter => {
                             let bool = true
-                            if (scope.user.countries.indexOf(letter.country) === -1) bool = false
-                            if (scope.user.customers.indexOf(letter.client) === -1) bool = false
+                            if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+                            if ($scope.user.customers.indexOf(letter.client) === -1) bool = false
+                            if (scope.csp) bool = letter.csp == $scope.user.id
+                            else bool = letter.pic == scope.user.id
                             return bool
                         })
                     } else {
