@@ -23,11 +23,11 @@ fs.createReadStream(sample)
     })
     .on('end', () => {
         //organizeData(csvData)
-        // makeUsers()
-        // makeCountries()
-        // makeBanks()
-        // makeClauses()
-        makeCustomers()
+        makeUsers()
+            // makeCountries()
+            // makeBanks()
+            // makeClauses()
+            // makeCustomers()
 
     })
 
