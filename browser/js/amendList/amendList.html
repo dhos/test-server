@@ -59,7 +59,7 @@
                             <thead>
                                 <tr>
                                   <th colspan="9">
-                                    <div class="form-group"><label class="sr-only">Search LC</label><div class="input-group"><input type="text" class="form-control" placeholder="Search LC number"><div class="input-group-btn"><button type="button" class="btn btn-primary">Search</button></div></div></div>
+<!--                                     <div class="form-group"><label class="sr-only">Search LC</label><div class="input-group"><input type="text" class="form-control" placeholder="Search LC number"><div class="input-group-btn"><button type="button" class="btn btn-primary">Search</button></div></div></div> -->
                                   </th>
                                 </tr>
                                 <tr>
@@ -78,7 +78,7 @@
                                 <tr ng-repeat="letter in letters track by letter.lc_number">
                                     <td><a ng-click="transition(letter.lc_number)"> {{letter.lc_number}}</a></td>
                                     <td>{{letter.contract}}</td>
-                                    <td>{{clients[letter.client]}}</td>
+                                    <td>{{clients[letter.customer]}}</td>
                                     <td>{{letter.date | date:"longDate"}}</td>
                                     <td>{{letter.expire | date:"longDate"}}</td>
                                     <td>{{countries[letter.country]}}</td>
