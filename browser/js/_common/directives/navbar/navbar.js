@@ -84,7 +84,7 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                         if ((Date.now() - Date.parse(letter.updatedAt)) < (60 * 60 * 1000 * 24 * 7)) scope.updatedLetters.push(letter)
                     })
                     scope.updatedLetters.sort((a, b) => {
-                        return a.updatedAt - b.updatedAt
+                        return b.updatedAt - a.updatedAt
                     })
                 })
                 lcFactory.getExpiringLetters({}).then(expiring => {
