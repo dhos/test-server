@@ -96,7 +96,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         if (!checkPermissions(clause.commercial)) return noPermission()
         clause.status = 2
         clause.expanded = false
-        if ($scope.amended.indexOf(clause.swift_code) !== -1) {
+        if ($scope.amended.indexOf(clause.swift_code) === -1) {
             $scope.amended.push(clause.swift_code)
         }
     }
