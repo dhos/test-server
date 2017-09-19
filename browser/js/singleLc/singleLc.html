@@ -3,7 +3,7 @@
     <!-- main header -->
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
-                <div class="col-md-3">
+                <div class="col-md-12">
                     <h2 class="second-head">Letter of Credit</h2>
                     <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="listManager.all"> List Manager</a> <i class="fa fa-angle-right br-gap"></i> Letter of Credit</small>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="row row-sm">
                     <div class="col-md-5">
                         <div class="panel wrapper">
-                            <h2 class="second-head">{{letterClient.name}}  <button ng-if="manager && client" ng-click="freeze()">Force {{(letter.state ===4)? 'un': ''}}freeze</button><button ng-if="user.role==4" ng-click="freeze()">Force {{(letter.state ===4)? 'un': ''}}freeze</button></h2>
+                            <h2 class="second-head">Sabic International  <button ng-if="manager && client" ng-click="freeze()">Force {{(letter.state ===4)? 'un': ''}}freeze</button><button ng-if="user.role==4" ng-click="freeze()">Force {{(letter.state ===4)? 'un': ''}}freeze</button></h2>
                             <span class="font-thin m-t-none m-b  text-muted"><span class="m-l"> • LC Number</span><span class="redcolor">{{letter.lc_number}}</span> • Sales Contract <span class="redcolor">{{letter.contract}}</span>
                             </span>
                             <div class="row">
@@ -67,29 +67,39 @@
                     </div>
                     <div class="col-md-7">
                         <div class="panel wrapper no-pad">
-                            <div class="tab-container m-b-none">
+                            <div class="tab-container m-b-none amendment-tab">
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href data-toggle="tab" data-target="#tab_1"><h2 class="second-head">Checklist & Action Center</h2></a></li>
                                     <li><a href data-toggle="tab" data-target="#tab_2"><h2 class="second-head">Review Summary</h2></a></li>
                                 </ul>
-                                <div class="tab-content pad-5" style="overflow-y: scroll; height: 70vh; overflow-x: hidden;">
+                                <div class="tab-content" style="overflow-y: scroll; height: 660px; overflow-x: hidden;">
                                     <div class="tab-pane active" id="tab_1">
                                         <table class="table m-b-none table-expandable">
                                             <thead>
                                                 <tr>
-                                                    <th>SWIFT (Com?)</th>
-                                                    <th width="35%">Field Description</th>
-                                                    <th width="30%">Line Description
-                                                    <!-- <th>Type</th> -->
-                                                    <th>Status</th>
+                                                    <th>SWIFT</th>
+                                                    <th width="20%">Field Description</th>
+                                                    <th>Line Description
+                                                    <th width="15%">Type</th>
+                                                    <th width="10%">Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat-start="clause in clauses track by $index">
-                                                    <td>{{clause.swift_code}} <i ng-if="clause.commercial" class="fa fa-check-circle-o" aria-hidden="true"></i></td>
+                                                    <td>{{clause.swift_code}}</td>
                                                     <td>{{clause.field_description}}
+                                                        <!-- <br>
+                                                        <br>
+                                                        <div class="inline-block">
+                                                            <div class="inline-block"><a href=""><img src="img/amend-tick.png"></a></div>
+                                                            <div class="inline-block"><a href=""><img src="img/amend-edit.png"></a></div>
+                                                            <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
+                                                        </div> -->
                                                     </td>
-                                                    <td>{{clause.line_description}}</td>
+                                                    <td>{{clause.line_description}}
+                                                    </td>
+                                                    
+                                                    <td>{{(clause.commercial)?'Com':'Non-Com'}}</td>
                                                     <td ng-if="clause.status ==null">
                                                         <a ng-click="approve(clause)"><img src="img/tick-inactive.png" alt="Status"></a>
                                                         <a ng-click="clause.expanded=!clause.expanded"><img src="img/edit.png" alt="Status"></a>
@@ -98,13 +108,17 @@
                                                         <a ng-if="clause.status ==1" ng-click="unapprove(clause)"><img src="img/tick-active.png" alt="Status"></a>
                                                         <a ng-if="clause.status == 2" ng-click="unammend(clause)"><img src="img/add.png" alt="Status"></a>
                                                     </td>
+                                                    
+<!--                                                     <td>
+                                                    <div ng-click="clause.expanded = false" ng-if="clause.expanded" class="table-expandable-arrow up"></div>
+                                                    <div ng-click="clause.expanded = true" ng-if="!clause.expanded" class="table-expandable-arrow"></div>
+                                                    </td> -->
                                                 </tr>
                                                 <tr  class="secondlevel" ng-show="clause.expanded" ng-repeat-end>
                                                     <td></td>
                                                     <td colspan="4">
                                                         <div class="full-width m-b">
-                                                            <textarea ng-if="!owner" ng-model="clause.note" class="full-width" ng-readonly="true" rows="5" placeholder="Add Note"></textarea>
-                                                            <textarea ng-if="owner" ng-model="clause.note" class="full-width" rows="5" placeholder="Add Note"></textarea>
+                                                            <textarea ng-model="clause.note" class="full-width" rows="5" placeholder="Add Note"></textarea>
                                                         </div>
                                                         <div class="full-width m-b">
                                                             <button class="btn m-b-xs btn-success" ng-click="ammend(clause)">Add Note</button>
@@ -126,7 +140,6 @@
                                                 <table class="table m-b-none no-td-b">
                                                     <tbody>
                                                         <tr>
-                                                            <td></td>
                                                             <td>
                                                                 <div class="text-center inline-block box-accepted">{{approved.length}}/
                                                                     {{(client?commercial_clauses.length:business_clauses.length)}}
@@ -134,8 +147,9 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Approved Clauses</td>
-                                                            <td>{{approved.join(', ')}}</td>
+                                                            <td>
+                                                            <span class="clauselbl">Approved Clauses</span> <br>
+                                                            {{approved.join(', ')}}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -144,27 +158,28 @@
                                                 <table class="table m-b-none no-td-b">
                                                     <tbody>
                                                         <tr>
-                                                            <td></td>
                                                             <td>
                                                                 <div class="text-center inline-block box-amended">{{amended.length}}/{{(client?commercial_clauses.length:business_clauses.length)}}
                                                                     <br> Amended</div>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Amended Clauses</td>
-                                                            <td>{{amended.join(', ')}}</td>
+                                                            <td><span class="clauselbl">Amended Clauses</span><br>
+                                                            {{amended.join(', ')}}</td>
                                                         </tr>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="action-section m-t">
-                                          <button class="btn m-b-xs btn-danger">Preview Email</button>
+                                        <div class="row action-section m-t">
+                                          <div class="col-md-12 actionplan">
+                                              <button class="btn m-b-xs btn-danger">Preview Email</button>
                                           <div class="pull-right">
                                             <button class="btn m-b-xs btn-success" ng-click="updateLetter()">Confirm</button>
                                           <button class="btn m-b-xs btn-default">Save Draft</button>
                                           <button href data-toggle="tab" data-target="#tab_1" class="btn m-b-xs btn-dark">Cancel</button>
+                                          </div>
                                           </div>
                                         </div>
                                     </div>
