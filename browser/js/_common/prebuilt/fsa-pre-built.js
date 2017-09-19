@@ -172,7 +172,6 @@
         };
 
         $rootScope.$watch(whenToSpin, function(hasPending) {
-            debugger
             if (hasPending) {
                 usSpinnerService.spin('spinner-1');
             } else {

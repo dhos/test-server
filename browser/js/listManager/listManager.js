@@ -26,11 +26,12 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user) => {
+app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user, clientFactory) => {
     //inits
     $scope.user = user
     $scope.csp = $scope.user.role === 2
-    if ($scope.user.role !== 4) {
+    $scope.manager = $scope.user.manager
+    if ($scope.user.role !== 4 && !$scope.manager) {
         $scope.letters = letters.filter(letter => {
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
@@ -42,7 +43,39 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     } else {
         $scope.letters = letters
     }
-    console.log($scope.user, $scope.letters)
+    $scope.dateDesc = {
+        date: false,
+        expire: false
+    }
+    $scope.sortByDate = (params) => {
+        $scope.dateDesc[params] = !$scope.dateDesc[params]
+        if ($scope.dateDesc[params]) {
+            $scope.letters.sort((a, b) => {
+                return new Date(a[params]) - new Date(b[params])
+            })
+        } else {
+            $scope.letters.sort((a, b) => {
+                return new Date(b[params]) - new Date(a[params])
+            })
+        }
+    }
+
+    $scope.alphaDesc = {
+        country: false,
+        client: false
+    }
+    $scope.sortByAlphabet = (params) => {
+        $scope.alphaDesc[params] = !$scope.alphaDesc[params]
+        if ($scope.alphaDesc[params]) {
+            $scope.letters.sort((a, b) => {
+                return a[params] - b[params]
+            })
+        } else {
+            $scope.letters.sort((a, b) => {
+                return b[params] - a[params]
+            })
+        }
+    }
     $scope.banks = {}
         //get banks
     bankFactory.getBanks({}).then(banks => {
@@ -82,6 +115,12 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.customers[customer.id] = customer.name
         })
     })
+    $scope.clients = {}
+    clientFactory.getClients({}).then(clients => {
+        clients.forEach(client => {
+            $scope.clients[client.id] = client.name
+        })
+    })
     $scope.state = {
         1: 'New',
         2: 'Reviewed',
@@ -94,6 +133,12 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.Amended = []
     $scope.Revised = []
     $scope.Frozen = []
+    $scope.displayRviewed = []
+    $scope.displayRevised = []
+    $scope.clientReviewedLetters = []
+    $scope.clientRevisedLetters = []
+    $scope.businessRevisedLetters = []
+    $scope.businessReviewedLetters = []
     $scope.Update = []
     if ($scope.user.role !== 4) {
         $scope.Expiring = expiring[0].filter(letter => {
@@ -107,11 +152,23 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     } else {
         $scope.Expiring = expiring[0]
     }
-    console.log($scope.Expiring)
     $scope.revisedCustomer = false
     $scope.reviewedCustomer = false
-
-    //set states
+    $scope.$watch('reviewedCustomer', (nv, ov) => {
+        if (nv === true) {
+            $scope.displayReviewed = $scope.clientReviewedLetters
+        } else {
+            $scope.displayReviewed = $scope.businessReviewedLetters
+        }
+    })
+    $scope.$watch('revisedCustomer', (nv, ov) => {
+            if (nv === true) {
+                $scope.displayRevised = $scope.clientRevisedLetters
+            } else {
+                $scope.displayRevised = $scope.businessRevisedLetters
+            }
+        })
+        //set states
     $scope.letters.forEach(letter => {
         $scope[$scope.state[letter.state]].push(letter)
     })
@@ -128,24 +185,37 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.Revised = []
             $scope.Frozen = []
             $scope.Update = []
-            $scope.amendedCustomer = false
-            $scope.reviewedCustomer = false
             if ($scope.user.role !== 4) {
                 $scope.letters = letters.filter(letter => {
                     let bool = true
                     if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
                     if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
                     if ($scope.csp) bool = letter.csp == $scope.user.id
-                    else bool = letter.pic == scope.user.id
+                    else bool = letter.pic == $scope.user.id
                     return bool
                 })
             }
             //set states
             $scope.letters.forEach(letter => {
                 $scope[$scope.state[letter.state]].push(letter)
-                if (letter.state == 4 && letter.finDoc === 0) scope.Update.push(letter)
+                if (letter.state == 4 && letter.finDoc === 0) $scope.Update.push(letter)
             })
+            $scope.clientReviewedLetters = $scope.Reviewed.filter(letter => {
+                return letter.client_approved
+            })
+            $scope.businessReviewedLetters = $scope.Reviewed.filter(letter => {
+                return letter.business_approved
+            })
+            $scope.clientRevisedLetters = $scope.Revised.filter(letter => {
+                return letter.client_approved
+            })
+            $scope.businessRevisedLetters = $scope.Revised.filter(letter => {
+                return letter.business_approved
+            })
+            $scope.displayReviewed = $scope.businessReviewedLetters
+            $scope.displayRevised = $scope.businessRevisedLetters
         })
     }
     $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
+    refreshLetters()
 })

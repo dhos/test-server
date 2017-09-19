@@ -13,25 +13,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, bankFactory, letter, $state, LETTER_EVENTS, $rootScope, customerFactory, openModal) => {
-    $scope.letter = letter
-    $scope.updateLc = () => {
-        openModal('Amend LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
-            if (result) {
-                $scope.letter.state = 5
-                $scope.letter.business_approved = false
-                $scope.letter.client_approved = false
-                $scope.letter.commercial_notes = {}
-                $scope.letter.business_notes = {}
-                lcFactory.updateLetterFile($scope.letter, $scope.updatedFile).then(letter => {
-                    $state.go('singleLc', {
-                        lc_number: letter.lc_number
-                    })
-                })
-            }
-        })
-    }
-
+app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, bankFactory, letter, $state, LETTER_EVENTS, $rootScope, customerFactory, openModal, clientFactory) => {
     //get banks
     bankFactory.getBanks({}).then(banks => {
             $scope.banks = banks
@@ -56,6 +38,37 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
     customerFactory.getCustomers({}).then(customers => {
         $scope.customers = customers
     })
+    clientFactory.getClients({}).then(clients => {
+        $scope.clients = clients
+    })
+    $scope.letter = letter
+    $scope.updateLc = () => {
+        $scope.letter.client = $scope.selectedClient.id
+        openModal('Amend LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+                if ($scope.updatedFile) {
+                    $scope.letter.state = 5
+                    $scope.letter.business_approved = false
+                    $scope.letter.client_approved = false
+                    $scope.letter.commercial_notes = {}
+                    $scope.letter.business_notes = {}
+                    lcFactory.updateLetterFile($scope.letter, $scope.updatedFile).then(letter => {
+                        $state.go('singleLc', {
+                            lc_number: letter.lc_number
+                        })
+                    })
+                } else {
+                    lcFactory.updateLetter($scope.letter).then(letter => {
+                        $state.go('singleLc', {
+                            lc_number: letter.lc_number
+                        })
+                    })
+                }
+            }
+        })
+    }
+
+
     $scope.state = {
             1: 'New',
             2: 'Reviewed',

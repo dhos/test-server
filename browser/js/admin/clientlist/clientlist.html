@@ -19,18 +19,20 @@
                             <thead>
                                 <tr>
                                   <th colspan="9">
-                                    <div class="pull-right adduser"><a ui-sref="newCustomer" class="btn m-b-xs btn-success"><i class="fa fa-plus"></i> New Client </a></div>
+                                    <div class="pull-right adduser"><a ui-sref="newClient" class="btn m-b-xs btn-success"><i class="fa fa-plus"></i> New Client </a></div>
                                   </th>
                                 </tr>
                                 <tr>
                                     <th>Name</th>
+                                    <th>Customer</th>
                                     <th data-breakpoints="xs sm">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="client in clients track by $index">
                                     <td>{{client.name}}</td>
-                                    <td><a ng-click="editclient(client.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteclient(client.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
+                                    <td>{{customers[client.customer]}}</td>
+                                    <td><a ng-click="editClient(client.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteClient(client.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
                                 </tr>
                             </tbody>
                         </table>

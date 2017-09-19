@@ -2,6 +2,7 @@ app.factory('clientFactory', function($http, $q) {
     var d = {}
         //Fetches
     d.getClients = (query) => {
+        console.log('making it to factory')
         return $http.get('/api/clients/', {
             params: query
         }).then((response) => {
@@ -27,7 +28,7 @@ app.factory('clientFactory', function($http, $q) {
 
     //Sets
     d.createClient = (clause) => {
-        return $http.post('/api/clients/', clause)
+        return $http.post('/api/clients/create', clause)
             .then(response => {
                 return response.data
             }).catch(err => {
@@ -41,7 +42,7 @@ app.factory('clientFactory', function($http, $q) {
 
     //Updates
     d.updateClient = (clause) => {
-        return $http.put(`/api/clients/`, clause)
+        return $http.put(`/api/clients/update`, clause)
             .then(response => {
                 return response.data
             }).catch(err => {

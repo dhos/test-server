@@ -15,7 +15,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('amendListCtrl', function($scope, amended, $state, countryFactory, userFactory, bankFactory, lcFactory, LETTER_EVENTS, $rootScope, customerFactory) {
+app.controller('amendListCtrl', function($scope, amended, $state, countryFactory, userFactory, bankFactory, lcFactory, LETTER_EVENTS, $rootScope, customerFactory, clientFactory) {
     //get banks
     $scope.letters = $scope.Amended
     $scope.banks = {}
@@ -50,8 +50,14 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
             $scope.cspUsers[user.id] = user.username
         })
     })
+    $scope.customers = {}
+    customerFactory.getCustomers({}).then(customer => {
+        customer.forEach(customer => {
+            $scope.customers[customer.id] = customer.name
+        })
+    })
     $scope.clients = {}
-    customerFactory.getCustomers({}).then(clients => {
+    clientFactory.getClients({}).then(clients => {
         clients.forEach(client => {
             $scope.clients[client.id] = client.name
         })
@@ -62,7 +68,39 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
             lc_number: lc_number
         })
     }
+    $scope.dateDesc = {
+        date: false,
+        expire: false
+    }
+    $scope.sortByDate = (params) => {
+        $scope.dateDesc[params] = !$scope.dateDesc[params]
+        if ($scope.dateDesc[params]) {
+            $scope.letters.sort((a, b) => {
+                return new Date(a[params]) - new Date(b[params])
+            })
+        } else {
+            $scope.letters.sort((a, b) => {
+                return new Date(b[params]) - new Date(a[params])
+            })
+        }
+    }
 
+    $scope.alphaDesc = {
+        country: false,
+        client: false
+    }
+    $scope.sortByAlphabet = (params) => {
+        $scope.alphaDesc[params] = !$scope.alphaDesc[params]
+        if ($scope.alphaDesc[params]) {
+            $scope.letters.sort((a, b) => {
+                return a[params] - b[params]
+            })
+        } else {
+            $scope.letters.sort((a, b) => {
+                return b[params] - a[params]
+            })
+        }
+    }
     $scope.state = {
         1: 'New',
         2: 'Reviewed',

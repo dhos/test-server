@@ -27,6 +27,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory) {
+    jQuery('body').removeClass('loginpage')
     $scope.user = user
     $scope.csp = $scope.user.role === 2
     if ($scope.user.role !== 4) {
@@ -102,8 +103,8 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.Frozen = []
         $scope.Update = []
         $scope.Revised = []
-        $scope.amendedCustomer = 0
-        $scope.amendedElite = 0
+        $scope.revisedCustomer = 0
+        $scope.revisedElite = 0
         $scope.reviewedCustomer = 0
         $scope.reviewedElite = 0
         if ($scope.user.role !== 4) {
@@ -126,13 +127,13 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.Frozen.forEach(frozen => {
             if (frozen.finDoc === 0) $scope.Update.push(frozen)
         })
-        $scope.Amended = $scope.Amended.concat($scope.Revised)
-        $scope.Amended.forEach(amended => {
-            if (!amended.clientApproved) $scope.amendedCustomer += 1
-            if (!amended.business_approved) $scope.amendedElite += 1
+        debugger
+        $scope.Revised.forEach(Revised => {
+            if (!$scope.Revised.client_approved) $scope.revisedCustomer += 1
+            if (!$scope.Revised.business_approved) $scope.revisedElite += 1
         })
         $scope.Reviewed.forEach(reviewed => {
-            if (!reviewed.clientApproved) $scope.reviewedCustomer += 1
+            if (!reviewed.client_approved) $scope.reviewedCustomer += 1
             if (!reviewed.business_approved) $scope.reviewedElite += 1
         })
     }
@@ -143,21 +144,21 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.Frozen = []
         $scope.Update = []
         $scope.Revised = []
-        $scope.amendedCustomer = 0
-        $scope.amendedElite = 0
+        $scope.revisedCustomer = 0
+        $scope.revisedElite = 0
         $scope.reviewedCustomer = 0
         $scope.reviewedElite = 0
-        debugger
+        $scope.filteredLetters = []
         if ($scope.customerFilter.name !== "All") {
             if ($scope.countryFilter.name !== "All") {
-                let letters = $scope.letters.filter(letter => {
-                    return letter.customer == $scope.customerFilter.filter && letter.country == $scope.countryFilter.filter
+                $scope.filteredLetters = $scope.letters.filter(letter => {
+                    return (letter.customer == $scope.customerFilter.filter) && (letter.country == $scope.countryFilter.filter)
                 })
                 $scope.Expiring = $scope.Expiring.filter(letter => {
-                    return letter.customer == $scope.customerFilter.filter && letter.country == $scope.countryFilter.filter
+                    return (letter.customer == $scope.customerFilter.filter) && (letter.country == $scope.countryFilter.filter)
                 })
             } else {
-                let letters = $scope.letters.filter(letter => {
+                $scope.filteredLetters = $scope.letters.filter(letter => {
                     return letter.customer == $scope.customerFilter.filter
                 })
                 $scope.Expiring = $scope.Expiring.filter(letter => {
@@ -166,32 +167,30 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
             }
         } else {
             if ($scope.countryFilter.name !== "All") {
-                let letters = $scope.letters.filter(letter => {
+                $scope.filteredLetters = $scope.letters.filter(letter => {
                     return letter.country == $scope.countryFilter.filter
                 })
                 $scope.Expiring = $scope.Expiring.filter(letter => {
                     return letter.country == $scope.countryFilter.filter
                 })
             } else {
-                let letters = $scope.letters
+                $scope.filteredLetters = $scope.letters
                 $scope.Expiring = $scope.Expiring
             }
         }
-        console.log(letters)
-        letters.forEach(letter => {
+        $scope.filteredLetters.forEach(letter => {
                 $scope[$scope.state[letter.state]].push(letter)
             })
             // $scope.Amended.forEach
         $scope.Frozen.forEach(frozen => {
             if (frozen.finDoc === 0) $scope.Update.push(frozen)
         })
-        $scope.Amended = $scope.Amended.concat($scope.Revised)
-        $scope.Amended.forEach(amended => {
-            if (!amended.clientApproved) $scope.amendedCustomer += 1
-            if (!amended.business_approved) $scope.amendedElite += 1
+        $scope.Revised.forEach(revised => {
+            if (!revised.client_approved) $scope.revisedCustomer += 1
+            if (!revised.business_approved) $scope.revisedElite += 1
         })
         $scope.Reviewed.forEach(reviewed => {
-            if (!reviewed.clientApproved) $scope.reviewedCustomer += 1
+            if (!reviewed.client_approved) $scope.reviewedCustomer += 1
             if (!reviewed.business_approved) $scope.reviewedElite += 1
         })
 

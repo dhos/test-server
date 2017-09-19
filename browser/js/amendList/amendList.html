@@ -6,7 +6,7 @@
                     <h2 class="second-head">LC's To Be Amended</h2>
                     <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="userlist"> Amended</a></small>
                 </div>
-                <div class="col-md-9 text-center">
+                <!-- <div class="col-md-9 text-center">
                     <div class="lc-stats row">
                         <div class="col-md-1 pull-right">
                             <span class="stats-numb">{{Expiring.length}}</span>
@@ -45,7 +45,7 @@
                             <br> New LCs
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
     </div>
     <!-- / main header -->
@@ -63,25 +63,28 @@
                                   </th>
                                 </tr>
                                 <tr>
-                                    <th data-breakpoints="xs">LC Number</th>
-                                    <th>Sales Contract Number</th>
-                                    <th>Customer Name</th>
-                                    <th data-breakpoints="xs sm">LC Start Date</th>
-                                    <th data-breakpoints="xs sm">LC End Date</th>
-                                    <th data-breakpoints="xs sm">Country Name</th>
-                                    <th data-breakpoints="xs sm">Advising Bank</th>
-                                    <th data-breakpoints="xs">PIC</th>
-                                    <th data-breakpoints="xs">CSP</th>
-                                </tr>
+                                    <th>LC Number</th>
+                                    <th>Contract Number</th>
+                                    <th>Start Date <a ng-click="sortByDate('date')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Expiry Date <a ng-click="sortByDate('expire')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Client <a ng-click="sort('client')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Country <a ng-click="sort('country')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Status</th>
+                                    <th>Advising Bank</th>
+                                    <th>PIC</th>
+                                    <th>CSP</th>
+                                    <!-- <th>Expand</th> -->
+                            </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="letter in letters track by letter.lc_number">
                                     <td><a ng-click="transition(letter.lc_number)"> {{letter.lc_number}}</a></td>
                                     <td>{{letter.contract}}</td>
-                                    <td>{{clients[letter.customer]}}</td>
                                     <td>{{letter.date | date:"mediumDate"}}</td>
                                     <td>{{letter.expire | date:"mediumDate"}}</td>
+                                    <td>{{clients[letter.client]}}</td>
                                     <td>{{countries[letter.country]}}</td>
+                                    <td ng-class="{'new-stat': (letter.state==1 || letter.state == 5),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
                                     <td>{{banks[letter.bank]}}</td>
                                     <td>{{picUsers[letter.pic]}}</td>
                                     <td>{{cspUsers[letter.csp]}}</td>

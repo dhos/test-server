@@ -25,8 +25,16 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-lg-2 control-label">Customer</label>
+                            <div class="col-lg-6">
+                                <select ng-model="selectedCustomer" class="form-control">
+                                    <option ng-selected="client.customer=customer.id" ng-repeat="customer in customers" ng-value="customer.id">{{customer.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button type="submit" ng-disabled="!client_form.$valid" ng-click="createclient(client)" class="btn m-b-xs btn-success">Save</button>
+                                <button type="submit" ng-disabled="!client_form.$valid" ng-click="createClient(client)" class="btn m-b-xs btn-success">Save</button>
                                 <a ui-sref="clientlist" class="btn m-b-xs w-xs btn-dark">Cancel</a>
                             </div>
                         </div>

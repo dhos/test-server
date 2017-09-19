@@ -19,7 +19,7 @@
                             <thead>
                                 <tr>
                                   <th colspan="9">
-                                    <div class="pull-right adduser"><a ui-sref="newCustomer" class="btn m-b-xs btn-success"><i class="fa fa-plus"></i> New Customer </a></div>
+                                    <!-- <div class="pull-right adduser"><a ui-sref="newCustomer" class="btn m-b-xs btn-success"><i class="fa fa-plus"></i> New Customer </a></div> -->
                                   </th>
                                 </tr>
                                 <tr>
@@ -36,7 +36,9 @@
                                     <td>{{customer.number}}</td>
                                     <td>{{customer.email}}</td>
                                     <td>{{customer.website}}</td>
-                                    <td><a ng-click="editCustomer(customer.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deletecustomer(customer.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
+                                    <td><a ng-click="editCustomer(customer.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> 
+                                        <!-- <a ng-click="deletecustomer(customer.id,$index)"><i class="fa fa-trash"></i> Delete</a>  -->
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
