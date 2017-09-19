@@ -15,11 +15,11 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('draftsCtrl', function($scope, drafts) {
+app.controller('draftsCtrl', function($scope, drafts, $state) {
     $scope.displayLetters = drafts
-    $scope.transition = (lc_number) => {
+    $scope.transition = (lcNumber) => {
         $state.go('singleLc', {
-            lc_number: lc_number
+            lc_number: lcNumber
         })
     }
 });
