@@ -133,6 +133,12 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.Amended = []
     $scope.Revised = []
     $scope.Frozen = []
+    $scope.displayRviewed = []
+    $scope.displayRevised = []
+    $scope.clientReviewedLetters = []
+    $scope.clientRevisedLetters = []
+    $scope.businessRevisedLetters = []
+    $scope.businessReviewedLetters = []
     $scope.Update = []
     if ($scope.user.role !== 4) {
         $scope.Expiring = expiring[0].filter(letter => {
@@ -148,8 +154,22 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     }
     $scope.revisedCustomer = false
     $scope.reviewedCustomer = false
-
-    //set states
+    $scope.$watch('reviewedCustomer', (nv, ov) => {
+        if (nv === true) {
+            $scope.displayReviewed = $scope.clientReviewedLetters
+            console.log(nv, $scope.clientReviewedLetters)
+        } else {
+            $scope.displayReviewed = $scope.businessReviewedLetters
+        }
+    })
+    $scope.$watch('revisedCustomer', (nv, ov) => {
+            if (nv === true) {
+                $scope.displayRevised = $scope.clientRevisedLetters
+            } else {
+                $scope.displayRevised = $scope.businessRevisedLetters
+            }
+        })
+        //set states
     $scope.letters.forEach(letter => {
         $scope[$scope.state[letter.state]].push(letter)
     })
@@ -166,24 +186,35 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.Revised = []
             $scope.Frozen = []
             $scope.Update = []
-            $scope.amendedCustomer = false
-            $scope.reviewedCustomer = false
             if ($scope.user.role !== 4) {
                 $scope.letters = letters.filter(letter => {
                     let bool = true
                     if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
                     if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
                     if ($scope.csp) bool = letter.csp == $scope.user.id
-                    else bool = letter.pic == scope.user.id
+                    else bool = letter.pic == $scope.user.id
                     return bool
                 })
             }
             //set states
             $scope.letters.forEach(letter => {
                 $scope[$scope.state[letter.state]].push(letter)
-                if (letter.state == 4 && letter.finDoc === 0) scope.Update.push(letter)
+                if (letter.state == 4 && letter.finDoc === 0) $scope.Update.push(letter)
+            })
+            $scope.clientReviewedLetters = $scope.Reviewed.filter(letter => {
+                return letter.client_approved
+            })
+            $scope.businessReviewedLetters = $scope.Reviewed.filter(letter => {
+                return letter.business_approved
+            })
+            $scope.clientRevisedLetters = $scope.Revised.filter(letter => {
+                return letter.client_approved
+            })
+            $scope.businessRevisedLetters = $scope.Revised.filter(letter => {
+                return letter.business_approved
             })
         })
     }
     $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
+    refreshLetters()
 })
