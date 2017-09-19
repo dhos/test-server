@@ -50,8 +50,14 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
             $scope.cspUsers[user.id] = user.username
         })
     })
+    $scope.customers = {}
+    customerFactory.getCustomers({}).then(customer => {
+        customer.forEach(customer => {
+            $scope.customers[customer.id] = customer.name
+        })
+    })
     $scope.clients = {}
-    customerFactory.getCustomers({}).then(clients => {
+    clientFactory.getClients({}).then(clients => {
         clients.forEach(client => {
             $scope.clients[client.id] = client.name
         })

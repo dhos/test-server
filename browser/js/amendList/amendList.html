@@ -64,6 +64,7 @@
                                 </tr>
                                 <tr>
                                     <th>LC Number</th>
+                                    <th>Contract Number</th>
                                     <th>Start Date <a ng-click="sortByDate('date')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
                                     <th>Expiry Date <a ng-click="sortByDate('expire')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
                                     <th>Client <a ng-click="sort('client')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
@@ -79,10 +80,11 @@
                                 <tr ng-repeat="letter in letters track by letter.lc_number">
                                     <td><a ng-click="transition(letter.lc_number)"> {{letter.lc_number}}</a></td>
                                     <td>{{letter.contract}}</td>
-                                    <td>{{clients[letter.customer]}}</td>
                                     <td>{{letter.date | date:"mediumDate"}}</td>
                                     <td>{{letter.expire | date:"mediumDate"}}</td>
+                                    <td>{{clients[letter.client]}}</td>
                                     <td>{{countries[letter.country]}}</td>
+                                    <td ng-class="{'new-stat': (letter.state==1 || letter.state == 5),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
                                     <td>{{banks[letter.bank]}}</td>
                                     <td>{{picUsers[letter.pic]}}</td>
                                     <td>{{cspUsers[letter.csp]}}</td>
