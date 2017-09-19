@@ -26,7 +26,7 @@ app.controller('editClientCtrl', function($scope, clientFactory, $state, client,
         openModal('Edit Client', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
 
-                clientFactory.updateCustomer(user).then(user => {
+                clientFactory.updateClient(user).then(user => {
                     $state.go('clientlist')
                 })
             }

@@ -22,7 +22,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauseFactory, openModal) => {
+app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauseFactory, openModal, clientFactory) => {
     $scope.user = user
     $scope.letter = letter
     $scope.client = $scope.user.role === 2
@@ -30,6 +30,10 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     $scope.manager = $scope.user.manager
     $scope.approved = []
     $scope.amended = []
+    clientFactory.getSingleClient($scope.letter.client).then(client => {
+        $scope.letterClient = client
+        console.log($scope.letterClinet)
+    })
 
     clauseFactory.getClauses({
         country: $scope.letter.country,

@@ -65,63 +65,63 @@
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">LC Start Date</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-2">
                                 <div class="input-group date">
-                                <md-datepicker ng-model="letter.date" md-placeholder="Enter date"></md-datepicker></div>
+                                    <md-datepicker ng-model="letter.date" md-placeholder="Enter date"></md-datepicker>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-lg-2 control-label">LC End Date</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-2">
                                 <div class="input-group date">
-                                <md-datepicker ng-model="letter.expire" md-placeholder="Enter date"></md-datepicker></div>
+                                    <md-datepicker ng-model="letter.expire" md-placeholder="Enter date"></md-datepicker>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Customer Name</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.customer">
-                                  <option ng-repeat="customer in customers" ng-selected="letter.customer=customer.id" ng-value = "{{customer.id}}">{{customer.name}}</option>
+                                <select class="form-control m-b" ng-model="letter.customer" ng-options="customer.id as customer.name for customer in customers">
+                                  <option>Select</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Client</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.client">
-                                  <option ng-repeat="client in clients" ng-selected="letter.client=client.id" ng-value = "{{client.id}}">{{client.name}}</option>
+                                <select class="form-control m-b" ng-model="letter.client" ng-options="client.id as client.name for client in clients">
+                                  <option>Select</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Country Name</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.country">
-                                    <option ng-repeat="country in countries" ng-selected="letter.country=country.id" ng-value = "{{country.id}}">{{country.name}}</option>
+                                <select class="form-control m-b" ng-model="letter.country" ng-options="country.id as country.name for country in countries">
+                                    <option>Select</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Advising Bank</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.bank">
-                                  <option ng-repeat="bank in banks" ng-value = "{{bank.id}}" ng-selected="letter.bank = bank.id">{{bank.name}}</option>
+                                <select class="form-control m-b" ng-model="letter.bank" ng-options="bank.id as bank.name for bank in banks">
+                                  <option></option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">PIC</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.pic">
-                                  <option ng-repeat="pic in picUsers" ng-value = "{{pic.id}}" ng-selected="letter.pic=pic.id">{{pic.username}}</option>
+                                <select class="form-control m-b" ng-model="letter.pic" ng-options="pic.id as pic.username for pic in picUsers">
+                                  <option></option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label">CSP</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.csp">
-                                 <option ng-repeat="csp in cspUsers" ng-value = "{{csp.id}}" ng-selected="letter.csp=csp.id">{{csp.username}}</option>
+                                <select class="form-control m-b" ng-model="letter.csp" ng-options="csp.id as csp.username for csp in cspUsers">
+                                 <option></option>
                                 </select>
                             </div>
                         </div>

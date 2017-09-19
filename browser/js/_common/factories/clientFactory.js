@@ -42,7 +42,7 @@ app.factory('clientFactory', function($http, $q) {
 
     //Updates
     d.updateClient = (clause) => {
-        return $http.put(`/api/clients/`, clause)
+        return $http.put(`/api/clients/update`, clause)
             .then(response => {
                 return response.data
             }).catch(err => {

@@ -58,6 +58,7 @@ app.factory('lcFactory', function($http, $q, LETTER_EVENTS, $rootScope) {
                 }
             })
             .then(response => {
+                $rootScope.$broadcast(LETTER_EVENTS.refreshLetters);
                 return response.data
             }).catch(err => {
                 return $q.reject({
