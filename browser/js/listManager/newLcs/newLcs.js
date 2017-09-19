@@ -19,7 +19,7 @@ app.controller('newLcsCtrl', ($scope, lcFactory, letters, $state) => {
         2: 'Reviewed',
         3: 'Amended',
         4: 'Frozen',
-        5: 'Pending Update'
+        5: 'Revised'
     }
     $scope.transition = (lc_number) => {
         $state.go('singleLc', {
