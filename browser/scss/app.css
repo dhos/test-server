@@ -1203,7 +1203,7 @@ h3, .h3 { font-size: 22px; }
 .table-expandable .table-expandable-arrow { display: none !important; }
 a.openicon { padding: 6px 12px; }
 .col-md-12.ng-scope { padding: 0; }
-#search-text { padding: 6px 14px; border-radius: 2px; }
+#search-text { padding: 6px 14px; border-radius: 2px;margin-right:27px; }
 td > button.ng-scope{    background: #69ccf6;
     border: 0;
     padding: 0px 7px;

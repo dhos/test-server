@@ -30,7 +30,8 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     //inits
     $scope.user = user
     $scope.csp = $scope.user.role === 2
-    if ($scope.user.role !== 4) {
+    $scope.manager = $scope.user.manager
+    if ($scope.user.role !== 4 && !$scope.manager) {
         $scope.letters = letters.filter(letter => {
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
