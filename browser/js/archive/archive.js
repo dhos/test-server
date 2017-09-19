@@ -5,9 +5,7 @@ app.config(function($stateProvider) {
         url: '/archive',
         resolve: {
             archivedLetters: (lcFactory) => {
-                return lcFactory.getLetters({
-                    archived: true
-                }).then(archived => {
+                return lcFactory.getArchivedLetters({}).then(archived => {
                     return archived
                 })
             }

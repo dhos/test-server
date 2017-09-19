@@ -12,8 +12,14 @@ app.config(function($stateProvider) {
 });
 
 app.controller('revisedCtrl', ($scope, lcFactory, letters, $state) => {
-    $scope.displayLetters = $scope.displayRevised
 
+    $scope.$watch('revisedCustomer', (nv, ov) => {
+        if (nv === false) {
+            $scope.displayLetters = $scope.needsClientRevised
+        } else {
+            $scope.displayLetters = $scope.needsBusinessRevised
+        }
+    })
     $scope.transition = (lc_number) => {
         $state.go('singleLc', {
             lc_number: lc_number

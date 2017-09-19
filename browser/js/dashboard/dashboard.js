@@ -128,9 +128,9 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
             if (frozen.finDoc === 0) $scope.Update.push(frozen)
         })
         debugger
-        $scope.Revised.forEach(Revised => {
-            if (!$scope.Revised.client_approved) $scope.revisedCustomer += 1
-            if (!$scope.Revised.business_approved) $scope.revisedElite += 1
+        $scope.Revised.forEach(revised => {
+            if (!revised.client_approved) $scope.revisedCustomer += 1
+            if (!revised.business_approved) $scope.revisedElite += 1
         })
         $scope.Reviewed.forEach(reviewed => {
             if (!reviewed.client_approved) $scope.reviewedCustomer += 1

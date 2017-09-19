@@ -135,10 +135,10 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.Frozen = []
     $scope.displayRviewed = []
     $scope.displayRevised = []
-    $scope.clientReviewedLetters = []
-    $scope.clientRevisedLetters = []
-    $scope.businessRevisedLetters = []
-    $scope.businessReviewedLetters = []
+    $scope.needsClientReviewed = []
+    $scope.needsClientRevised = []
+    $scope.needsBusinessRevised = []
+    $scope.needsBusinessReviewed = []
     $scope.Update = []
     if ($scope.user.role !== 4) {
         $scope.Expiring = expiring[0].filter(letter => {
@@ -155,17 +155,17 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.revisedCustomer = false
     $scope.reviewedCustomer = false
     $scope.$watch('reviewedCustomer', (nv, ov) => {
-        if (nv === true) {
-            $scope.displayReviewed = $scope.clientReviewedLetters
+        if (nv === false) {
+            $scope.displayReviewed = $scope.needsClientReviewed
         } else {
-            $scope.displayReviewed = $scope.businessReviewedLetters
+            $scope.displayReviewed = $scope.needsBusinessReviewed
         }
     })
     $scope.$watch('revisedCustomer', (nv, ov) => {
-            if (nv === true) {
-                $scope.displayRevised = $scope.clientRevisedLetters
+            if (nv === false) {
+                $scope.displayRevised = $scope.needsClientRevised
             } else {
-                $scope.displayRevised = $scope.businessRevisedLetters
+                $scope.displayRevised = $scope.needsBusinessRevised
             }
         })
         //set states
@@ -200,20 +200,16 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
                 $scope[$scope.state[letter.state]].push(letter)
                 if (letter.state == 4 && letter.finDoc === 0) $scope.Update.push(letter)
             })
-            $scope.clientReviewedLetters = $scope.Reviewed.filter(letter => {
-                return letter.client_approved
+            $scope.Revised.forEach(revised => {
+                if (!revised.client_approved) $scope.needsClientRevised.push(revised)
+                if (!revised.business_approved) $scope.needsBusinessRevised.push(revised)
             })
-            $scope.businessReviewedLetters = $scope.Reviewed.filter(letter => {
-                return letter.business_approved
+            $scope.Reviewed.forEach(reviewed => {
+                if (!reviewed.client_approved) $scope.needsClientReviewed.push(reviewed)
+                if (!reviewed.business_approved) $scope.needsBusinessReviewed.push(reviewed)
             })
-            $scope.clientRevisedLetters = $scope.Revised.filter(letter => {
-                return letter.client_approved
-            })
-            $scope.businessRevisedLetters = $scope.Revised.filter(letter => {
-                return letter.business_approved
-            })
-            $scope.displayReviewed = $scope.businessReviewedLetters
-            $scope.displayRevised = $scope.businessRevisedLetters
+            $scope.displayReviewed = $scope.needsClientReviewed
+            $scope.displayRevised = $scope.needsClientRevised
         })
     }
     $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
