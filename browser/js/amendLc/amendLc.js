@@ -13,7 +13,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, bankFactory, letter, $state, LETTER_EVENTS, $rootScope, customerFactory, openModal) => {
+app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, bankFactory, letter, $state, LETTER_EVENTS, $rootScope, customerFactory, openModal, clientFactory) => {
     $scope.letter = letter
     $scope.updateLc = () => {
         openModal('Amend LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
