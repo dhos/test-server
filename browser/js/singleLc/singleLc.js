@@ -7,10 +7,9 @@ app.config(function($stateProvider) {
             authenticate: true
         },
         resolve: {
-            letter: (lcFactory, $stateParams) => {
+            letter: (lcFactory, $stateParams, $state) => {
                 return lcFactory.getSingleLetter($stateParams.lc_number).then(letter => {
-                    console.log('hello', letter)
-                        // if (!letter) $state.go('listManager.all')
+                    if (!letter) $state.go('listManager.all')
                     return letter
                 })
             },
@@ -76,19 +75,27 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     let checkPermissions = (commercial) => {
         return ($scope.client ? !!commercial : !commercial) && (!$scope.manager) && ($scope.owner)
     }
+
+    let noPermission = () => {
+        return openModal('No Access', 'You don\'t have access to that', '', 'warning')
+    }
+
     $scope.approve = clause => {
-        if (!checkPermissions(clause.commercial)) return
+        if (!checkPermissions(clause.commercial)) return noPermission()
         clause.expanded = false
         clause.status = 1
         $scope.approved.push(clause.swift_code)
     }
     $scope.unapprove = clause => {
-        if (!checkPermissions(clause.commercial)) return
-        clause.status = null
-        $scope.approved.splice($scope.approved.indexOf(clause.swift_code), 1)
+        if (!checkPermissions(clause.commercial)) return noPermission()
+        openModal('Delete Note', 'Are you sure you want to remove the note?', 'prompt', 'confirm').then(result => {
+            if (!result) return
+            clause.status = null
+            $scope.approved.splice($scope.approved.indexOf(clause.swift_code), 1)
+        })
     }
     $scope.ammend = clause => {
-        if (!checkPermissions(clause.commercial)) return
+        if (!checkPermissions(clause.commercial)) return noPermission()
         clause.status = 2
         clause.expanded = false
         $scope.amended.push(clause.swift_code)
@@ -96,7 +103,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     $scope.unammend = clause => {
         if (clause.expanded == false) clause.expanded = true
         else {
-            if (!checkPermissions(clause.commercial)) return
+            if (!checkPermissions(clause.commercial)) return noPermission()
             clause.status = null
             clause.note = null
             $scope.amended.splice($scope.approved.indexOf(clause.swift_code), 1)
@@ -120,7 +127,6 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         if (!$scope.client) {
             $scope.business_clauses.forEach(clause => {
                 if (!clause.status) {
-                    console.log(clause)
                     complete = false
                 }
                 if (clause.status == 2) approved = false

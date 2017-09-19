@@ -77,16 +77,16 @@
                                         <table class="table m-b-none table-expandable">
                                             <thead>
                                                 <tr>
-                                                    <th>SWIFT</th>
+                                                    <th>SWIFT(Com?)</th>
                                                     <th width="35%">Field Description</th>
                                                     <th width="30%">Line Description
-                                                    <th>Type</th>
+                                                    <!-- <th>Type</th> -->
                                                     <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat-start="clause in clauses track by $index">
-                                                    <td>{{clause.swift_code}}</td>
+                                                    <td>{{clause.swift_code}}<i ng-if="clause.commercial" class="fa fa-check-circle-o" aria-hidden="true"></i></td>
                                                     <td>{{clause.field_description}}
                                                         <!-- <br>
                                                         <br>
@@ -96,10 +96,8 @@
                                                             <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
                                                         </div> -->
                                                     </td>
-                                                    <td>{{clause.line_description}}
-                                                    </td>
-                                                    
-                                                    <td>{{(clause.commercial)?'Com':'Non-Com'}}</td>
+                                                    <td>{{clause.line_description}}</td>
+                                                    <!-- <td>{{(clause.commercial)?'Com':'Non-Com'}}</td> -->
                                                     <td ng-if="clause.status ==null">
                                                         <a ng-click="approve(clause)"><img src="img/tick-inactive.png" alt="Status"></a>
                                                         <a ng-click="clause.expanded=!clause.expanded"><img src="img/edit.png" alt="Status"></a>

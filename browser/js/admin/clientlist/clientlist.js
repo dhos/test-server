@@ -5,29 +5,37 @@ app.config(function($stateProvider) {
         url: '/clients',
         resolve: {
             clients: clientFactory => {
-                return clientFactory.getclients({}).then(clients => {
+                return clientFactory.getClients({}).then(clients => {
                     return clients
+                })
+            },
+            customers: customerFactory => {
+                return customerFactory.getCustomers({}).then(customers => {
+                    return customers
                 })
             }
         }
     })
 });
 
-app.controller('clientlistCtrl', function($scope, clients, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory) {
+app.controller('clientlistCtrl', function($scope, clients, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, customers, openModal, clientFactory) {
     $scope.clients = clients
-    $scope.deleteclient = (UserId, index) => {
+    $scope.customers = customers
+    $scope.customers.forEach(customer => {
+        $scope.customers[customer.id] = customer.name
+    })
+    $scope.deleteClient = (UserId, index) => {
         openModal('Delete Client', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
-
                 $scope.clients.splice(index, 1)
-                clientFactory.deleteUser({
+                clientFactory.deleteClient({
                     id: UserId
                 })
             }
         })
     }
-    $scope.editCustomer = (UserId) => {
-        $state.go('editCustomer', {
+    $scope.editClient = (UserId) => {
+        $state.go('editClient', {
             userId: UserId
         })
     }

@@ -23,6 +23,8 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
                     $state.go('singleLc', {
                         lc_number: letter.lc_number
                     })
+                }).catch(err => {
+                    openModal('Upload Error', 'That LC already exists', 'warning', 'warnint')
                 })
             }
         })

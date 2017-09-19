@@ -27,6 +27,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory) {
+    jQuery('body').removeClass('loginpage')
     $scope.user = user
     $scope.csp = $scope.user.role === 2
     if ($scope.user.role !== 4) {

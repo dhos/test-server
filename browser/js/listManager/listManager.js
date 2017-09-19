@@ -42,7 +42,38 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     } else {
         $scope.letters = letters
     }
-    console.log($scope.user, $scope.letters)
+    $scope.dateDesc = {
+        date: false,
+        expire: false
+    }
+    $scope.sortByDate = (params) => {
+        $scope.dateDesc[params] = !$scope.dateDesc[params]
+        if ($scope.dateDesc[params]) {
+            $scope.letters.sort((a, b) => {
+                return new Date(a[params]) - new Date(b[params])
+            })
+        } else {
+            $scope.letters.sort((a, b) => {
+                return new Date(b[params]) - new Date(a[params])
+            })
+        }
+    }
+
+    $scope.alphaDesc = {
+        country: false
+    }
+    $scope.sortByAlphabet = (params) => {
+        $scope.alphaDesc[params] = !$scope.alphaDesc[params]
+        if ($scope.alphaDesc[params]) {
+            $scope.letters.sort((a, b) => {
+                return a[params] - b[params]
+            })
+        } else {
+            $scope.letters.sort((a, b) => {
+                return b[params] - a[params]
+            })
+        }
+    }
     $scope.banks = {}
         //get banks
     bankFactory.getBanks({}).then(banks => {
@@ -107,7 +138,6 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     } else {
         $scope.Expiring = expiring[0]
     }
-    console.log($scope.Expiring)
     $scope.revisedCustomer = false
     $scope.reviewedCustomer = false
 
