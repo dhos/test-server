@@ -26,7 +26,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user) => {
+app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user, clientFactory) => {
     //inits
     $scope.user = user
     $scope.csp = $scope.user.role === 2
@@ -60,7 +60,8 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     }
 
     $scope.alphaDesc = {
-        country: false
+        country: false,
+        client: false
     }
     $scope.sortByAlphabet = (params) => {
         $scope.alphaDesc[params] = !$scope.alphaDesc[params]
@@ -111,6 +112,12 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     customerFactory.getCustomers({}).then(customers => {
         customers.forEach(customer => {
             $scope.customers[customer.id] = customer.name
+        })
+    })
+    $scope.clients = {}
+    clientFactory.getClients({}).then(clients => {
+        clients.forEach(client => {
+            $scope.clients[client.id] = client.name
         })
     })
     $scope.state = {
