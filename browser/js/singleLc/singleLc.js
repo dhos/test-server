@@ -88,11 +88,9 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     }
     $scope.unapprove = clause => {
         if (!checkPermissions(clause.commercial)) return noPermission()
-        openModal('Delete Note', 'Are you sure you want to remove the note?', 'prompt', 'confirm').then(result => {
-            if (!result) return
-            clause.status = null
-            $scope.approved.splice($scope.approved.indexOf(clause.swift_code), 1)
-        })
+        clause.status = null
+        $scope.approved.splice($scope.approved.indexOf(clause.swift_code), 1)
+
     }
     $scope.ammend = clause => {
         if (!checkPermissions(clause.commercial)) return noPermission()
@@ -104,9 +102,12 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         if (clause.expanded == false) clause.expanded = true
         else {
             if (!checkPermissions(clause.commercial)) return noPermission()
-            clause.status = null
-            clause.note = null
-            $scope.amended.splice($scope.approved.indexOf(clause.swift_code), 1)
+            openModal('Delete Note', 'Are you sure you want to remove the note?', 'prompt', 'confirm').then(result => {
+                if (!result) return
+                clause.status = null
+                clause.note = null
+                $scope.amended.splice($scope.amended.indexOf(clause.swift_code), 1)
+            })
         }
     }
     $scope.freeze = () => {
