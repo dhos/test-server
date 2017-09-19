@@ -89,7 +89,7 @@
                             <label class="col-lg-2 control-label">Client</label>
                             <div class="col-lg-6">
                                 <select class="form-control m-b" ng-model="letter.client">
-                                  <option ng-repeat="client in clients" value = "{{client.id}}">{{client.name}}</option>
+                                  <option ng-repeat="client in clients" ng-selected="letter.client=client.id" value = "{{client.id}}">{{client.name}}</option>
                                 </select>
                             </div>
                         </div>

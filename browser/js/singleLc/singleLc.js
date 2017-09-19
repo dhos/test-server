@@ -33,7 +33,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
 
     clauseFactory.getClauses({
         country: $scope.letter.country,
-        customer: $scope.letter.client
+        customer: $scope.letter.customer
     }).then(clauses => {
         $scope.clauses = clauses.map(clause => {
             if (clause.commercial) {
