@@ -30,13 +30,30 @@ var ensureAuthenticated = function(req, res, next) {
 //fetches
 
 router.get('/', ensureAuthenticated, (req, res, next) => {
+    let query = req.query
+    query.expire = {
+        $gte: new Date(new Date() - (30 * 24 * 60 * 60 * 1000))
+    }
     Letter.findAll({
-        where: req.query
+        where: query
     }).then(letters => {
         res.json(letters)
     }).catch(err => {
         next(err)
     })
+})
+
+router.get('/archived', ensureAuthenticated, (req, res, next) => {
+    Letter.findAll({
+        where: {
+            expire: {
+                $lte: new Date(new Date() - (30 * 24 * 60 * 60 * 1000))
+            }
+        }
+    }).then(archivedLetters => {
+        console.log(archivedLetters)
+        res.json(archivedLetters)
+    }).catch(err => next(err))
 })
 
 router.get('/expiring', ensureAuthenticated, (req, res, next) => {

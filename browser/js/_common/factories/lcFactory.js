@@ -13,6 +13,16 @@ app.factory('lcFactory', function($http, $q, LETTER_EVENTS, $rootScope) {
         })
     }
 
+    d.getArchivedLetters = () => {
+        return $http.get('/api/lc/archived').then(response => {
+            return response.data
+        }).catch(err => {
+            return $q.reject({
+                message: err
+            })
+        })
+    }
+
     d.getExpiringLetters = () => {
         return $http.get('/api/lc/expiring').then(response => {
             return response.data
