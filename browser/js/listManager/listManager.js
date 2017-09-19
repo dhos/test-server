@@ -157,7 +157,6 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.$watch('reviewedCustomer', (nv, ov) => {
         if (nv === true) {
             $scope.displayReviewed = $scope.clientReviewedLetters
-            console.log(nv, $scope.clientReviewedLetters)
         } else {
             $scope.displayReviewed = $scope.businessReviewedLetters
         }
@@ -213,6 +212,8 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.businessRevisedLetters = $scope.Revised.filter(letter => {
                 return letter.business_approved
             })
+            $scope.displayReviewed = $scope.businessReviewedLetters
+            $scope.displayRevised = $scope.businessRevisedLetters
         })
     }
     $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
