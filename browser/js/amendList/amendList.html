@@ -63,16 +63,17 @@
                                   </th>
                                 </tr>
                                 <tr>
-                                    <th data-breakpoints="xs">LC Number</th>
-                                    <th>Sales Contract Number</th>
-                                    <th>Customer Name</th>
-                                    <th data-breakpoints="xs sm">LC Start Date</th>
-                                    <th data-breakpoints="xs sm">LC End Date</th>
-                                    <th data-breakpoints="xs sm">Country Name</th>
-                                    <th data-breakpoints="xs sm">Advising Bank</th>
-                                    <th data-breakpoints="xs">PIC</th>
-                                    <th data-breakpoints="xs">CSP</th>
-                                </tr>
+                                    <th>LC Number</th>
+                                    <th>Start Date <a ng-click="sortByDate('date')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Expiry Date <a ng-click="sortByDate('expire')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Client <a ng-click="sort('client')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Country <a ng-click="sort('country')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+                                    <th>Status</th>
+                                    <th>Advising Bank</th>
+                                    <th>PIC</th>
+                                    <th>CSP</th>
+                                    <!-- <th>Expand</th> -->
+                            </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="letter in letters track by letter.lc_number">

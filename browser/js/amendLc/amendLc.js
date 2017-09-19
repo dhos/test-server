@@ -64,6 +64,9 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
     customerFactory.getCustomers({}).then(customers => {
         $scope.customers = customers
     })
+    clientFactory.getClients({}).then(clients => {
+        $scope.clients = clients
+    })
     $scope.state = {
             1: 'New',
             2: 'Reviewed',
