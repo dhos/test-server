@@ -1234,6 +1234,15 @@ td > button.ng-scope{    background: #69ccf6;
     padding: 6px 10px;
     font-size: 13px;
     border-radius: 2px;}
+        .amendment-tab .nav-tabs li a{background: #eee; margin: 0;    border-bottom: 1px solid #dadada;}
+    .amendment-tab ul.nav.nav-tabs > li.active > a{background: #fff;    border-bottom: 1px solid #fff !important;}
+    .actionplan{border-top: 1px solid #ddd;
+    padding-top: 15px;}
+    .clauselbl{color: #222;
+    font-size: 15px;
+    margin-bottom: 6px;
+    display: inline-block;}
+    .md-dialog-content{text-align: center;}
 /*Custom CSS End Here*/
 /*switch button css start*/
 .switch { position: relative; display: inline-block; width: 33px; height: 18px; -ms-transform: rotate(-90deg); -webkit-transform: rotate(-90deg); transform: rotate(-90deg); vertical-align: top; margin-top: 19px; }
@@ -1250,7 +1259,7 @@ input:checked + .slider:before { -webkit-transform: translateX(15px); -ms-transf
 .statuses li { list-style: none; display: inline-block; }
 .statuses li button { padding: 8px 12px; border: 1px solid #ccc; display: inline-block; margin: 5px; border-radius: 4px; background: #fff }
 .nav.nav-tabs li:first-child a { border-left: 0; }
-.nav.nav-tabs li a { border-top: 0 !important; border-bottom: 0 !important; padding: 25px; }
+.nav.nav-tabs li a { border-top: 0 !important;  padding: 15px 25px;    margin-bottom: 1px; }
 .inline-block { display: inline-block; }
 .float-right { float: right; }
 .btn-dropdown { background: none; border: 0; padding: 0; }
