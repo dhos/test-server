@@ -87,17 +87,9 @@
                                             <tbody>
                                                 <tr ng-repeat-start="clause in clauses track by $index">
                                                     <td>{{clause.swift_code}} <i ng-if="clause.commercial" class="fa fa-check-circle-o" aria-hidden="true"></i></td>
-                                                    <td>{{clause.field_description}}
-                                                        <!-- <br>
-                                                        <br>
-                                                        <div class="inline-block">
-                                                            <div class="inline-block"><a href=""><img src="img/amend-tick.png"></a></div>
-                                                            <div class="inline-block"><a href=""><img src="img/amend-edit.png"></a></div>
-                                                            <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
-                                                        </div> -->
+                                                    <td>{{clause.field_description}P
                                                     </td>
                                                     <td>{{clause.line_description}}</td>
-                                                    <!-- <td>{{(clause.commercial)?'Com':'Non-Com'}}</td> -->
                                                     <td ng-if="clause.status ==null">
                                                         <a ng-click="approve(clause)"><img src="img/tick-inactive.png" alt="Status"></a>
                                                         <a ng-click="clause.expanded=!clause.expanded"><img src="img/edit.png" alt="Status"></a>
@@ -106,17 +98,13 @@
                                                         <a ng-if="clause.status ==1" ng-click="unapprove(clause)"><img src="img/tick-active.png" alt="Status"></a>
                                                         <a ng-if="clause.status == 2" ng-click="unammend(clause)"><img src="img/add.png" alt="Status"></a>
                                                     </td>
-                                                    
-<!--                                                     <td>
-                                                    <div ng-click="clause.expanded = false" ng-if="clause.expanded" class="table-expandable-arrow up"></div>
-                                                    <div ng-click="clause.expanded = true" ng-if="!clause.expanded" class="table-expandable-arrow"></div>
-                                                    </td> -->
                                                 </tr>
                                                 <tr  class="secondlevel" ng-show="clause.expanded" ng-repeat-end>
                                                     <td></td>
                                                     <td colspan="4">
                                                         <div class="full-width m-b">
-                                                            <textarea ng-model="clause.note" class="full-width" rows="5" placeholder="Add Note"></textarea>
+                                                            <textarea ng-if="!owner" ng-model="clause.note" class="full-width" ng-readonly="true" rows="5" placeholder="Add Note"></textarea>
+                                                            <textarea ng-if="owner" ng-model="clause.note" class="full-width" rows="5" placeholder="Add Note"></textarea>
                                                         </div>
                                                         <div class="full-width m-b">
                                                             <button class="btn m-b-xs btn-success" ng-click="ammend(clause)">Add Note</button>
@@ -143,10 +131,6 @@
                                                                 <div class="text-center inline-block box-accepted">{{approved.length}}/
                                                                     {{(client?commercial_clauses.length:business_clauses.length)}}
                                                                     <br/> Accepted</div>
-                                                                    
-                                                                
-                                                                
-
                                                             </td>
                                                         </tr>
                                                         <tr>
