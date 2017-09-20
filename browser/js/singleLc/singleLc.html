@@ -77,7 +77,7 @@
                                         <table class="table m-b-none table-expandable">
                                             <thead>
                                                 <tr>
-                                                    <th>SWIFT</th>
+                                                    <th width="7%">SWIFT</th>
                                                     <th width="20%">Field Description</th>
                                                     <th>Line Description
                                                     <th width="15%">Type</th>
@@ -86,7 +86,7 @@
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat-start="clause in clauses track by $index">
-                                                    <td>{{clause.swift_code}} <i ng-if="clause.commercial" class="fa fa-check-circle-o" aria-hidden="true"></i></td>
+                                                    <td>{{clause.swift_code}}<i ng-if="clause.commercial" class="fa fa-check-circle-o" aria-hidden="true"></i></td>
                                                     <td>{{clause.field_description}}
                                                         <!-- <br>
                                                         <br>
@@ -96,7 +96,7 @@
                                                             <div class="inline-block"><a href=""><img src="img/amend-clock.png"></a></div>
                                                         </div> -->
                                                     </td>
-                                                    <td>{{clause.line_description}}
+                                                    <td style="white-space:pre-line;">{{clause.line_description}}
                                                     </td>
                                                     
                                                     <td>{{(clause.commercial)?'Com':'Non-Com'}}</td>

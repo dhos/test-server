@@ -6,7 +6,7 @@
 
  */
 module.exports = {
-    "DATABASE_URI": "postgres://localhost:5432/lcportal",
-    "SESSION_SECRET": "Optimus Prime is my real dad",
+    "DATABASE_URI": process.env.POSTGRES_URI,
+    "SESSION_SECRET": process.env.SESSION_SECRET,
     "LOGGING": true
 };

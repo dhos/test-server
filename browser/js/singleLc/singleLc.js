@@ -30,6 +30,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     $scope.manager = $scope.user.manager
     $scope.approved = []
     $scope.amended = []
+    console.log($scope.letter)
     clientFactory.getSingleClient($scope.letter.client).then(client => {
         $scope.letterClient = client
         console.log($scope.letterClinet)
@@ -66,8 +67,8 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
                 else if (clause.status == 2) $scope.amended.push(clause.swift_code)
             })
         }
+        console.log($scope.clauses)
     })
-
 
     $scope.states = {
         1: 'newLcs',
