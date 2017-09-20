@@ -81,7 +81,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     }
 
     let noPermission = () => {
-        return openModal('No Access', 'You don\'t have access to that', '', 'warning')
+        return openModal('No Access', 'You don\'t have access to that', 'label', 'warning')
     }
 
     $scope.approve = clause => {
