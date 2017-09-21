@@ -11,18 +11,21 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('frozenCtrl', ($scope, lcFactory, letters, $state) => {
+app.controller('frozenCtrl', ($scope, lcFactory, letters, $state, openModal) => {
     $scope.displayLetters = $scope.Frozen
     $scope.transition = (lc_number) => {
         $state.go('singleLc', {
             lc_number: lc_number
         })
     }
-    console.log($scope.displayLetters)
     $scope.updateFinDoc = (index) => {
         if ($scope.displayLetters[index].finDoc !== 0) {
-            lcFactory.updateLetter($scope.displayLetters[index]).then(letter => {
-                $scope.displayLetters[index].toggled = false
+            openModal('Create LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
+                if (result) {
+                    lcFactory.updateLetter($scope.displayLetters[index]).then(letter => {
+                        $scope.displayLetters[index].toggled = false
+                    })
+                }
             })
         }
     }
