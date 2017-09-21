@@ -31,6 +31,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
     $scope.user = user
     $scope.csp = $scope.user.role === 2
     $scope.pic = $scope.user.role === 1
+    $scope.manager = $scope.user.manager
     if ($scope.user.role !== 4) {
         $scope.letters = letters.filter(letter => {
             let bool = true
