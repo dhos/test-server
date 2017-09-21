@@ -30,10 +30,9 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     $scope.manager = $scope.user.manager
     $scope.approved = []
     $scope.amended = []
-    console.log($scope.letter)
     clientFactory.getSingleClient($scope.letter.client).then(client => {
         $scope.letterClient = client
-        console.log($scope.letterClinet)
+        console.log(client)
     })
 
     clauseFactory.getClauses({

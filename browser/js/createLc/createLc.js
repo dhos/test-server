@@ -9,23 +9,18 @@ app.config(function($stateProvider) {
 app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope, customerFactory, openModal, clientFactory) {
     //find the users that are clients,
     //find the users that are csp/pic
-    $scope.selectedCountry = {}
-    $scope.selectedCustomer = {}
-    $scope.selectedClient = {}
     $scope.createLc = () => {
         openModal('Create LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 $scope.letter.state = 1
-                $scope.letter.client = $scope.selectedClient.id
-                $scope.letter.customer = $scope.selectedCustomer.id
-                $scope.letter.country = $scope.selectedCountry.id
-                lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
-                    $state.go('singleLc', {
-                        lc_number: letter.lc_number
-                    })
-                }).catch(err => {
-                    openModal('Upload Error', 'That LC already exists', 'warning', 'warnint')
-                })
+                console.log($scope.letter)
+                // lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
+                //     $state.go('singleLc', {
+                //         lc_number: letter.lc_number
+                //     })
+                // }).catch(err => {
+                //     openModal('Upload Error', 'That LC already exists', 'warning', 'warnint')
+                // })
             }
         })
     }
