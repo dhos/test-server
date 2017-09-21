@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
     Client.findAll({
         where: req.query,
         order: [
-            ['name', 'DSC']
+            ['name', 'DESC']
         ]
     }).then(clients => {
         res.json(clients)
