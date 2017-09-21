@@ -21,14 +21,20 @@ app.config(function($stateProvider) {
                 return AuthService.getLoggedInUser().then(user => {
                     return user
                 })
+            },
+            archivedLetters: (lcFactory) => {
+                return lcFactory.getArchivedLetters({}).then(archived => {
+                    return archived
+                })
             }
         }
     })
 });
 
-app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory) {
+app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory, archivedLetters) {
     jQuery('body').removeClass('loginpage')
     $scope.user = user
+    $scope.Archived = archivedLetters
     $scope.csp = $scope.user.role === 2
     $scope.pic = $scope.user.role === 1
     $scope.manager = $scope.user.manager
