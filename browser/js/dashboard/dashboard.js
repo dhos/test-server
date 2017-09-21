@@ -163,11 +163,17 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
                 $scope.Expiring = $scope.Expiring.filter(letter => {
                     return (letter.customer == $scope.customerFilter.filter) && (letter.country == $scope.countryFilter.filter)
                 })
+                $scope.Archived = $scope.Archived.filter(letter => {
+                    return (letter.customer == $scope.customerFilter.filter) && (letter.country == $scope.countryFilter.filter)
+                })
             } else {
                 $scope.filteredLetters = $scope.letters.filter(letter => {
                     return letter.customer == $scope.customerFilter.filter
                 })
                 $scope.Expiring = $scope.Expiring.filter(letter => {
+                    return letter.customer == $scope.customerFilter.filter
+                })
+                $scope.Archived = $scope.Archived.filter(letter => {
                     return letter.customer == $scope.customerFilter.filter
                 })
             }
@@ -179,9 +185,13 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
                 $scope.Expiring = $scope.Expiring.filter(letter => {
                     return letter.country == $scope.countryFilter.filter
                 })
+                $scope.Archived = $scope.Archived.filter(letter => {
+                    return letter.country == $scope.countryFilter.filter
+                })
             } else {
                 $scope.filteredLetters = $scope.letters
-                $scope.Expiring = $scope.Expiring
+                $scope.Expiring = expiring[0]
+                $scope.Archived = archivedLetters
             }
         }
         $scope.filteredLetters.forEach(letter => {
