@@ -40,7 +40,7 @@ app.controller('clauseManagerCtrl', function($scope, countries, countryFactory, 
     $scope.createClause = (clause) => {
         clause.customer = $scope.selectedCustomer.id
         clause.country = $scope.selectedCountry.id
-        openModal('Create Bank', 'Are you sure?', 'prompt', 'confirm').then(result => {
+        openModal('Create Clause', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 clauseFactory.createClause(clause).then(createdClause => {
 

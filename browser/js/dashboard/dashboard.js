@@ -96,7 +96,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
             if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
             if ($scope.csp && !$scope.manager) bool = letter.csp == $scope.user.id
-            if ($scope.pic) bool = letter.pic == $scope.user.id
+            if ($scope.pic && !$scope.manager) bool = letter.pic == $scope.user.id
             return bool
         })
     } else {
@@ -120,7 +120,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
                 if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
                 if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
                 if ($scope.csp && !$scope.manager) bool = letter.csp == $scope.user.id
-                if ($scope.pic) bool = letter.pic == $scope.user.id
+                if ($scope.pic && !$scope.manager) bool = letter.pic == $scope.user.id
                 return bool
             })
         } else {

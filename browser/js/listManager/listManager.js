@@ -28,6 +28,8 @@ app.config(function($stateProvider) {
 
 app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user, clientFactory) => {
     //inits
+    $scope.$state = $state
+    console.log($scope.$state)
     $scope.user = user
     $scope.csp = $scope.user.role === 2
     $scope.pic = $scope.user.role === 1
@@ -37,10 +39,11 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
             if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
-            if ($scope.csp) bool = letter.csp == $scope.user.id
-            if ($scope.pic) bool = letter.pic == $scope.user.id
+            if ($scope.csp && !$scope.manager) bool = letter.csp == $scope.user.id
+            if ($scope.pic && !$scope.manager) bool = letter.pic == $scope.user.id
             return bool
         })
+        console.log($scope.letters)
     } else {
         $scope.letters = letters
     }
@@ -147,7 +150,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
             if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
             if ($scope.csp && !$scope.manager) bool = letter.csp == $scope.user.id
-            if ($scope.pic) bool = letter.pic == $scope.user.id
+            if ($scope.pic && !$scope.manager) bool = letter.pic == $scope.user.id
             return bool
         })
     } else {
@@ -179,7 +182,18 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
 
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
-            $scope.letters = letters
+            if ($scope.user.role !== 4) {
+                $scope.letters = letters.filter(letter => {
+                    let bool = true
+                    if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
+                    if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
+                    if ($scope.csp && !$scope.manager) bool = letter.csp == $scope.user.id
+                    if ($scope.pic && !$scope.manager) bool = letter.pic == $scope.user.id
+                    return bool
+                })
+            } else {
+                $scope.letters = letters
+            }
             $scope.New = []
             $scope.Reviewed = []
             $scope.Amended = []
@@ -192,7 +206,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
                     if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
                     if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
                     if ($scope.csp && !$scope.manager) bool = letter.csp == $scope.user.id
-                    if ($scope.pic) bool = letter.pic == $scope.user.id
+                    if ($scope.pic && !$scope.manager) bool = letter.pic == $scope.user.id
                     return bool
                 })
             } else {
@@ -208,7 +222,6 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
                 if (!revised.business_approved) $scope.needsBusinessRevised.push(revised)
             })
             $scope.Reviewed.forEach(reviewed => {
-                debugger
                 if (!reviewed.client_approved) $scope.needsClientReviewed.push(reviewed)
                 if (!reviewed.business_approved) $scope.needsBusinessReviewed.push(reviewed)
             })

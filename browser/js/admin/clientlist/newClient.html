@@ -27,9 +27,12 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Customer</label>
                             <div class="col-lg-6">
-                                <select ng-model="selectedCustomer" class="form-control">
-                                    <option ng-selected="client.customer=customer.id" ng-repeat="customer in customers" ng-value="customer.id">{{customer.name}}</option>
+                                <select ng-model="selectedCustomer" class="form-control" name="customer_name" id="customer_name" ng-options="customer.id as customer.name for customer in customers" required>
+                                    <option>Select</option>
                                 </select>
+                                <span ng-show="client_form.customer_name.$error.required && client_form.customer_name.$dirty">
+                                    Name is required.
+                                  </span>
                             </div>
                         </div>
                         <div class="form-group">
