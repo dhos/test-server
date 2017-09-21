@@ -71,7 +71,6 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         4: 'Frozen',
         5: 'Revised'
     }
-    $scope.Archived = []
     $scope.countryFilter = {
         name: "All"
     }
