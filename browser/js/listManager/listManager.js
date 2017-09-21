@@ -205,6 +205,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
                 if (!revised.business_approved) $scope.needsBusinessRevised.push(revised)
             })
             $scope.Reviewed.forEach(reviewed => {
+                debugger
                 if (!reviewed.client_approved) $scope.needsClientReviewed.push(reviewed)
                 if (!reviewed.business_approved) $scope.needsBusinessReviewed.push(reviewed)
             })
@@ -212,5 +213,6 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.displayRevised = $scope.needsClientRevised
         })
     }
+    refreshLetters()
     $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
 })
