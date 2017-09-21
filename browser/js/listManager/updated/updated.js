@@ -20,7 +20,7 @@ app.controller('updatedCtrl', ($scope, lcFactory, letters, $state, openModal) =>
     }
     $scope.updateFinDoc = (index) => {
         if ($scope.displayLetters[index].finDoc !== 0) {
-            openModal('Create LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            openModal('Input FD Number', 'Are you sure?', 'prompt', 'confirm').then(result => {
                 if (result) {
                     lcFactory.updateLetter($scope.displayLetters[index]).then(letter => {
                         $scope.displayLetters[index].toggled = false
