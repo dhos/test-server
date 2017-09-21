@@ -80,7 +80,6 @@
                                                     <th width="7%">SWIFT</th>
                                                     <th width="20%">Field Description</th>
                                                     <th>Line Description
-                                                    <th width="15%">Type</th>
                                                     <th width="10%">Status</th>
                                                 </tr>
                                             </thead>
@@ -98,8 +97,6 @@
                                                     </td>
                                                     <td style="white-space:pre-line;">{{clause.line_description}}
                                                     </td>
-                                                    
-                                                    <td>{{(clause.commercial)?'Com':'Non-Com'}}</td>
                                                     <td ng-if="clause.status ==null">
                                                         <a ng-click="approve(clause)"><img src="img/tick-inactive.png" alt="Status"></a>
                                                         <a ng-click="clause.expanded=!clause.expanded"><img src="img/edit.png" alt="Status"></a>
