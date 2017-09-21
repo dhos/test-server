@@ -30,6 +30,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
     jQuery('body').removeClass('loginpage')
     $scope.user = user
     $scope.csp = $scope.user.role === 2
+    $scope.pic = $scope.user.role === 1
     if ($scope.user.role !== 4) {
         $scope.letters = letters.filter(letter => {
             let bool = true
@@ -88,8 +89,8 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
             if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
-            if ($scope.csp) bool = letter.csp == $scope.user.id
-            else bool = letter.pic == $scope.user.id
+            if ($scope.csp && !$scope.manager) bool = letter.csp == $scope.user.id
+            if ($scope.pic) bool = letter.pic == $scope.user.id
             return bool
         })
     } else {
@@ -112,8 +113,8 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
                 let bool = true
                 if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
                 if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
-                if ($scope.csp) bool = letter.csp == $scope.user.id
-                else bool = letter.pic == $scope.user.id
+                if ($scope.csp && !$scope.manager) bool = letter.csp == $scope.user.id
+                if ($scope.pic) bool = letter.pic == $scope.user.id
                 return bool
             })
         } else {

@@ -30,14 +30,15 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     //inits
     $scope.user = user
     $scope.csp = $scope.user.role === 2
+    $scope.pic = $scope.user.role === 1
     $scope.manager = $scope.user.manager
-    if ($scope.user.role !== 4 && !$scope.manager) {
+    if ($scope.user.role !== 4) {
         $scope.letters = letters.filter(letter => {
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
             if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
             if ($scope.csp) bool = letter.csp == $scope.user.id
-            else bool = letter.pic == $scope.user.id
+            if ($scope.pic) bool = letter.pic == $scope.user.id
             return bool
         })
     } else {
@@ -140,13 +141,13 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.needsBusinessRevised = []
     $scope.needsBusinessReviewed = []
     $scope.Update = []
-    if ($scope.user.role !== 4 && !$scope.manager) {
+    if ($scope.user.role !== 4) {
         $scope.Expiring = expiring[0].filter(letter => {
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
             if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
-            if ($scope.csp) bool = letter.csp == $scope.user.id
-            else bool = letter.pic == $scope.user.id
+            if ($scope.csp && !$scope.manager) bool = letter.csp == $scope.user.id
+            if ($scope.pic) bool = letter.pic == $scope.user.id
             return bool
         })
     } else {
@@ -185,15 +186,17 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.Revised = []
             $scope.Frozen = []
             $scope.Update = []
-            if ($scope.user.role !== 4 && !$scope.manager) {
-                $scope.letters = letters.filter(letter => {
+            if ($scope.user.role !== 4) {
+                $scope.Expiring = expiring[0].filter(letter => {
                     let bool = true
                     if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
                     if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
-                    if ($scope.csp) bool = letter.csp == $scope.user.id
-                    else bool = letter.pic == $scope.user.id
+                    if ($scope.csp && !$scope.manager) bool = letter.csp == $scope.user.id
+                    if ($scope.pic) bool = letter.pic == $scope.user.id
                     return bool
                 })
+            } else {
+                $scope.Expiring = expiring[0]
             }
             //set states
             $scope.letters.forEach(letter => {

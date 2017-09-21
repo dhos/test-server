@@ -64,6 +64,7 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                     scope.Update = []
                     scope.updatedLetters = []
                     scope.csp = scope.user.role === 2
+                    scope.pic = scope.user.role === 1
                     scope.manager = scope.user.manager
                     if (scope.user.role !== 4 && !scope.manager) {
                         scope.letters = letters.filter(letter => {
@@ -93,8 +94,8 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                             let bool = true
                             if (scope.user.countries.indexOf(letter.country) === -1) bool = false
                             if (scope.user.customers.indexOf(letter.customer) === -1) bool = false
-                            if (scope.csp) bool = letter.csp == scope.user.id
-                            else bool = letter.pic == scope.user.id
+                            if (scope.csp && !scope.manager) bool = letter.csp == scope.user.id
+                            if (scope.pic) bool = letter.pic == scope.user.id
                             return bool
                         })
                     } else {
