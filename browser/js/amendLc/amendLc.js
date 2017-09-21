@@ -46,16 +46,17 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
         openModal('Amend LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 if ($scope.updatedFile) {
+                    debugger
                     $scope.letter.state = 5
                     $scope.letter.business_approved = false
                     $scope.letter.client_approved = false
                     $scope.letter.commercial_notes = {}
                     $scope.letter.business_notes = {}
-                    lcFactory.updateLetterFile($scope.letter, $scope.updatedFile).then(letter => {
-                        $state.go('singleLc', {
-                            lc_number: letter.lc_number
-                        })
-                    })
+                    // lcFactory.updateLetterFile($scope.letter, $scope.updatedFile).then(letter => {
+                    //     $state.go('singleLc', {
+                    //         lc_number: letter.lc_number
+                    //     })
+                    // })
                 } else {
                     lcFactory.updateLetter($scope.letter).then(letter => {
                         $state.go('singleLc', {

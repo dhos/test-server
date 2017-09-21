@@ -185,7 +185,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
             $scope.Revised = []
             $scope.Frozen = []
             $scope.Update = []
-            if ($scope.user.role !== 4) {
+            if ($scope.user.role !== 4 && !$scope.manager) {
                 $scope.letters = letters.filter(letter => {
                     let bool = true
                     if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
@@ -213,5 +213,4 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
         })
     }
     $rootScope.$on(LETTER_EVENTS.refreshLetters, refreshLetters);
-    refreshLetters()
 })
