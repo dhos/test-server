@@ -140,7 +140,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.needsBusinessRevised = []
     $scope.needsBusinessReviewed = []
     $scope.Update = []
-    if ($scope.user.role !== 4) {
+    if ($scope.user.role !== 4 && !$scope.manager) {
         $scope.Expiring = expiring[0].filter(letter => {
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
