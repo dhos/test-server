@@ -43,7 +43,6 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
     })
     $scope.letter = letter
     $scope.updateLc = () => {
-        $scope.letter.client = $scope.selectedClient.id
         openModal('Amend LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 if ($scope.updatedFile) {

@@ -123,6 +123,7 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
         }
     }).then(updatedLetter => {
         // setup email data with unicode symbols
+        res.json(updatedLetter)
         User.findAll({
             where: {
                 countries: {
@@ -133,22 +134,22 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
                 }
             }
         }).then(users => {
-            let emails = users.map(user => {
-                return user.email
-            })
-            let amended_clauses = updatedLetter.business_notes.filter(clause => {
-                return clause.status == 2
-            })
-            amende_clauses.concat(updatedLetter.commercial_notes.filter(clause => {
-                    return clause.status == 2
-                }))
-                // let mailOptions = {
-                //     from: env.smtp.sender, // sender address
-                //     to: emails, // list of receivers
-                //     subject: `Update to LC ${updatedLetter.lc_number}`, // Subject line
-                //     text: 'Hello world?', // plain text body
-                //     html: '<b>Hello world?</b>' // html body
-                // };
+            // let emails = users.map(user => {
+            //     return user.email
+            // })
+            // let amended_clauses = updatedLetter.business_notes.filter(clause => {
+            //     return clause.status == 2
+            // })
+            // amende_clauses.concat(updatedLetter.commercial_notes.filter(clause => {
+            //         return clause.status == 2
+            //     }))
+            // let mailOptions = {
+            //     from: env.smtp.sender, // sender address
+            //     to: emails, // list of receivers
+            //     subject: `Update to LC ${updatedLetter.lc_number}`, // Subject line
+            //     text: 'Hello world?', // plain text body
+            //     html: '<b>Hello world?</b>' // html body
+            // };
 
             // send mail with defined transport object
             // transporter.sendMail(mailOptions, (error, info) => {
@@ -162,8 +163,10 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
             //     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
             //     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
             // });
-            res.json(updatedLetter)
-        }).catch(err => next(err))
+
+        }).catch(err => {
+            next(err)
+        })
     }).catch((err) => {
         return next(err)
     })
