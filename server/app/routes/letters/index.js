@@ -4,7 +4,7 @@ module.exports = router;
 var path = require('path');
 var db = require('../../../db');
 var Letter = db.model('letter')
-var user = db.model('user')
+var User = db.model('user')
 const nodemailer = require('nodemailer');
 var multer = require('multer')
 var env = require(path.join(__dirname, '../../../env'));
@@ -124,16 +124,16 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
     }).then(updatedLetter => {
         // setup email data with unicode symbols
         res.json(updatedLetter)
-        User.findAll({
-            where: {
-                countries: {
-                    $contains: updatedLetter.country
-                },
-                customers: {
-                    $contains: updatedLetter.customer
-                }
-            }
-        }).then(users => {
+        // User.findAll({
+        //     where: {
+        //         countries: {
+        //             $contains: updatedLetter.country
+        //         },
+        //         customers: {
+        //             $contains: updatedLetter.customer
+        //         }
+        //     }
+        // }).then(users => {
             // let emails = users.map(user => {
             //     return user.email
             // })
@@ -164,9 +164,9 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
             //     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
             // });
 
-        }).catch(err => {
-            next(err)
-        })
+        // }).catch(err => {
+        //     next(err)
+        // })
     }).catch((err) => {
         return next(err)
     })
