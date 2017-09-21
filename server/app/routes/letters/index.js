@@ -136,13 +136,19 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
             let emails = users.map(user => {
                 return user.email
             })
-            // let mailOptions = {
-            //     from: env.smtp.sender, // sender address
-            //     to: emails, // list of receivers
-            //     subject: `Update to LC ${updatedLetter.lc_number}`, // Subject line
-            //     text: 'Hello world?', // plain text body
-            //     html: '<b>Hello world?</b>' // html body
-            // };
+            let amended_clauses = updatedLetter.business_notes.filter(clause => {
+                return clause.status == 2
+            })
+            amende_clauses.concat(updatedLetter.commercial_notes.filter(clause => {
+                    return clause.status == 2
+                }))
+                // let mailOptions = {
+                //     from: env.smtp.sender, // sender address
+                //     to: emails, // list of receivers
+                //     subject: `Update to LC ${updatedLetter.lc_number}`, // Subject line
+                //     text: 'Hello world?', // plain text body
+                //     html: '<b>Hello world?</b>' // html body
+                // };
 
             // send mail with defined transport object
             // transporter.sendMail(mailOptions, (error, info) => {
@@ -249,7 +255,7 @@ router.put('/amend', upload.single('file'), ensureAuthenticated, (req, res, next
 //         <p style="font-size: 9px;">
 //             This e-mail and any attachments are for authorized use by the intended recipient(s) only. They may contain proprietary material or confidential information and/or be subject to legal privilege. They should not be copied, disclosed to, or used by any other party. If you have reason to believe that you are not one of the intended recipients of this e-mail, please notify the sender immediately by reply e-mail and immediately delete this e-mail and any of its attachments. Thank you.</p>
 //     </div>`
-    //deletes
+//deletes
 
 router.put('/delete', ensureAuthenticated, (req, res, next) => {
     Letter.findOne({
