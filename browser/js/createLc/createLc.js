@@ -13,14 +13,13 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
         openModal('Create LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 $scope.letter.state = 1
-                console.log($scope.letter)
-                // lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
-                //     $state.go('singleLc', {
-                //         lc_number: letter.lc_number
-                //     })
-                // }).catch(err => {
-                //     openModal('Upload Error', 'That LC already exists', 'warning', 'warnint')
-                // })
+                lcFactory.createLetter($scope.letter, $scope.file).then(letter => {
+                    $state.go('singleLc', {
+                        lc_number: letter.lc_number
+                    })
+                }).catch(err => {
+                    openModal('Upload Error', 'That LC already exists', 'warning', 'warnint')
+                })
             }
         })
     }
