@@ -36,7 +36,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="letter in letters track by letter.lc_number track by $index">
+                                <tr ng-repeat="letter in letters track track by $index">
                                     <td><a ng-click="transition(letter.lc_number)"> {{letter.lc_number}}</a></td>
                                     <td>{{letter.contract}}</td>
                                     <td>{{letter.date | date:"mediumDate"}}</td>
