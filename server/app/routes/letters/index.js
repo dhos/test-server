@@ -225,6 +225,7 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
                 if (error) {
                     return console.log(error);
                 }
+                console.log('hello', info.messageId)
             });
         })
 
