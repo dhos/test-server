@@ -153,9 +153,9 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             })
         }
         $scope.letter.draft = false
-        $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
         if (!complete) return openModal('Incomplete', 'There are clauses awaiting approval', '', 'warning')
         if (approved) {
+            $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
             if ($scope.letter.state === 1) {
                 $scope.letter.state = 2
             }
