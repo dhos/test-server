@@ -3,62 +3,63 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
         restrict: 'E',
         scope: {},
         templateUrl: 'js/_common/directives/chat/chat.html',
-        link: function(scope) {
-            scope.chat = false
-            scope.selectedChat = false
-            scope.chats = {}
-            scope.open = () => {
-                scope.chat = !scope.chat
+        controller: function($scope) {
+            $scope.chat = false
+            $scope.selectedChat = false
+            $scope.chats = {}
+            $scope.open = () => {
+                $scope.chat = !$scope.chat
             }
             var setUser = function() {
                 AuthService.getLoggedInUser().then(function(user) {
-                    scope.user = user;
+                    $scope.user = user;
 
                 });
             };
-            scope.date = new Date();
-            scope.startChat = (userId) => {
-                scope.newMessage = false
-                if (scope.chats[userId]) {
-                    scope.selectedChat = scope.chats[userId]
+            $scope.date = new Date();
+            $scope.startChat = (userId) => {
+                $scope.newMessage = false
+                if ($scope.chats[userId]) {
+                    $scope.selectedChat = $scope.chats[userId]
                 } else {
-                    scope.chats[userId] = []
+                    $scope.chats[userId] = []
                 }
-                scope.chatTarget = userId
+                $scope.chatTarget = userId
             }
-            scope.back = () => {
-                scope.selectedChat = false
+            $scope.back = () => {
+                $scope.selectedChat = false
             }
             Socket.on('identity', function(identity) {
-                scope.self = identity
+                $scope.self = identity
             })
             Socket.on('ChatList', function(onlineUsers) {
-                scope.contactList = onlineUsers
+                $scope.contactList = onlineUsers
             })
             Socket.on('Incoming', function(newChat) {
-                scope.newMessage = true
-                if (scope.chats[newChat.sender.id]) {
-                    scope.chats[newChat.sender.id].push(newChat)
+                $scope.newMessage = true
+                if ($scope.chats[newChat.sender.id]) {
+                    $scope.chats[newChat.sender.id].push(newChat)
                 } else {
-                    scope.chats[newChat.sender.id] = []
+                    $scope.chats[newChat.sender.id] = []
                 }
             })
-            scope.sendChat = (message) => {
-                console.log(scope.message)
-                if (!message) return
+            $scope.sendChat = () => {
+                console.log($scope.message)
+                debugger
+                if (!$scope.message) return
                 let chat = {
-                    text: message,
+                    text: $scope.message,
                     date: Date.now(),
-                    sender: scope.user,
-                    target: scope.chatTarget
+                    sender: $scope.user,
+                    target: $scope.chatTarget
                 }
                 $('#chatBox').val('')
-                scope.message = null
-                scope.selectedChat.push(chat)
+                $scope.message = null
+                $scope.selectedChat.push(chat)
                 Socket.emit('chat', chat)
             }
             var removeUser = function() {
-                scope.user = null;
+                $scope.user = null;
             };
             setUser()
             $rootScope.$on(AUTH_EVENTS.loginSuccess, setUser);

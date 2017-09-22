@@ -40,8 +40,8 @@
     </div>
     <div class="form-chat" ng-if="selectedChat">
         <div class="input-group input-group-sm">
-            <input id="chatBox" type="text" name="" placeholder="Type message here..." class="form-control" ng-model="message" chat-enter="sendChat(message)">
-            <span ng-click="sendChat(message)" class="input-group-btn"> <button class="btn btn-primary" type="button">Send
+            <input id="chatBox" type="text" name="" placeholder="Type message here..." class="form-control" ng-model="$parent.message" chat-enter="sendChat()">
+            <span ng-click="sendChat()" class="input-group-btn"> <button class="btn btn-primary" type="button">Send
         </button> </span></div>
     </div>
 </div>
