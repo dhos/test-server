@@ -216,7 +216,7 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
             });
             let mailOptions = {
                 from: 'noreply@elitesin.com', // sender address
-                to: 'stan.le1107@gmail.com', // list of receivers
+                to: emails, // list of receivers
                 subject: `Update to LC ${updatedLetter.lc_number}`, // Subject line
                 text: 'emailBody', // plain text body
                 html: emailHTML // html body
