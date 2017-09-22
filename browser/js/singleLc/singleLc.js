@@ -136,6 +136,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         })
     }
     $scope.updateLetter = () => {
+        if (!$scope.owner) return noPermission()
         var approved = true
         var complete = true
         if (!$scope.client) {
