@@ -263,15 +263,10 @@ router.put('/amend', upload.single('file'), ensureAuthenticated, (req, res, next
 //deletes
 
 router.put('/delete', ensureAuthenticated, (req, res, next) => {
-    Letter.findOne({
-        where: {
-            id: req.body.letter.id
-        }
-    }).then(letterToBeRemoved => {
-        letterToBeRemoved.status = 0
-        letterToBeRemoved.save().then(letter => {
-
-        })
+    Letter.destroy({
+        where: req.query
+    }).then(() => {
+        res.sendStatus(200)
     }).catch(err => next(err))
 })
 

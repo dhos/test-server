@@ -101,6 +101,16 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
             })
         }
     }
+    $scope.deleteLC = (lc_number, index) => {
+        openModal('Delete Letter', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+                $scope.letters.splice(index, 1)
+                lcFactory.deleteLetter({
+                    lc_number: lc_number
+                })
+            }
+        })
+    }
     $scope.state = {
         1: 'New',
         2: 'Reviewed',

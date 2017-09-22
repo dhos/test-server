@@ -17,7 +17,7 @@
                 <div class="row row-sm">
                     <div class="col-md-5">
                         <div class="panel wrapper">
-                            <h4 class="second-head">{{letterClient.name}}  <button class="btn m-b-xs btn-success" ng-if="manager && client" ng-click="freeze()">Force {{(letter.state ===4)? 'un': ''}}freeze</button><button class="btn m-b-xs btn-success" ng-if="user.role==5" ng-click="freeze()">Force {{(letter.state ===4)? 'un': ''}}freeze</button></h4>
+                            <h4 class="second-head">{{letterClient.name}}  <button class="btn m-b-xs btn-success pull-right" ng-if="manager && client" ng-click="freeze()">Force {{(letter.state ===4)? 'un': ''}}freeze</button><button class="btn m-b-xs btn-success pull-right" ng-if="user.role==5" ng-click="freeze()">Force {{(letter.state ===4)? 'un': ''}}freeze</button></h4>
                             <span class="font-thin m-t-none m-b  text-muted"><span class="m-l"> • LC Number</span><span class="redcolor">{{letter.lc_number}}</span> • Sales Contract <span class="redcolor">{{letter.contract}}</span>
                             </span>
                             <div class="row">

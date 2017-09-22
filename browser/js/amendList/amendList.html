@@ -36,7 +36,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="letter in letters track by letter.lc_number">
+                                <tr ng-repeat="letter in letters track by letter.lc_number track by $index">
                                     <td><a ng-click="transition(letter.lc_number)"> {{letter.lc_number}}</a></td>
                                     <td>{{letter.contract}}</td>
                                     <td>{{letter.date | date:"mediumDate"}}</td>
@@ -47,7 +47,7 @@
                                     <td>{{banks[letter.bank]}}</td>
                                     <td>{{picUsers[letter.pic]}}</td>
                                     <td>{{cspUsers[letter.csp]}}</td>
-                                    <td><a ng-click="deleteClient(client.id,$index)"><i class="fa fa-trash"></i> Delete</a></td>
+                                    <td><a ng-click="deleteLC(letter.lc_number,$index)"><i class="fa fa-trash"></i> Delete</a></td>
                                 </tr>
                             </tbody>
                         </table>

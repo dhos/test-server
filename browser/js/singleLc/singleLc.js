@@ -25,7 +25,6 @@ app.config(function($stateProvider) {
 app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootScope, LETTER_EVENTS, clauseFactory, openModal, clientFactory) => {
     $scope.user = user
     $scope.letter = letter
-    console.log($scope.user)
     $scope.client = $scope.user.role === 2
     $scope.owner = $scope.client ? ($scope.letter.csp == $scope.user.id) : ($scope.letter.pic == $scope.user.id)
     $scope.manager = $scope.user.manager
@@ -73,7 +72,6 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
                 else if (clause.status == 2) $scope.amended.push(clause.swift_code)
             })
         }
-        console.log($scope.clauses)
     })
 
     $scope.states = {
