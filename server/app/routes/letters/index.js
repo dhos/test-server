@@ -209,7 +209,7 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
 
             // create reusable transporter object using the default SMTP transport
             let transporter = nodemailer.createTransport({
-                host: 'smtp-aws.eliteasiapac.com',
+                host: 'smtp-aws.eliteglobalplatform.com.',
                 port: 25,
                 secure: false, // true for 465, false for other ports
                 auth: {}

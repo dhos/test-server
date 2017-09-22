@@ -168,7 +168,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         }
         $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
         lcFactory.updateLetter($scope.letter).then(letter => {
-            // $state.go('listManager.' + $scope.states[letter.state])
+            $state.go('listManager.' + $scope.states[letter.state])
         })
     }
     $scope.submitDraft = () => {
