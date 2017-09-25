@@ -166,7 +166,6 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             $scope.letter.state = 3
             $scope.letter.amendedCount += 1
         }
-        $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
         lcFactory.updateLetter($scope.letter).then(letter => {
             $state.go('listManager.' + $scope.states[letter.state])
         })
