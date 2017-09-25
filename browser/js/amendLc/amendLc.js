@@ -46,6 +46,11 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
         openModal('Amend LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 if ($scope.updatedFile) {
+                    if ($scope.letter.state === 4) {
+                        openModal('Frozen', 'Please unfreeze the lc before editing', 'warning', 'warning')
+                        return
+                    }
+
                     $scope.letter.state = 5
                     $scope.letter.business_approved = false
                     $scope.letter.client_approved = false
