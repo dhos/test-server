@@ -15,9 +15,11 @@ app.config(function($stateProvider) {
 
 app.controller('landingCtrl', function($scope, AuthService, userFactory, $state) {
     jQuery('body').addClass('loginpage')
+    console.log('hello')
     $scope.authError = null;
     $scope.sendLogin = function(loginInfo) {
         $scope.error = null;
+        console.log('test')
         AuthService.login(loginInfo).then(function() {
             jQuery('body').removeClass('loginpage')
             $state.transitionTo('dashboard');

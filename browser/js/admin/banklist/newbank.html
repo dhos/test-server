@@ -16,7 +16,7 @@
                 <div class="panel padder-v item">
                     <form name="bank_form" class="bs-example form-horizontal" novalidate>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label">Bank Name</label>
+                            <label class="col-lg-2 control-label required">Bank Name</label>
                             <div class="col-lg-6">
                                 <input name="bank_name" id="bank_name" ng-model="bank.name" type="input" class="form-control" required>
                                   <span ng-show="bank_form.bank_name.$error.required && bank_form.bank_name.$dirty">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label">Primary Email Address</label>
+                            <label class="col-lg-2 control-label required">Primary Email Address</label>
                             <div class="col-lg-6">
                                 <input name="prim_email" ng-model="bank.primary_email" type="email" class="form-control" required>
                                 <span ng-show="bank_form.prim_email.$error.required && bank_form.prim_email.$dirty">

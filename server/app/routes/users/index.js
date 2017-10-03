@@ -50,6 +50,19 @@ router.put('/update', function(req, res, next) {
     })
 })
 
+router.put('/resetPassword/:userId', (req, res, next) => {
+    User.update(req.body, {
+        individualHooks: true,
+        where: {
+            id: req.params.userId
+        }
+    }).then(result => {
+        res.json(result)
+    }).catch(err => {
+        next(err)
+    })
+})
+
 router.post('/signup', function(req, res, next) {
     var user = req.body
     User.create(user).then(createdUser => {

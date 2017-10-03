@@ -9,5 +9,12 @@ module.exports = db.define('client', {
     },
     customer: {
         type: Sequelize.INTEGER
+    },
+    client_code: {
+        type: Sequelize.INTEGER
+    },
+    emails: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
+        defaultValue: []
     }
 });

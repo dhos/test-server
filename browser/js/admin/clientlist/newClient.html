@@ -16,7 +16,7 @@
                 <div class="panel padder-v item">
                     <form name="client_form" class="bs-example form-horizontal" novalidate>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label">Client Name</label>
+                            <label class="col-lg-2 control-label required">Client Name</label>
                             <div class="col-lg-6">
                                 <input name="client_name" id="client_name" ng-model="client.name" type="input" class="form-control" required>
                                   <span ng-show="client_form.client_name.$error.required && client_form.client_name.$dirty">
@@ -25,14 +25,29 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label">Customer</label>
+                            <label class="col-lg-2 control-label required">Customer</label>
                             <div class="col-lg-6">
-                                <select ng-model="selectedCustomer" class="form-control" name="customer_name" id="customer_name" ng-options="customer.id as customer.name for customer in customers" required>
-                                    <option>Select</option>
+                                <select ng-model="selectedCustomer" class="form-control" name="customer_name" id="customer_name" ng-options="customer.id as customer.name for customer in customers" ng-init="selectedCustomer=client.customer" required>
+                                    <option value="">Select</option>
                                 </select>
                                 <span ng-show="client_form.customer_name.$error.required && client_form.customer_name.$dirty">
-                                    Name is required.
+                                    Customer is required.
                                   </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label required">Client Code</label>
+                            <div class="col-lg-6">
+                                <input name="client_code" id="client_code" ng-model="client.client_code" type="input" class="form-control" required>
+                                  <span ng-show="client_form.client_code.$error.required && client_form.client_code.$dirty">
+                                    Client Code is required.
+                                  </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label required">Emails (Separate by Comma)</label>
+                            <div class="col-lg-6">
+                                <input ng-model="client.emails" type="input" class="form-control">
                             </div>
                         </div>
                         <div class="form-group">

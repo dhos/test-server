@@ -77,6 +77,8 @@ input.login-input {
   margin: 0;
 }
 
+label.required:after {content: " *"; color: red;}
+
 @import 'animate';
 @import 'app';
 @import 'font';

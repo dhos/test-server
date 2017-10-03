@@ -162,9 +162,12 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             if ($scope.letter.client_approved && $scope.letter.business_approved) {
                 $scope.letter.state = 4
             }
+
         } else {
-            $scope.letter.state = 3
-            $scope.letter.amendedCount += 1
+            if (jQuery.isEmptyObject($scope.letter.commercial_notes) || jQuery.isEmptyObject($scope.letter.business_notes)) {
+                $scope.letter.state = 3
+                $scope.letter.amendedCount += 1
+            }
         }
         lcFactory.updateLetter($scope.letter).then(letter => {
             $state.go('listManager.' + $scope.states[letter.state])

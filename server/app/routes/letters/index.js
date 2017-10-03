@@ -129,27 +129,21 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
     }).then(updatedLetter => {
         // setup email data with unicode symbols
         res.json(updatedLetter)
-        User.findAll({
-            where: {
-                countries: {
-                    $contains: [updatedLetter.country]
-                },
-                customers: {
-                    $contains: [updatedLetter.customer]
+        if (updatedLetter.state === 3) {
+            Client.findOne({
+                where: {
+                    id: updatedLetter.client
                 }
-            }
-        }).then(users => {
-            let emails = users.map(user => {
-                return user.email
-            })
-            let amended_clauses = []
-            for (let key of Object.keys(updatedLetter.business_notes)) {
-                if (updatedLetter.business_notes[key].status == 2) amended_clauses.push(updatedLetter.business_notes[key])
-            }
-            for (let key of Object.keys(updatedLetter.commercial_notes)) {
-                if (updatedLetter.commercial_notes[key].status == 2) amended_clauses.push(updatedLetter.commercial_notes[key])
-            }
-            let emailHTML = `<div style="font-family: arial; font-size: 14px; color: #041e42; padding: 10px;">
+            }).then(client => {
+                let emails = client.emails
+                let amended_clauses = []
+                for (let key of Object.keys(updatedLetter.business_notes)) {
+                    if (updatedLetter.business_notes[key].status == 2) amended_clauses.push(updatedLetter.business_notes[key])
+                }
+                for (let key of Object.keys(updatedLetter.commercial_notes)) {
+                    if (updatedLetter.commercial_notes[key].status == 2) amended_clauses.push(updatedLetter.commercial_notes[key])
+                }
+                let emailHTML = `<div style="font-family: arial; font-size: 14px; color: #041e42; padding: 10px;">
         <table style="border: 0; width: 100%; padding: 0; font-size: 14px; " cellpadding="0" cellspacing="0">
             <tr>
                 <td>
@@ -164,10 +158,10 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
         <p style="font-size: 14px;">Based on the advice & communication received from SABIC Asia Pacific Pte Ltd we are forwarding herewith the below amendments which are required to be carried out in your subject L/C :</p>
         <p style="font-weight: bold; font-size: 14px;">QUOTE</p>
         <ul style="padding-left:0; list-style: none; font-size: 14px;">`
-            amended_clauses.forEach(clause => {
-                emailHTML += `<li style="margin-bottom: 10px;">1. CLAUSE ${clause.swift_code}: ${clause.note}</li>`
-            })
-            emailHTML += `</ul>
+                amended_clauses.forEach(clause => {
+                    emailHTML += `<li style="margin-bottom: 10px;">1. CLAUSE ${clause.swift_code}: ${clause.note}</li>`
+                })
+                emailHTML += `</ul>
         <p style="font-weight: bold; font-size: 14px;">UNQUOTE</p>
         <ul style="padding-left:0; list-style: none; font-size: 14px;">
             <li style="margin-bottom: 10px;">Kindly arrange to carry out all the above amendments by a swift message and provide a transmitted swift copy of the same no later than dd/mm/yyyy (auto calculate date + 3 working days) to beneficiary.</li>
@@ -207,29 +201,28 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
             This e-mail and any attachments are for authorized use by the intended recipient(s) only. They may contain proprietary material or confidential information and/or be subject to legal privilege. They should not be copied, disclosed to, or used by any other party. If you have reason to believe that you are not one of the intended recipients of this e-mail, please notify the sender immediately by reply e-mail and immediately delete this e-mail and any of its attachments. Thank you.</p>
     </div>`
 
-            // create reusable transporter object using the default SMTP transport
-            let transporter = nodemailer.createTransport({
-                host: 'smtp-aws.eliteglobalplatform.com.',
-                port: 25,
-                secure: false, // true for 465, false for other ports
-                auth: {}
-            });
-            let mailOptions = {
-                from: 'noreply@elitesin.com', // sender address
-                to: emails, // list of receivers
-                subject: `Update to LC ${updatedLetter.lc_number}`, // Subject line
-                text: 'emailBody', // plain text body
-                html: emailHTML // html body
-            };
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    return console.log(error);
-                }
-                console.log('hello', info.messageId)
-            });
-        })
-
-
+                // create reusable transporter object using the default SMTP transport
+                let transporter = nodemailer.createTransport({
+                    host: 'smtp-aws.eliteglobalplatform.com.',
+                    port: 25,
+                    secure: false, // true for 465, false for other ports
+                    auth: {}
+                });
+                let mailOptions = {
+                    from: 'noreply@elitesin.com', // sender address
+                    to: emails, // list of receivers
+                    subject: `Update to LC ${updatedLetter.lc_number}`, // Subject line
+                    text: 'emailBody', // plain text body
+                    html: emailHTML // html body
+                };
+                transporter.sendMail(mailOptions, (error, info) => {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    console.log('hello', info.messageId)
+                });
+            })
+        }
         // send mail with defined transport object
         // }).catch(err => {
         //     next(err)

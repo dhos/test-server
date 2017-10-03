@@ -3,7 +3,7 @@
     <div class="bg-light lter wrapper-md">
         <div class="row title-space">
             <div class="col-md-3 col-xs-12">
-                <h1 class="m-n font-thin h3 text-black main-title">Dashboard</h1>
+                <h1 class="m-n font-thin h3 text-black main-title">Dashboard <button ng-click="resetPassword()">Reset Password</button></h1>
                 <small class="text-muted"><a href=""> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> Dashboard</small>
             </div>
             <div class="col-md-9 text-right stats-column">
@@ -86,6 +86,19 @@
                 </a>
             </div>
             <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
+                <a ui-sref="listManager.amended">
+                    <div class="panel padder-v item">
+                    <div class="mainstatscol">
+                        <div class="h1 text-info h1">{{Amended.length}}</div>
+                        <span class="text-muted text-base">Amended</span>
+                        </div>
+                        <div class="top text-right w-full">
+                            <i class="fa fa-file-text-o stats-replace"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
                 <a ui-sref="listManager.revised">
                     <div class="panel padder-v item">
                         <div class="row">
@@ -123,19 +136,6 @@
                     <div class="mainstatscol">
                         <div class="h1 text-info h1">{{Update.length}}</div>
                         <span class="text-muted text-base">FD Update</span>
-                        </div>
-                        <div class="top text-right w-full">
-                            <i class="fa fa-file-text-o stats-replace"></i>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-2 col-sm-6 col-xs-12 col-hf-2">
-                <a ui-sref="listManager.amended">
-                    <div class="panel padder-v item">
-                    <div class="mainstatscol">
-                        <div class="h1 text-info h1">{{Amended.length}}</div>
-                        <span class="text-muted text-base">Amended</span>
                         </div>
                         <div class="top text-right w-full">
                             <i class="fa fa-file-text-o stats-replace"></i>

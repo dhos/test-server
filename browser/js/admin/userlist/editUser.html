@@ -23,23 +23,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label required">Password</label>
-                            <div class="col-lg-6">
-                                <input name="user_pwd" ng-model="user.password" type="password" class="form-control"
-                                ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required>
-                                <span ng-show="user_form.user_pwd.$error.required && user_form.user_pwd.$dirty">
-                                  Password is required.
-                                </span>
-                                <span ng-show="!user_form.user_pwd.$error.required &&
-                                  (user_form.user_pwd.$error.minlength || user_form.user_pwd.$error.maxlength) && user_form.user_pwd.$dirty">
-                                  Passwords must be between 8 and 20 characters.</span>
-                                <span ng-show="!user_form.user_pwd.$error.required &&
-                                  !user_form.user_pwd.$error.minlength && !user_form.user_pwd.$error.maxlength &&
-                                  user_form.user_pwd.$error.pattern && user_form.user_pwd.$dirty">
-                                  Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.)</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-lg-2 control-label required">Name</label>
                             <div class="col-lg-3">
                                 <input name="user_first_name" type="input" class="form-control" placeholder="First Name" ng-model="user.firstName" required>

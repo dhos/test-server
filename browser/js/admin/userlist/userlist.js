@@ -38,6 +38,13 @@ app.controller('userlistCtrl', function($scope, users, userFactory, $state, $roo
             userId: UserId
         })
     }
+    $scope.resetPassword = (userId) => {
+        openModal('Reset Password', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            userFactory.resetPassword(userId, 'elite_password').then(() => {
+                openModal('Password Reset', 'The password has been reset to "elite_password"', 'notification', 'notification')
+            })
+        })
+    }
     $scope.newUser = () => {
         $state.go('newUser')
     }

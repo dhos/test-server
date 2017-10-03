@@ -10,6 +10,10 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
     //find the users that are clients,
     //find the users that are csp/pic
     $scope.createLc = () => {
+        if (!$scope.file) {
+            openModal('Please attach an LC', 'There is no lc attached', 'warning', 'warning')
+            return
+        }
         openModal('Create LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 $scope.letter.state = 1
@@ -18,7 +22,7 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
                         lc_number: letter.lc_number
                     })
                 }).catch(err => {
-                    openModal('Upload Error', 'That LC already exists', 'warning', 'warnint')
+                    openModal('Upload Error', 'That LC already exists', 'warning', 'warning')
                 })
             }
         })
