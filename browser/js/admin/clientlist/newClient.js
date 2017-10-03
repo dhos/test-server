@@ -22,6 +22,8 @@ app.controller('newClientCtrl', function($scope, $state, openModal, customers, c
             if (result) {
                 clientFactory.createClient(client).then(() => {
                     $state.go('clientlist')
+                }).catch(err => {
+                    openModal('Error', err.message, 'warning', 'warning')
                 })
             }
         })

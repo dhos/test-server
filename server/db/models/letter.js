@@ -26,6 +26,9 @@ module.exports = db.define('letter', {
     expire: {
         type: Sequelize.DATE
     },
+    ship_date: {
+        type: Sequelize.DATE
+    },
     country: {
         type: Sequelize.INTEGER
     },
