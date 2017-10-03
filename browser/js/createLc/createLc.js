@@ -7,8 +7,7 @@ app.config(function($stateProvider) {
 });
 
 app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userFactory, bankFactory, $state, LETTER_EVENTS, $rootScope, customerFactory, openModal, clientFactory) {
-    //find the users that are clients,
-    //find the users that are csp/pic
+
     $scope.createLc = () => {
         if (!$scope.file) {
             openModal('Please attach an LC', 'There is no lc attached', 'warning', 'warning')

@@ -9,13 +9,12 @@
     <div class="heading">
         <small class="chat-date pull-right">
             <a ng-if="selectedChat" ng-click="back()" class="backbtn"><i class="fa fa-angle-left"></i> Back</a>
-        </small> <span ng-if="selectedChat"></span> Admin 
+        </small> <span ng-if="selectedChat">{{selectedUser}}</span><span ng-if="!selectedChat">Select a Contact</span>
     </div>
     <div ng-if="!selectedChat" class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">
         <div class="content" style="overflow-y: scroll;width: auto;height: 234px;overflow-x: hidden;">
-            <ul>
-                <li ng-repeat="(key,value) in contactList"><a ng-click="startChat(key)">{{value.user.username}}</a><span ng-if="chats[value.user.id].newMessage" class="badge badge-warning pull-right">!</span></li>
-            </ul>
+            <p ng-repeat="(key,value) in contactList"><a ng-click="startChat(key,value.user.username)">{{value.user.username}}</a><span ng-if="chats[value.user.id].newMessage" class="badge badge-warning pull-right">!</span></p>
+        
         </div>
     </div>
     <div ng-if="selectedChat" class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;">
