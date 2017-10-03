@@ -50,6 +50,7 @@ router.put('/update', function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
     var client = req.body
+    client.emails = client.emails.split(',')
     Client.create(client).then(createdClient => {
         res.json(createdClient)
     }).catch(err => {
