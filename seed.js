@@ -16,35 +16,7 @@ var frozen = path.join(__dirname, 'seedLc.csv')
 
 var promises = []
 
-// fs.createReadStream(sample)
-//     .pipe(parse({
-//         delimiter: ',',
-//         relax: true,
-//         trim: true,
-//         // columns: true,
-//         skip_empty_lines: true
-//     }))
-//     .on('data', csvrow => {
-//         promises.push(Client.create({
-//             name: csvrow[2],
-//             customer: 1,
-//             client_code: csvrow[1],
-//             emails: csvrow[4].trim().split(',').concat(csvrow[6].trim().split(','))
-//         }))
-//     })
-//     .on('end', () => {
-//         //organizeData(csvData)
-//         // makeUsers()
-//         // makeCountries()
-//         // makeBanks()
-//         // makeClauses()
-//         // makeCustomers()
-//         Promise.all(promises).then(() => {
-//             console.log('finished')
-//         })
-//     })
-
-fs.createReadStream(frozen)
+fs.createReadStream(sample)
     .pipe(parse({
         delimiter: ',',
         relax: true,
@@ -53,7 +25,12 @@ fs.createReadStream(frozen)
         skip_empty_lines: true
     }))
     .on('data', csvrow => {
-        console.log(csvrow)
+        promises.push(Client.create({
+            name: csvrow[2],
+            customer: 1,
+            client_code: csvrow[1],
+            emails: csvrow[4].trim().split(',').concat(csvrow[6].trim().split(','))
+        }))
     })
     .on('end', () => {
         //organizeData(csvData)
@@ -62,10 +39,33 @@ fs.createReadStream(frozen)
         // makeBanks()
         // makeClauses()
         // makeCustomers()
-        // Promise.all(promises).then(() => {
-        //     console.log('finished')
-        // })
+        Promise.all(promises).then(() => {
+            console.log('finished')
+        })
     })
+
+// fs.createReadStream(frozen)
+//     .pipe(parse({
+//         delimiter: ',',
+//         relax: true,
+//         trim: true,
+//         // columns: true,
+//         skip_empty_lines: true
+//     }))
+//     .on('data', csvrow => {
+//         console.log(csvrow)
+//     })
+//     .on('end', () => {
+//         //organizeData(csvData)
+//         // makeUsers()
+//         // makeCountries()
+//         // makeBanks()
+//         // makeClauses()
+//         // makeCustomers()
+//         // Promise.all(promises).then(() => {
+//         //     console.log('finished')
+//         // })
+//     })
 
 
 var makeCountries = () => {

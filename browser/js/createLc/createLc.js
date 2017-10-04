@@ -52,7 +52,7 @@ app.controller('createLcCtrl', function($scope, lcFactory, countryFactory, userF
         $scope.customers = customers
     })
 
-    clientFactory.getClients({}).then(clients => {
+    clientFactory.getAllClients().then(clients => {
         $scope.clients = clients
     })
     $scope.state = {

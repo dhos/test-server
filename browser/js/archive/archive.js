@@ -5,7 +5,9 @@ app.config(function($stateProvider) {
         url: '/archive',
         resolve: {
             archivedLetters: (lcFactory) => {
-                return lcFactory.getArchivedLetters({}).then(archived => {
+                return lcFactory.getArchivedLetters({
+                    offset: 0
+                }).then(archived => {
                     return archived
                 })
             }
@@ -15,5 +17,11 @@ app.config(function($stateProvider) {
 
 app.controller('archiveCtrl', function($scope, archivedLetters) {
     $scope.letters = archivedLetters
-
+    $scope.$watch("currentPage", function() {
+        lcFactory.getArchivedLetters({
+            offset: $scope.currentPage
+        }).then(archivedLetters => {
+            $scope.letters = archivedLetters
+        })
+    });
 });

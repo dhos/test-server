@@ -38,7 +38,7 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
     customerFactory.getCustomers({}).then(customers => {
         $scope.customers = customers
     })
-    clientFactory.getClients({}).then(clients => {
+    clientFactory.getAllClients().then(clients => {
         $scope.clients = clients
     })
     $scope.letter = letter

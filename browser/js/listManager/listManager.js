@@ -13,7 +13,9 @@ app.config(function($stateProvider) {
                 })
             },
             expiring: (lcFactory) => {
-                return lcFactory.getExpiringLetters({}).then(letters => {
+                return lcFactory.getExpiringLetters({
+                    offset: 0
+                }).then(letters => {
                     return letters
                 })
             },
@@ -120,7 +122,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
         })
     })
     $scope.clients = {}
-    clientFactory.getClients({}).then(clients => {
+    clientFactory.getAllClients().then(clients => {
         clients.forEach(client => {
             $scope.clients[client.id] = client.name
         })
@@ -218,12 +220,12 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
                 if (letter.state == 4 && letter.finDoc === 0) $scope.Update.push(letter)
             })
             $scope.Revised.forEach(revised => {
-                if (!revised.client_approved) $scope.needsClientRevised.push(revised)
-                if (!revised.business_approved) $scope.needsBusinessRevised.push(revised)
+                if (!jQuery.isEmptyObject(revised.commercial_notes)) $scope.needsClientRevised.push(revised)
+                if (!jQuery.isEmptyObject(revised.business_notes)) $scope.needsBusinessRevised.push(revised)
             })
             $scope.Reviewed.forEach(reviewed => {
-                if (!reviewed.client_approved) $scope.needsClientReviewed.push(reviewed)
-                if (!reviewed.business_approved) $scope.needsBusinessReviewed.push(reviewed)
+                if (!jQuery.isEmptyObject(reviewed.client_notes)) $scope.needsClientReviewed.push(reviewed)
+                if (!jQuery.isEmptyObject(reviewed.business_notes)) $scope.needsBusinessReviewed.push(reviewed)
             })
             $scope.displayReviewed = $scope.needsClientReviewed
             $scope.displayRevised = $scope.needsClientRevised

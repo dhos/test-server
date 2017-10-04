@@ -153,20 +153,19 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             })
         }
         $scope.letter.draft = false
+        debugger
         if (!complete) return openModal('Incomplete', 'There are clauses awaiting approval', '', 'warning')
+        if ($scope.letter.state === 1) {
+            $scope.letter.state = 2
+        }
+        if (!jQuery.isEmptyObject($scope.letter.commercial_notes) && !jQuery.isEmptyObject($scope.letter.business_notes)) {
+            $scope.letter.state = 3
+            $scope.letter.amendedCount += 1
+        }
         if (approved) {
             $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
-            if ($scope.letter.state === 1) {
-                $scope.letter.state = 2
-            }
             if ($scope.letter.client_approved && $scope.letter.business_approved) {
                 $scope.letter.state = 4
-            }
-
-        } else {
-            if (jQuery.isEmptyObject($scope.letter.commercial_notes) || jQuery.isEmptyObject($scope.letter.business_notes)) {
-                $scope.letter.state = 3
-                $scope.letter.amendedCount += 1
             }
         }
         lcFactory.updateLetter($scope.letter).then(letter => {

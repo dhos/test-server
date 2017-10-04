@@ -23,7 +23,9 @@ app.config(function($stateProvider) {
                 })
             },
             archivedLetters: (lcFactory) => {
-                return lcFactory.getArchivedLetters({}).then(archived => {
+                return lcFactory.getArchivedLetters({
+                    offset: 0
+                }).then(archived => {
                     return archived
                 })
             }

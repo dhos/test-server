@@ -5,7 +5,11 @@ app.config(function($stateProvider) {
         url: '/clients',
         resolve: {
             clients: clientFactory => {
-                return clientFactory.getClients({}).then(clients => {
+                return clientFactory.getClients({
+                    offset: 0,
+                    where: {}
+                }).then(clients => {
+                    console.log(clients)
                     return clients
                 })
             },
@@ -19,13 +23,12 @@ app.config(function($stateProvider) {
 });
 
 app.controller('clientlistCtrl', function($scope, clients, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, customers, openModal, clientFactory) {
-    $scope.clients = clients
+    $scope.displayClients = clients
     $scope.customers = customers
     $scope.customers.forEach(customer => {
         $scope.customers[customer.id] = customer.name
     })
     $scope.deleteClient = (UserId, index) => {
-        console.log('hello delete')
         openModal('Delete Client', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 $scope.clients.splice(index, 1)
@@ -43,5 +46,15 @@ app.controller('clientlistCtrl', function($scope, clients, userFactory, $state, 
     $scope.newUser = () => {
         $state.go('newCustomer')
     }
+    $scope.currentPage = 1
+    $scope.numPerPage = 100
+    $scope.$watch("currentPage", function() {
+        clientFactory.getClients({
+            offset: $scope.currentPage,
+            where: {}
+        }).then(clients => {
+            $scope.displayClients = clients
+        })
+    });
 
 });

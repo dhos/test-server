@@ -164,7 +164,8 @@
 
             for (var i = 0; i < $http.pendingRequests.length; ++i) {
                 if ($http.pendingRequests[i].method.toLowerCase() === 'post' ||
-                    $http.pendingRequests[i].method.toLowerCase() === 'put')
+                    $http.pendingRequests[i].method.toLowerCase() === 'put' ||
+                    $http.pendingRequests[i].method.toLowerCase() === 'get')
                     request_count += 1;
             }
 
