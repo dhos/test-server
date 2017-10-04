@@ -204,12 +204,12 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
             if (frozen.finDoc === 0) $scope.Update.push(frozen)
         })
         $scope.Revised.forEach(revised => {
-            if (!revised.client_approved) $scope.revisedCustomer += 1
-            if (!revised.business_approved) $scope.revisedElite += 1
+            if (jQuery.isEmptyObject(revised.commercial_notes)) $scope.revisedCustomer += 1
+            if (jQuery.isEmptyObject(revised.business_notes)) $scope.revisedElite += 1
         })
         $scope.Reviewed.forEach(reviewed => {
-            if (!reviewed.client_approved) $scope.reviewedCustomer += 1
-            if (!reviewed.business_approved) $scope.reviewedElite += 1
+            if (jQuery.isEmptyObject(reviewed.client_notes)) $scope.reviewedCustomer += 1
+            if (jQuery.isEmptyObject(reviewed.business_notes)) $scope.reviewedElite += 1
         })
 
     }
