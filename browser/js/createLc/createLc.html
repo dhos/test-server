@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label">Client</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.client" ng-options="client.id as client.name for client in clients" ng-init="letter.client=clients[0]">
+                                <select class="form-control m-b" ng-model="letter.client" ng-options="client.client_code as client.name for client in clients" ng-init="letter.client=clients[0]">
                                   <option value="" selected disabled>Select Client</option>
                                 </select>
                             </div>
