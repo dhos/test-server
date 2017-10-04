@@ -50,7 +50,7 @@ app.controller('clientlistCtrl', function($scope, clients, userFactory, $state, 
     $scope.numPerPage = 100
     $scope.$watch("currentPage", function() {
         clientFactory.getClients({
-            offset: $scope.currentPage,
+            offset: $scope.currentPage - 1,
             where: {}
         }).then(clients => {
             $scope.displayClients = clients
