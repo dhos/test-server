@@ -184,10 +184,7 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
     <br>
     <div style="color: #53565a; font-family: arial; font-size: 11px; line-height: 14px;padding: 10px;">
         <p style="font-size: 14px;">
-            Sheetal Grover
-            <br> Sr Representative, CS, SCM,
-            <br> Petrochemicals, INS
-            <br>
+            Regards,
         </p>
         <p style="font-size: 14px;">
             SABIC
