@@ -126,6 +126,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
         clients.forEach(client => {
             $scope.clients[client.client_code] = client.name
         })
+        console.log('clients', $scope.clients)
     })
     $scope.state = {
         1: 'New',
@@ -181,7 +182,7 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
     $scope.Frozen.forEach(frozen => {
         if (frozen.finDoc === 0) $scope.Update.push(frozen)
     })
-    console.log('clients', $scope.clients)
+
     var refreshLetters = () => {
         lcFactory.getLetters({}).then(letters => {
             if ($scope.user.role !== 4) {
