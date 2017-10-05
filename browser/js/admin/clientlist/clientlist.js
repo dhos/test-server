@@ -31,7 +31,7 @@ app.controller('clientlistCtrl', function($scope, clients, userFactory, $state, 
     $scope.deleteClient = (UserId, index) => {
         openModal('Delete Client', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
-                $scope.clients.splice(index, 1)
+                $scope.displayClients.rows.splice(index, 1)
                 clientFactory.deleteClient({
                     id: UserId
                 })
