@@ -36,7 +36,7 @@ app.config(function($stateProvider) {
 app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory, archivedLetters) {
     jQuery('body').removeClass('loginpage')
     $scope.user = user
-    $scope.Archived = archivedLetters
+    $scope.Archived = archivedLetters.rows
     $scope.csp = $scope.user.role === 2
     $scope.pic = $scope.user.role === 1
     $scope.manager = $scope.user.manager
@@ -146,6 +146,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         })
     }
     $scope.filter = () => {
+        debugger
         $scope.New = []
         $scope.Reviewed = []
         $scope.Amended = []
@@ -193,7 +194,7 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
             } else {
                 $scope.filteredLetters = $scope.letters
                 $scope.Expiring = expiring[0]
-                $scope.Archived = archivedLetters
+                $scope.Archived = archivedLetters.rows
             }
         }
         $scope.filteredLetters.forEach(letter => {
