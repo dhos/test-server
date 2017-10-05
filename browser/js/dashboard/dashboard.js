@@ -36,6 +36,7 @@ app.config(function($stateProvider) {
 app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory, archivedLetters) {
     jQuery('body').removeClass('loginpage')
     $scope.user = user
+    $scope.archivedCount = archivedLetter.count
     $scope.Archived = archivedLetters.rows
     $scope.csp = $scope.user.role === 2
     $scope.pic = $scope.user.role === 1
