@@ -43,7 +43,6 @@ app.directive('chat', function($rootScope, AuthService, AUTH_EVENTS, $state, Soc
             Socket.on('ChatList', function(onlineUsers) {
                 $scope.contactList = onlineUsers
                 delete $scope.contactList[$scope.user.id]
-                console.log($scope.contactList)
             })
             Socket.on('Incoming', function(newChat) {
                 $scope.newMessage = true

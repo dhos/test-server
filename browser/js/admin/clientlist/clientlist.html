@@ -36,7 +36,7 @@
                                     <td>{{client.name}}</td>
                                     <td>{{customers[client.customer]}}</td>
                                     <td style="word-wrap: break-word;width:100px">{{client.emails.join(', ')}}</td>
-                                    <td><a ng-click="editClient(client.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteClient(client.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
+                                    <td><a ng-click="editClient(client.client_code)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteClient(client.client_code,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
                                 </tr>
                             </tbody>
                         </table>

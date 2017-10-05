@@ -76,6 +76,7 @@ router.get('/:id', ensureAuthenticated, (req, res, next) => {
             lc_number: req.params.id
         }
     }).then(letter => {
+        console.log(letter.client)
         res.json(letter)
     }).catch(err => {
         next(err)

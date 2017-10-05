@@ -38,6 +38,7 @@ app.factory('lcFactory', function($http, $q, LETTER_EVENTS, $rootScope) {
     d.getSingleLetter = (id) => {
         return $http.get(`/api/lc/${id}`)
             .then(response => {
+                console.log(response.data)
                 return response.data
             }).catch(err => {
                 return $q.reject({

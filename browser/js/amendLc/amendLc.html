@@ -103,7 +103,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">Client</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.client" ng-options="client.client_code as client.name for client in clients" ng-init="letter.client=clients[0]" required>
+                                <select class="form-control m-b" ng-model="letter.client" ng-options="client.client_code as client.name for client in clients" required>
                                   <option value="" selected disabled>Select Client</option>
                                 </select>
                             </div>
@@ -128,7 +128,7 @@
                             <label class="col-lg-2 control-label required">CSP</label>
                             <div class="col-lg-6">
                                 <select class="form-control m-b" ng-model="letter.csp" ng-options="csp.id as csp.username for csp in cspUsers" required>
-                                 <option value="" selected disabled>Selecte CSP</option>
+                                 <option value="" selected disabled>Select CSP</option>
                                 </select>
                             </div>
                         </div>

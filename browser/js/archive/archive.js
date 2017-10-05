@@ -15,7 +15,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('archiveCtrl', function($scope, archivedLetters) {
+app.controller('archiveCtrl', function($scope, archivedLetters, lcFactory) {
     $scope.letters = archivedLetters
     $scope.$watch("currentPage", function() {
         lcFactory.getArchivedLetters({

@@ -57,9 +57,9 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
         })
     })
     $scope.clients = {}
-    clientFactory.getClients({}).then(clients => {
+    clientFactory.getAllClients().then(clients => {
         clients.forEach(client => {
-            $scope.clients[client.id] = client.name
+            $scope.clients[client.client_code] = client.name
         })
     })
     $scope.letters = amended
