@@ -21,6 +21,7 @@ app.config(function($stateProvider) {
 app.controller('newUserCtrl', function($scope, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, countries, customers, openModal) {
     $scope.countries = countries
     $scope.customers = customers
+    $scope.user.manager = false
     $scope.makeUser = (user) => {
         openModal('Create User', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {

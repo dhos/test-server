@@ -50,90 +50,97 @@
         <div class="row row-sm">
             <div class="col-md-12">
                 <div class="panel padder-v item">
-                    <form class="bs-example form-horizontal">
+                    <form name="lc_form" class="bs-example form-horizontal" ng-submit="updateLc()">
                         <div class="form-group">
-                            <label class="col-lg-2 control-label reaquired">LC Number</label>
+                            <label class="col-lg-2 control-label required">LC Number</label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" ng-model="letter.lc_number">
+                                <input type="text" ng-model="letter.lc_number" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">Sales Contract Number</label>
                             <div class="col-lg-6">
-                                <input type="text" class="form-control" ng-model="letter.contract">
+                                <input type="text" ng-model="letter.contract" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">LC Start Date</label>
                             <div class="col-lg-2">
                                 <div class="input-group date">
-                                    <md-datepicker ng-model="letter.date" md-placeholder="Enter date"></md-datepicker>
+                                    <md-datepicker ng-model="letter.date" md-placeholder="Enter date" required></md-datepicker>
                                 </div>
                             </div>
-                            <label class="col-lg-2 control-label required">LC End Date</label>
+                            <label class="col-lg-2 control-label required">LC Expire Date</label>
                             <div class="col-lg-2">
                                 <div class="input-group date">
-                                    <md-datepicker ng-model="letter.expire" md-placeholder="Enter date"></md-datepicker>
+                                    <md-datepicker ng-model="letter.expire" md-placeholder="Enter date" required></md-datepicker>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-lg-2 control-label required">Customer Name</label>
+                        <div class="form-group required">
+                            <label class="col-lg-2 control-label required">Shipping Date</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.customer" ng-options="customer.id as customer.name for customer in customers">
-                                  <option>Select</option>
-                                </select>
+                                <md-datepicker ng-model="letter.ship_date" md-placeholder="Enter date" required></md-datepicker>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-lg-2 control-label required">Client</label>
+                            <!-- make into a dropdown -->
+                            <label class="col-lg-2 control-label required">Customer Name</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.client" ng-options="client.client_code as client.name for client in clients">
-                                  <option>Select</option>
+                                <select class="form-control m-b" ng-model="letter.customer" ng-options="customer.id as customer.name for customer in customers" required>
+                                  <option value="">Select Customer</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">Country Name</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.country" ng-options="country.id as country.name for country in countries">
-                                    <option>Select</option>
+                                <select class="form-control m-b" ng-model="letter.country" ng-options="country.id as country.name for country in countries" required>
+                                    <option value="">Select Country</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label required">Client</label>
+                            <div class="col-lg-6">
+                                <select class="form-control m-b" ng-model="letter.client" ng-options="client.client_code as client.name for client in clients" ng-init="letter.client=clients[0]" required>
+                                  <option value="" selected disabled>Select Client</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">Advising Bank</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.bank" ng-options="bank.id as bank.name for bank in banks">
-                                  <option></option>
+                                <select class="form-control m-b" ng-model="letter.bank" ng-options="bank.id as bank.name for bank in banks" required>
+                                  <option value="" selected disabled>Select Bank</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">PIC</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.pic" ng-options="pic.id as pic.username for pic in picUsers">
-                                  <option></option>
+                                <select class="form-control m-b" ng-model="letter.pic" ng-options="pic.id as pic.username for pic in picUsers" required>
+                                  <option value="" selected disabled>Select PIC</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">CSP</label>
                             <div class="col-lg-6">
-                                <select class="form-control m-b" ng-model="letter.csp" ng-options="csp.id as csp.username for csp in cspUsers">
-                                 <option></option>
+                                <select class="form-control m-b" ng-model="letter.csp" ng-options="csp.id as csp.username for csp in cspUsers" required>
+                                 <option value="" selected disabled>Selecte CSP</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">LC PDF or Text File Upload</label>
                             <div class="col-lg-6">
-                                <input type="file" ng-model="updatedFile" accept="image/*,application/pdf" ngf-select ng-f-max-height="1000" ngf-max-size="5mb" class="change-pro slim-btn outlined-btn gray-btn float-rt"></input>
+                                <input type="file" ng-model="file" accept="image/*,application/pdf" ngf-select ng-f-max-height="1000" ngf-max-size="5mb" class="change-pro slim-btn outlined-btn gray-btn float-rt"></input>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                                <button ng-click="updateLc()" class="btn m-b-xs btn-success">Update LC</button>
+                                <button type="submit" class="btn m-b-xs btn-success">Update LC</button>
                             </div>
                         </div>
                     </form>

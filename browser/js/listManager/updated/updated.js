@@ -19,6 +19,10 @@ app.controller('updatedCtrl', ($scope, lcFactory, letters, $state, openModal) =>
         })
     }
     $scope.updateFinDoc = (index) => {
+        if ($scope.user.manager) {
+            openModal('Denied', 'You don\'t have permission to do that', 'warning', 'warning')
+            return
+        }
         if ($scope.displayLetters[index].finDoc !== 0) {
             openModal('Input FD Number', 'Are you sure?', 'prompt', 'confirm').then(result => {
                 if (result) {

@@ -153,7 +153,6 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             })
         }
         $scope.letter.draft = false
-        debugger
         if (!complete) return openModal('Incomplete', 'There are clauses awaiting approval', '', 'warning')
         if ($scope.letter.state === 1) {
             $scope.letter.state = 2
@@ -169,7 +168,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             }
         }
         lcFactory.updateLetter($scope.letter).then(letter => {
-            $state.go('listManager.' + $scope.states[letter.state])
+            // $state.go('listManager.' + $scope.states[letter.state])
         })
     }
     $scope.submitDraft = () => {

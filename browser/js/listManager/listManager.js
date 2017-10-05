@@ -31,7 +31,6 @@ app.config(function($stateProvider) {
 app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user, clientFactory) => {
     //inits
     $scope.$state = $state
-    console.log($scope.$state)
     $scope.user = user
     $scope.csp = $scope.user.role === 2
     $scope.pic = $scope.user.role === 1
@@ -126,7 +125,6 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, letters, bankFacto
         clients.forEach(client => {
             $scope.clients[client.client_code] = client.name
         })
-        console.log('clients', $scope.clients)
     })
     $scope.state = {
         1: 'New',
