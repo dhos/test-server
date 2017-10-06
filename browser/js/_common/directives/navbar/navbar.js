@@ -25,8 +25,8 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                 AuthService.getLoggedInUser().then(function(user) {
                     scope.user = user;
                     Socket.emit('logon', user)
+                    refreshLetters();
                 });
-                refreshLetters();
             };
 
             var removeUser = function() {
@@ -54,7 +54,10 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                 4: 'Admin'
             }
             var refreshLetters = () => {
+                scope.csp = scope.user.role === 2
+                scope.pic = scope.user.role === 1
                 lcFactory.getLetters({}).then(letters => {
+                    debugger
                     scope.letters = letters
                     scope.New = []
                     scope.Reviewed = []
@@ -63,8 +66,6 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                     scope.Frozen = []
                     scope.Update = []
                     scope.updatedLetters = []
-                    scope.csp = scope.user.role === 2
-                    scope.pic = scope.user.role === 1
                     scope.manager = scope.user.manager
                     if (scope.user.role !== 4) {
                         scope.letters = letters.filter(letter => {
