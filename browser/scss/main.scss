@@ -82,9 +82,14 @@ input.login-input {
     margin-right: 10px;
     margin-top: 15px;
 }
-.md-scroll-mask { z-index: 2000; }
-md-backdrop.md-dialog-backdrop { z-index: 2019; }
-.md-dialog-container {  z-index: 2020; }
+.md-dialog-container, md-backdrop {
+    position: fixed;
+    top: 0;
+}
+
+.md-dialog-is-showing{
+    overflow-x:visible;
+}
 label.required:after {content: " *"; color: red;}
 
 @import 'animate';
