@@ -33,7 +33,7 @@
         <tr ng-repeat-end ng-if="letter.expanded">
             <td colspan="12" class="secondlevel">
                 <ul class="statuses">
-                    <li ng-class="{active: letter.state===1}">
+                    <li>
                         <button ng-disabled="true" class="new-stat" ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">
                             <div class="icon-stat stat-bg">
                                 <img src="img/new.png" alt="new">
@@ -43,18 +43,18 @@
                             </div>
                         </button>
                     </li>
-                    <li ng-class="{active: letter.state===2}">
-                        <button class="review-stat" ng-disabled="letter.state!==2 || letter.state !== 4" ng-click="transition(letter.lc_number)">
+                    <li ng-class="{'review-stat': (letter.state>=2)}">
+                        <button ng-disabled="checkReviewed(letter)" ng-click="transition(letter.lc_number)">
                             <div class="icon-stat stat-bg">
                                 <img src="img/review.png" alt="review">
                             </div>
                             <div>
-                                <span class="main-stat"> Review/Revised</span><br> <span class="secnd-stat">Stage 2 of 5</span>
+                                <span class="main-stat"> Review/Revise</span><br> <span class="secnd-stat">Stage 2 of 5</span>
                             </div>
                         </button>
                     </li>
-                    <li ng-class="{active: letter.state===3}">
-                        <button class="amend-stat" ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">
+                    <li>
+                        <button class="normal-stat" ng-disabled="letter.state!==3" ng-click="transition(letter.lc_number)">
                              <div class="icon-stat stat-bg">
                                 <img src="img/amend.png" alt="amend">
                             </div>
@@ -63,7 +63,7 @@
                             </div>
                         </button>
                     </li>
-                    <li ng-disabled="true" ng-class="{active: letter.state===4}">
+                    <li>
                         <button class="normal-stat" ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">                            
                              <div class="icon-stat stat-bg">
                                 <img src="img/freeze.png" alt="freeze">
@@ -73,7 +73,7 @@
                             </div>
                         </button>
                     </li>
-                    <li ng-disabled="true" ng-class="{active: letter.state===5}">
+                    <li>
                         <button class="normal-stat" ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">
                              <div class="icon-stat stat-bg">
                                 <img src="img/update.png" alt="update">
