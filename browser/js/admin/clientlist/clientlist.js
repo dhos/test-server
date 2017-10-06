@@ -28,12 +28,12 @@ app.controller('clientlistCtrl', function($scope, clients, userFactory, $state, 
     $scope.customers.forEach(customer => {
         $scope.customers[customer.id] = customer.name
     })
-    $scope.deleteClient = (UserId, index) => {
+    $scope.deleteClient = (client_code, index) => {
         openModal('Delete Client', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 $scope.displayClients.rows.splice(index, 1)
                 clientFactory.deleteClient({
-                    id: UserId
+                    client_code: client_code
                 })
             }
         })
@@ -43,9 +43,7 @@ app.controller('clientlistCtrl', function($scope, clients, userFactory, $state, 
             userId: UserId
         })
     }
-    $scope.newUser = () => {
-        $state.go('newCustomer')
-    }
+
     $scope.currentPage = 1
     $scope.numPerPage = 100
     $scope.$watch("currentPage", function() {
