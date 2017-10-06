@@ -26,15 +26,15 @@ app.controller('newUserCtrl', function($scope, userFactory, $state, $rootScope, 
     $scope.makeUser = (user) => {
         openModal('Create User', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
-                user.countries = []
-                user.customers = []
+                newUser.countries = []
+                newUser.customers = []
                 for (let key of Object.keys($scope.selectedCountries)) {
-                    if ($scope.selectedCountries[key]) user.countries.push(key)
+                    if ($scope.selectedCountries[key]) newUser.countries.push(key)
                 }
                 for (let key of Object.keys($scope.selectedCustomers)) {
-                    if ($scope.selectedCustomers[key]) user.customers.push(key)
+                    if ($scope.selectedCustomers[key]) newUser.customers.push(key)
                 }
-                userFactory.createUser(user).then(user => {
+                userFactory.createUser(newUser).then(user => {
                     $state.go('userlist')
                 })
             }
