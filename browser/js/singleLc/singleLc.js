@@ -168,7 +168,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             }
         }
         lcFactory.updateLetter($scope.letter).then(letter => {
-            // $state.go('listManager.' + $scope.states[letter.state])
+            $state.go('listManager.' + $scope.states[letter.state])
         })
     }
     $scope.submitDraft = () => {
