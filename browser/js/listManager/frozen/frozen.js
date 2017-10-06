@@ -11,7 +11,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('frozenCtrl', ($scope, lcFactory, letters, $state, openModal) => {
+app.controller('frozenCtrl', ($scope, lcFactory, $state, openModal) => {
     $scope.displayLetters = $scope.Frozen
     $scope.transition = (lc_number) => {
         $state.go('singleLc', {
