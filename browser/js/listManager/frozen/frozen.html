@@ -63,7 +63,7 @@
                             </div>
                         </button>
                     </li>
-                    <li ng-disabled="true" ng-class="{active: letter.state===4}">
+                    <li ng-class="{active: letter.state===4}">
                         <button class="freeze-stat" ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">                            
                              <div class="icon-stat stat-bg">
                                 <img src="img/freeze.png" alt="freeze">
@@ -73,7 +73,7 @@
                             </div>
                         </button>
                     </li>
-                    <li ng-disabled="true" ng-class="{active: letter.state===5}">
+                    <li ng-class="{active: letter.state===5}">
                         <button class="normal-stat" ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">
                              <div class="icon-stat stat-bg">
                                 <img src="img/update.png" alt="update">
