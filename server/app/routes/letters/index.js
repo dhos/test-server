@@ -112,34 +112,34 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
         }
     }).then(updatedLetter => {
         // setup email data with unicode symbols
-        console.log(updatedLetter.client)
         res.json(updatedLetter)
-        User.findAll({
-            where: {
-                $or: [{
-                    id: updatedLetter.csp
-                }, {
-                    id: updatedLetter.pic
-                }]
-
-            }
-        }).then(users => {
-            Client.findOne({
+        if (updatedLetter.state === 3) {
+            User.findAll({
                 where: {
-                    client_code: updatedLetter.client
+                    $or: [{
+                        id: updatedLetter.csp
+                    }, {
+                        id: updatedLetter.pic
+                    }]
+
                 }
-            }).then(client => {
-                let userEmails = [users[0].email, users[1].email]
-                let emails = client.emails.concat(userEmails)
-                console.log(chalk.red(emails))
-                let amended_clauses = []
-                for (let key of Object.keys(updatedLetter.business_notes)) {
-                    if (updatedLetter.business_notes[key].status == 2) amended_clauses.push(updatedLetter.business_notes[key])
-                }
-                for (let key of Object.keys(updatedLetter.commercial_notes)) {
-                    if (updatedLetter.commercial_notes[key].status == 2) amended_clauses.push(updatedLetter.commercial_notes[key])
-                }
-                let emailHTML = `<div style="font-family: arial; font-size: 14px; color: #041e42; padding: 10px;">
+            }).then(users => {
+                Client.findOne({
+                    where: {
+                        client_code: updatedLetter.client
+                    }
+                }).then(client => {
+                    let userEmails = [users[0].email, users[1].email]
+                    let emails = client.emails.concat(userEmails)
+                    console.log(chalk.red(emails))
+                    let amended_clauses = []
+                    for (let key of Object.keys(updatedLetter.business_notes)) {
+                        if (updatedLetter.business_notes[key].status == 2) amended_clauses.push(updatedLetter.business_notes[key])
+                    }
+                    for (let key of Object.keys(updatedLetter.commercial_notes)) {
+                        if (updatedLetter.commercial_notes[key].status == 2) amended_clauses.push(updatedLetter.commercial_notes[key])
+                    }
+                    let emailHTML = `<div style="font-family: arial; font-size: 14px; color: #041e42; padding: 10px;">
         <table style="border: 0; width: 100%; padding: 0; font-size: 14px; " cellpadding="0" cellspacing="0">
             <tr>
                 <td>
@@ -154,10 +154,10 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
         <p style="font-size: 14px;">Based on the advice & communication received from SABIC Asia Pacific Pte Ltd we are forwarding herewith the below amendments which are required to be carried out in your subject L/C :</p>
         <p style="font-weight: bold; font-size: 14px;">QUOTE</p>
         <ul style="padding-left:0; list-style: none; font-size: 14px;">`
-                amended_clauses.forEach(clause => {
-                    emailHTML += `<li style="margin-bottom: 10px;">1. CLAUSE ${clause.swift_code}: ${clause.note}</li>`
-                })
-                emailHTML += `</ul>
+                    amended_clauses.forEach(clause => {
+                        emailHTML += `<li style="margin-bottom: 10px;">1. CLAUSE ${clause.swift_code}: ${clause.note}</li>`
+                    })
+                    emailHTML += `</ul>
         <p style="font-weight: bold; font-size: 14px;">UNQUOTE</p>
         <ul style="padding-left:0; list-style: none; font-size: 14px;">
             <li style="margin-bottom: 10px;">Kindly arrange to carry out all the above amendments by a swift message and provide a transmitted swift copy of the same no later than dd/mm/yyyy (auto calculate date + 3 working days) to beneficiary.</li>
@@ -174,28 +174,29 @@ router.put('/', ensureAuthenticated, (req, res, next) => {
         <p>This is a system generated e-mail. Please do not reply to the sender of this e-mail. All replies to this message will be returned undeliverable.</p>
     </div>`
 
-                // create reusable transporter object using the default SMTP transport
-                let transporter = nodemailer.createTransport({
-                    host: 'smtp-aws.eliteglobalplatform.com.',
-                    port: 25,
-                    secure: false, // true for 465, false for other ports
-                    auth: {}
-                });
-                let mailOptions = {
-                    from: 'noreply@elitesin.com', // sender address
-                    to: emails, // list of receivers
-                    subject: `Update to LC ${updatedLetter.lc_number}`, // Subject line
-                    text: 'emailBody', // plain text body
-                    html: emailHTML // html body
-                };
-                transporter.sendMail(mailOptions, (error, info) => {
-                    if (error) {
-                        return console.log(error);
-                    }
-                    console.log('hello', info.messageId)
-                });
+                    // create reusable transporter object using the default SMTP transport
+                    let transporter = nodemailer.createTransport({
+                        host: 'smtp-aws.eliteglobalplatform.com.',
+                        port: 25,
+                        secure: false, // true for 465, false for other ports
+                        auth: {}
+                    });
+                    let mailOptions = {
+                        from: 'noreply@elitesin.com', // sender address
+                        to: emails, // list of receivers
+                        subject: `Update to LC ${updatedLetter.lc_number}`, // Subject line
+                        text: 'emailBody', // plain text body
+                        html: emailHTML // html body
+                    };
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                            return console.log(error);
+                        }
+                        console.log('hello', info.messageId)
+                    });
+                })
             })
-        })
+        }
     }).catch((err) => {
         return next(err)
     })
