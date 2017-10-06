@@ -18,14 +18,14 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">Username</label>
                             <div class="col-lg-6">
-                                <input name="username" ng-model="user.username" type="input" class="form-control" required>
+                                <input name="username" ng-model="newIser.username" type="input" class="form-control" required>
                                 <span ng-show="user_form.username.$error.required && user_form.username.$dirty">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">Password</label>
                             <div class="col-lg-6">
-                                <input name="user_pwd" ng-model="user.password" type="password" class="form-control"
+                                <input name="user_pwd" ng-model="newIser.password" type="password" class="form-control"
                                 ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required>
                                 <span ng-show="user_form.user_pwd.$error.required && user_form.user_pwd.$dirty">
                                   Password is required.
@@ -42,13 +42,13 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">Name</label>
                             <div class="col-lg-3">
-                                <input name="user_first_name" type="input" class="form-control" placeholder="First Name" ng-model="user.firstName" required>
+                                <input name="user_first_name" type="input" class="form-control" placeholder="First Name" ng-model="newIser.firstName" required>
                                 <span ng-show="user_form.user_first_name.$error.required && user_form.user_first_name.$dirty">
                                   First name is required.
                                 </span>
                             </div>
                             <div class="col-lg-3">
-                                <input name="user_last_name" type="input" class="form-control" placeholder="Last Name" ng-model="user.lastName" required>
+                                <input name="user_last_name" type="input" class="form-control" placeholder="Last Name" ng-model="newIser.lastName" required>
                                 <span ng-show="user_form.user_last_name.$error.required && user_form.user_last_name.$dirty">
                                   Last name is required.
                                 </span>
@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">User Role</label>
                             <div class="col-lg-6">
-                                <select ng-model="user.role" class="form-control">
+                                <select ng-model="newIser.role" class="form-control">
                                     <option ng-value="1">PIC</option>
                                     <option ng-value="2">CSP</option>
                                     <option ng-value="4">ADMIN</option>
@@ -67,7 +67,7 @@
                         <div class="form-group">
                             <label class="col-lg-2 control-label required">Email Address</label>
                             <div class="col-lg-6">
-                                <input name="user_email" ng-model="user.email" class="form-control" type="email" required>
+                                <input name="user_email" ng-model="newIser.email" class="form-control" type="email" required>
                                 <span ng-show="user_form.user_email.$error.required && user_form.user_email.$dirty">
                                   Email is required.
                                 </span>
@@ -80,7 +80,7 @@
                             <label class="col-lg-2 control-label">Manager</label>
                             <div class="col-lg-6">
                                 <label>
-                                    <input ng-model="user.manager" type="checkbox"> Manager
+                                    <input ng-model="newIser.manager" type="checkbox"> Manager
                                 </label>
                             </div>
                         </div>
