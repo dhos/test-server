@@ -23,7 +23,7 @@ app.controller('newUserCtrl', function($scope, userFactory, $state, $rootScope, 
     $scope.customers = customers
     $scope.newUser = {}
     $scope.newUser.manager = false
-    $scope.makeUser = (user) => {
+    $scope.makeUser = (newUser) => {
         openModal('Create User', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 newUser.countries = []
