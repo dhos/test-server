@@ -38,9 +38,9 @@ app.controller('clientlistCtrl', function($scope, clients, userFactory, $state, 
             }
         })
     }
-    $scope.editClient = (UserId) => {
+    $scope.editClient = (clientId) => {
         $state.go('editClient', {
-            userId: UserId
+            clientId: clientId
         })
     }
 
