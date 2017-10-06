@@ -57,7 +57,6 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                 scope.csp = scope.user.role === 2
                 scope.pic = scope.user.role === 1
                 lcFactory.getLetters({}).then(letters => {
-                    debugger
                     scope.letters = letters
                     scope.New = []
                     scope.Reviewed = []

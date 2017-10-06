@@ -10,7 +10,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('updatedCtrl', ($scope, lcFactory, letters, $state, openModal) => {
+app.controller('updatedCtrl', ($scope, lcFactory, $state, openModal) => {
     $scope.displayLetters = $scope.Update
     console.log($scope.displayLetters)
     $scope.transition = (lc_number) => {

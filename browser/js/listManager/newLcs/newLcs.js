@@ -11,7 +11,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('newLcsCtrl', ($scope, lcFactory, letters, $state) => {
+app.controller('newLcsCtrl', ($scope, lcFactory, $state) => {
     $scope.displayLetters = $scope.New
     console.log($scope.letters)
     $scope.state = {

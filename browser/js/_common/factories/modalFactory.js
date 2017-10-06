@@ -17,7 +17,7 @@ app.factory('openModal', function($mdDialog) {
             .content(text)
             .ariaLabel(label)
             .ok('Ok')
-        // .type(msgType)
+            // .type(msgType)
             .clickOutsideToClose(true)
         if (msgType.toLowerCase() === "confirm") dialog.cancel('Cancel')
         return $mdDialog.show(dialog);

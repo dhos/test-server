@@ -16,11 +16,13 @@
                     <div class="col-md-8">
                         <div class="col-md-5">
                             <select class="form-control m-b" ng-model="selectedCountry">
+                                <option value="">Select Country</option>
                                 <option ng-repeat="country in countries" ng-selected="selectedCountry.name===country.name" ng-value="{{country}}">{{country.name}}</option>
                             </select>
                         </div>
                         <div class="col-md-5">
                             <select class="form-control m-b" ng-model="selectedCustomer">
+                                <option value="">Select Customer</option>
                                 <option ng-repeat="customer in customers" ng-selected="selectedCustomer.name==customer.name" ng-value = "{{customer}}">{{customer.name}}</option>
                             </select>
                         </div>
