@@ -73,9 +73,9 @@
                             </div>
                         </button>
                     </li>
-                    <li ng-disabled="true" ng-class="{active: letter.state===5}">
-                        <button class="normal-stat" ng-disabled="letter.state!==4" ng-click="transition(letter.lc_number)">
-                             <div class="icon-stat stat-bg">
+                    <li>
+                        <button class="normal-stat" ng-class="{'fdupdate-stat':(letter.finDoc!=0)}" ng-disabled="letter.state!==4" ng-click="letter.toggled = !letter.toggled">
+                            <div class="icon-stat stat-bg" >
                                 <img src="img/update.png" alt="update">
                             </div>
                             <div>
