@@ -47,6 +47,7 @@ router.get('/:id', (req, res, next) => {
 //UPDATES FOR THINGS
 router.put('/update', function(req, res, next) {
     const updates = req.body
+    updates.emails = updates.emails.split(',')
     Client.update(updates, {
         where: {
             client_code: req.body.client_code
