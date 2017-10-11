@@ -15,7 +15,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('amendListCtrl', function($scope, amended, $state, countryFactory, userFactory, bankFactory, lcFactory, LETTER_EVENTS, $rootScope, customerFactory, clientFactory) {
+app.controller('amendListCtrl', function($scope, amended, $state, countryFactory, userFactory, bankFactory, lcFactory, LETTER_EVENTS, $rootScope, customerFactory, clientFactory, openModal) {
     //get banks
     $scope.letters = $scope.Amended
     $scope.banks = {}

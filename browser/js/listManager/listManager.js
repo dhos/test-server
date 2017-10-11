@@ -7,11 +7,11 @@ app.config(function($stateProvider) {
             authenticate: true
         },
         resolve: {
-            // letters: (lcFactory) => {
-            //     return lcFactory.getLetters({}).then(letters => {
-            //         return letters
-            //     })
-            // },
+            letters: (lcFactory) => {
+                return lcFactory.getLetters({}).then(letters => {
+                    return letters
+                })
+            },
             expiring: (lcFactory) => {
                 return lcFactory.getExpiringLetters({
                     offset: 0
@@ -28,15 +28,16 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('listManagerCtrl', ($scope, lcFactory, $state, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user, clientFactory) => {
+app.controller('listManagerCtrl', ($scope, lcFactory, $state, bankFactory, countryFactory, userFactory, LETTER_EVENTS, $rootScope, customerFactory, expiring, user, clientFactory, letters) => {
     //inits
     $scope.$state = $state
     $scope.user = user
+    $scope.letters = letters
     $scope.csp = $scope.user.role === 2
     $scope.pic = $scope.user.role === 1
     $scope.manager = $scope.user.manager
     if ($scope.user.role !== 4) {
-        $scope.letters = $scope.mainLetters.filter(letter => {
+        $scope.letters = $scope.letters.filter(letter => {
             let bool = true
             if ($scope.user.countries.indexOf(letter.country) === -1) bool = false
             if ($scope.user.customers.indexOf(letter.customer) === -1) bool = false
@@ -44,9 +45,6 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, bankFactory, count
             if ($scope.pic && !$scope.manager) bool = letter.pic == $scope.user.id
             return bool
         })
-        console.log($scope.letters)
-    } else {
-        $scope.letters = $scope.mainLetters
     }
     $scope.dateDesc = {
         date: false,

@@ -63,7 +63,7 @@ router.get('/archived', ensureAuthenticated, (req, res, next) => {
 })
 
 router.get('/expiring', ensureAuthenticated, (req, res, next) => {
-    db.query(`select * from letters where letters.expire < NOW() + interval '30 days' and letters.expire >= NOW();`).then(expiringLetters => {
+    db.query(`select * from letters where letters.ship_date < NOW() + interval '25 days' and letters.expire >= NOW();`).then(expiringLetters => {
         res.json(expiringLetters)
     }).catch(err => {
         next(err)
@@ -226,7 +226,7 @@ router.put('/amend', upload.single('file'), ensureAuthenticated, (req, res, next
 
 //deletes
 
-router.put('/delete', ensureAuthenticated, (req, res, next) => {
+router.delete('/', ensureAuthenticated, (req, res, next) => {
     Letter.destroy({
         where: req.query
     }).then(() => {

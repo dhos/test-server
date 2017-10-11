@@ -49,7 +49,7 @@ router.put('/update', function(req, res, next) {
     const updates = req.body
     Client.update(updates, {
         where: {
-            id: req.body.id
+            client_code: req.body.client_code
         }
     }).then(result => {
         res.json(result)
