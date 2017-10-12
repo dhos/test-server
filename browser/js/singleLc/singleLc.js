@@ -167,6 +167,10 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
                 $scope.letter.state = 4
             }
         }
+        letter.history.push({
+            state: letter.state,
+            time: new Date.now()
+        })
         lcFactory.updateLetter($scope.letter).then(letter => {
             $state.go('listManager.' + $scope.states[letter.state])
         })

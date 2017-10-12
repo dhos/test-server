@@ -92,5 +92,9 @@ module.exports = db.define('letter', {
     amendedCount: {
         type: Sequelize.INTEGER,
         defaultValue: 0
+    },
+    history: {
+        type: Sequelize.ARRAY(Sequelize.JSON),
+        defaultValue: []
     }
 });

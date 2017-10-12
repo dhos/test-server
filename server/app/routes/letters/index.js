@@ -40,7 +40,10 @@ router.get('/', ensureAuthenticated, (req, res, next) => {
         $gte: new Date(new Date() - (30 * 24 * 60 * 60 * 1000))
     }
     Letter.findAll({
-        where: query
+        where: query,
+        order: [
+            ['updatedAt', 'DESC']
+        ]
     }).then(letters => {
         res.json(letters)
     }).catch(err => {
@@ -76,7 +79,6 @@ router.get('/:id', ensureAuthenticated, (req, res, next) => {
             lc_number: req.params.id
         }
     }).then(letter => {
-        console.log(letter.client)
         res.json(letter)
     }).catch(err => {
         next(err)
