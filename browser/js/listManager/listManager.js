@@ -51,8 +51,6 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, bankFactory, count
         expire: false
     }
     $scope.sortByDate = (params) => {
-        console.log('hello date')
-        debugger
         $scope.dateDesc[params] = !$scope.dateDesc[params]
         if ($scope.dateDesc[params]) {
             $scope.letters.sort((a, b) => {
@@ -70,8 +68,6 @@ app.controller('listManagerCtrl', ($scope, lcFactory, $state, bankFactory, count
         client: false
     }
     $scope.sortByAlphabet = (params) => {
-        console.log('hello alphaDesc')
-        debugger
         $scope.alphaDesc[params] = !$scope.alphaDesc[params]
         if ($scope.alphaDesc[params]) {
             $scope.letters.sort((a, b) => {

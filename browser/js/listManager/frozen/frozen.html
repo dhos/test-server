@@ -31,7 +31,7 @@
               </td> -->
         </tr>
         <tr ng-repeat-end ng-if="letter.expanded">
-            <td colspan="12" class="secondlevel" ng-click="transition(letter.lc_number)">
+            <td colspan="12" class="secondlevel">
                 <ul class="statuses">
                     <li ng-class="{active: letter.state===1}">
                         <button ng-disabled="true" class="new-stat" ng-disabled="letter.state!==1" ng-click="transition(letter.lc_number)">
