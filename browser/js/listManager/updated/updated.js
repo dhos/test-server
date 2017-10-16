@@ -26,7 +26,7 @@ app.controller('updatedCtrl', ($scope, lcFactory, $state, openModal) => {
         if ($scope.displayLetters[index].finDoc !== 0) {
             openModal('Input FD Number', 'Are you sure?', 'prompt', 'confirm').then(result => {
                 if (result) {
-                    if (Date.now() > $scope.diaplayLetters[index].ship_date) {
+                    if (Date.now() > $scope.displayLetters[index].ship_date) {
                         openModal('Shipping Date Passed', 'That letter cannot be updated.', 'warning', 'warning')
                         return
                     }

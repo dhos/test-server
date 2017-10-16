@@ -171,9 +171,10 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             state: letter.state,
             time: Date.now()
         })
-        lcFactory.updateLetter($scope.letter).then(letter => {
-            $state.go('listManager.' + $scope.states[letter.state])
-        })
+        console.log(letter)
+        // lcFactory.updateLetter($scope.letter).then(letter => {
+        //     $state.go('listManager.' + $scope.states[letter.state])
+        // })
     }
     $scope.submitDraft = () => {
         $scope.client ? $scope.letter.client_draft = true : $scope.letter.business_draft = true
