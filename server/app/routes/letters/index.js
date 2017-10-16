@@ -66,7 +66,7 @@ router.get('/archived', ensureAuthenticated, (req, res, next) => {
 })
 
 router.get('/expiring', ensureAuthenticated, (req, res, next) => {
-    db.query(`select * from letters where letters.ship_date < NOW() + interval '25 days' and letters.expire >= NOW();`).then(expiringLetters => {
+    db.query(`select * from letters where letters.ship_date < NOW() + interval '25 days' and letters.expire >= NOW() order by letters."updatedAt" DESC`).then(expiringLetters => {
         res.json(expiringLetters)
     }).catch(err => {
         next(err)
