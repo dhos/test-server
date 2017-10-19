@@ -33,18 +33,14 @@
                     </ul>
                     </span>
                 </div>
-                <!-- <div class="inline m-r text-left stats-col">
-                    <div ng-init="d3_1=[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ]" ui-jq="sparkline" ui-options="[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ], {type:'bar', height:35, barWidth:5, barSpacing:1, barColor:'#610000'}" class="sparkline inline v-middle">loading...
-                    </div>
+                <div class="inline m-r text-left stats-col">
                     <div class="m-b-xs top-chart-stats"><span class="text-muted">THIS MONTH</span>
-                        <br>356 </div>
+                        <br>{{thisMonth}} </div>
                 </div>
                 <div class="inline m-r text-left stats-col">
-                    <div ng-init="d3_1=[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ]" ui-jq="sparkline" ui-options="[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ], {type:'bar', height:35, barWidth:5, barSpacing:1, barColor:'#6ccee7'}" class="sparkline inline v-middle">loading...
-                    </div>
                     <div class="m-b-xs top-chart-stats"><span class="text-muted">LAST MONTH</span>
-                        <br>412 </div>
-                </div> -->
+                        <br>{{lastMonth}} </div>
+                </div>
             </div>
         </div>
     </div>
@@ -170,29 +166,26 @@
                 </a>
             </div>
         </div>
-<!--         <div class="row row-sm">
+        <div class="row row-sm">
             <div class="col-md-4">
                 <div class="panel wrapper">
-                    <h2 class="second-head m-b">LCs By Month</h2>
-                    <span class="font-thin m-t-none m-b text-muted">Actual Sales Vs Projected Sales for 2017</span>
-                    <div class="img-responsive text-center"> <img src="img/place1.png"></div>
+                    <h2 class="second-head m-b">LCs By Bank</h2>
+                    <canvas id="lcToBank" bankchart banks="banks" height="200" width="200"></canvas>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="panel wrapper">
-                    <h2 class="second-head m-b">Daily LCs </h2>
-                    <span class="font-thin m-t-none m-b text-muted">Overview of Newsletter Campaign </span>
-                    <div class="img-responsive text-center"> <img src="img/place2.png"></div>
+                    <h2 class="second-head m-b">LCs By CSP </h2>
+                    <canvas id="lcToCsp" cspchart csp="csps" height="200" width="200"></canvas>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="panel wrapper">
-                    <h2 class="second-head m-b">Current Visitors</h2>
-                    <span class="font-thin m-t-none m-b text-muted">Different Devices Used to Visit</span>
-                    <div class="img-responsive text-center"> <img src="img/place3.png"></div>
+                    <h2 class="second-head m-b">LCs By Country</h2>
+                    <canvas id="lcToCountries" countrychart countries="countryCharts" height="200" width="200"></canvas>
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- / stats -->
     </div>
 </div>

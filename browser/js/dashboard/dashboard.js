@@ -28,12 +28,31 @@ app.config(function($stateProvider) {
                 }).then(archived => {
                     return archived
                 })
+            },
+            banks: (bankFactory) => {
+                return bankFactory.getBanks({}).then(banks => {
+                    return banks
+                })
+            },
+            csps: (userFactory) => {
+                return userFactory.getUsers({
+                    role: 2
+                }).then(cspUsers => {
+                    return cspUsers.filter(user => {
+                        return !user.manager
+                    })
+                })
+            },
+            countries: (countryFactory) => {
+                return countryFactory.getCountries({}).then(countries => {
+                    return countries
+                })
             }
         }
     })
 });
 
-app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countryFactory, userFactory, expiring, user, customerFactory, archivedLetters) {
+app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, countries, userFactory, expiring, user, customerFactory, archivedLetters, bankFactory, banks, csps) {
     jQuery('body').removeClass('loginpage')
     $scope.user = user
     $scope.archivedCount = archivedLetters.count
@@ -56,16 +75,29 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         $scope.letters = letters
     }
     $scope.countries = {}
-    countryFactory.getCountries({}).then(countries => {
-        countries.forEach(country => {
-            $scope.countries[country.id] = country.name
-        })
+    $scope.countryCharts = {}
+    countries.forEach(country => {
+        $scope.countries[country.id] = country.name
+        $scope.countryCharts[country.id] = country
+        $scope.countryCharts[country.id].lcCount = 0
+
     })
+
     $scope.customers = {}
     customerFactory.getCustomers({}).then(customers => {
         customers.forEach(customer => {
             $scope.customers[customer.id] = customer.name
         })
+    })
+    $scope.banks = {}
+    banks.forEach(bank => {
+        $scope.banks[bank.id] = bank
+        $scope.banks[bank.id].lcCount = 0
+    })
+    $scope.csps = {}
+    csps.forEach(csp => {
+        $scope.csps[csp.id] = csp
+        $scope.csps[csp.id].lcCount = 0
     })
     $scope.state = {
         1: 'New',
@@ -105,7 +137,8 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
     } else {
         $scope.Expiring = expiring[0]
     }
-
+    $scope.thisMonth = 0
+    $scope.lastMonth = 0
     $scope.reset = (letters) => {
         $scope.New = []
         $scope.Reviewed = []
@@ -130,10 +163,22 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
             $scope.Expiring = expiring[0]
         }
         //set states
+
         letters.forEach(letter => {
-                $scope[$scope.state[letter.state]].push(letter)
-            })
-            // $scope.Amended.forEach
+            $scope[$scope.state[letter.state]].push(letter)
+            $scope.banks[letter.bank].lcCount += 1
+            let date = moment.utc(letter.createdAt, 'YYYY-MM-DD');
+            if (isThisMonth(date)) {
+                $scope.thisMonth += 1
+            }
+            if (isLastMonth(date)) {
+                $scope.lastMonth += 1
+            }
+            if (letter.csp !== null) $scope.csps[letter.csp].lcCount += 1
+            if (letter.country !== null) $scope.countryCharts[letter.country].lcCount += 1
+        })
+
+        // $scope.Amended.forEach
         $scope.Frozen.forEach(frozen => {
             if (frozen.finDoc === 0) $scope.Update.push(frozen)
         })
@@ -147,7 +192,6 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         })
     }
     $scope.filter = () => {
-        debugger
         $scope.New = []
         $scope.Reviewed = []
         $scope.Amended = []
@@ -215,6 +259,14 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
         })
 
     }
+    let isThisMonth = (lc) => {
+        let thisMonth = [moment.utc().startOf('month'), moment.utc().endOf('month')]
+        return lc.isBetween(thisMonth[0], thisMonth[1]) || lc.isSame(thisMonth[0]) || lc.isSame(thisMonth[1])
+    }
+    let isLastMonth = (lc) => {
+        let lastMonth = [moment.utc().subtract(1, 'months').startOf('month'), moment.utc().subtract(1, 'months').endOf('month')]
+        return lc.isBetween(lastMonth[0], lastMonth[1]) || lc.isSame(lastMonth[0]) || lc.isSame(lastMonth[1])
+    }
 
     $scope.filterByCustomer = (customerId, name) => {
         $scope.customerFilter = {
@@ -232,13 +284,13 @@ app.controller('dashboardCtrl', function($scope, $state, lcFactory, letters, cou
     }
     $scope.reset($scope.letters)
 
-    //inits
-    // $scope.letters = letters
-    //$scope.analytics = analytics
-
-    //end inits
-
     //functions to edit and ammend lcs
+    //monthly lcs this month last month
+    //ask if it's strictly this month or in the past 30 days
+    //this can all be done within the single loop in the reset function
+    //lc by bankbanks to create a bar graph
+    //lc by cspl
+    //lc by timeline
 
 
 });
