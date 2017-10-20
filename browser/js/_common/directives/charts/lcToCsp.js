@@ -9,7 +9,7 @@ app.directive('cspchart', () => {
             console.log('hello', csp)
             let ctx = document.getElementById('lcToCsp').getContext('2d')
             let myChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'horizontalBar',
                 data: {
                     labels: csp.map(a => a.username),
                     datasets: [{

@@ -9,11 +9,10 @@ app.directive('countrychart', () => {
             console.log('hello', countries)
             let ctx = document.getElementById('lcToCountries').getContext('2d')
             let myChart = new Chart(ctx, {
-                type: 'bar',
+                type: 'pie',
                 data: {
                     labels: countries.map(a => a.name),
                     datasets: [{
-                        label: '# of Lcs',
                         data: countries.map(a => a.lcCount),
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
@@ -35,13 +34,7 @@ app.directive('countrychart', () => {
                     }]
                 },
                 options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
+
                 }
             });
         }
