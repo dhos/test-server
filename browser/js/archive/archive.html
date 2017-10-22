@@ -18,16 +18,16 @@
             <td>{{letter.lc_number}}</td>
             <td>{{letter.date | date:'mediumDate'}}</td>
             <td>{{letter.expire | date:'mediumDate'}}</td>
-            <td>{{customers[letter.customer]}}</td>
+            <td>{{clients[letter.client]}}</td>
             <td>{{countries[letter.country]}}</td>
             <td ng-class="{'new-stat': (letter.state==1 || letter.state == 5),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
             <td>{{banks[letter.bank]}}</td>
             <td>{{picUsers[letter.pic]}}</td>
             <td>{{cspUsers[letter.csp]}}</td>
-            <td>
+<!--             <td>
               <button ng-if="letter.expanded" ng-click="letter.expanded = false">-</button>
               <button ng-if="!letter.expanded" ng-click="letter.expanded = true">+</button>
-            </td>
+            </td> -->
         </tr>
         <tr ng-repeat-end ng-show="false">
             <td colspan="12" class="secondlevel">
@@ -73,20 +73,20 @@
                         </button>
                     </li>
                     <li>
-                        <button class="normal-stat" ng-class="{'fdupdate-stat':(letter.finDoc!=0)}" ng-disabled="letter.state!==4" >
-                             <div class="icon-stat stat-bg" ng-click="letter.toggled = !letter.toggled">
+                        <button class="normal-stat" ng-class="{'fdupdate-stat':(letter.finDoc!=0)}" ng-disabled="letter.state!==4" ng-click="letter.toggled = !letter.toggled">
+                            <div class="icon-stat stat-bg" >
                                 <img src="img/update.png" alt="update">
                             </div>
-                            <div ng-click="letter.toggled = !letter.toggled">
+                            <div>
                                 <span class="main-stat"> FD Update</span><br> <span class="secnd-stat">Stage 5 of 5</span>
-                            </div>
-                            <div ng-show="letter.toggled" class="fd-updatefield">
-                                <input ng-model="letter.finDoc" placeholder="Input financial document number"/>
-                                <a class="updatedoctnum" ng-click="updateFinDoc($index)">Update</a>
                             </div>
                         </button>
                     </li>
-                    
+                    <li ng-show="letter.toggled">
+                        <input ng-model="letter.finDoc" placeholder="Input financial document number" ng-if="user.role==1"/>
+                        <input ng-model="letter.finDoc" ng-if="user.role!==1" readonly/>
+                        <button ng-click="updateFinDoc($index)" ng-disabled="user.role !=1">Update</button>
+                    </li>                    
                 </ul>
             </td>
         </tr>
