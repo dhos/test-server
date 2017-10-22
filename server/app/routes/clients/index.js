@@ -12,19 +12,32 @@ var ensureAuthenticated = function(req, res, next) {
     }
 }
 router.get('/', (req, res, next) => {
-    Client.findAll({
-        where: req.query
+    Client.findAndCountAll({
+        where: JSON.parse(req.query.where),
+        order: [
+            ['name', 'ASC']
+        ],
+        offset: req.query.offset * 100,
+        limit: 100
     }).then(clients => {
         res.json(clients)
     }).catch(err => {
         next(err)
     })
 })
-
+router.get('/all', (req, res, next) => {
+    Client.findAll({
+        order: [
+            ['name', 'ASC']
+        ],
+    }).then(clients => {
+        res.json(clients)
+    }).catch(err => next(err))
+})
 router.get('/:id', (req, res, next) => {
     Client.findOne({
         where: {
-            id: req.params.id
+            client_code: req.params.id
         }
     }).then(client => {
         res.json(client)
@@ -34,9 +47,10 @@ router.get('/:id', (req, res, next) => {
 //UPDATES FOR THINGS
 router.put('/update', function(req, res, next) {
     const updates = req.body
+    updates.emails = updates.emails.split(',')
     Client.update(updates, {
         where: {
-            id: req.body.id
+            client_code: req.body.client_code
         }
     }).then(result => {
         res.json(result)
@@ -47,6 +61,7 @@ router.put('/update', function(req, res, next) {
 
 router.post('/create', function(req, res, next) {
     var client = req.body
+    client.emails = client.emails.split(',')
     Client.create(client).then(createdClient => {
         res.json(createdClient)
     }).catch(err => {

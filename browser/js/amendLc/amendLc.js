@@ -6,6 +6,7 @@ app.config(function($stateProvider) {
         resolve: {
             letter: (lcFactory, $stateParams) => {
                 return lcFactory.getSingleLetter($stateParams.lc_number).then(letter => {
+                    console.log(letter)
                     return letter
                 })
             }
@@ -38,12 +39,16 @@ app.controller('amendLcCtrl', ($scope, lcFactory, countryFactory, userFactory, b
     customerFactory.getCustomers({}).then(customers => {
         $scope.customers = customers
     })
-    clientFactory.getClients({}).then(clients => {
+    clientFactory.getAllClients().then(clients => {
         $scope.clients = clients
     })
     $scope.letter = letter
+    console.log($scope.letter)
     $scope.updateLc = () => {
-        $scope.letter.client = $scope.selectedClient.id
+        if ($scope.letter.state === 4) {
+            openModal('Frozen', 'Please unfreeze the lc before editing', 'warning', 'warning')
+            return
+        }
         openModal('Amend LC', 'Are you sure?', 'prompt', 'confirm').then(result => {
             if (result) {
                 if ($scope.updatedFile) {

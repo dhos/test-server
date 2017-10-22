@@ -10,7 +10,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('amendedCtrl', ($scope, lcFactory, letters, $state) => {
+app.controller('amendedCtrl', ($scope, lcFactory, $state) => {
     $scope.displayLetters = $scope.Amended
     $scope.transition = (lc_number) => {
         $state.go('singleLc', {

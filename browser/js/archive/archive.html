@@ -14,7 +14,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat-start="letter in letters track by $index" expandable>
+        <tr ng-repeat-start="letter in letters.rows track by $index" expandable>
             <td>{{letter.lc_number}}</td>
             <td>{{letter.date | date:'mediumDate'}}</td>
             <td>{{letter.expire | date:'mediumDate'}}</td>
@@ -92,3 +92,4 @@
         </tr>
     </tbody>
 </table>
+<ul uib-pagination total-items="letters.count" items-per-page="numPerPage" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>

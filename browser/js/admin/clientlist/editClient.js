@@ -2,10 +2,10 @@ app.config(function($stateProvider) {
     $stateProvider.state('editClient', {
         templateUrl: 'js/admin/clientlist/newClient.html',
         controller: 'editClientCtrl',
-        url: '/editClient/:userId',
+        url: '/editClient/:clientId',
         resolve: {
             client: (clientFactory, $stateParams) => {
-                return clientFactory.getSingleClient($stateParams.userId).then(client => {
+                return clientFactory.getSingleClient($stateParams.clientId).then(client => {
                     //remember to shortcircuit if it's not a client
                     return client
                 })

@@ -5,7 +5,11 @@ app.config(function($stateProvider) {
         url: '/clients',
         resolve: {
             clients: clientFactory => {
-                return clientFactory.getClients({}).then(clients => {
+                return clientFactory.getClients({
+                    offset: 0,
+                    where: {}
+                }).then(clients => {
+                    console.log(clients)
                     return clients
                 })
             },
@@ -19,28 +23,37 @@ app.config(function($stateProvider) {
 });
 
 app.controller('clientlistCtrl', function($scope, clients, userFactory, $state, $rootScope, LETTER_EVENTS, lcFactory, customers, openModal, clientFactory) {
-    $scope.clients = clients
+    $scope.displayClients = clients
     $scope.customers = customers
     $scope.customers.forEach(customer => {
         $scope.customers[customer.id] = customer.name
     })
-    $scope.deleteClient = (UserId, index) => {
-        openModal('Delete Client', 'Are you sure?', 'prompt', 'confirm').then(result => {
+    $scope.deleteClient = (client_code, index) => {
+        console.log('hello')
+        openModal('Delete Client', 'Are you sure?', 'confirm', 'confirm').then(result => {
             if (result) {
-                $scope.clients.splice(index, 1)
+                $scope.displayClients.rows.splice(index, 1)
                 clientFactory.deleteClient({
-                    id: UserId
+                    client_code: client_code
                 })
             }
         })
     }
-    $scope.editClient = (UserId) => {
+    $scope.editClient = (clientId) => {
         $state.go('editClient', {
-            userId: UserId
+            clientId: clientId
         })
     }
-    $scope.newUser = () => {
-        $state.go('newCustomer')
-    }
+
+    $scope.currentPage = 1
+    $scope.numPerPage = 100
+    $scope.$watch("currentPage", function() {
+        clientFactory.getClients({
+            offset: $scope.currentPage - 1,
+            where: {}
+        }).then(clients => {
+            $scope.displayClients = clients
+        })
+    });
 
 });

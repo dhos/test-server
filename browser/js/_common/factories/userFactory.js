@@ -14,6 +14,16 @@ app.factory('userFactory', function($http, $q) {
             })
     }
 
+    userFactory.resetPassword = (userId, newPassword) => {
+        let password = {
+            password: newPassword
+        }
+        return $http.put('/api/users/resetPassword/' + userId, password).then(response => {
+            return response.data
+        })
+    }
+
+
     userFactory.getUsers = (query) => {
         return $http.get('/api/users/', {
             params: query

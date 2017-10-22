@@ -26,6 +26,9 @@ module.exports = db.define('letter', {
     expire: {
         type: Sequelize.DATE
     },
+    ship_date: {
+        type: Sequelize.DATE
+    },
     country: {
         type: Sequelize.INTEGER
     },
@@ -59,7 +62,10 @@ module.exports = db.define('letter', {
     archived: {
         type: Sequelize.BOOLEAN
     },
-    draft: {
+    business_draft: {
+        type: Sequelize.BOOLEAN
+    },
+    client_draft: {
         type: Sequelize.BOOLEAN
     },
     client_approved: {
@@ -69,10 +75,12 @@ module.exports = db.define('letter', {
         type: Sequelize.BOOLEAN
     },
     client_draftText: {
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        defaultValue: {}
     },
     business_draftText: {
-        type: Sequelize.JSON
+        type: Sequelize.JSON,
+        defaultValue: {}
     },
     finDoc: {
         type: Sequelize.INTEGER,
@@ -84,5 +92,9 @@ module.exports = db.define('letter', {
     amendedCount: {
         type: Sequelize.INTEGER,
         defaultValue: 0
+    },
+    history: {
+        type: Sequelize.ARRAY(Sequelize.JSON),
+        defaultValue: []
     }
 });

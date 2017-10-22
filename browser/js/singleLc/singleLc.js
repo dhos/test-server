@@ -32,7 +32,6 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     $scope.amended = []
     clientFactory.getSingleClient($scope.letter.client).then(client => {
         $scope.letterClient = client
-        console.log($scope.letterClinet)
     })
 
     clauseFactory.getClauses({
@@ -41,10 +40,17 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     }).then(clauses => {
         $scope.clauses = clauses.map(clause => {
             if (clause.commercial) {
-                if ($scope.letter.commercial_notes[clause.swift_code]) clause = $scope.letter.commercial_notes[clause.swift_code]
-
+                if ($scope.letter.client_draft) {
+                    if ($scope.letter.client_draftText[clause.swift_code]) clause = $scope.letter.client_draftText[clause.swift_code]
+                } else {
+                    if ($scope.letter.commercial_notes[clause.swift_code]) clause = $scope.letter.commercial_notes[clause.swift_code]
+                }
             } else {
-                if ($scope.letter.business_notes[clause.swift_code]) clause = $scope.letter.business_notes[clause.swift_code]
+                if ($scope.letter.business_draft) {
+                    if ($scope.letter.business_draftText[clause.swift_code]) clause = $scope.letter.business_draftText[clause.swift_code]
+                } else {
+                    if ($scope.letter.business_notes[clause.swift_code]) clause = $scope.letter.business_notes[clause.swift_code]
+                }
             }
 
             return clause
@@ -68,7 +74,6 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         }
     })
 
-
     $scope.states = {
         1: 'newLcs',
         2: 'reviewed',
@@ -81,7 +86,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
     }
 
     let noPermission = () => {
-        return openModal('No Access', 'You don\'t have access to that', '', 'warning')
+        return openModal('No Access', 'You don\'t have access to that', 'label', 'warning')
     }
 
     $scope.approve = clause => {
@@ -129,6 +134,7 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
         })
     }
     $scope.updateLetter = () => {
+        if (!$scope.owner) return noPermission()
         var approved = true
         var complete = true
         if (!$scope.client) {
@@ -147,34 +153,37 @@ app.controller('singleLcCtrl', ($scope, lcFactory, letter, user, $state, $rootSc
             })
         }
         $scope.letter.draft = false
-        $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
         if (!complete) return openModal('Incomplete', 'There are clauses awaiting approval', '', 'warning')
-        if (approved) {
-            if ($scope.letter.state === 1) {
-                $scope.letter.state = 2
-            }
-            if ($scope.letter.client_approved && $scope.letter.business_approved) {
-                $scope.letter.state = 4
-            }
-        } else {
+        if ($scope.letter.state === 1) {
+            $scope.letter.state = 2
+        }
+        if (!jQuery.isEmptyObject($scope.letter.commercial_notes) && !jQuery.isEmptyObject($scope.letter.business_notes)) {
             $scope.letter.state = 3
             $scope.letter.amendedCount += 1
         }
-        $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
-
+        if (approved) {
+            $scope.client ? $scope.letter.client_approved = true : $scope.letter.business_approved = true
+            if ($scope.letter.client_approved && $scope.letter.business_approved) {
+                $scope.letter.state = 4
+            }
+        }
+        letter.history.push({
+            state: letter.state,
+            time: Date.now()
+        })
         lcFactory.updateLetter($scope.letter).then(letter => {
             $state.go('listManager.' + $scope.states[letter.state])
         })
     }
     $scope.submitDraft = () => {
-        $scope.letter.draft = true
+        $scope.client ? $scope.letter.client_draft = true : $scope.letter.business_draft = true
         if (!$scope.client) {
             $scope.business_clauses.forEach(clause => {
-                $scope.letter.business_notes[clause.swift_code] = clause
+                $scope.letter.business_draftText[clause.swift_code] = clause
             })
         } else {
             $scope.commercial_clauses.forEach(clause => {
-                $scope.letter.commercial_notes[clause.swift_code] = clause
+                $scope.letter.client_draftText[clause.swift_code] = clause
             })
         }
         lcFactory.updateLetter($scope.letter).then(letter => {

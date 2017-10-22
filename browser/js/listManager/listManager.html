@@ -5,7 +5,7 @@
     <div class="row title-space">
                 <div class="col-md-3">
                     <h2 class="second-head">LC Management</h2>
-                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a> List Manager</a></small>
+                    <small class="text-muted"><a ui-sref="dashboard"> LC Portal</a> <i class="fa fa-angle-right br-gap"></i> <a ui-sref="listManager.all"> List Manager</a> <i class="fa fa-angle-right br-gap"></i> {{$state.current.name.split('.')[1].charAt(0).toUpperCase() + $state.current.name.split('.')[1].slice(1)}}</a></small>
                 </div>
                 <div class="col-md-9 text-center">
                     <div class="lc-stats row">
@@ -22,16 +22,16 @@
                             <br> Frozen
                         </div>
                         <div class="col-md-1 pull-right">
-                            <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
-                            <br> Amended</span>
-                        </div>
-                        <div class="col-md-1 pull-right">
                             <span style="display: inline-block;"><span class="stats-numb">{{displayRevised.length}}</span>
                             <br> Revised</span>
                             <label class="switch">
                                 <input type="checkbox" ng-model="revisedCustomer">
                                 <span class="slider round"></span>
                             </label>
+                        </div>
+                        <div class="col-md-1 pull-right">
+                            <span style="display: inline-block;"><span class="stats-numb">{{Amended.length}}</span>
+                            <br> Amendments</span>
                         </div>
                         <div class="col-md-1 pull-right">
                             <span style="display: inline-block;"><span class="stats-numb">{{displayReviewed.length}}</span>

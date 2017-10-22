@@ -10,7 +10,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('allCtrl', ($scope, lcFactory, $state) => {
+app.controller('allCtrl', ($scope, lcFactory, $state, openModal) => {
 
     $scope.state = {
         1: 'New',
@@ -29,8 +29,16 @@ app.controller('allCtrl', ($scope, lcFactory, $state) => {
     }
     $scope.updateFinDoc = (index) => {
         if ($scope.letters[index].finDoc !== 0) {
-            lcFactory.updateLetter($scope.letters[index]).then(letter => {
-                $scope.letters[index].toggled = false
+            openModal('Input FD Number', 'Are you sure?', 'prompt', 'confirm').then(result => {
+                if (result) {
+                    if (Date.now() > $scope.letters[index].ship_date) {
+                        openModal('Shipping Date Passed', 'That letter cannot be updated.', 'warning', 'warning')
+                        return
+                    }
+                    lcFactory.updateLetter($scope.letters[index]).then(letter => {
+                        $scope.letters[index].toggled = false
+                    })
+                }
             })
         }
     }

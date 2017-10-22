@@ -13,8 +13,10 @@ app.factory('lcFactory', function($http, $q, LETTER_EVENTS, $rootScope) {
         })
     }
 
-    d.getArchivedLetters = () => {
-        return $http.get('/api/lc/archived').then(response => {
+    d.getArchivedLetters = (query) => {
+        return $http.get('/api/lc/archived', {
+            params: query
+        }).then(response => {
             return response.data
         }).catch(err => {
             return $q.reject({
@@ -36,6 +38,7 @@ app.factory('lcFactory', function($http, $q, LETTER_EVENTS, $rootScope) {
     d.getSingleLetter = (id) => {
         return $http.get(`/api/lc/${id}`)
             .then(response => {
+                console.log(response.data)
                 return response.data
             }).catch(err => {
                 return $q.reject({

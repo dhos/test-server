@@ -11,7 +11,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('reviewedCtrl', ($scope, lcFactory, letters, $state) => {
+app.controller('reviewedCtrl', ($scope, lcFactory, $state) => {
     $scope.$watch('reviewedCustomer', (nv, ov) => {
         if (nv === false) {
             $scope.displayLetters = $scope.needsClientReviewed

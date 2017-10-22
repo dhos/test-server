@@ -4,32 +4,68 @@ var Letter = db.model('letter')
 var User = db.model('user');
 var Country = db.model('country')
 var Customer = db.model('customer')
+var Client = db.model('client')
 var Bank = db.model('bank')
 var Clause = db.model('swift_clause')
 var fs = require('fs')
 var path = require('path')
 var Promise = require('sequelize').Promise;
 var parse = require('csv-parse');
-var sample = path.join(__dirname, '/sample.csv')
+var sample = path.join(__dirname, '/clients/clients.csv')
+var frozen = path.join(__dirname, 'seedLc.csv')
 
-var csvData = []
+var promises = []
 
 fs.createReadStream(sample)
     .pipe(parse({
-        delimiter: ':'
+        delimiter: ',',
+        relax: true,
+        trim: true,
+        // columns: true,
+        skip_empty_lines: true
     }))
     .on('data', csvrow => {
-        csvData.push(csvrow)
+        promises.push(Client.create({
+            name: csvrow[2],
+            customer: 1,
+            client_code: csvrow[1],
+            emails: csvrow[4].trim().split(',').concat(csvrow[6].trim().split(','))
+        }))
     })
     .on('end', () => {
         //organizeData(csvData)
-        makeUsers()
-            // makeCountries()
-            // makeBanks()
-            // makeClauses()
-            // makeCustomers()
-
+        // makeUsers()
+        // makeCountries()
+        // makeBanks()
+        // makeClauses()
+        // makeCustomers()
+        Promise.all(promises).then(() => {
+            console.log('finished')
+        })
     })
+
+// fs.createReadStream(frozen)
+//     .pipe(parse({
+//         delimiter: ',',
+//         relax: true,
+//         trim: true,
+//         // columns: true,
+//         skip_empty_lines: true
+//     }))
+//     .on('data', csvrow => {
+//         console.log(csvrow)
+//     })
+//     .on('end', () => {
+//         //organizeData(csvData)
+//         // makeUsers()
+//         // makeCountries()
+//         // makeBanks()
+//         // makeClauses()
+//         // makeCustomers()
+//         // Promise.all(promises).then(() => {
+//         //     console.log('finished')
+//         // })
+//     })
 
 
 var makeCountries = () => {

@@ -11,7 +11,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('revisedCtrl', ($scope, lcFactory, letters, $state) => {
+app.controller('revisedCtrl', ($scope, lcFactory, $state) => {
 
     $scope.$watch('revisedCustomer', (nv, ov) => {
         if (nv === false) {

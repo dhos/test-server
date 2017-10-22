@@ -4,8 +4,9 @@
             <th>LC Number</th>
             <th>Start Date <a ng-click="sortByDate('date')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
             <th>Expiry Date <a ng-click="sortByDate('expire')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
-            <th>Client <a ng-click="sort('client')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
-            <th>Country <a ng-click="sort('country')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+            <th>Shipping Date <a ng-click="sortByDate('ship_date')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+            <th>Client <a ng-click="sortByAlphabet('client')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
+            <th>Country <a ng-click="sortByAlphabet('country')"><i class="fa fa-sort" aria-hidden="true"></i></a></th>
             <th>Status</th>
             <th>Advising Bank</th>
             <th>PIC</th>
@@ -18,6 +19,7 @@
             <td>{{letter.lc_number}}</td>
             <td>{{letter.date | date:'mediumDate'}}</td>
             <td>{{letter.expire | date:'mediumDate'}}</td>
+            <td>{{letter.ship_date | date:'mediumDate'}}</td>
             <td>{{clients[letter.client]}}</td>
             <td>{{countries[letter.country]}}</td>
             <td ng-class="{'new-stat': (letter.state==1 || letter.state == 5),'review-stat':(letter.state==2),'amend-stat':(letter.state==3),'freeze-stat':(letter.state==4)}"><span class="stat-bg td-stat">{{state[letter.state]}}</span></td>
@@ -58,7 +60,7 @@
                                 <img src="img/amend.png" alt="amend">
                             </div>
                             <div>
-                                <span class="main-stat"> Amended</span><br> <span class="secnd-stat">Stage 3 of 5</span>
+                                <span class="main-stat"> Amendments</span><br> <span class="secnd-stat">Stage 3 of 5</span>
                             </div>
                         </button>
                     </li>
@@ -83,10 +85,10 @@
                         </button>
                     </li>
                     <li ng-show="letter.toggled">
-                        <input ng-model="letter.finDoc" placeholder="Input financial document number" ng-if="user.role==1"/>
-                        <input ng-model="letter.finDoc" ng-if="user.role!==1" readonly/>
-                        <button ng-click="updateFinDoc($index)" ng-disabled="user.role !=1">Update</button>
-                    </li>                    
+                        <input ng-model="letter.finDoc" placeholder="Input financial document number" ng-if="user.role==1 && !user.manager"/>
+                        <input ng-model="letter.finDoc" ng-if="user.role!==1 || user.manager" readonly/>
+                        <button ng-click="updateFinDoc($index)" ng-disabled="user.role !=1 || user.manager">Update</button>
+                    </li>
                 </ul>
             </td>
         </tr>

@@ -2,10 +2,18 @@ app.factory('clientFactory', function($http, $q) {
     var d = {}
         //Fetches
     d.getClients = (query) => {
-        console.log('making it to factory')
         return $http.get('/api/clients/', {
             params: query
         }).then((response) => {
+            return response.data
+        }).catch(err => {
+            return $q.reject({
+                message: err
+            })
+        })
+    }
+    d.getAllClients = () => {
+        return $http.get('/api/clients/all').then(response => {
             return response.data
         }).catch(err => {
             return $q.reject({

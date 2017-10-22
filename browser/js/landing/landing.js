@@ -17,11 +17,12 @@ app.controller('landingCtrl', function($scope, AuthService, userFactory, $state)
     jQuery('body').addClass('loginpage')
     $scope.authError = null;
     $scope.sendLogin = function(loginInfo) {
-        $scope.error = null;
+        $scope.authError = null;
         AuthService.login(loginInfo).then(function() {
             jQuery('body').removeClass('loginpage')
             $state.transitionTo('dashboard');
         }).catch(err => {
+            console.log(err)
             $scope.authError = err.message.data;
         })
     };

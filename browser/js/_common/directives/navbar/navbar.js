@@ -25,8 +25,8 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                 AuthService.getLoggedInUser().then(function(user) {
                     scope.user = user;
                     Socket.emit('logon', user)
+                    refreshLetters();
                 });
-                refreshLetters();
             };
 
             var removeUser = function() {
@@ -54,6 +54,8 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                 4: 'Admin'
             }
             var refreshLetters = () => {
+                scope.csp = scope.user.role === 2
+                scope.pic = scope.user.role === 1
                 lcFactory.getLetters({}).then(letters => {
                     scope.letters = letters
                     scope.New = []
@@ -63,15 +65,14 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                     scope.Frozen = []
                     scope.Update = []
                     scope.updatedLetters = []
-                    scope.csp = scope.user.role === 2
                     scope.manager = scope.user.manager
-                    if (scope.user.role !== 4 && !scope.manager) {
+                    if (scope.user.role !== 4) {
                         scope.letters = letters.filter(letter => {
                             let bool = true
                             if (scope.user.countries.indexOf(letter.country) === -1) bool = false
                             if (scope.user.customers.indexOf(letter.customer) === -1) bool = false
-                            if (scope.csp) bool = letter.csp == scope.user.id
-                            else bool = letter.pic == scope.user.id
+                            if (scope.csp && !scope.manager) bool = letter.csp == scope.user.id
+                            if (scope.pic && !scope.manager) bool = letter.pic == scope.user.id
                             return bool
                         })
                     } else {
@@ -84,7 +85,7 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                         if ((Date.now() - Date.parse(letter.updatedAt)) < (60 * 60 * 1000 * 24 * 7)) scope.updatedLetters.push(letter)
                     })
                     scope.updatedLetters.sort((a, b) => {
-                        return b.updatedAt - a.updatedAt
+                        return new Date(b.updatedAt) - new Date(a.updatedAt)
                     })
                 })
                 lcFactory.getExpiringLetters({}).then(expiring => {
@@ -93,8 +94,8 @@ app.directive('navbar', function($rootScope, AuthService, AUTH_EVENTS, $state, L
                             let bool = true
                             if (scope.user.countries.indexOf(letter.country) === -1) bool = false
                             if (scope.user.customers.indexOf(letter.customer) === -1) bool = false
-                            if (scope.csp) bool = letter.csp == scope.user.id
-                            else bool = letter.pic == scope.user.id
+                            if (scope.csp && !scope.manager) bool = letter.csp == scope.user.id
+                            if (scope.pic && !scope.manager) bool = letter.pic == scope.user.id
                             return bool
                         })
                     } else {

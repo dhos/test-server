@@ -15,7 +15,7 @@ app.config(function($stateProvider) {
     })
 });
 
-app.controller('amendListCtrl', function($scope, amended, $state, countryFactory, userFactory, bankFactory, lcFactory, LETTER_EVENTS, $rootScope, customerFactory, clientFactory) {
+app.controller('amendListCtrl', function($scope, amended, $state, countryFactory, userFactory, bankFactory, lcFactory, LETTER_EVENTS, $rootScope, customerFactory, clientFactory, openModal) {
     //get banks
     $scope.letters = $scope.Amended
     $scope.banks = {}
@@ -57,9 +57,9 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
         })
     })
     $scope.clients = {}
-    clientFactory.getClients({}).then(clients => {
+    clientFactory.getAllClients().then(clients => {
         clients.forEach(client => {
-            $scope.clients[client.id] = client.name
+            $scope.clients[client.client_code] = client.name
         })
     })
     $scope.letters = amended
@@ -100,6 +100,16 @@ app.controller('amendListCtrl', function($scope, amended, $state, countryFactory
                 return b[params] - a[params]
             })
         }
+    }
+    $scope.deleteLC = (lc_number, index) => {
+        openModal('Delete Letter', 'Are you sure?', 'prompt', 'confirm').then(result => {
+            if (result) {
+                $scope.letters.splice(index, 1)
+                lcFactory.deleteLetter({
+                    lc_number: lc_number
+                })
+            }
+        })
     }
     $scope.state = {
         1: 'New',

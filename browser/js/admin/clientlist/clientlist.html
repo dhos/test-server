@@ -23,19 +23,24 @@
                                   </th>
                                 </tr>
                                 <tr>
+                                    <th>Client Code</th>
                                     <th>Name</th>
                                     <th>Customer</th>
+                                    <th>Contact Emails</th>
                                     <th data-breakpoints="xs sm">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="client in clients track by $index">
+                                <tr ng-repeat="client in displayClients.rows track by $index">
+                                    <td>{{client.client_code}}</td>
                                     <td>{{client.name}}</td>
                                     <td>{{customers[client.customer]}}</td>
-                                    <td><a ng-click="editClient(client.id)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteClient(client.id,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
+                                    <td style="word-wrap: break-word;width:100px">{{client.emails.join(', ')}}</td>
+                                    <td><a ng-click="editClient(client.client_code)" class="small-btn action m-r"><i class="fa fa-edit"></i> Edit</a> <a ng-click="deleteClient(client.client_code,$index)"><i class="fa fa-trash"></i> Delete</a> </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <ul uib-pagination total-items="displayClients.count" items-per-page="numPerPage" ng-model="currentPage" max-size="5" class="pagination-sm" boundary-link-numbers="true" rotate="true"></ul>
                     </div>
                 </div>
             </div>
